@@ -29,8 +29,8 @@ public class Cliente extends Usuario {
 		return dispositivos.size();
 	}
 
-	public int estaEncendido(Dispositivo dispositivo){
-		return 0;
+	public boolean estaEncendido(Dispositivo dispositivo){
+		return dispositivo.getEncendido();
 	}
 
 	public String getTipoDocumento() {
