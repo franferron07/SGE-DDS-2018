@@ -10,7 +10,6 @@ public class Cliente extends Usuario {
 	private int numeroDocumento;
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
-	private String domicilio;
 	private Categoria categoria;
 	private List<Dispositivo> dispositivos;
 
@@ -18,11 +17,11 @@ public class Cliente extends Usuario {
 	}
 
 	public int cantidadDispositivosEncendidos(){
-		return dispositivos.stream().filter(disp -> disp.getEncendido()).collect(Collectors.toList()).size();
+		return dispositivos.stream().filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivosApagados(){
-		return dispositivos.stream().filter(disp -> !disp.getEncendido()).collect(Collectors.toList()).size();
+		return dispositivos.stream().filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivos(){
@@ -49,10 +48,6 @@ public class Cliente extends Usuario {
 		return telefonoContacto;
 	}
 
-	public String getDomicilio() {
-		return domicilio;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -75,10 +70,6 @@ public class Cliente extends Usuario {
 
 	public void setTelefonoContacto(int telefonoContacto) {
 		this.telefonoContacto = telefonoContacto;
-	}
-
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
 	}
 
 	public void setCategoria(Categoria categoria) {

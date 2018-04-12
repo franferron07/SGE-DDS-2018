@@ -9,7 +9,7 @@ public abstract class Usuario {
 	protected String password;
 
 	public boolean login(String nombreUsuario, String password) {
-		return this.nombreUsuario == nombreUsuario && this.password == password;
+		return ( this.nombreUsuario == nombreUsuario && this.password == password );
 	}
 
 	public String getNombre() {

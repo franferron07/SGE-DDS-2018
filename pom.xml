@@ -1,5 +1,5 @@
 <project>
-	<modelVersion>1.0.0</modelVersion>
+	<modelVersion>1.0.0</modelVersion><!--<modelVersion>1.0.0</modelVersion>-->
 	<groupId>ar.utn.frba.dds.equipo.03</groupId>
 	<artifactId>TrabajoPractico</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

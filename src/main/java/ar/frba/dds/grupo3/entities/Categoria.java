@@ -3,13 +3,13 @@ package ar.frba.dds.grupo3.entities;
 public class Categoria {
 
 	private String nombre;
-	private int consumoDesde;
-	private int consumoHasta;
-	private int montoAPagar;
-	private int costoFijo;
+	private float consumoDesde;
+	private float consumoHasta;
+	private float montoAPagar;
+	private float costoFijo;
 	private String unidadCostoFijo;
-	private int unidadCostoVariable;
-	private int costoVariable;
+	private String unidadCostoVariable;
+	private float costoVariable;
 
 	public Categoria() {
 
@@ -19,19 +19,19 @@ public class Categoria {
 		return nombre;
 	}
 
-	public int getConsumoDesde() {
+	public float getConsumoDesde() {
 		return consumoDesde;
 	}
 
-	public int getConsumoHasta() {
+	public float getConsumoHasta() {
 		return consumoHasta;
 	}
 
-	public int getMontoAPagar() {
+	public float getMontoAPagar() {
 		return montoAPagar;
 	}
 
-	public int getCostoFijo() {
+	public float getCostoFijo() {
 		return costoFijo;
 	}
 
@@ -39,11 +39,11 @@ public class Categoria {
 		return unidadCostoFijo;
 	}
 
-	public int getUnidadCostoVariable() {
+	public String getUnidadCostoVariable() {
 		return unidadCostoVariable;
 	}
 
-	public int getCostoVariable() {
+	public float getCostoVariable() {
 		return costoVariable;
 	}
 
@@ -51,19 +51,19 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 
-	public void setConsumoDesde(int consumoDesde) {
+	public void setConsumoDesde(float consumoDesde) {
 		this.consumoDesde = consumoDesde;
 	}
 
-	public void setConsumoHasta(int consumoHasta) {
+	public void setConsumoHasta(float consumoHasta) {
 		this.consumoHasta = consumoHasta;
 	}
 
-	public void setMontoAPagar(int montoAPagar) {
+	public void setMontoAPagar(float montoAPagar) {
 		this.montoAPagar = montoAPagar;
 	}
 
-	public void setCostoFijo(int costoFijo) {
+	public void setCostoFijo(float costoFijo) {
 		this.costoFijo = costoFijo;
 	}
 
@@ -71,20 +71,14 @@ public class Categoria {
 		this.unidadCostoFijo = unidadCostoFijo;
 	}
 
-	public void setUnidadCostoVariable(int unidadCostoVariable) {
+	public void setUnidadCostoVariable(String unidadCostoVariable) {
 		this.unidadCostoVariable = unidadCostoVariable;
 	}
 
-	public void setCostoVariable(int costoVariable) {
+	public void setCostoVariable(float costoVariable) {
 		this.costoVariable = costoVariable;
 	}
 
-	/**
-	 * 
-	 * @param unidad
-	 */
-	public void setUnidad(String unidad){
-
-	}
+	
 
 }
