@@ -1,6 +1,7 @@
 package ar.frba.dds.grupo3.entities;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,10 @@ public class Cliente extends Usuario {
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
 	private Categoria categoria;
-	private List<Dispositivo> dispositivos;
+	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>() ; //inicializo la lista en nul
 
+	
+	//constructor vacio para jackson
 	public Cliente() {
 	}
 

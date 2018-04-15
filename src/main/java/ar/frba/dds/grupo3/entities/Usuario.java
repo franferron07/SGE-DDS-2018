@@ -7,6 +7,7 @@ public abstract class Usuario {
 	protected String domicilio;
 	protected String nombreUsuario;
 	protected String password;
+	
 
 	public boolean login(String nombreUsuario, String password) {
 		return ( this.nombreUsuario == nombreUsuario && this.password == password );

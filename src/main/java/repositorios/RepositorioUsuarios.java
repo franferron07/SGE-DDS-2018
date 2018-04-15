@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.frba.dds.grupo3.entities.Usuario;
 import dao.Dao;
+import excepciones.ArchivoException;
 
 public class RepositorioUsuarios {
 	
@@ -12,7 +13,7 @@ public class RepositorioUsuarios {
 	
 	
 	
-	public void inicializarUsuarios(){
+	public void inicializarUsuarios() throws ArchivoException{
 		usuarios = dao.leerArchivo( "usuarios.json" , Usuario.class );
 	}
 	
