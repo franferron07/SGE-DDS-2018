@@ -25,7 +25,7 @@ public class LecturaArchivoUsuariosTest {
 	public void testLecturaClientes() throws ArchivoException {
 		repoUsuarios.obtenerClientes();
 		List<Cliente> clientes = repoUsuarios.obtenerClientes();
-		Assert.assertEquals(1, clientes.size());
+		Assert.assertTrue(clientes.size() > 1);
 	}
 
 	@Test
