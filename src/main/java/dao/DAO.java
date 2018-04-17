@@ -2,14 +2,12 @@ package dao;
 
 import java.util.List;
 
-public interface DAO<T> {
-	
-	public void insertar( T clazz);
+import entities.Usuario;
 
-	void eliminar(T a);
+public abstract class DAO<T> {
 
-	List<T> obtenerTodos();
+	public abstract <T> List<T> obtener();
 
-
+	public abstract void guardar(List<Usuario> listaUsuarios);
 
 }

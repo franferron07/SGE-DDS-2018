@@ -6,66 +6,67 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import entities.Administrador;
+import entities.Cliente;
+import entities.Dispositivo;
+import entities.Usuario;
 
-
-public class JsonUsuariosDAO<clazz> extends DAOAbstract {
+public class JsonUsuariosDAO extends DAO<Usuario> {
 
 	private String rutaArchivo;
-	
+
 	public JsonUsuariosDAO(String rutaArchivo) {
 		this.rutaArchivo = rutaArchivo;
 	}
-	
-	@Override
-	public <T> void insertar(T clazz) {
-		
-	}
 
 	@Override
-	public <T> void eliminar(T clazz) {
-	
-	}
+	public void guardar(List<Usuario> listaUsuarios) {
 
-	@Override
-	public <T> List<T> obtenerTodos(T clazz) {
-		
-		List<clazz> listaUsuarios = new ArrayList<clazz>();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enableDefaultTyping();
+
 		try {
 
-			ObjectMapper mapper = new ObjectMapper();
-
-			JsonNode nodosUsuario = mapper.readTree(new File(rutaArchivo)).get("Clientes");
-			if (nodosUsuario.isArray()) {
-				for (final JsonNode nodoUsuario : nodosUsuario) {
-					clazz us = (clazz) mapper.treeToValue(nodoUsuario, clazz.getClass());
-					listaUsuarios.add(us);
-
-				}
-			}
-
-			/* EXCEPCIONES */
-		} catch (com.fasterxml.jackson.core.JsonParseException e) {
-			// throw new ArchivoException("Error de Formato de Archivo");
-		} catch (FileNotFoundException e) {
-			// throw new ArchivoException("NO Se Logro Cargar El Archivo");
-		} catch (com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException e) {
-			// throw new ArchivoException("No esta bien formateado el archivo, le falta" +
-			// e.getLocation().getSourceRef().toString());
-		} catch (com.fasterxml.jackson.databind.JsonMappingException e) {
-			// throw new ArchivoException("No se pudo Mapear los usuarios");
+			mapper.writeValue(new File(this.rutaArchivo), listaUsuarios);
 		} catch (IOException e) {
-			// throw new ArchivoException("Error de Lectura/Escritura de Archivo");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
 		}
-		return (List<T>) listaUsuarios;
 
 	}
 
-	
-	
-	
-	
+	@Override
+	public List<Usuario> obtener() {
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enableDefaultTyping();
+		try {
+
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+
+			usuarios = (List<Usuario>) mapper.readValue(new File(this.rutaArchivo), usuarios.getClass());
+			return usuarios;
+
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 
 }

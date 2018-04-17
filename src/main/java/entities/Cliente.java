@@ -1,4 +1,4 @@
-package ar.frba.dds.grupo3.entities;
+package entities;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

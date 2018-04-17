@@ -1,4 +1,4 @@
-package ar.frba.dds.grupo3.entities;
+package entities;
 
 public class Categoria {
 

@@ -1,25 +1,33 @@
 package repositorios;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import ar.frba.dds.grupo3.entities.Administrador;
-import ar.frba.dds.grupo3.entities.Cliente;
-import dao.JsonClientesDAO;
+import dao.JsonUsuariosDAO;
+import entities.Administrador;
+import entities.Cliente;
+import entities.Usuario;
 import excepciones.ArchivoException;
 
 public class RepositorioUsuarios {
+	private JsonUsuariosDAO dao;
+	private List<Usuario> usuarios;
 
-	private List<Cliente> clientes;
-	private List<Administrador> administradores;
+	public RepositorioUsuarios() {
 
-	public void obtenerClientes() throws ArchivoException {
-
-		JsonClientesDAO daoClientes = new JsonClientesDAO("usuarios.json");
-		clientes = daoClientes.obtenerTodos();
+		this.dao = new JsonUsuariosDAO("usuarios.json");
+		this.usuarios = this.dao.obtener();
 	}
 
-	public List<Cliente> getClientes() {
-		return this.clientes;
-	}
+	public List<Cliente> obtenerClientes() {
+		return this.usuarios.stream().filter(Cliente.class::isInstance).map(Cliente.class::cast)
+				.collect(Collectors.toList());
 
+	}
+	
+	public List<Administrador> obtenerAdministradores() {
+		return this.usuarios.stream().filter(Administrador.class::isInstance).map(Administrador.class::cast)
+				.collect(Collectors.toList());
+
+	}
 }
