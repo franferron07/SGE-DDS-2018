@@ -3,11 +3,13 @@ package dao;
 import java.util.List;
 
 public interface DAO<T> {
-
-	void insertar(T a);
+	
+	public void insertar( T clazz);
 
 	void eliminar(T a);
 
 	List<T> obtenerTodos();
+
+
 
 }
