@@ -7,7 +7,6 @@ import dao.JsonUsuariosDAO;
 import entities.Administrador;
 import entities.Cliente;
 import entities.Usuario;
-import excepciones.ArchivoException;
 
 public class RepositorioUsuarios {
 	private JsonUsuariosDAO dao;
