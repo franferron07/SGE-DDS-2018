@@ -30,4 +30,20 @@ public class RepositorioUsuarios {
 				.collect(Collectors.toList());
 
 	}
+	
+	public void guardar() {
+		this.dao.guardar(this.usuarios);
+	}
+	
+	public void recargarUsuarios() {
+		this.usuarios = this.dao.obtener();
+	}
+	
+	public void agregarUsuario(Usuario usuario){
+		this.usuarios.add(usuario);
+	}
+	
+	public void quitarUsuario(Usuario usuario) {
+		this.usuarios.remove(usuario);
+	}
 }

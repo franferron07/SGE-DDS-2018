@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Administrador;
 import entities.Cliente;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
@@ -24,13 +25,13 @@ public class LecturaArchivoUsuariosTest {
 	public void testLecturaClientes() throws ArchivoException {
 		repoUsuarios.obtenerClientes();
 		List<Cliente> clientes = repoUsuarios.obtenerClientes();
-		Assert.assertEquals(3, clientes.size());
+		Assert.assertEquals(1, clientes.size());
 	}
 
-	/*
-	 * @Test public void testLecturaAdministradores() throws ArchivoException{ repo_
-	 * 
-	 * }
-	 */
+	@Test
+	public void testLecturaAdministradores() throws ArchivoException {
+		List<Administrador> administradores = repoUsuarios.obtenerAdministradores();
+		Assert.assertEquals(1, administradores.size());
+	}
 
 }

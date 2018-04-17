@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Administrador;
 import entities.Cliente;
@@ -31,9 +32,13 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping();
 
+		JsonNode rootNode = mapper.createObjectNode();
+
+		JsonNode array = mapper.valueToTree(listaUsuarios);
+		((ObjectNode) rootNode).set("usuarios", array);
 		try {
 
-			mapper.writeValue(new File(this.rutaArchivo), listaUsuarios);
+			mapper.writeValue(new File(this.rutaArchivo), rootNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,8 +55,9 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 		try {
 
 			List<Usuario> usuarios = new ArrayList<Usuario>();
+			JsonNode nodosCliente = mapper.readTree(new File(this.rutaArchivo)).get("usuarios");
 
-			usuarios = (List<Usuario>) mapper.readValue(new File(this.rutaArchivo), usuarios.getClass());
+			usuarios = (List<Usuario>) mapper.treeToValue(nodosCliente, usuarios.getClass());
 			return usuarios;
 
 		} catch (JsonParseException e) {

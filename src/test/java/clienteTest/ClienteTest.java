@@ -38,7 +38,7 @@ public class ClienteTest {
 		RepositorioUsuarios repo = new RepositorioUsuarios();
 		repo.obtenerClientes();
 		List<Cliente> clientes = repo.obtenerClientes();
-		Assert.assertEquals(2, clientes.get(2).cantidadDispositivos());
+		Assert.assertEquals(2, clientes.get(0).cantidadDispositivos());
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class ClienteTest {
 		RepositorioUsuarios repo = new RepositorioUsuarios();
 		repo.obtenerClientes();
 		List<Cliente> clientes = repo.obtenerClientes();
-		Assert.assertEquals(1, clientes.get(2).cantidadDispositivosEncendidos());
+		Assert.assertEquals(1, clientes.get(0).cantidadDispositivosEncendidos());
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class ClienteTest {
 		RepositorioUsuarios repo = new RepositorioUsuarios();
 		repo.obtenerClientes();
 		List<Cliente> clientes = repo.obtenerClientes();
-		Assert.assertEquals(1, clientes.get(2).cantidadDispositivosApagados());
+		Assert.assertEquals(1, clientes.get(0).cantidadDispositivosApagados());
 	}
 
 }
