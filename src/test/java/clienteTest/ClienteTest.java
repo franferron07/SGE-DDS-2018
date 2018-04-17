@@ -33,20 +33,13 @@ public class ClienteTest {
 		Assert.assertEquals(0, cliente.cantidadDispositivos());
 	}
 
-	@Test
-	public void testLecturaClientes() throws ArchivoException {
-		RepositorioUsuarios repo = new RepositorioUsuarios();
-		repo.obtenerClientes();
-		List<Cliente> clientes = repo.getClientes();
-		Assert.assertEquals(3, clientes.size());
-	}
 	
 	@Test
 	public void testClienteCantDispositivos() throws ArchivoException {
 		RepositorioUsuarios repo = new RepositorioUsuarios();
 		repo.obtenerClientes();
 		List<Cliente> clientes = repo.getClientes();
-		Assert.assertEquals(1, clientes.get(2).cantidadDispositivos());
+		Assert.assertEquals(2, clientes.get(2).cantidadDispositivos());
 	}
 
 	@Test
@@ -54,7 +47,7 @@ public class ClienteTest {
 		RepositorioUsuarios repo = new RepositorioUsuarios();
 		repo.obtenerClientes();
 		List<Cliente> clientes = repo.getClientes();
-		Assert.assertEquals(0, clientes.get(2).cantidadDispositivosEncendidos());
+		Assert.assertEquals(1, clientes.get(2).cantidadDispositivosEncendidos());
 	}
 	
 	@Test

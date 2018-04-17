@@ -1,9 +1,53 @@
 {
-		"Clientes":[
-			{"nombre":"TEST!","apellido":"TEST","domicilio":null,"nombreUsuario":null,"password":null,"tipoDocumento":null,"numeroDocumento":0,"fechaAltaServicio":null,"telefonoContacto":0,"categoria":null,"dispositivos":null},
-			{"nombre":"TEST!","apellido":"TEST","domicilio":null,"nombreUsuario":null,"password":null,"tipoDocumento":null,"numeroDocumento":0,"fechaAltaServicio":null,"telefonoContacto":0,"categoria":null,"dispositivos":[]},
-			{"nombre":"TEST!","apellido":"TEST","domicilio":null,"nombreUsuario":null,"password":null,"tipoDocumento":null,"numeroDocumento":0,"fechaAltaServicio":null,"telefonoContacto":0,"categoria":null,"dispositivos":[{"kwHora":150,"encendido":"false","nombre":"heladera"}]}
-		],
-		"Administradores":[]
+	"Clientes": [{
+			"nombre": "TEST!",
+			"apellido": "TEST",
+			"domicilio": null,
+			"nombreUsuario": null,
+			"password": null,
+			"tipoDocumento": null,
+			"numeroDocumento": 0,
+			"fechaAltaServicio": null,
+			"telefonoContacto": 0,
+			"categoria": null,
+			"dispositivos": null
+		},
+		{
+			"nombre": "TEST!",
+			"apellido": "TEST",
+			"domicilio": null,
+			"nombreUsuario": null,
+			"password": null,
+			"tipoDocumento": null,
+			"numeroDocumento": 0,
+			"fechaAltaServicio": null,
+			"telefonoContacto": 0,
+			"categoria": null,
+			"dispositivos": []
+		},
+		{
+			"nombre": "TEST!",
+			"apellido": "TEST",
+			"domicilio": null,
+			"nombreUsuario": null,
+			"password": null,
+			"tipoDocumento": null,
+			"numeroDocumento": 0,
+			"fechaAltaServicio": null,
+			"telefonoContacto": 0,
+			"categoria": null,
+			"dispositivos": [{
+				"kwHora": 150,
+				"encendido": "false",
+				"nombre": "heladera"
+			}, {
+				"kwHora": 50,
+				"encendido": "true",
+				"nombre": "television"
+			}]
+		}
+	],
+	"Administradores": [{}]
+
 
 }
