@@ -31,6 +31,7 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping();
+		
 
 		JsonNode rootNode = mapper.createObjectNode();
 
@@ -38,7 +39,7 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 		((ObjectNode) rootNode).set("usuarios", array);
 		try {
 
-			mapper.writeValue(new File(this.rutaArchivo), rootNode);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.rutaArchivo), rootNode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
