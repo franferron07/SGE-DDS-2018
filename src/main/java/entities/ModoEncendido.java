@@ -9,12 +9,6 @@ public class ModoEncendido extends Modo{
 		return true;
 	}
 
-	//no hace nada
-	@Override
-	public void encenderse(DispositivoInteligente disp) {
-		
-	}
-
 	
 
 }

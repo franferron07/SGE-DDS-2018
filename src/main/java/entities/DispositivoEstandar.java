@@ -23,6 +23,12 @@ public class DispositivoEstandar implements Dispositivo {
 		return true;
 	}
 
+	public boolean estaEncendido(){	
+		boolean estaEncen=false;
+		if( this.adaptador != null )
+			estaEncen=adaptador.estaEncendido();
+		return estaEncen;
+	}
 	
 	//obtengo cuanto consume en el dia el dispositivo. Duda si estimativoDeHora se obtiene por parametro o es atributo
 	public float consumoDia(){

@@ -2,9 +2,14 @@ package dao;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.lang.reflect.Type;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,6 +50,7 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 
 	@Override
 	public List<Usuario> obtener() {
+		Gson gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping();
@@ -53,7 +59,13 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 			List<Usuario> usuarios = new ArrayList<Usuario>();
 			JsonNode nodosCliente = mapper.readTree(new File(this.rutaArchivo)).get("usuarios");
 
-			usuarios = (List<Usuario>) mapper.treeToValue(nodosCliente, usuarios.getClass());
+	//		usuarios = (List<Usuario>) mapper.treeToValue(nodosCliente, usuarios.getClass());
+			
+			//TODO
+			Type pagedResultType = new TypeToken<List<Usuario>>() {}.getType();  
+			
+		//	List<Usuario> userRolePojos = gson.fromJson(nodosCliente, pagedResultType);
+	
 			return usuarios;
 
 		} catch (JsonParseException e) {

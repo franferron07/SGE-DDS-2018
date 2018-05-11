@@ -11,7 +11,8 @@ public class DispositivoInteligente implements Dispositivo {
 	public boolean esInteligente() {
 		return true;
 	}
-	
+
+
 	public boolean estaEncendido(){
 		
 		return this.modo.encendido();
@@ -63,7 +64,6 @@ public class DispositivoInteligente implements Dispositivo {
 	public void setModo(Modo modo) {
 		this.modo = modo;
 	}
-
 	
 
 }

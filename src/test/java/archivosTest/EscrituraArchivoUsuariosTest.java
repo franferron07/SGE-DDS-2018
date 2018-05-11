@@ -1,13 +1,11 @@
 package archivosTest;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Administrador;
 import entities.Cliente;
-import entities.Dispositivo;
+import entities.DispositivoInteligente;
+import entities.ModoEncendido;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
 import repositorios.RepositorioUsuarios;
@@ -29,11 +27,15 @@ public class EscrituraArchivoUsuariosTest {
 
 		cli.setApellido("User");
 
-		Dispositivo disp = new Dispositivo();
-		disp.setEncendido(false);
-		disp.setKwHora(50);
+		DispositivoInteligente disp = new DispositivoInteligente();
 		disp.setNombre("Panel");
+		ModoEncendido modoEncendido=new ModoEncendido();
+		modoEncendido.encenderse(disp);
+		
 		cli.agregarDispositivo(disp);
+		
+		
+		
 		
 		int cantidadUsuariosPrevios = repoUsuarios.obtenerClientes().size();
 		

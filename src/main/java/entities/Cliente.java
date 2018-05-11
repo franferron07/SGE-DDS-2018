@@ -12,11 +12,12 @@ public class Cliente extends Usuario {
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
 	private Categoria categoria;
-	private List<Dispositivo> dispositivos = new ArrayList<Dispositivo>() ; //inicializo la lista en nul
+	private List<Dispositivo> dispositivos; //inicializo la lista en nul
 
 	
 	//constructor vacio para jackson
 	public Cliente() {
+		 dispositivos = new ArrayList<Dispositivo>() ; 
 	}
 
 	public int cantidadDispositivosEncendidos(){
@@ -32,7 +33,7 @@ public class Cliente extends Usuario {
 	}
 
 	public boolean estaEncendido(Dispositivo dispositivo){
-		return dispositivo.getEncendido();
+		return dispositivo.estaEncendido();
 	}
 
 	public String getTipoDocumento() {
@@ -49,10 +50,6 @@ public class Cliente extends Usuario {
 
 	public int getTelefonoContacto() {
 		return telefonoContacto;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
 	}
 
 	public List<Dispositivo> getDispositivos() {
@@ -75,10 +72,6 @@ public class Cliente extends Usuario {
 		this.telefonoContacto = telefonoContacto;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
 	public void setDispositivos(List<Dispositivo> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
@@ -90,4 +83,13 @@ public class Cliente extends Usuario {
 	public void agregarDispositivo(Dispositivo dispositivo) {
 		this.dispositivos.add(dispositivo);
 	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 }
