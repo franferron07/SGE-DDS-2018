@@ -10,6 +10,11 @@ public class Administrador extends Usuario {
 	public Administrador() {
 
 	}
+	
+	//metodo que deberia hacer el calculo 
+	public void periodoDeAlta(){
+		
+	}
 
 	public LocalTime getFechaAltaSistema() {
 		return fechaAltaSistema;
@@ -26,4 +31,6 @@ public class Administrador extends Usuario {
 	public void setIdentificadorSistema(int identificadorSistema) {
 		this.identificadorSistema = identificadorSistema;
 	}
+	
+	
 }

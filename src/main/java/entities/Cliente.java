@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Cliente extends Usuario {
 
@@ -20,12 +21,21 @@ public class Cliente extends Usuario {
 		 dispositivos = new ArrayList<Dispositivo>() ; 
 	}
 
+	
+	@SuppressWarnings("unused")
+	private Stream<Dispositivo> filtrarDispositivosInteligentes(){
+		
+		return this.dispositivos.stream().filter(d -> d.esInteligente() );
+	}
+	
 	public int cantidadDispositivosEncendidos(){
-		return dispositivos.stream().filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
+		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
+		return inteligentes.filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivosApagados(){
-		return dispositivos.stream().filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
+		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
+		return inteligentes.filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivos(){
