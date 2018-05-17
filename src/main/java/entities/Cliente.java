@@ -14,7 +14,7 @@ public class Cliente extends Usuario {
 	private int telefonoContacto;
 	private Categoria categoria;
 	private List<Dispositivo> dispositivos; //inicializo la lista en nul
-
+	private int puntaje;
 	
 	//constructor vacio para jackson
 	public Cliente() {
@@ -46,6 +46,10 @@ public class Cliente extends Usuario {
 		return dispositivo.estaEncendido();
 	}
 
+	public float consumoPorDia(DispositivoEstandar dispositivoEstandar,long horas) {
+		return dispositivoEstandar.consumoDia(horas);
+	}
+	
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
@@ -91,15 +95,33 @@ public class Cliente extends Usuario {
 	}
 	
 	public void agregarDispositivo(Dispositivo dispositivo) {
-		this.dispositivos.add(dispositivo);
+		if (dispositivos.add(dispositivo))
+			this.setPuntaje(puntaje+15);
 	}
 
+	public Dispositivo convertirStandarInteligente() {
+		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente();
+		DispositivoEstandar dispositivoEstandar =new DispositivoEstandar();
+		dispositivoEstandar.setAdaptador(dispositivoInteligente);
+		puntaje+=10;
+		return dispositivoEstandar;
+	}
+	
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+
+	public int getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
 	}
 	
 }

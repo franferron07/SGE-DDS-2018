@@ -4,7 +4,7 @@ public class DispositivoInteligente implements Dispositivo {
 	
 	private String nombre;
 	private Modo modo;
-	
+	private Actuador actuador;
 	
 	
 	@Override
@@ -37,7 +37,7 @@ public class DispositivoInteligente implements Dispositivo {
 	}
 	
 	//calcula cuando energia se consumio en las ultimas n horas
-	public float energiaConsumidaTiempo(float horas){
+	public float energiaConsumidaTiempo(long horas){
 	
 		return 0;
 	}
@@ -65,5 +65,8 @@ public class DispositivoInteligente implements Dispositivo {
 		this.modo = modo;
 	}
 	
+	public void ejecutar() {
+		
+	}
 
 }

@@ -5,9 +5,6 @@ public class DispositivoEstandar implements Dispositivo {
 	private String nombre;
 	private float kwHora;
 	private DispositivoInteligente adaptador;
-	//duda no se si este es atributo o se da por parametro
-	private float estimativoUso;
-	
 	
 	
 	//constructor
@@ -31,9 +28,9 @@ public class DispositivoEstandar implements Dispositivo {
 	}
 	
 	//obtengo cuanto consume en el dia el dispositivo. Duda si estimativoDeHora se obtiene por parametro o es atributo
-	public float consumoDia(){
+	public float consumoDia(long estimativoUso){
 		
-		return this.kwHora * this.estimativoUso ; 
+		return this.kwHora * estimativoUso ; 
 	}
 	
 	
@@ -66,6 +63,5 @@ public class DispositivoEstandar implements Dispositivo {
 	public void setAdaptador(DispositivoInteligente adaptador) {
 		this.adaptador = adaptador;
 	}
-	
 
 }
