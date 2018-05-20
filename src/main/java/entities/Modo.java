@@ -1,19 +1,15 @@
 package entities;
 
-public class Modo {
+public interface Modo {
 	
-	public Modo() {
-		
-	}
-	
-	public boolean encendido() {
-		return false;
-	}
 
-	public  void apagarse(DispositivoInteligente disp) {
-	}
-	public  void encenderse(DispositivoInteligente disp) {
-	}
-	public  void ahorrarseEnergia(DispositivoInteligente disp) {
-	}	
+	public boolean encendido();
+
+	public void apagarse(DispositivoInteligente disp);
+
+	public void encenderse(DispositivoInteligente disp);
+
+	public void ahorrarseEnergia(DispositivoInteligente disp);
+		
+
 }

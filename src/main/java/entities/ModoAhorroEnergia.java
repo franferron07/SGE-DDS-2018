@@ -1,7 +1,7 @@
 package entities;
 
 
-public class ModoAhorroEnergia extends Modo {
+public class ModoAhorroEnergia implements Modo {
 
 	 public ModoAhorroEnergia() {
 		 super();
@@ -14,7 +14,7 @@ public class ModoAhorroEnergia extends Modo {
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {	
-		disp.setModo(new ModoApagado());//No se menciona en el tp,pero esun estado posible
+		disp.setModo(new ModoApagado());
         System.out.println("Se ejecuta apagarse del Modo Ahorro de Energia");
 	}
 

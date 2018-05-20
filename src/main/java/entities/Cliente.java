@@ -12,29 +12,30 @@ public class Cliente extends Usuario {
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
 	private Categoria categoria;
-	private List<DispositivoInteligente> dispositivosInteligentes;
+	private List<Dispositivo> dispositivos;
 	private int puntaje;
 	
-	public Cliente(List<DispositivoInteligente> dispositivosInteligentes) {
-		 this.dispositivosInteligentes = dispositivosInteligentes; 
+	
+	public Cliente(List<Dispositivo> dispositivos) {
+		 this.dispositivos = dispositivos; 
 	}
 
-	private Stream<DispositivoInteligente> filtrarDispositivosInteligentes(){
-		return this.dispositivosInteligentes.stream().filter(d -> d.esInteligente() );
+	private Stream<Dispositivo> filtrarDispositivosInteligentes(){
+		return this.dispositivos.stream().filter(d -> d.esInteligente() );
 	}
 	
 	public int cantidadDispositivosEncendidos(){
-		Stream<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
+		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
 		return inteligentes.filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivosApagados(){
-		Stream<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
+		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
 		return inteligentes.filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivos(){
-		return dispositivosInteligentes.size();
+		return dispositivos.size();
 	}
 
 	public boolean estaEncendido(Dispositivo dispositivo){
@@ -45,21 +46,26 @@ public class Cliente extends Usuario {
 		return dispositivoEstandar.consumoKmHora(horas);
 	}
 
-	public Dispositivo convertirStandarInteligente() {
+	public Dispositivo convertirStandarInteligente( DispositivoEstandar dispositivoEstandar) {
 		ModoApagado modoApagado=new ModoApagado();
 		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado);
-		DispositivoEstandar dispositivoEstandar =new DispositivoEstandar();
 		dispositivoEstandar.setAdaptador(dispositivoInteligente);
 		puntaje+=10;
 		return dispositivoEstandar;
 	}
+	
 	public void quitarDispositivo(Dispositivo dispositivo) {
-		this.dispositivosInteligentes.remove(dispositivo);
+		this.dispositivos.remove(dispositivo);
 	}
 	
-	public void agregarDispositivo(DispositivoInteligente dispositivo) {
-		if (dispositivosInteligentes.add(dispositivo))
-		this.setPuntaje(puntaje+15);
+	public void agregarDispositivo(Dispositivo dispositivo) {
+		
+		if( dispositivo.esInteligente() == true ){
+			this.setPuntaje(puntaje+15);
+		}
+		
+		dispositivos.add(dispositivo);
+		
 	}
 
 	public String getTipoDocumento() {
@@ -102,12 +108,12 @@ public class Cliente extends Usuario {
 		this.categoria = categoria;
 	}
 
-	public List<DispositivoInteligente> getDispositivosInteligentes() {
-		return dispositivosInteligentes;
+	public List<Dispositivo> getDispositivos() {
+		return dispositivos;
 	}
 
-	public void setDispositivosInteligentes(List<DispositivoInteligente> dispositivosInteligentes) {
-		this.dispositivosInteligentes = dispositivosInteligentes;
+	public void setDispositivos(List<Dispositivo> dispositivos) {
+		this.dispositivos = dispositivos;
 	}
 
 	public int getPuntaje() {

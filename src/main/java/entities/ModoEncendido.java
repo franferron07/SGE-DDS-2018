@@ -1,6 +1,6 @@
 package entities;
 
-public class ModoEncendido extends Modo{
+public class ModoEncendido implements Modo{
 
 	
     public ModoEncendido() {
@@ -25,7 +25,7 @@ public class ModoEncendido extends Modo{
 
 	@Override
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
-		disp.setModo(new ModoAhorroEnergia());//No se menciona en el tp,pero esun estado posible        
+		disp.setModo(new ModoAhorroEnergia());   
 		System.out.println("Se ejecuta ahorrarseEnergia del modo encendido");
 	}
 	public String toString() {
