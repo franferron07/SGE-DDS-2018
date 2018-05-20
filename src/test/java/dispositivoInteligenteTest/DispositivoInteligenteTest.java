@@ -2,57 +2,63 @@ package dispositivoInteligenteTest;
 
 //import junit.framework.Assert;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import entities.DispositivoInteligente;
 import entities.Modo;
+import entities.ModoAhorroEnergia;
 import entities.ModoApagado;
 import entities.ModoEncendido;
 
 public class DispositivoInteligenteTest {
 
 	 private DispositivoInteligente dispositivoInteligente;
-	 private Modo conexion;
+	 private Modo modo;
 
 	    @Before
-	    public void ini() {
-	        this.conexion = new ModoApagado();
-	        this.dispositivoInteligente=new DispositivoInteligente(conexion);
+	    public void init() {
+	        modo = new ModoEncendido(); // new ModoApagado() // new ModoAhorroEnergia()
+	        dispositivoInteligente=new DispositivoInteligente(modo);
 	    }
 
 	    @Test
 	    public void testEstadoInicial() {
-	        assertEquals(true, !this.dispositivoInteligente.estaEncendido());
+	        assertEquals(true, !dispositivoInteligente.estaEncendido());
 	    }
 
 	    @Test
 	    public void testApagadoEncender() {
-	    	this.conexion = new ModoEncendido();
-	    	this.dispositivoInteligente=new DispositivoInteligente(conexion);
-	        this.dispositivoInteligente.encender();
-	        assertEquals(this.conexion, this.dispositivoInteligente.getModo());
+	        dispositivoInteligente.encender();
+	        assertEquals(new ModoEncendido().toString(),dispositivoInteligente.getModo().toString());
 	    }
 
 	    @Test
 	    public void testApagadoApagar() {
-	        this.conexion = new ModoApagado();
-	    	this.dispositivoInteligente=new DispositivoInteligente(conexion);
-	        this.dispositivoInteligente.apagar();
-	        assertEquals(this.conexion, this.dispositivoInteligente.getModo());
+	        dispositivoInteligente.apagar();
+	        assertEquals(new ModoApagado().toString(),dispositivoInteligente.getModo().toString());
 	    }
 
 	    @Test
-	    public void testApagadoNoSoportadoAhorroEnergia() {
+	    public void testApagadoAhorroEnergia() {
 	        try {
-	            this.dispositivoInteligente.ahorrarEnergia();
-	     //       fail();
+	            dispositivoInteligente.ahorrarEnergia();
+	            //Operacion No soportada cuando esta apagado
+	          //  assertEquals(new ModoAhorroEnergia().toString(),dispositivoInteligente.getModo().toString());
 	        } catch (UnsupportedOperationException ignored) {
 	            ignored.toString();
 	        }
 	    }
 
+	    @Test
+	    public void testEncendidoAhorroEnergia() {
+	        try {
+	            dispositivoInteligente.ahorrarEnergia();
+	            assertEquals(new ModoAhorroEnergia().toString(),dispositivoInteligente.getModo().toString());
+	        } catch (UnsupportedOperationException ignored) {
+	            ignored.toString();
+	        }
+	    }
 	
 }
