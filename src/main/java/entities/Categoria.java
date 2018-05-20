@@ -3,13 +3,11 @@ package entities;
 public class Categoria {
 
 	private String nombre;
-	private float consumoDesde;
-	private float consumoHasta;
-	private float montoAPagar;
-	private float costoFijo;
-	private String unidadCostoFijo;
-	private String unidadCostoVariable;
-	private float costoVariable;
+	private float consumoMinimo;
+	private float consumoMaximo;
+	private String concepto;//Valores que puede tener Cargo fijo,Cargo variable u otro si abria en el futuro
+	private String unidad;
+	private float costoNormal;
 
 	public Categoria() {
 
@@ -19,66 +17,49 @@ public class Categoria {
 		return nombre;
 	}
 
-	public float getConsumoDesde() {
-		return consumoDesde;
-	}
-
-	public float getConsumoHasta() {
-		return consumoHasta;
-	}
-
-	public float getMontoAPagar() {
-		return montoAPagar;
-	}
-
-	public float getCostoFijo() {
-		return costoFijo;
-	}
-
-	public String getUnidadCostoFijo() {
-		return unidadCostoFijo;
-	}
-
-	public String getUnidadCostoVariable() {
-		return unidadCostoVariable;
-	}
-
-	public float getCostoVariable() {
-		return costoVariable;
-	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void setConsumoDesde(float consumoDesde) {
-		this.consumoDesde = consumoDesde;
+	public float getConsumoMinimo() {
+		return consumoMinimo;
 	}
 
-	public void setConsumoHasta(float consumoHasta) {
-		this.consumoHasta = consumoHasta;
+	public void setConsumoMinimo(float consumoMinimo) {
+		this.consumoMinimo = consumoMinimo;
 	}
 
-	public void setMontoAPagar(float montoAPagar) {
-		this.montoAPagar = montoAPagar;
+	public float getConsumoMaximo() {
+		return consumoMaximo;
 	}
 
-	public void setCostoFijo(float costoFijo) {
-		this.costoFijo = costoFijo;
+	public void setConsumoMaximo(float consumoMaximo) {
+		this.consumoMaximo = consumoMaximo;
 	}
 
-	public void setUnidadCostoFijo(String unidadCostoFijo) {
-		this.unidadCostoFijo = unidadCostoFijo;
+	public String getConcepto() {
+		return concepto;
 	}
 
-	public void setUnidadCostoVariable(String unidadCostoVariable) {
-		this.unidadCostoVariable = unidadCostoVariable;
+	public void setConcepto(String concepto) {
+		this.concepto = concepto;
 	}
 
-	public void setCostoVariable(float costoVariable) {
-		this.costoVariable = costoVariable;
+	public String getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
+	}
+
+	public float getCostoNormal() {
+		return costoNormal;
+	}
+
+	public void setCostoNormal(float costoNormal) {
+		this.costoNormal = costoNormal;
 	}
 
 	
-
 }

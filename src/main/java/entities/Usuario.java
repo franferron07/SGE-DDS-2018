@@ -1,14 +1,24 @@
 package entities;
 
-public abstract class Usuario {
+import java.io.Serializable;
 
+public class Usuario implements Serializable{
+	//public abstract class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String nombre;
 	protected String apellido;
 	protected String domicilio;
 	protected String nombreUsuario;
 	protected String password;
 	
-
+	public Usuario() {
+		
+	}
+	
 	public boolean login(String nombreUsuario, String password) {
 		return ( this.nombreUsuario == nombreUsuario && this.password == password );
 	}

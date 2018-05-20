@@ -1,45 +1,40 @@
 package entities;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Cliente extends Usuario {
-
+	private static final long serialVersionUID = 1L;
 	private String tipoDocumento;
 	private int numeroDocumento;
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
 	private Categoria categoria;
-	private List<Dispositivo> dispositivos; //inicializo la lista en nul
+	private List<DispositivoInteligente> dispositivosInteligentes;
 	private int puntaje;
 	
-	//constructor vacio para jackson
-	public Cliente() {
-		 dispositivos = new ArrayList<Dispositivo>() ; 
+	public Cliente(List<DispositivoInteligente> dispositivosInteligentes) {
+		 this.dispositivosInteligentes = dispositivosInteligentes; 
 	}
 
-	
-	@SuppressWarnings("unused")
-	private Stream<Dispositivo> filtrarDispositivosInteligentes(){
-		
-		return this.dispositivos.stream().filter(d -> d.esInteligente() );
+	private Stream<DispositivoInteligente> filtrarDispositivosInteligentes(){
+		return this.dispositivosInteligentes.stream().filter(d -> d.esInteligente() );
 	}
 	
 	public int cantidadDispositivosEncendidos(){
-		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
+		Stream<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
 		return inteligentes.filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivosApagados(){
-		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
+		Stream<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
 		return inteligentes.filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivos(){
-		return dispositivos.size();
+		return dispositivosInteligentes.size();
 	}
 
 	public boolean estaEncendido(Dispositivo dispositivo){
@@ -47,66 +42,58 @@ public class Cliente extends Usuario {
 	}
 
 	public float consumoPorDia(DispositivoEstandar dispositivoEstandar,long horas) {
-		return dispositivoEstandar.consumoDia(horas);
+		return dispositivoEstandar.consumoKmHora(horas);
+	}
+
+	public Dispositivo convertirStandarInteligente() {
+		ModoApagado modoApagado=new ModoApagado();
+		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado);
+		DispositivoEstandar dispositivoEstandar =new DispositivoEstandar();
+		dispositivoEstandar.setAdaptador(dispositivoInteligente);
+		puntaje+=10;
+		return dispositivoEstandar;
+	}
+	public void quitarDispositivo(Dispositivo dispositivo) {
+		this.dispositivosInteligentes.remove(dispositivo);
 	}
 	
+	public void agregarDispositivo(DispositivoInteligente dispositivo) {
+		if (dispositivosInteligentes.add(dispositivo))
+		this.setPuntaje(puntaje+15);
+	}
+
 	public String getTipoDocumento() {
 		return tipoDocumento;
-	}
-
-	public int getNumeroDocumento() {
-		return numeroDocumento;
-	}
-
-	public LocalTime getFechaAltaServicio() {
-		return fechaAltaServicio;
-	}
-
-	public int getTelefonoContacto() {
-		return telefonoContacto;
-	}
-
-	public List<Dispositivo> getDispositivos() {
-		return dispositivos;
 	}
 
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
 
+	public int getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
 	public void setNumeroDocumento(int numeroDocumento) {
 		this.numeroDocumento = numeroDocumento;
+	}
+
+	public LocalTime getFechaAltaServicio() {
+		return fechaAltaServicio;
 	}
 
 	public void setFechaAltaServicio(LocalTime fechaAltaServicio) {
 		this.fechaAltaServicio = fechaAltaServicio;
 	}
 
+	public int getTelefonoContacto() {
+		return telefonoContacto;
+	}
+
 	public void setTelefonoContacto(int telefonoContacto) {
 		this.telefonoContacto = telefonoContacto;
 	}
 
-	public void setDispositivos(List<Dispositivo> dispositivos) {
-		this.dispositivos = dispositivos;
-	}
-	
-	public void quitarDispositivo(Dispositivo dispositivo) {
-		this.dispositivos.remove(dispositivo);
-	}
-	
-	public void agregarDispositivo(Dispositivo dispositivo) {
-		if (dispositivos.add(dispositivo))
-			this.setPuntaje(puntaje+15);
-	}
-
-	public Dispositivo convertirStandarInteligente() {
-		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente();
-		DispositivoEstandar dispositivoEstandar =new DispositivoEstandar();
-		dispositivoEstandar.setAdaptador(dispositivoInteligente);
-		puntaje+=10;
-		return dispositivoEstandar;
-	}
-	
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -115,6 +102,13 @@ public class Cliente extends Usuario {
 		this.categoria = categoria;
 	}
 
+	public List<DispositivoInteligente> getDispositivosInteligentes() {
+		return dispositivosInteligentes;
+	}
+
+	public void setDispositivosInteligentes(List<DispositivoInteligente> dispositivosInteligentes) {
+		this.dispositivosInteligentes = dispositivosInteligentes;
+	}
 
 	public int getPuntaje() {
 		return puntaje;
@@ -124,4 +118,4 @@ public class Cliente extends Usuario {
 		this.puntaje = puntaje;
 	}
 	
-}
+	}

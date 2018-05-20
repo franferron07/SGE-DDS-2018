@@ -1,28 +1,34 @@
 package entities;
 
-public class DispositivoInteligente implements Dispositivo {
+public class DispositivoInteligente extends Dispositivo {
 	
-	private String nombre;
-	private Modo modo;
+	private Modo modo;//Aqui se usa el patron State
 	private Actuador actuador;
 	
 	
-	@Override
+    public DispositivoInteligente(Modo m) {
+		this.setModo(m);
+	}
+
 	public boolean esInteligente() {
 		return true;
 	}
 
+	public void setModo(Modo modo) {
+		this.modo = modo;
+	}
+	
+	public Modo getModo() {
+		return modo;
+	}
 
-	public boolean estaEncendido(){
-		
+	public boolean estaEncendido(){	
 		return this.modo.encendido();
 	}
 	
-	public boolean estaApagado(){
-		
+	public boolean estaApagado(){	
 		return !this.modo.encendido();
 	}
-	
 	
 	public void apagar(){
 		this.modo.apagarse(this);
@@ -37,9 +43,8 @@ public class DispositivoInteligente implements Dispositivo {
 	}
 	
 	//calcula cuando energia se consumio en las ultimas n horas
-	public float energiaConsumidaTiempo(long horas){
-	
-		return 0;
+	public float consumoKmHora(long horas){
+		return this.getKwHora() * horas ; 
 	}
 	
 	//calcula la energia consumida en un periodo de dias . DUDA
@@ -47,22 +52,6 @@ public class DispositivoInteligente implements Dispositivo {
 	
 		
 		return 0;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Modo getModo() {
-		return modo;
-	}
-
-	public void setModo(Modo modo) {
-		this.modo = modo;
 	}
 	
 	public void ejecutar() {

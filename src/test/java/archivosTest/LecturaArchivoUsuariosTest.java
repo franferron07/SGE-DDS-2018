@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import dao.JsonUsuariosDAO;
 import entities.Administrador;
 import entities.Cliente;
 import excepciones.ArchivoException;
@@ -17,13 +18,12 @@ public class LecturaArchivoUsuariosTest {
 
 	@Before
 	public void init() {
-
-		repoUsuarios = new RepositorioUsuarios();
+		JsonUsuariosDAO jsonUsuariosDAO=new JsonUsuariosDAO("usuarios.json");
+		repoUsuarios = new RepositorioUsuarios(jsonUsuariosDAO);
 	}
 
 	@Test
 	public void testLecturaClientes() throws ArchivoException {
-		repoUsuarios.obtenerClientes();
 		List<Cliente> clientes = repoUsuarios.obtenerClientes();
 		Assert.assertTrue(clientes.size() > 1);
 	}

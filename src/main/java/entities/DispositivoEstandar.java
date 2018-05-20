@@ -1,9 +1,8 @@
 package entities;
 
-public class DispositivoEstandar implements Dispositivo {
+public class DispositivoEstandar extends Dispositivo {
 	
-	private String nombre;
-	private float kwHora;
+
 	private DispositivoInteligente adaptador;
 	
 	
@@ -15,9 +14,9 @@ public class DispositivoEstandar implements Dispositivo {
 	@Override
 	public boolean esInteligente() {
 		
-		if( this.adaptador == null ) return false;
+		if( this.adaptador != null ) return true;
 		
-		return true;
+		return false;
 	}
 
 	public boolean estaEncendido(){	
@@ -27,33 +26,15 @@ public class DispositivoEstandar implements Dispositivo {
 		return estaEncen;
 	}
 	
-	//obtengo cuanto consume en el dia el dispositivo. Duda si estimativoDeHora se obtiene por parametro o es atributo
-	public float consumoDia(long estimativoUso){
-		
-		return this.kwHora * estimativoUso ; 
+	//obtengo cuanto consume en el dia el dispositivo.
+	public float consumoKmHora(long horas){		
+		return this.getKwHora() * horas ; 
 	}
 	
 	
 	public void quitarAdaptador(){
 		
 		this.adaptador=null;
-	}
-	
-	//getters y setters
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public float getKwHora() {
-		return kwHora;
-	}
-
-	public void setKwHora(float kwHora) {
-		this.kwHora = kwHora;
 	}
 
 	public DispositivoInteligente getAdaptador() {

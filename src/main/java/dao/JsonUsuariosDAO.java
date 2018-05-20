@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Usuario;
 
-public class JsonUsuariosDAO extends DAO<Usuario> {
+public class JsonUsuariosDAO implements DAO<Usuario> {
 
 	private String rutaArchivo;
 
@@ -59,7 +59,7 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 			List<Usuario> usuarios = new ArrayList<Usuario>();
 			JsonNode nodosCliente = mapper.readTree(new File(this.rutaArchivo)).get("usuarios");
 
-	//		usuarios = (List<Usuario>) mapper.treeToValue(nodosCliente, usuarios.getClass());
+			usuarios = (List<Usuario>) mapper.treeToValue(nodosCliente, usuarios.getClass());
 			
 			//TODO
 			Type pagedResultType = new TypeToken<List<Usuario>>() {}.getType();  
@@ -78,9 +78,24 @@ public class JsonUsuariosDAO extends DAO<Usuario> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return null;
-
+	}
+	
+	public void guardar(Usuario usuario){
+	//	this.usuarios.add(usuario);
+		
+	}	
+	
+	public void borrar(Usuario usuario) {
+	//	this.usuarios.remove(usuario);
 	}
 
+	public String getRutaArchivo() {
+		return rutaArchivo;
+	}
+
+	public void setRutaArchivo(String rutaArchivo) {
+		this.rutaArchivo = rutaArchivo;
+	}
+	
 }

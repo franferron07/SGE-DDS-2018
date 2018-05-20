@@ -1,7 +1,11 @@
 package entities;
 
 public class Sensor extends DispositivoInteligente {
- private Actuador actuador;
+ public Sensor(Modo m) {
+		super(m);
+	}
+
+private Actuador actuador;
  
 	@Override
 	public void ejecutar() {

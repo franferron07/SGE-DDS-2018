@@ -7,42 +7,47 @@ import dao.JsonUsuariosDAO;
 import entities.Administrador;
 import entities.Cliente;
 import entities.Usuario;
-
+/**
+ * Patron Strategy
+ *
+ */
 public class RepositorioUsuarios {
 	private JsonUsuariosDAO dao;
-	private List<Usuario> usuarios;
+	
+	public RepositorioUsuarios(JsonUsuariosDAO dao) {
+		//this.dao = new JsonUsuariosDAO("usuarios.json");
+		this.dao = dao;
+	}
 
-	public RepositorioUsuarios() {
-
-		this.dao = new JsonUsuariosDAO("usuarios.json");
-		this.usuarios = this.dao.obtener();
+	public void setDao(JsonUsuariosDAO dao) {
+		this.dao = dao;
 	}
 
 	public List<Cliente> obtenerClientes() {
-		return this.usuarios.stream().filter(Cliente.class::isInstance).map(Cliente.class::cast)
+		List<Usuario> usuarios = this.dao.obtener();
+		return usuarios.stream().filter(Cliente.class::isInstance).map(Cliente.class::cast)
 				.collect(Collectors.toList());
-
 	}
 	
 	public List<Administrador> obtenerAdministradores() {
-		return this.usuarios.stream().filter(Administrador.class::isInstance).map(Administrador.class::cast)
+		List<Usuario> usuarios = this.dao.obtener();
+		return usuarios.stream().filter(Administrador.class::isInstance).map(Administrador.class::cast)
 				.collect(Collectors.toList());
-
 	}
 	
-	public void guardar() {
-		this.dao.guardar(this.usuarios);
+	public void guardar(List<Usuario> usuarios ) {
+		this.dao.guardar(usuarios);
 	}
 	
-	public void recargarUsuarios() {
-		this.usuarios = this.dao.obtener();
+	public List<Usuario> recargarUsuarios() {
+		return this.dao.obtener();
 	}
 	
-	public void agregarUsuario(Usuario usuario){
-		this.usuarios.add(usuario);
-	}
-	
-	public void quitarUsuario(Usuario usuario) {
-		this.usuarios.remove(usuario);
+	public void guardar(Usuario usuario){
+		this.dao.guardar(usuario);
+		
+	}	
+	public void borrar(Usuario usuario) {
+		this.dao.borrar(usuario);
 	}
 }

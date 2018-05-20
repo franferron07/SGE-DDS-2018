@@ -1,26 +1,19 @@
 package entities;
 
-public abstract class Modo {
+public class Modo {
 	
-	
-	abstract boolean encendido();
-
-
-	public void apagarse(DispositivoInteligente disp) {
+	public Modo() {
 		
-		disp.setModo(new ModoApagado());
-	}
-
-
-	public void encenderse(DispositivoInteligente disp) {
-		
-		disp.setModo(new ModoEncendido());
-	}
-
-	public void ahorrarseEnergia(DispositivoInteligente disp) {
-		
-		disp.setModo(new ModoAhorroEnergia());
 	}
 	
+	public boolean encendido() {
+		return false;
+	}
 
+	public  void apagarse(DispositivoInteligente disp) {
+	}
+	public  void encenderse(DispositivoInteligente disp) {
+	}
+	public  void ahorrarseEnergia(DispositivoInteligente disp) {
+	}	
 }
