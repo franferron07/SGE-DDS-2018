@@ -4,7 +4,8 @@ import java.util.List;
 
 public class Sensor  {
 
-	
+	//si mide temparatura , movimiento, humedad,intensidad de luz
+	private String tipoMagnitud;
 	private List<Regla> reglas;
 	
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
