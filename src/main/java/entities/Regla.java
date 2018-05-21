@@ -1,16 +1,19 @@
 package entities;
 
-public abstract class Regla {
+import java.util.List;
 
-	//habria que ver si es una lista o un solo actuador(creo que es lista)
-	private ActuadorBase actuador;
+public class Regla {
+	
+	private List<ActuadorBase> actuadores;
 	
 	//evalua segun la regla si va a ejecutar el actuador o no.
-	public abstract void evaluarMedicion(Sensor sensor);
+	public void evaluarMedicion(Sensor sensor){
+		
+	}
 	
 	//ejecuto actuador
-	private void ejecutarActuador(){
-		this.actuador.ejecutarAccion();
+	private void ejecutarActuador(ActuadorBase actuador){
+		actuador.ejecutarAccion();
 	}
 
 }
