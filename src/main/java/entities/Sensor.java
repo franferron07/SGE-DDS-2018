@@ -1,23 +1,24 @@
 package entities;
 
-public class Sensor extends DispositivoInteligente {
- public Sensor(Modo m) {
-		super(m);
+import java.util.List;
+
+public class Sensor  {
+
+	
+	private List<Regla> reglas;
+	
+	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
+	public void realizarMedicion(){
+		/*procedimiento aun no definido*/
+		avisarMedicion();
 	}
 
-private Actuador actuador;
- 
-	@Override
-	public void ejecutar() {
-		actuador.accion();
-	}
+	//metodo que avisa a sus observadores(reglas) que realizo la medicion
+	private void avisarMedicion() {
 		
-	public Actuador getActuador() {
-		return actuador;
+		this.reglas.forEach( r -> r.evaluarMedicion(this));
+		
 	}
-	
-	public void setActuador(Actuador actuador) {
-		this.actuador = actuador;
-	}
+
 
 }
