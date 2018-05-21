@@ -1,9 +1,9 @@
 package entities;
 
-public class DispositivoInteligente extends Dispositivo {
+public class DispositivoInteligente {
 	
 	private Modo modo;//Aqui se usa el patron State
-	private ActuadorBase actuador;
+	private Actuador actuador;
 	
 	
     public DispositivoInteligente(Modo m) {
