@@ -24,6 +24,10 @@ public class Sensor  {
 	}
 
 	
+	public void agregarRegla(Regla unaRegla){
+		this.reglas.add(unaRegla);
+	}
+	
 	//getters y setters
 	public TipoMagnitud getTipoMagnitud() {
 		return magnitud;
