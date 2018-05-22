@@ -2,10 +2,12 @@ package entities;
 
 import java.util.List;
 
+import enums.TipoMagnitud;
+
 public class Sensor  {
 
 	//si mide temparatura , movimiento, humedad,intensidad de luz
-	private String tipoMagnitud;
+	private TipoMagnitud magnitud ;
 	private List<Regla> reglas;
 	
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
@@ -23,12 +25,12 @@ public class Sensor  {
 
 	
 	//getters y setters
-	public String getTipoMagnitud() {
-		return tipoMagnitud;
+	public TipoMagnitud getTipoMagnitud() {
+		return magnitud;
 	}
 
-	public void setTipoMagnitud(String tipoMagnitud) {
-		this.tipoMagnitud = tipoMagnitud;
+	public void setTipoMagnitud(TipoMagnitud tipoMagnitud) {
+		this.magnitud = tipoMagnitud;
 	}
 
 	public List<Regla> getReglas() {
