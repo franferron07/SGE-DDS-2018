@@ -4,6 +4,7 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	private Modo modo;//Aqui se usa el patron State.
 	private ActuadorBase actuador;
+	private int idDispositivo;
 	
 	
     public DispositivoInteligente(Modo m) {

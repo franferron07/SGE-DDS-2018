@@ -2,7 +2,7 @@ package entities;
 
 public class CambiarIntensidadLuzCommand implements ActuadorBase {
 
-	private Dispositivo dispositivo;
+	private DispositivoInteligente dispositivo;
 	
 	@Override
 	public void ejecutarAccion() {

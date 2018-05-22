@@ -21,5 +21,26 @@ public class Sensor  {
 		
 	}
 
+	
+	//getters y setters
+	public String getTipoMagnitud() {
+		return tipoMagnitud;
+	}
 
+	public void setTipoMagnitud(String tipoMagnitud) {
+		this.tipoMagnitud = tipoMagnitud;
+	}
+
+	public List<Regla> getReglas() {
+		return reglas;
+	}
+
+	public void setReglas(List<Regla> reglas) {
+		this.reglas = reglas;
+	}
+
+
+	
+	
+	
 }

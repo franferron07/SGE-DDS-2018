@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Cliente extends Usuario {
+	
 	private static final long serialVersionUID = 1L;
 	private String tipoDocumento;
 	private int numeroDocumento;
