@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Regla {
@@ -8,15 +9,17 @@ public class Regla {
 	private String nombreRegla;
 	
 	public Regla(String nombre){
-		super();
 		this.nombreRegla=nombre;
+		this.actuadores= new ArrayList<ActuadorBase>();
+	}
+	
+	public void agregarActuador(ActuadorBase unActuador){
+		this.actuadores.add(unActuador);
 	}
 	
 	//evalua segun la regla si va a ejecutar el actuador o no.
 	public void evaluarMedicion(Sensor sensor){
 
-		
-		
 	}
 	
 	//ejecuto actuador
