@@ -2,13 +2,26 @@ package entities;
 
 public class CambiarTemperaturaActuadorCommand implements ActuadorBase{
 	
-	private Dispositivo dispositivo;
+	private DispositivoInteligente dispositivo;
 
-	@Override
-	public void ejecutarAccion() {
-		// TODO Auto-generated method stub
-		
+	
+	public CambiarTemperaturaActuadorCommand(DispositivoInteligente d) {
+		dispositivo=d;
 	}
 	
+	
+	@Override
+	public void ejecutarAccion() {
+		dispositivo.cambiarTemperaturaActuador();		
+	}
+
+	public DispositivoInteligente getDispositivo() {
+		return dispositivo;
+	}
+
+
+	public void setDispositivo(DispositivoInteligente dispositivo) {
+		this.dispositivo = dispositivo;
+	}
 
 }

@@ -3,7 +3,6 @@ package entities;
 public class DispositivoInteligente extends Dispositivo {
 	
 	private Modo modo;//Aqui se usa el patron State.
-	private ActuadorBase actuador;
 	private int idDispositivo;
 	
 	
@@ -49,14 +48,25 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	//calcula la energia consumida en un periodo de dias . DUDA
-	public float energiaConsumidaPeriodo(int dias){
-	
-		
-		return 0;
+	public float energiaConsumidaPeriodo(int dias){		
+		return this.consumoKmHora(24)*dias;
 	}
 	
-	public void ejecutar() {
-		
+	public void cambiarTemperaturaActuador() {
+		 System.out.println("Cambiando la temperatura");
 	}
 
+	public void cambiarIntensidadLuz() {
+		System.out.println("Cambiando la intensidad de la luz");
+	}
+
+	public int getIdDispositivo() {
+		return idDispositivo;
+	}
+
+	public void setIdDispositivo(int idDispositivo) {
+		this.idDispositivo = idDispositivo;
+	}
+	
+	
 }
