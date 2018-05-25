@@ -42,15 +42,6 @@ public class DispositivoInteligente extends Dispositivo {
 		this.modo.ahorrarseEnergia(this);
 	}
 	
-	//calcula cuando energia se consumio en las ultimas n horas
-	public float consumoKmHora(long horas){
-		return this.getKwHora() * horas ; 
-	}
-	
-	//calcula la energia consumida en un periodo de dias . DUDA
-	public float energiaConsumidaPeriodo(int dias){		
-		return this.consumoKmHora(24)*dias;
-	}
 	
 	public void cambiarTemperaturaActuador() {
 		 System.out.println("Cambiando la temperatura");
@@ -66,6 +57,17 @@ public class DispositivoInteligente extends Dispositivo {
 
 	public void setIdDispositivo(int idDispositivo) {
 		this.idDispositivo = idDispositivo;
+	}
+
+	//calcula la energia consumida en un periodo de dias . DUDA
+	public float energiaConsumidaPeriodo(int dias){		
+		return this.consumoKWHoras(24)*dias;
+	}
+	
+	@Override
+	public float consumoKWHoras(int horas) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

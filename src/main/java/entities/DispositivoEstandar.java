@@ -27,7 +27,7 @@ public class DispositivoEstandar extends Dispositivo {
 	}
 	
 	//obtengo cuanto consume en el dia el dispositivo.
-	public float consumoKmHora(long horas){		
+	public float consumoKWHoras(int horas){		
 		return this.getKwHora() * horas ; 
 	}
 	
@@ -44,5 +44,6 @@ public class DispositivoEstandar extends Dispositivo {
 	public void setAdaptador(DispositivoInteligente adaptador) {
 		this.adaptador = adaptador;
 	}
+
 
 }
