@@ -3,47 +3,40 @@ package entities;
 public class DispositivoEstandar extends Dispositivo {
 	
 
-	private DispositivoInteligente adaptador;
-	
+	private float horasPorDia;
 	
 	//constructor
 	public DispositivoEstandar(){
-		adaptador=null;
 	}
+	
 	
 	@Override
 	public boolean esInteligente() {
-		
-		if( this.adaptador != null ) return true;
-		
 		return false;
 	}
 
-	public boolean estaEncendido(){	
-		boolean estaEncen=false;
-		if( this.adaptador != null )
-			estaEncen=adaptador.estaEncendido();
-		return estaEncen;
+	public float consumoPeriodo(int dias){		
+		return consumoEnElDia() * dias ; 
 	}
 	
-	//obtengo cuanto consume en el dia el dispositivo.
-	public float consumoKWHoras(int horas){		
-		return this.getKwHora() * horas ; 
-	}
-	
-	
-	public void quitarAdaptador(){
-		
-		this.adaptador=null;
+	//me devuelve el consumo estimativo para un dia
+	private float consumoEnElDia() {
+		return horasPorDia * kwHora;
 	}
 
-	public DispositivoInteligente getAdaptador() {
-		return adaptador;
+
+
+	public float getHorasPorDia() {
+		return horasPorDia;
 	}
 
-	public void setAdaptador(DispositivoInteligente adaptador) {
-		this.adaptador = adaptador;
+
+
+	public void setHorasPorDia(float horasPorDia) {
+		this.horasPorDia = horasPorDia;
 	}
+
+	
 
 
 }

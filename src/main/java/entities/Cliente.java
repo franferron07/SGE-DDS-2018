@@ -21,38 +21,44 @@ public class Cliente extends Usuario {
 		 this.dispositivos = dispositivos; 
 	}
 
-	private Stream<Dispositivo> filtrarDispositivosInteligentes(){
-		return this.dispositivos.stream().filter(d -> d.esInteligente() );
+	//filtro los dispositivos inteligentes
+	private List<DispositivoInteligente> filtrarDispositivosInteligentes(){
+		List<DispositivoInteligente> inteligentes ;
+		inteligentes = (List<DispositivoInteligente>) this.dispositivos.stream().filter(d -> d.esInteligente()) ; 
+		return inteligentes ;
 	}
 	
 	public int cantidadDispositivosEncendidos(){
-		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
-		return inteligentes.filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
+		List<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
+		return inteligentes.stream().filter(disp -> estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
 	public int cantidadDispositivosApagados(){
-		Stream<Dispositivo> inteligentes = filtrarDispositivosInteligentes(); 
-		return inteligentes.filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
+		List<DispositivoInteligente> inteligentes = filtrarDispositivosInteligentes(); 
+		return inteligentes.stream().filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
+	//aca debo discriminar los inteligentes que tienen el estandar distinto de null
 	public int cantidadDispositivos(){
 		return dispositivos.size();
 	}
 
-	public boolean estaEncendido(Dispositivo dispositivo){
+	public boolean estaEncendido(DispositivoInteligente dispositivo){
 		return dispositivo.estaEncendido();
 	}
 
-	public float consumoPorDia(DispositivoEstandar dispositivoEstandar,long horas) {
-		return dispositivoEstandar.consumoKmHora(horas);
-	}
-
-	public Dispositivo convertirStandarInteligente( DispositivoEstandar dispositivoEstandar) {
+	//conviero dispositivo estandar a inteligente y agrego inteligente a la lista. (consultar si saco el estandar o lo dejo)
+	public void convertirEStandarInteligente( DispositivoEstandar dispositivoEstandar) {
+		
 		ModoApagado modoApagado=new ModoApagado();
 		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado);
-		dispositivoEstandar.setAdaptador(dispositivoInteligente);
+		
+		//agrego disposiutivo estandar en inteligente y lo agrego a la lista. 
+		dispositivoInteligente.setEstandar(dispositivoEstandar);
+		agregarDispositivo(dispositivoInteligente);
+		
 		puntaje+=10;
-		return dispositivoEstandar;
+
 	}
 	
 	public void quitarDispositivo(Dispositivo dispositivo) {
@@ -69,6 +75,8 @@ public class Cliente extends Usuario {
 		
 	}
 
+	
+	//getters y setters
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
@@ -125,4 +133,4 @@ public class Cliente extends Usuario {
 		this.puntaje = puntaje;
 	}
 	
-	}
+}

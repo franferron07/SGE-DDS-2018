@@ -1,14 +1,14 @@
 package entities;
 
 public abstract class Dispositivo {
-	private String nombre;
-	private float kwHora;
 	
-	public abstract float consumoKWHoras(int horas);
+	private String nombre;
+	protected float kwHora;
+	
+	//seguramente esto sea un date time, desde y hasta. Me da el consumo en un determinado periodo de tiempo. 
+	public abstract float consumoPeriodo(int dias);
 	
 	public abstract boolean esInteligente();
-	
-	public abstract boolean estaEncendido();
 
 	public String getNombre() {
 		return nombre;

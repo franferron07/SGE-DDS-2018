@@ -4,24 +4,27 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	private Modo modo;//Aqui se usa el patron State.
 	private int idDispositivo;
+	private DispositivoEstandar estandar;
 	
 	
-    public DispositivoInteligente(Modo m) {
-		this.setModo(m);
+	@Override
+	public float consumoPeriodo(int dias) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
+	
+	@Override
 	public boolean esInteligente() {
 		return true;
 	}
-
-	public void setModo(Modo modo) {
-		this.modo = modo;
-	}
 	
-	public Modo getModo() {
-		return modo;
+	//me da el consumo del dispositivo en las ultimas N horas. 
+	public float consumoUltimasNHoras(float horas){
+		
+		return 0;
 	}
 
+	
 	public boolean estaEncendido(){	
 		return this.modo.encendido();
 	}
@@ -43,14 +46,33 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	
-	public void cambiarTemperaturaActuador() {
-		 System.out.println("Cambiando la temperatura");
+	
+	//constructor
+    public DispositivoInteligente(Modo m) {
+		this.setModo(m);
+		this.estandar=null;
 	}
 
-	public void cambiarIntensidadLuz() {
-		System.out.println("Cambiando la intensidad de la luz");
+    
+    //getters y setters
+    
+	
+	public DispositivoEstandar getEstandar() {
+		return estandar;
 	}
 
+	public void setEstandar(DispositivoEstandar estandar) {
+		this.estandar = estandar;
+	}
+	
+	public void setModo(Modo modo) {
+		this.modo = modo;
+	}
+
+	public Modo getModo() {
+		return modo;
+	}
+	
 	public int getIdDispositivo() {
 		return idDispositivo;
 	}
@@ -59,16 +81,10 @@ public class DispositivoInteligente extends Dispositivo {
 		this.idDispositivo = idDispositivo;
 	}
 
-	//calcula la energia consumida en un periodo de dias . DUDA
-	public float energiaConsumidaPeriodo(int dias){		
-		return this.consumoKWHoras(24)*dias;
-	}
+
+
+
 	
-	@Override
-	public float consumoKWHoras(int horas) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	
 }
