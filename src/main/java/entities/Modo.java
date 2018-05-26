@@ -4,6 +4,8 @@ public interface Modo {
 	
 
 	public boolean encendido();
+	
+	public float consumoEnPeriodo();
 
 	public void apagarse(DispositivoInteligente disp);
 

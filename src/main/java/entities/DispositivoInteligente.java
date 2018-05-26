@@ -1,8 +1,12 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DispositivoInteligente extends Dispositivo {
 	
-	private Modo modo;//Aqui se usa el patron State.
+	private Modo modo;
+	private List<Modo> logModos ;
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
 	
@@ -45,12 +49,17 @@ public class DispositivoInteligente extends Dispositivo {
 		this.modo.ahorrarseEnergia(this);
 	}
 	
+	public void agregarLogModo( Modo modo ){
+		this.logModos.add(modo);
+	}
+	
 	
 	
 	//constructor
     public DispositivoInteligente(Modo m) {
 		this.setModo(m);
 		this.estandar=null;
+		this.logModos =  new ArrayList<Modo>();
 	}
 
     
@@ -79,6 +88,14 @@ public class DispositivoInteligente extends Dispositivo {
 
 	public void setIdDispositivo(int idDispositivo) {
 		this.idDispositivo = idDispositivo;
+	}
+
+	public List<Modo> getLogModos() {
+		return logModos;
+	}
+
+	public void setLogModos(List<Modo> logModos) {
+		this.logModos = logModos;
 	}
 
 

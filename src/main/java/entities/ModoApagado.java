@@ -3,9 +3,18 @@ package entities;
 public class ModoApagado implements Modo {
 
 	
+	
+	 //constructor
 	 public ModoApagado() {
-		 super();
-		}
+		
+	}
+	 
+	@Override
+    public float consumoEnPeriodo(){
+    
+		
+    	return 0;
+    } 
 	 
 	@Override
 	public boolean encendido() {
@@ -14,22 +23,31 @@ public class ModoApagado implements Modo {
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {	
-        System.out.println("Se ejecuta apagarse del modo Apagado");
+        
 	}
 
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
-		disp.setModo(new ModoEncendido());
-        System.out.println("Se ejecuta encenderse del modo Apagado");
+		//agrego log de modo antes de cambiarlo
+		disp.agregarLogModo( disp.getModo() );
+		
+		disp.setModo(new ModoEncendido());       
 	}
 
 	@Override
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
-        System.out.println("Se ejecuta ahorrarseEnergia del modo Apagado");
+		//agrego log de modo antes de cambiarlo
+		disp.agregarLogModo( disp.getModo() );
+		
+		disp.setModo(new ModoAhorroEnergia());
+        
 	}
 	
 	public String toString() {
 		return "Modo Apagado";
 	}
+	
+	
+	
 
 }

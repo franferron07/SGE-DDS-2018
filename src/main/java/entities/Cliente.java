@@ -47,7 +47,7 @@ public class Cliente extends Usuario {
 		return dispositivo.estaEncendido();
 	}
 
-	//conviero dispositivo estandar a inteligente y agrego inteligente a la lista. (consultar si saco el estandar o lo dejo)
+	//conviero dispositivo estandar a inteligente y agrego inteligente a la lista. y saco el estandar de la lista
 	public void convertirEStandarInteligente( DispositivoEstandar dispositivoEstandar) {
 		
 		ModoApagado modoApagado=new ModoApagado();
@@ -57,8 +57,25 @@ public class Cliente extends Usuario {
 		dispositivoInteligente.setEstandar(dispositivoEstandar);
 		agregarDispositivo(dispositivoInteligente);
 		
+		quitarDispositivo(dispositivoEstandar);
+		
 		puntaje+=10;
 
+	}
+	
+	//quita el adaptador de un dispositivo estandar , quita el inteligente de la lista y pone el estandar. 
+	public void quitarAdaptadorEnDispositivoEstandar( DispositivoInteligente inteligente ){
+		
+		DispositivoEstandar estandar = inteligente.getEstandar();
+		
+		if( estandar != null ){
+			inteligente.setEstandar(null);
+			quitarDispositivo(inteligente);
+			agregarDispositivo(estandar);
+			
+			puntaje= puntaje-10;
+		}
+		
 	}
 	
 	public void quitarDispositivo(Dispositivo dispositivo) {

@@ -1,11 +1,29 @@
 package entities;
 
+import java.time.LocalDateTime;
+
 public class ModoEncendido implements Modo{
 
+	private LocalDateTime fechaHoraInicio;
+	private LocalDateTime fechaHoraFin;
+	private float consumoKW;
 	
+	
+	
+	//constructor
     public ModoEncendido() {
-		super();
+    	
+    	fechaHoraInicio= LocalDateTime.now();
+    	
+		
 	}
+    
+    @Override
+    public float consumoEnPeriodo(){
+    
+    	
+    	return 0;
+    }
 
 	@Override
 	public boolean encendido() {
@@ -14,22 +32,55 @@ public class ModoEncendido implements Modo{
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {		
+		
+		//agrego log de modo antes de cambiarlo
+		disp.agregarLogModo( disp.getModo() );
+				
 		disp.setModo(new ModoApagado());
-        System.out.println("Se ejecuta apagarse del modo encendido");
 	}
 
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
-        System.out.println("Se ejecuta encenderse del modo encendido");
+       
 	}
 
 	@Override
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
-		disp.setModo(new ModoAhorroEnergia());   
-		System.out.println("Se ejecuta ahorrarseEnergia del modo encendido");
+		
+		//agrego log de modo antes de cambiarlo
+		disp.agregarLogModo( disp.getModo() );
+		
+		disp.setModo(new ModoAhorroEnergia());   	
 	}
+	
 	public String toString() {
 		return "Modo Encendido";
+	}
+	
+
+	//getters y setters
+	public LocalDateTime getFechaHoraInicio() {
+		return fechaHoraInicio;
+	}
+
+	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
+		fechaHoraInicio = fechaHoraInicio;
+	}
+
+	public LocalDateTime getFechaHoraFin() {
+		return fechaHoraFin;
+	}
+
+	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
+		fechaHoraFin = fechaHoraFin;
+	}
+
+	public float getConsumoKW() {
+		return consumoKW;
+	}
+
+	public void setConsumoKW(float consumoKW) {
+		this.consumoKW = consumoKW;
 	}
 
 }
