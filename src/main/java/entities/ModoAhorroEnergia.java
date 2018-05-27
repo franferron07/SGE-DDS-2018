@@ -1,13 +1,6 @@
 package entities;
 
-import java.time.LocalDateTime;
-
-public class ModoAhorroEnergia implements Modo {
-
-	private LocalDateTime fechaHoraInicio;
-	private LocalDateTime fechaHoraFin;
-	private float consumoKW; 
-	
+public class ModoAhorroEnergia extends Modo {
 	
 	//constructor
 	public ModoAhorroEnergia() {
@@ -15,9 +8,8 @@ public class ModoAhorroEnergia implements Modo {
 	}
 	
 	@Override
-    public float consumoEnPeriodo(){
-    
-    	return 0;
+    public float consumoEnPeriodo(){  
+    	return this.getConsumoKW();//Este va hacer el valor de un registro,en su periodo fechaHoraInicio y fechaHoraFin
     } 
 	 
 	@Override
@@ -28,17 +20,14 @@ public class ModoAhorroEnergia implements Modo {
 	@Override
     public void apagarse(DispositivoInteligente disp) {	
 		//agrego log de modo antes de cambiarlo
-		disp.agregarLogModo( disp.getModo() );
-		
-		disp.setModo(new ModoApagado());
-		
+		disp.agregarLogModo( disp.getModo().clone());		
+		disp.setModo(new ModoApagado());		
 	}
 
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
 		//agrego log de modo antes de cambiarlo
-		disp.agregarLogModo( disp.getModo() );
-		
+		disp.agregarLogModo( disp.getModo().clone());		
 		disp.setModo(new ModoEncendido());
 	}
 
@@ -50,31 +39,14 @@ public class ModoAhorroEnergia implements Modo {
 	public String toString() {
 		return "Modo Ahorro de Energia";
 	}
-
 	
-	//getters y setters
-	public LocalDateTime getFechaHoraInicio() {
-		return fechaHoraInicio;
+	@Override
+	public ModoAhorroEnergia clone() {
+		ModoAhorroEnergia modoAhorroEnergia = new ModoAhorroEnergia();
+		modoAhorroEnergia.setConsumoKW(this.getConsumoKW());
+		modoAhorroEnergia.setFechaHoraInicio(this.getFechaHoraInicio());
+		modoAhorroEnergia.setFechaHoraFin(this.getFechaHoraFin());
+		return modoAhorroEnergia;
 	}
 
-	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		fechaHoraInicio = fechaHoraInicio;
-	}
-
-	public LocalDateTime getFechaHoraFin() {
-		return fechaHoraFin;
-	}
-
-	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-		fechaHoraFin = fechaHoraFin;
-	}
-
-	public float getConsumoKW() {
-		return consumoKW;
-	}
-
-	public void setConsumoKW(float consumoKW) {
-		this.consumoKW = consumoKW;
-	}
-	
 }

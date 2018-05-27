@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dao.JsonUsuariosDAO;
 import entities.Cliente;
+import entities.Dispositivo;
 import entities.DispositivoInteligente;
 import entities.ModoApagado;
 import entities.ModoEncendido;
@@ -29,7 +30,7 @@ public class EscrituraArchivoUsuariosTest {
 	public void testEscrituraUsuarios() throws ArchivoException {
 
 		//Cliente cli = new Cliente();
-		   List<DispositivoInteligente> dispositivos=new ArrayList<DispositivoInteligente>();
+		   List<Dispositivo> dispositivos=new ArrayList<Dispositivo>();
 	        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado());
 	        dispositivoInteligente.setNombre("DispositivoInteligente1");
 	        dispositivos.add(dispositivoInteligente);

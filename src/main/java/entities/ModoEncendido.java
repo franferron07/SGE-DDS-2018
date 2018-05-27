@@ -1,28 +1,13 @@
 package entities;
 
-import java.time.LocalDateTime;
-
-public class ModoEncendido implements Modo{
-
-	private LocalDateTime fechaHoraInicio;
-	private LocalDateTime fechaHoraFin;
-	private float consumoKW;
-	
-	
-	
+public class ModoEncendido extends Modo{
 	//constructor
     public ModoEncendido() {
-    	
-    	fechaHoraInicio= LocalDateTime.now();
-    	
-		
 	}
     
     @Override
-    public float consumoEnPeriodo(){
-    
-    	
-    	return 0;
+    public float consumoEnPeriodo(){  	
+    	return this.getConsumoKW();//Este va hacer el valor de un registro,en su periodo fechaHoraInicio y fechaHoraFin
     }
 
 	@Override
@@ -32,10 +17,8 @@ public class ModoEncendido implements Modo{
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {		
-		
 		//agrego log de modo antes de cambiarlo
-		disp.agregarLogModo( disp.getModo() );
-				
+		disp.agregarLogModo( disp.getModo().clone() );				
 		disp.setModo(new ModoApagado());
 	}
 
@@ -45,42 +28,23 @@ public class ModoEncendido implements Modo{
 	}
 
 	@Override
-	public void ahorrarseEnergia(DispositivoInteligente disp) {
-		
+	public void ahorrarseEnergia(DispositivoInteligente disp) {		
 		//agrego log de modo antes de cambiarlo
-		disp.agregarLogModo( disp.getModo() );
-		
+		disp.agregarLogModo( disp.getModo().clone() );		
 		disp.setModo(new ModoAhorroEnergia());   	
 	}
 	
 	public String toString() {
 		return "Modo Encendido";
 	}
-	
 
-	//getters y setters
-	public LocalDateTime getFechaHoraInicio() {
-		return fechaHoraInicio;
-	}
-
-	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		fechaHoraInicio = fechaHoraInicio;
-	}
-
-	public LocalDateTime getFechaHoraFin() {
-		return fechaHoraFin;
-	}
-
-	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-		fechaHoraFin = fechaHoraFin;
-	}
-
-	public float getConsumoKW() {
-		return consumoKW;
-	}
-
-	public void setConsumoKW(float consumoKW) {
-		this.consumoKW = consumoKW;
+	@Override
+	public ModoEncendido clone() {
+		ModoEncendido modoEncendido = new ModoEncendido();
+		modoEncendido.setConsumoKW(this.getConsumoKW());
+		modoEncendido.setFechaHoraInicio(this.getFechaHoraInicio());
+		modoEncendido.setFechaHoraFin(this.getFechaHoraFin());
+		return modoEncendido;
 	}
 
 }
