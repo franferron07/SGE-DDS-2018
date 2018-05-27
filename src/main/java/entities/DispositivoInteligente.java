@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,28 @@ public class DispositivoInteligente extends Dispositivo {
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
 	
+	//parametros de consumo en kw de los dispositivos en horas. 
+	private float consumoEncendidoHora;
+	private float consumoAhorroHora;
+	
 	
 	@Override
-	public float consumoPeriodo(int dias) {
-		// TODO Auto-generated method stub
+	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
+		
+		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
+		
+		modosFiltrados.stream().forEach(disp -> disp.consumoEnPeriodo() );
+		
 		return 0;
 	}
 	
+	private List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+		
+		
+		
+		return null;
+	}
+
 	@Override
 	public boolean esInteligente() {
 		return true;
@@ -98,10 +114,23 @@ public class DispositivoInteligente extends Dispositivo {
 		this.logModos = logModos;
 	}
 
+	public float getConsumoEncendidoHora() {
+		return consumoEncendidoHora;
+	}
+
+	public void setConsumoEncendidoHora(float consumoEncendidoHora) {
+		this.consumoEncendidoHora = consumoEncendidoHora;
+	}
+
+	public float getConsumoAhorroHora() {
+		return consumoAhorroHora;
+	}
+
+	public void setConsumoAhorroHora(float consumoAhorroHora) {
+		this.consumoAhorroHora = consumoAhorroHora;
+	}
 
 
-
-	
 	
 	
 }

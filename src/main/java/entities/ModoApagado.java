@@ -31,7 +31,7 @@ public class ModoApagado implements Modo {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoEncendido());       
+		disp.setModo(new ModoEncendido( disp.getConsumoEncendidoHora() ));       
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ModoApagado implements Modo {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoAhorroEnergia());
+		disp.setModo(new ModoAhorroEnergia( disp.getConsumoAhorroHora() ));
         
 	}
 	

@@ -6,12 +6,14 @@ public class ModoAhorroEnergia implements Modo {
 
 	private LocalDateTime fechaHoraInicio;
 	private LocalDateTime fechaHoraFin;
-	private float consumoKW; 
+	private float consumoKW; //consumo en horas del dispositivo, lo guardo para el log por si llega a cambiar el consumo del dispositivo
 	
 	
 	//constructor
-	public ModoAhorroEnergia() {
-		 
+	public ModoAhorroEnergia(float consumo) {
+		
+		fechaHoraInicio= LocalDateTime.now();
+    	consumoKW = consumo;
 	}
 	
 	@Override
@@ -27,7 +29,8 @@ public class ModoAhorroEnergia implements Modo {
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {	
-		//agrego log de modo antes de cambiarlo
+		//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo() );
 		
 		disp.setModo(new ModoApagado());
@@ -36,10 +39,11 @@ public class ModoAhorroEnergia implements Modo {
 
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
-		//agrego log de modo antes de cambiarlo
+		//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoEncendido());
+		disp.setModo(new ModoEncendido( disp.getConsumoEncendidoHora() ));
 	}
 
 	@Override
@@ -58,7 +62,7 @@ public class ModoAhorroEnergia implements Modo {
 	}
 
 	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		fechaHoraInicio = fechaHoraInicio;
+		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
 	public LocalDateTime getFechaHoraFin() {
@@ -66,7 +70,7 @@ public class ModoAhorroEnergia implements Modo {
 	}
 
 	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-		fechaHoraFin = fechaHoraFin;
+		this.fechaHoraFin = fechaHoraFin;
 	}
 
 	public float getConsumoKW() {

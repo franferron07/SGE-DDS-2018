@@ -1,28 +1,39 @@
 package entities;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+
 
 public class ModoEncendido implements Modo{
 
 	private LocalDateTime fechaHoraInicio;
 	private LocalDateTime fechaHoraFin;
-	private float consumoKW;
+	private float consumoKW; //consumo en horas del dispositivo, lo guardo para el log por si llega a cambiar el consumo del dispositivo
 	
 	
 	
 	//constructor
-    public ModoEncendido() {
+    public ModoEncendido(float consumo) {
     	
     	fechaHoraInicio= LocalDateTime.now();
-    	
-		
+    	consumoKW = consumo;
 	}
     
     @Override
     public float consumoEnPeriodo(){
     
+    	long horas;
+    	horas = periodoEnHoras();
     	
-    	return 0;
+    	return this.consumoKW * horas;
+    }
+    
+    public long periodoEnHoras(){
+    	
+    	Duration duracion = Duration.between(fechaHoraInicio, fechaHoraFin);
+    	long horas = duracion.getSeconds()/3600;  //obtengo la diferencia del periodo en horas.
+    	
+    	return horas;
     }
 
 	@Override
@@ -33,7 +44,8 @@ public class ModoEncendido implements Modo{
 	@Override
     public void apagarse(DispositivoInteligente disp) {		
 		
-		//agrego log de modo antes de cambiarlo
+		//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo() );
 				
 		disp.setModo(new ModoApagado());
@@ -47,10 +59,11 @@ public class ModoEncendido implements Modo{
 	@Override
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
 		
-		//agrego log de modo antes de cambiarlo
+		//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoAhorroEnergia());   	
+		disp.setModo(new ModoAhorroEnergia( disp.getConsumoAhorroHora() ));   	
 	}
 	
 	public String toString() {
@@ -64,7 +77,7 @@ public class ModoEncendido implements Modo{
 	}
 
 	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		fechaHoraInicio = fechaHoraInicio;
+		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
 	public LocalDateTime getFechaHoraFin() {
@@ -72,7 +85,7 @@ public class ModoEncendido implements Modo{
 	}
 
 	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-		fechaHoraFin = fechaHoraFin;
+		this.fechaHoraFin = fechaHoraFin;
 	}
 
 	public float getConsumoKW() {
