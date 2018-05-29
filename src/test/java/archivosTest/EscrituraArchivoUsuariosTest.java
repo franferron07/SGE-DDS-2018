@@ -41,7 +41,7 @@ public class EscrituraArchivoUsuariosTest {
 
 		DispositivoInteligente disp = new DispositivoInteligente(new ModoApagado());
 		disp.setNombre("Panel");
-		ModoEncendido modoEncendido=new ModoEncendido();
+		ModoEncendido modoEncendido=new ModoEncendido(20);
 		modoEncendido.encenderse(disp);
 		
 		cliente1.agregarDispositivo(disp);

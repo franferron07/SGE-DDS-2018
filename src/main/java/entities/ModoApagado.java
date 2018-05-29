@@ -25,14 +25,14 @@ public class ModoApagado extends Modo {
 	public void encenderse(DispositivoInteligente disp) {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo().clone() );		
-		disp.setModo(new ModoEncendido());       
+		disp.setModo(new ModoEncendido(disp.getConsumoEncendidoHora()));       
 	}
 
 	@Override
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo().clone() );		
-		disp.setModo(new ModoAhorroEnergia());       
+		disp.setModo(new ModoAhorroEnergia(disp.getConsumoAhorroHora()));       
 	}
 	
 	public String toString() {

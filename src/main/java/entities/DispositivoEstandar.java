@@ -1,5 +1,9 @@
 package entities;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
+
 public class DispositivoEstandar extends Dispositivo {
 	
 	protected float kwHora; //consumo de kw por hora
@@ -18,8 +22,20 @@ public class DispositivoEstandar extends Dispositivo {
 	}
 	
 	@Override
-	public float consumoPeriodo(int dias){		
+	public float consumoPeriodo( LocalDateTime desde , LocalDateTime hasta  ){	
+		
+		int dias;
+		dias= periodoEnDias( desde , hasta );
+		
 		return consumoEnElDia() * dias ; 
+	}
+	
+	//calcula cuantos dias dura el periodo. 
+	public int periodoEnDias( LocalDateTime desde , LocalDateTime hasta ){
+		
+		Period periodo= Period.between(desde.toLocalDate(), hasta.toLocalDate());
+		return periodo.getDays();
+		
 	}
 	
 	//me devuelve el consumo estimativo para un dia

@@ -1,12 +1,11 @@
 package entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public abstract class Modo {
 		
-	private Date fechaHoraInicio;
-	private Date fechaHoraFin;
+	private LocalDateTime fechaHoraInicio;
+	private LocalDateTime fechaHoraFin;
 	private float consumoKW; 
 	
 	public abstract boolean encendido();
@@ -21,19 +20,21 @@ public abstract class Modo {
 	
 	public abstract Modo clone();
 
-	public Date getFechaHoraInicio() {
+	
+
+	public LocalDateTime getFechaHoraInicio() {
 		return fechaHoraInicio;
 	}
 
-	public void setFechaHoraInicio(Date fechaHoraInicio) {
+	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
-	public Date getFechaHoraFin() {
+	public LocalDateTime getFechaHoraFin() {
 		return fechaHoraFin;
 	}
 
-	public void setFechaHoraFin(Date fechaHoraFin) {
+	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
 		this.fechaHoraFin = fechaHoraFin;
 	}
 

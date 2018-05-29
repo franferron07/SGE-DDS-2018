@@ -1,10 +1,13 @@
 package entities;
 
+import java.time.LocalDateTime;
+
 public class ModoAhorroEnergia extends Modo {
 	
 	//constructor
-	public ModoAhorroEnergia() {
-		 
+	public ModoAhorroEnergia(float consumo) {
+		this.setFechaHoraInicio(LocalDateTime.now());
+    	this.setConsumoKW(consumo);
 	}
 	
 	@Override
@@ -19,16 +22,18 @@ public class ModoAhorroEnergia extends Modo {
 
 	@Override
     public void apagarse(DispositivoInteligente disp) {	
-		//agrego log de modo antes de cambiarlo
+			//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo().clone());		
 		disp.setModo(new ModoApagado());		
 	}
 
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
-		//agrego log de modo antes de cambiarlo
+		//agrego log de modo antes de cambiarlo y le seteo la fecha final
+		setFechaHoraFin(LocalDateTime.now());
 		disp.agregarLogModo( disp.getModo().clone());		
-		disp.setModo(new ModoEncendido());
+		disp.setModo(new ModoEncendido(disp.getConsumoEncendidoHora()));
 	}
 
 	@Override
@@ -42,7 +47,7 @@ public class ModoAhorroEnergia extends Modo {
 	
 	@Override
 	public ModoAhorroEnergia clone() {
-		ModoAhorroEnergia modoAhorroEnergia = new ModoAhorroEnergia();
+		ModoAhorroEnergia modoAhorroEnergia = new ModoAhorroEnergia(this.getConsumoKW());
 		modoAhorroEnergia.setConsumoKW(this.getConsumoKW());
 		modoAhorroEnergia.setFechaHoraInicio(this.getFechaHoraInicio());
 		modoAhorroEnergia.setFechaHoraFin(this.getFechaHoraFin());

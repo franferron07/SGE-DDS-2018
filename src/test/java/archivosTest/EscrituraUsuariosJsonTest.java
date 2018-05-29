@@ -43,11 +43,11 @@ public class EscrituraUsuariosJsonTest {
 
 		DispositivoInteligente dispositivo1 = new DispositivoInteligente(new ModoApagado());
 		dispositivo1.setNombre("Dispositivo1");
-		ModoEncendido modoEncendido=new ModoEncendido();
+		ModoEncendido modoEncendido=new ModoEncendido(10);
 		modoEncendido.encenderse(dispositivo1);
 		DispositivoInteligente dispositivo2 = new DispositivoInteligente(new ModoApagado());
 		dispositivo2.setNombre("Dispositivo2");
-		modoEncendido=new ModoEncendido();
+		modoEncendido=new ModoEncendido(20);
 		modoEncendido.encenderse(dispositivo2);
 		
 		cliente1.agregarDispositivo(dispositivo1);
