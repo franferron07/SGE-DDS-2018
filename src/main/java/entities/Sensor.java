@@ -3,19 +3,31 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import composite.Regla;
 import enums.TipoMagnitud;
+import observers.Observable;
 
-public class Sensor  {
+public class Sensor  extends Observable {
 
 	//si mide temparatura , movimiento, humedad,intensidad de luz
 	private TipoMagnitud magnitud ;
 	private List<Regla> reglas;
-	
+	   private int state;
 	
 	public Sensor(){
 		reglas= new ArrayList<Regla>();
 	}
 	
+
+    public int getState() {
+        return state;
+    }
+//Aqui esta el patron Observer
+    public void setState(int state) {
+        this.state = state;
+        this.notifyObservers();
+    }
+    
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
 	public void realizarMedicion(){
 		/*procedimiento aun no definido*/

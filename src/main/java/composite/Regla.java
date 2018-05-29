@@ -1,17 +1,39 @@
-package entities;
+package composite;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Regla {
-	
+import entities.ActuadorBase;
+import entities.Sensor;
+import observers.Observer;
+
+public abstract class Regla implements Observer{
+
+    public abstract int operate();
+
 	private List<ActuadorBase> actuadores;
 	private String nombreRegla;
-	
+	 private Sensor subject;
+	 
+	 
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
 	}
+	
+	
+
+	    public Regla(Sensor subject) {
+	        this.subject = subject;
+	        this.subject.addObserver(this);
+	    }
+
+	    @Override
+	    public void update() {
+	        System.out.println("Observer A: sujeto a cambiado: " + this.subject.getState());
+	    }
+	
+	
 	
 	public void agregarActuador(ActuadorBase unActuador){
 		this.actuadores.add(unActuador);
@@ -46,5 +68,4 @@ public class Regla {
 	}
 	
 	
-
 }
