@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDateTime;
+
 public class ModoApagado implements Modo {
 
 	
@@ -10,9 +12,8 @@ public class ModoApagado implements Modo {
 	}
 	 
 	@Override
-    public float consumoEnPeriodo(){
+	public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
     
-		
     	return 0;
     } 
 	 
@@ -31,7 +32,7 @@ public class ModoApagado implements Modo {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoEncendido( disp.getConsumoEncendidoHora() ));       
+		disp.setModo(new ModoEncendido());       
 	}
 
 	@Override
@@ -39,9 +40,22 @@ public class ModoApagado implements Modo {
 		//agrego log de modo antes de cambiarlo
 		disp.agregarLogModo( disp.getModo() );
 		
-		disp.setModo(new ModoAhorroEnergia( disp.getConsumoAhorroHora() ));
+		disp.setModo(new ModoAhorroEnergia());
         
 	}
+	
+	//en apagado no hace nada
+	@Override
+	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin , float consumo) {
+	
+	}
+	
+	@Override
+	public boolean cumpleIntervalo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
+		
+		return false;
+	}
+	
 	
 	public String toString() {
 		return "Modo Apagado";

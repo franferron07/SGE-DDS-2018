@@ -11,31 +11,17 @@ public class DispositivoInteligente extends Dispositivo {
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
 	
-	//parametros de consumo en kw de los dispositivos en horas. 
-	private float consumoEncendidoHora;
-	private float consumoAhorroHora;
-	
 	
 	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
+		//filtro los modos
 		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
 		
-		modosFiltrados.stream().forEach(disp -> disp.consumoEnPeriodo() );
+		//calculo el consumo
+		double consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
 		
-		return 0;
-	}
-	
-	private List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
-		
-		
-		
-		return null;
-	}
-
-	@Override
-	public boolean esInteligente() {
-		return true;
+		return (float) consumoTotal;
 	}
 	
 	//me da el consumo del dispositivo en las ultimas N horas. 
@@ -43,7 +29,28 @@ public class DispositivoInteligente extends Dispositivo {
 		
 		return 0;
 	}
-
+	
+	@Override
+	public boolean esInteligente() {
+		return true;
+	}
+	
+	
+	//metodo desde el dispositivo hardware para avisar que se registro el consumo
+	public void avisoConsumo( LocalDateTime inicio , LocalDateTime fin , float consumo ){
+		
+		this.modo.registrarConsumo( inicio , fin , consumo );
+		
+	}
+	
+	
+	//filtra los modos que entren en el intervalo pedido
+	@SuppressWarnings("unchecked")
+	private List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+		
+		return (List<Modo>) this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );
+		
+	}
 	
 	public boolean estaEncendido(){	
 		return this.modo.encendido();
@@ -114,21 +121,6 @@ public class DispositivoInteligente extends Dispositivo {
 		this.logModos = logModos;
 	}
 
-	public float getConsumoEncendidoHora() {
-		return consumoEncendidoHora;
-	}
-
-	public void setConsumoEncendidoHora(float consumoEncendidoHora) {
-		this.consumoEncendidoHora = consumoEncendidoHora;
-	}
-
-	public float getConsumoAhorroHora() {
-		return consumoAhorroHora;
-	}
-
-	public void setConsumoAhorroHora(float consumoAhorroHora) {
-		this.consumoAhorroHora = consumoAhorroHora;
-	}
 
 
 	
