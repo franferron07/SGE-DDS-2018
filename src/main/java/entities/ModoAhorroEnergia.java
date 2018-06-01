@@ -112,5 +112,13 @@ public class ModoAhorroEnergia implements Modo {
 	}
 
 
+	public List<ConsumoModo> getConsumos() {
+		return consumos;
+	}
+
+	public void setConsumos(List<ConsumoModo> consumos) {
+		this.consumos = consumos;
+	}
+	
 	
 }

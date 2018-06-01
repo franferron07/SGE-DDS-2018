@@ -116,5 +116,15 @@ public class ModoEncendido implements Modo{
 		this.fechaHoraFin = fechaHoraFin;
 	}
 
+	public List<ConsumoModo> getConsumos() {
+		return consumos;
+	}
+
+	public void setConsumos(List<ConsumoModo> consumos) {
+		this.consumos = consumos;
+	}
+	
+	
+
 
 }
