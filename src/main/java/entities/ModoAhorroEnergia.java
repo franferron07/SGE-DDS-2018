@@ -21,10 +21,21 @@ public class ModoAhorroEnergia implements Modo {
 	public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
 		
 		//filtrarConsumoDePeriodo
+		List<ConsumoModo> consumosFiltrados = filtrarConsumosEnPeriodo(fechaInicial , fechaFinal);
+		
+		//calculo el consumo
+		double consumoTotal = consumosFiltrados.stream().mapToDouble(consumo -> consumo.getConsumo()).sum();
     
-    	return 0;
+    	return (float) consumoTotal;
     } 
 	 
+	//filtro los consumos que cumplen el periodo
+	private List<ConsumoModo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		
+		List<ConsumoModo> consumos = (List<ConsumoModo>) this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
+		return consumos;
+	}
+
 	@Override
 	public boolean encendido() {
 		return true;

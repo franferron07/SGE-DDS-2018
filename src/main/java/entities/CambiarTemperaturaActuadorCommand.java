@@ -12,7 +12,7 @@ public class CambiarTemperaturaActuadorCommand implements ActuadorBase{
 	
 	@Override
 	public void ejecutarAccion() {
-		dispositivo.cambiarTemperaturaActuador();		
+			
 	}
 
 	public DispositivoInteligente getDispositivo() {

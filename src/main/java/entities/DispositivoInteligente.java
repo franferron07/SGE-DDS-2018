@@ -12,6 +12,15 @@ public class DispositivoInteligente extends Dispositivo {
 	private DispositivoEstandar estandar;
 	
 	
+	
+	//constructor
+    public DispositivoInteligente(Modo m) {
+		this.setModo(m);
+		this.estandar=null;
+		this.logModos =  new ArrayList<Modo>();
+	}
+	
+	
 	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
@@ -77,18 +86,8 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	
-	
-	//constructor
-    public DispositivoInteligente(Modo m) {
-		this.setModo(m);
-		this.estandar=null;
-		this.logModos =  new ArrayList<Modo>();
-	}
-
-    
     //getters y setters
     
-	
 	public DispositivoEstandar getEstandar() {
 		return estandar;
 	}

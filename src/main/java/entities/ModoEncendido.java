@@ -23,20 +23,21 @@ public class ModoEncendido implements Modo{
     
     @Override
     public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
+		
+		//filtrarConsumoDePeriodo
+		List<ConsumoModo> consumosFiltrados = filtrarConsumosEnPeriodo(fechaInicial , fechaFinal);
+		
+		double consumoTotal = consumosFiltrados.stream().mapToDouble(consumo -> consumo.getConsumo()).sum();
+    	return (float) consumoTotal;
+    } 
+	 
+	//filtro los consumos que cumplen el periodo
+	private List<ConsumoModo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		
+		List<ConsumoModo> consumos = (List<ConsumoModo>) this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
+		return consumos;
+	}
     
-    	long horas;
-    	horas = periodoEnHoras();
-    	
-    	return 0;
-    }
-    
-    public long periodoEnHoras(){
-    	
-    	Duration duracion = Duration.between(fechaHoraInicio, fechaHoraFin);
-    	long horas = duracion.getSeconds()/3600;  //obtengo la diferencia del periodo en horas.
-    	
-    	return horas;
-    }
 
 	@Override
 	public boolean encendido() {
