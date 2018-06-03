@@ -31,7 +31,7 @@ public class ConsumoTest {
 	public void testCrearConsumoModo(){
 		
 		Consumo consumo_test = new Consumo( fecha_inicial , fecha_final , 10);
-		assertEquals( 10 , consumo_test.getConsumo() , '=' );
+		assertEquals( 10 , consumo_test.getConsumo() , 0 );
 	}
 	
 	@Test

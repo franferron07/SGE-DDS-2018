@@ -3,10 +3,12 @@ package modoTest;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Consumo;
 import entities.ModoEncendido;
 
 public class ModoConConsumoTest {
@@ -55,6 +57,7 @@ public class ModoConConsumoTest {
 		
 	}
 	
+	@Test
 	public void testCumpleIntervalo(){
 		
 		LocalDateTime inicio_intervalo = LocalDateTime.now().plusDays(-1);
@@ -64,6 +67,7 @@ public class ModoConConsumoTest {
 		
 	}
 	
+	@Test
 	public void testNoCumpleIntervalo(){
 		
 		LocalDateTime inicio_intervalo = LocalDateTime.now().plusDays(-2);
@@ -73,6 +77,29 @@ public class ModoConConsumoTest {
 		
 	}
 	
+	@Test
+	public void testFiltrarConsumoEnPeriodo(){
+		
+		LocalDateTime inicio_intervalo = modoEncendido.getFechaHoraInicio();
+		LocalDateTime fin_intevalo = inicio_intervalo.plusHours(12);
+		
+		List<Consumo> consumos = modoEncendido.filtrarConsumosEnPeriodo(inicio_intervalo, fin_intevalo);
+		
+		assertEquals(1 , consumos.size() );
+		
+	}
+	
+	@Test
+	public void testConsumoEnPeriodo(){
+		
+		LocalDateTime inicio_intervalo = modoEncendido.getFechaHoraInicio();
+		LocalDateTime fin_intevalo = inicio_intervalo.plusHours(12);
+		
+		float consumoTotal = modoEncendido.consumoEnPeriodo(inicio_intervalo, fin_intevalo);
+		
+		assertEquals(10 , consumoTotal , 0  );
+		
+	}
 	
 	
 
