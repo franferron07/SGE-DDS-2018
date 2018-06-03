@@ -1,4 +1,4 @@
-package consumoModoTest;
+package consumoTest;
 
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import entities.Consumo;
 
-public class ConsumoModoTest {
+public class ConsumoTest {
 	
 	
 	private LocalDateTime fecha_inicial ;

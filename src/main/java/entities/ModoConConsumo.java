@@ -2,6 +2,8 @@ package entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class ModoConConsumo implements Modo {
 	
@@ -64,8 +66,9 @@ public abstract class ModoConConsumo implements Modo {
 	@SuppressWarnings("unchecked")
 	public List<Consumo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 		
-		List<Consumo> consumos = (List<Consumo>) this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
-		return consumos;
+		Stream<Consumo> consumos = this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
+		//conviverto la stream en list
+		return consumos.collect(Collectors.toList());
 	}
 
 	public void agregarConsumo(Consumo consumoModo) {
@@ -73,6 +76,10 @@ public abstract class ModoConConsumo implements Modo {
 		this.consumos.add(consumoModo);
 	}
 
+	public int cantidadConsumos(){
+		
+		return this.consumos.size();
+	}
 	
 	//getters y setters
 	public LocalDateTime getFechaHoraInicio() {
