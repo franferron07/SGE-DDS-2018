@@ -28,16 +28,8 @@ public abstract class ModoConConsumo implements Modo {
 		disp.setModo(new ModoApagado());
 	}
 	
-	
-	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin , float consumo) {
-		
-		Consumo consumoModo = new Consumo( inicio , fin , consumo );
-		this.agregarConsumo( consumoModo );
-	}
-	
-	
-	
 	//metodo que se utiliza para filtrar los modos en el DI. Con que una de las fechas este en el intervalo , devuelve true
+	@Override
 	public boolean cumpleIntervalo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
 		
 		if(  ( this.fechaHoraInicio.compareTo(fechaInicial) >= 0  && this.fechaHoraInicio.compareTo(fechaFinal) < 0   ) || 
@@ -49,16 +41,13 @@ public abstract class ModoConConsumo implements Modo {
 		return false;
 	}
 	
-	
-	//filtro los consumos que cumplen el periodo
-	@SuppressWarnings("unchecked")
-	public List<Consumo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+	@Override
+	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin , float consumo) {
 		
-		List<Consumo> consumos = (List<Consumo>) this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
-		return consumos;
+		Consumo consumoModo = new Consumo( inicio , fin , consumo );
+		this.agregarConsumo( consumoModo );
 	}
 	
-
 	@Override
 	public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
 		
@@ -71,7 +60,14 @@ public abstract class ModoConConsumo implements Modo {
     	return (float) consumoTotal;
     } 
 	
-	
+	//filtro los consumos que cumplen el periodo
+	@SuppressWarnings("unchecked")
+	public List<Consumo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		
+		List<Consumo> consumos = (List<Consumo>) this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
+		return consumos;
+	}
+
 	public void agregarConsumo(Consumo consumoModo) {
 		
 		this.consumos.add(consumoModo);

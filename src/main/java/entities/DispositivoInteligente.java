@@ -22,15 +22,27 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	
 	@Override
+	public boolean esInteligente() {
+		return true;
+	}
+	
+	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
 		//filtro los modos
-		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
+		List<ModoConConsumo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
 		
 		//calculo el consumo
 		double consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
 		
 		return (float) consumoTotal;
+	}
+	
+	//filtra los modos que entren en el intervalo pedido
+	@SuppressWarnings("unchecked")
+	private List<ModoConConsumo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+		
+		return (List<ModoConConsumo>) this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );	
 	}
 	
 	//me da el consumo del dispositivo en las ultimas N horas. 
@@ -39,25 +51,10 @@ public class DispositivoInteligente extends Dispositivo {
 		return 0;
 	}
 	
-	@Override
-	public boolean esInteligente() {
-		return true;
-	}
-	
-	
 	//metodo desde el dispositivo hardware para avisar que se registro el consumo
 	public void avisoConsumo( LocalDateTime inicio , LocalDateTime fin , float consumo ){
 		
 		this.modo.registrarConsumo( inicio , fin , consumo );
-		
-	}
-	
-	
-	//filtra los modos que entren en el intervalo pedido
-	@SuppressWarnings("unchecked")
-	private List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
-		
-		return (List<Modo>) this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );
 		
 	}
 	

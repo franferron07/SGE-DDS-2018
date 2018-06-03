@@ -16,6 +16,12 @@ public interface Modo {
 	
 	//me da el consumo en un periodo del modo.
 	public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal );
+
+	//registra el consumo en los modos. en modo apagado no hace nada.
+	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin, float consumo);
+
+	//me indica si en un periodo se cumple o no el intervalo
+	public boolean cumpleIntervalo(LocalDateTime desde, LocalDateTime hasta);
 	
 	
 	
