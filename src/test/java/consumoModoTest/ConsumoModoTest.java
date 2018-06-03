@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.ConsumoModo;
+import entities.Consumo;
 
 public class ConsumoModoTest {
 	
 	
 	private LocalDateTime fecha_inicial ;
 	private LocalDateTime fecha_final;
-	private ConsumoModo consumo;
+	private Consumo consumo;
 	private float consumo_periodo ;
 	
 	@Before
@@ -24,13 +24,13 @@ public class ConsumoModoTest {
 		fecha_inicial = LocalDateTime.now();
 		fecha_final = fecha_inicial.plusDays(1);
 		consumo_periodo = 10;
-		consumo = new ConsumoModo(fecha_inicial , fecha_final , consumo_periodo);
+		consumo = new Consumo(fecha_inicial , fecha_final , consumo_periodo);
 	}
 	
 	@Test
 	public void testCrearConsumoModo(){
 		
-		ConsumoModo consumo_test = new ConsumoModo( fecha_inicial , fecha_final , 10);
+		Consumo consumo_test = new Consumo( fecha_inicial , fecha_final , 10);
 		assertEquals( 10 , consumo_test.getConsumo() , '=' );
 	}
 	

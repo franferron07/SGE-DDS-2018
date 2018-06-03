@@ -44,18 +44,6 @@ public class ModoApagado implements Modo {
         
 	}
 	
-	//en apagado no hace nada
-	@Override
-	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin , float consumo) {
-	
-	}
-	
-	@Override
-	public boolean cumpleIntervalo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
-		
-		return false;
-	}
-	
 	
 	public String toString() {
 		return "Modo Apagado";
