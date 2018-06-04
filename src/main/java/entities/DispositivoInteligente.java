@@ -3,6 +3,8 @@ package entities;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DispositivoInteligente extends Dispositivo {
 	
@@ -30,7 +32,7 @@ public class DispositivoInteligente extends Dispositivo {
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
 		//filtro los modos
-		List<ModoConConsumo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
+		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
 		
 		//calculo el consumo
 		double consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
@@ -39,10 +41,11 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	//filtra los modos que entren en el intervalo pedido
-	@SuppressWarnings("unchecked")
-	private List<ModoConConsumo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+	public List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
 		
-		return (List<ModoConConsumo>) this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );	
+		Stream<Modo> modos = this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );
+		
+		return modos.collect(Collectors.toList());
 	}
 	
 	//me da el consumo del dispositivo en las ultimas N horas. 
@@ -80,6 +83,11 @@ public class DispositivoInteligente extends Dispositivo {
 	
 	public void agregarLogModo( Modo modo ){
 		this.logModos.add(modo);
+	}
+	
+	public int cantidadLogModo(){
+	
+		return this.logModos.size();
 	}
 	
 	

@@ -12,7 +12,7 @@ import entities.ModoAhorroEnergia;
 import entities.ModoApagado;
 import entities.ModoEncendido;
 
-public class DispositivoInteligenteTest {
+public class DispositivoInteligenteCambiosDeModoTest {
 
 	 private DispositivoInteligente dispositivoInteligente;
 	 private Modo modo;

@@ -63,7 +63,6 @@ public abstract class ModoConConsumo implements Modo {
     } 
 	
 	//filtro los consumos que cumplen el periodo
-	@SuppressWarnings("unchecked")
 	public List<Consumo> filtrarConsumosEnPeriodo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 		
 		Stream<Consumo> consumos = this.consumos.stream().filter(c -> c.cumplePeriodoConsumo(fechaInicial,fechaFinal));
