@@ -12,6 +12,7 @@ import entities.DispositivoInteligente;
 import entities.Modo;
 import entities.ModoAhorroEnergia;
 import entities.ModoApagado;
+import entities.ModoConConsumo;
 import entities.ModoEncendido;
 
 public class DispositivoInteligenteConsumoTest {
@@ -55,8 +56,36 @@ public class DispositivoInteligenteConsumoTest {
 		
 		LocalDateTime inicio = LocalDateTime.now();
 		LocalDateTime fin = inicio.plusMinutes(10);
+
+		di.avisoConsumo(inicio, fin, 10);
+		
+		di.encender();
 		
 		di.avisoConsumo(inicio, fin, 10);
+		
+		float consumoTotal = di.consumoPeriodo(inicio, fin);
+		ModoConConsumo encendido = (ModoConConsumo) di.getModo();
+		assertEquals(1,encendido.cantidadConsumos());
+		
+		assertEquals(20, consumoTotal  , 0);
+		
+	}
+	
+	@Test
+	public void testConsumoUltimasNHoras(){
+		
+		LocalDateTime inicio = LocalDateTime.now().plusMinutes(-30);
+		LocalDateTime fin = inicio.plusMinutes(-10);
+
+		di.avisoConsumo(inicio, fin, 10);
+		
+		di.encender();
+		
+		di.avisoConsumo(inicio, fin, 10);
+		
+		float consumoTotal = di.consumoUltimasNHoras(6);
+		
+		assertEquals(20, consumoTotal  , 0);
 		
 	}
 

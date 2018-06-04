@@ -31,11 +31,27 @@ public class DispositivoInteligente extends Dispositivo {
 	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
+		ModoConConsumo modoActual;
+		float consumoActual=0;
+		double consumoTotal=0;
+		
 		//filtro los modos
 		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
 		
 		//calculo el consumo
-		double consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
+		consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
+		
+		//sumo lo consumido por el modo actual
+		if( this.estaEncendido() ){
+			
+			modoActual = (ModoConConsumo) this.getModo();
+			//chequeo si esta en intervalo
+			if(modoActual.cumpleIntervalo(desde, hasta)){
+				consumoActual = modoActual.consumoEnPeriodo(desde, hasta);
+			}
+		
+			consumoTotal = consumoTotal + consumoActual;
+		}
 		
 		return (float) consumoTotal;
 	}
@@ -49,9 +65,15 @@ public class DispositivoInteligente extends Dispositivo {
 	}
 	
 	//me da el consumo del dispositivo en las ultimas N horas. 
-	public float consumoUltimasNHoras(float horas){
+	public float consumoUltimasNHoras(int horas){
 		
-		return 0;
+		int horasNegativo = -1*horas;
+		LocalDateTime inicial = LocalDateTime.now().plusHours(horasNegativo);
+		LocalDateTime fin = LocalDateTime.now();
+		
+		float consumoNHoras = this.consumoPeriodo(inicial, fin);
+		
+		return consumoNHoras;
 	}
 	
 	//metodo desde el dispositivo hardware para avisar que se registro el consumo
