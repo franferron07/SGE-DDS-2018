@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import dao.JsonUsuariosDAO;
 import entities.Administrador;
 import entities.Cliente;
+import entities.Dispositivo;
 import entities.DispositivoInteligente;
 import entities.ModoApagado;
 import entities.ModoEncendido;
@@ -35,7 +36,7 @@ public class EscrituraUsuariosJsonTest {
 	@Test
 	public void testEscrituraUsuarios() throws ArchivoException {
         List<Usuario> usuarios=new ArrayList<Usuario>();
-        List<DispositivoInteligente> dispositivosInteligentes=new ArrayList<DispositivoInteligente>();
+        List<Dispositivo> dispositivosInteligentes=new ArrayList<Dispositivo>();
                
 		Cliente cliente1 = new Cliente(dispositivosInteligentes);
 		cliente1.setNombre("Cliente1");
@@ -77,7 +78,7 @@ public class EscrituraUsuariosJsonTest {
 	@Test
 	public void testEscrituraClientes() throws ArchivoException {
         List<Cliente> clientes=new ArrayList<Cliente>();
-        List<DispositivoInteligente> dispositivos=new ArrayList<DispositivoInteligente>();
+        List<Dispositivo> dispositivos=new ArrayList<Dispositivo>();
        
 		Cliente cliente1 = new Cliente(dispositivos);
 		cliente1.setNombre("Cliente1");
