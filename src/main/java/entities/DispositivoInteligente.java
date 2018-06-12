@@ -112,7 +112,14 @@ public class DispositivoInteligente extends Dispositivo {
 		return this.logModos.size();
 	}
 	
-	
+	public void cambiarTemperaturaActuador() {
+         System.out.println("Cambiando la temperatura");
+    }
+
+    public void cambiarIntensidadLuz() {
+        System.out.println("Cambiando la intensidad de la luz");
+    }
+
     //getters y setters
     
 	public DispositivoEstandar getEstandar() {

@@ -10,7 +10,7 @@ public class CambiarIntensidadLuzCommand implements ActuadorBase {
 	
 	@Override
 	public void ejecutarAccion() {
-		
+		dispositivo.cambiarIntensidadLuz();		
 	}
 
 	public DispositivoInteligente getDispositivo() {
