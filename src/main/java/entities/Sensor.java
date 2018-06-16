@@ -17,15 +17,15 @@ public class Sensor  {
 	}
 	
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
-	public void realizarMedicion(){
+	public void obtenerMedicion( Float valor ){
 		/* procedimiento no definido. es externo*/
-		avisarMedicion();
+		avisarMedicion(valor);
 	}
 
 	//metodo que avisa a sus observadores(reglas) que realizo la medicion
-	private void avisarMedicion() {
+	private void avisarMedicion(Float valor) {
 		
-		this.observadores.forEach( r -> r.notificacionDeMedicion(this));
+		this.observadores.forEach( r -> r.notificacionDeMedicion(valor));
 		
 	}
 

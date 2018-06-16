@@ -5,14 +5,14 @@ import java.util.List;
 
 public abstract class Regla implements ObservadorSensor {
 	
-	private List<ActuadorBase> actuadores;
+	protected List<ActuadorBase> actuadores;
 	private String nombreRegla;
 	
 	
 	
 	@Override
-	public void notificacionDeMedicion(Sensor unSensor) {
-		evaluarMedicion(unSensor);
+	public void notificacionDeMedicion(Float valor) {
+		evaluarMedicion(valor);
 	}
 	
 	public Regla(String nombre){
@@ -20,9 +20,20 @@ public abstract class Regla implements ObservadorSensor {
 		this.actuadores= new ArrayList<ActuadorBase>();
 	}
 	
-	//evalua segun la regla si va a ejecutar el actuador o no.
-	public abstract void evaluarMedicion(Sensor sensor);
 	
+	public abstract boolean cumpleCondiciones(Float valor);
+	
+	public abstract void ejecutarActuadores();
+	
+	
+	//ejecuto si se cumplen todas las condiciones de la regla , sea simple o compuesta.
+	public void evaluarMedicion(Float valor) {
+		
+		if( cumpleCondiciones(valor) ){
+			ejecutarActuadores();
+		}
+		
+	}
 	
 	public void agregarActuador(ActuadorBase unActuador){
 		this.actuadores.add(unActuador);

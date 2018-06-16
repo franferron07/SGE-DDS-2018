@@ -63,7 +63,7 @@ public class SensorTest {
 		regla1.agregarActuador(actuadorLuz);
 		regla1.agregarActuador(actuadorTemperatura);
 		
-		sensor.realizarMedicion();
+		sensor.obtenerMedicion();
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ReglaCompuesta extends Regla {
 
+	//son las condiciones de las reglas compuestas
 	List<Regla> reglas;
 	
 	
@@ -13,12 +14,20 @@ public class ReglaCompuesta extends Regla {
 		this.reglas=new ArrayList<Regla>();
 	}
 
+	
 	@Override
-	public void evaluarMedicion(Sensor sensor) {
-		// TODO Auto-generated method stub
+	//ejecuto cada actuador de cada regla que se cumple + los actuadores propios
+	public void ejecutarActuadores() {
 		
+		this.reglas.ejecutarActuadores();
 	}
-
+	
+	//filtra los modos que entren en el intervalo pedido
+	@Override
+	public boolean cumpleCondiciones(Float valor) {
+		
+		return this.reglas.stream().allMatch( c -> c.cumpleCondiciones(valor) );
+	}
 	
 	//getters y setters
 	public List<Regla> getReglas() {
@@ -28,7 +37,7 @@ public class ReglaCompuesta extends Regla {
 	public void setReglas(List<Regla> reglas) {
 		this.reglas = reglas;
 	}
-	
-	
+
+		
 
 }
