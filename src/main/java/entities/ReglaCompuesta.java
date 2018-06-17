@@ -18,8 +18,11 @@ public class ReglaCompuesta extends Regla {
 	@Override
 	//ejecuto cada actuador de cada regla que se cumple + los actuadores propios
 	public void ejecutarActuadores() {
+		//ejecuto actuadores de las reglas
+		this.reglas.stream().forEach(r->r.ejecutarActuadores());
+		//ejecuto actuadores propios
+		this.actuadores.stream().forEach(a->a.ejecutarAccion());
 		
-		this.reglas.ejecutarActuadores();
 	}
 	
 	//filtra los modos que entren en el intervalo pedido
