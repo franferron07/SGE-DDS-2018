@@ -8,63 +8,62 @@ import org.junit.Test;
 
 import entities.CambiarIntensidadLuzCommand;
 import entities.CambiarTemperaturaActuadorCommand;
-import entities.Regla;
+import entities.CondicionRegla;
+import entities.ReglaSimple;
 import entities.Sensor;
 import junit.framework.Assert;
 
 public class SensorTest {
 	
 	private Sensor sensor;
-	private Regla regla1;
-	private Regla regla2;
-	
 
 	@Before
-	public void init() {
-		
-		sensor= new Sensor();
-		regla1= new Regla("Cambiar Intensidad");
-		regla2= new Regla("Cambiar temparatura");
-
+	public void init() {	
+	 sensor=new Sensor();		
 	}
 	
 	//instanciacion de sensor
 	@Test
 	public void testSensorConReglas(){
+		ReglaSimple reglaSimple=new ReglaSimple("ReglaSimple1");
+		sensor.agregarObservador(reglaSimple);
+		reglaSimple=new ReglaSimple("ReglaSimple2");
+		sensor.agregarObservador(reglaSimple);
 		
-		sensor.agregarRegla(regla1);
-		sensor.agregarRegla(regla2);
-		Assert.assertEquals(2, sensor.cantidadReglas());
+		Assert.assertEquals(2, sensor.cantidadObservadores());
 	}
 	
 	//instanciacion de regla con actuadores
 	@Test
-	public void testReglasConActuadores(){
-		
+	public void testReglasConActuadores(){	
 		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand(null);
 		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand(null);
+		ReglaSimple reglaSimple=new ReglaSimple("ReglaSimple1");
+		reglaSimple.agregarActuador(actuadorLuz);
+		reglaSimple.agregarActuador(actuadorTemperatura);
 		
-		regla1.agregarActuador(actuadorLuz);
-		regla1.agregarActuador(actuadorTemperatura);
-		
-		Assert.assertEquals(2, regla1.getActuadores().size() );
+		Assert.assertEquals(2, reglaSimple.getActuadores().size() );
 	}
 	
 	//sensor que notifica muchas reglas
 	@Test
 	public void testNotificarSensorReglas(){
+		ReglaSimple reglaSimple=new ReglaSimple("ReglaSimple1");
 		
-		sensor.agregarRegla(regla1);
-		sensor.agregarRegla(regla2);
+		List<CondicionRegla> condiciones = new ArrayList<CondicionRegla>();
+		CondicionRegla condicionRegla=new CondicionRegla(">",10f);
+		condiciones.add(condicionRegla);
+		reglaSimple.setCondiciones(condiciones);
+		
+		sensor.agregarObservador(reglaSimple);
 		
 		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand(null);
 		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand(null);
 		
-		regla1.agregarActuador(actuadorLuz);
-		regla1.agregarActuador(actuadorTemperatura);
+		reglaSimple.agregarActuador(actuadorLuz);
+		reglaSimple.agregarActuador(actuadorTemperatura);
 		
-		sensor.obtenerMedicion();
-		
+		sensor.obtenerMedicion(10f);		
 	}
 	
 }

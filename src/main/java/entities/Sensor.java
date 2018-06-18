@@ -31,7 +31,9 @@ public class Sensor  {
 
 	
 	public void agregarObservador(ObservadorSensor unObservador){
-		this.observadores.add(unObservador);
+		 if (!observadores.contains(unObservador)) {
+			 this.observadores.add(unObservador); 
+		 }
 	}
 	
 	public int cantidadObservadores(){

@@ -8,24 +8,15 @@ public abstract class Regla implements ObservadorSensor {
 	protected List<ActuadorBase> actuadores;
 	private String nombreRegla;
 	
-	
-	
-	@Override
-	public void notificacionDeMedicion(Float valor) {
-		evaluarMedicion(valor);
-	}
-	
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
 	}
 	
-	
-	public abstract boolean cumpleCondiciones(Float valor);
-	
-	public abstract void ejecutarActuadores();
-	
-	
+	@Override
+	public void notificacionDeMedicion(Float valor) {
+		evaluarMedicion(valor);
+	}
 	//ejecuto si se cumplen todas las condiciones de la regla , sea simple o compuesta.
 	public void evaluarMedicion(Float valor) {
 		
@@ -34,14 +25,20 @@ public abstract class Regla implements ObservadorSensor {
 		}
 		
 	}
+		
+	public abstract boolean cumpleCondiciones(Float valor);
 	
-	public void agregarActuador(ActuadorBase unActuador){
-		this.actuadores.add(unActuador);
-	}
-	
+	public abstract void ejecutarActuadores();
 	
 
 	//getters y setters
+	
+	public void agregarActuador(ActuadorBase unActuador){
+		if (!actuadores.contains(unActuador)) {
+			this.actuadores.add(unActuador); 
+		}		
+	}
+	
 	public List<ActuadorBase> getActuadores() {
 		return actuadores;
 	}
