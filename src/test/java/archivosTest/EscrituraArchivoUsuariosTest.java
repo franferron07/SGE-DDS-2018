@@ -7,14 +7,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.JsonUsuariosDAO;
-import entities.Cliente;
-import entities.Dispositivo;
-import entities.DispositivoInteligente;
-import entities.ModoApagado;
-import entities.ModoEncendido;
+import dispositivos.DispositivoInteligente;
+import dispositivos.DispositivoUsuario;
+import dispositivos.ModoApagado;
+import dispositivos.ModoEncendido;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
 import repositorios.RepositorioUsuarios;
+import usuarios.Cliente;
 
 public class EscrituraArchivoUsuariosTest {
 
@@ -30,9 +30,8 @@ public class EscrituraArchivoUsuariosTest {
 	public void testEscrituraUsuarios() throws ArchivoException {
 
 		//Cliente cli = new Cliente();
-		   List<Dispositivo> dispositivos=new ArrayList<Dispositivo>();
+		   List<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
 	        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado());
-	        dispositivoInteligente.setNombre("DispositivoInteligente1");
 	        dispositivos.add(dispositivoInteligente);
 	               
 			Cliente cliente1 = new Cliente(dispositivos);
@@ -40,7 +39,6 @@ public class EscrituraArchivoUsuariosTest {
 			cliente1.setApellido("User");
 
 		DispositivoInteligente disp = new DispositivoInteligente(new ModoApagado());
-		disp.setNombre("Panel");
 		ModoEncendido modoEncendido=new ModoEncendido();
 		modoEncendido.encenderse(disp);
 		

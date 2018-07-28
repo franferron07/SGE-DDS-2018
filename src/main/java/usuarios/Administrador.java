@@ -1,4 +1,4 @@
-package entities;
+package usuarios;
 
 import java.util.Calendar;
 import java.util.Date;

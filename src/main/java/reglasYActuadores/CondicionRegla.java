@@ -1,4 +1,4 @@
-package entities;
+package reglasYActuadores;
 
 public class CondicionRegla {
 

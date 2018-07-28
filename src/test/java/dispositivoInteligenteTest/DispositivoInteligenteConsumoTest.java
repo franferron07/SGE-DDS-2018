@@ -8,12 +8,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.DispositivoInteligente;
-import entities.Modo;
-import entities.ModoAhorroEnergia;
-import entities.ModoApagado;
-import entities.ModoConConsumo;
-import entities.ModoEncendido;
+import dispositivos.DispositivoInteligente;
+import dispositivos.Modo;
+import dispositivos.ModoAhorroEnergia;
+import dispositivos.ModoApagado;
+import dispositivos.ModoConConsumo;
+import dispositivos.ModoEncendido;
 
 public class DispositivoInteligenteConsumoTest {
 	

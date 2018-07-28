@@ -1,4 +1,4 @@
-package entities;
+package reglasYActuadores;
 
 import java.util.ArrayList;
 import java.util.List;

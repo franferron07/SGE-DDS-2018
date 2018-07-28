@@ -1,16 +1,13 @@
-package entities;
+package dispositivos;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-public class DispositivoEstandar extends Dispositivo {
+public class DispositivoEstandar extends DispositivoUsuario {
 	
-	protected float kwHora; //consumo de kw por hora
 	private float horasPorDia; //horas encendido por dia
 	
-	
-	
+
 	//constructor
 	public DispositivoEstandar(){
 		
@@ -40,7 +37,7 @@ public class DispositivoEstandar extends Dispositivo {
 	
 	//me devuelve el consumo estimativo para un dia
 	private float consumoEnElDia() {
-		return horasPorDia * kwHora;
+		return horasPorDia * this.dispositivoLista.getConsumoKwHora();
 	}
 
 
@@ -53,13 +50,7 @@ public class DispositivoEstandar extends Dispositivo {
 		this.horasPorDia = horasPorDia;
 	}
 	
-	public float getKwHora() {
-		return kwHora;
-	}
 
-	public void setKwHora(float kwHora) {
-		this.kwHora = kwHora;
-	}
 
 	
 

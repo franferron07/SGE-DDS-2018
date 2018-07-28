@@ -6,12 +6,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.CambiarIntensidadLuzCommand;
-import entities.CambiarTemperaturaActuadorCommand;
-import entities.CondicionRegla;
-import entities.ReglaSimple;
 import entities.Sensor;
 import junit.framework.Assert;
+import reglasYActuadores.CambiarIntensidadLuzCommand;
+import reglasYActuadores.CambiarTemperaturaActuadorCommand;
+import reglasYActuadores.CondicionRegla;
+import reglasYActuadores.ReglaSimple;
 
 public class SensorTest {
 	

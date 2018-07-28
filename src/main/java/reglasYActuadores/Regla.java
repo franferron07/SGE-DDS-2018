@@ -1,7 +1,9 @@
-package entities;
+package reglasYActuadores;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.ObservadorSensor;
 
 public abstract class Regla implements ObservadorSensor {
 	

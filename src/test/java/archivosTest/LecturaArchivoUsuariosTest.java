@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.JsonUsuariosDAO;
-import entities.Administrador;
-import entities.Cliente;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
 import repositorios.RepositorioUsuarios;
+import usuarios.Administrador;
+import usuarios.Cliente;
 
 public class LecturaArchivoUsuariosTest {
 

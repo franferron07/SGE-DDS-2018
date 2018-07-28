@@ -13,15 +13,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import dao.JsonUsuariosDAO;
-import entities.Administrador;
-import entities.Cliente;
-import entities.Dispositivo;
-import entities.DispositivoInteligente;
-import entities.ModoApagado;
-import entities.ModoEncendido;
-import entities.Usuario;
+import dispositivos.DispositivoInteligente;
+import dispositivos.DispositivoUsuario;
+import dispositivos.ModoApagado;
+import dispositivos.ModoEncendido;
 import excepciones.ArchivoException;
 import repositorios.RepositorioUsuarios;
+import usuarios.Administrador;
+import usuarios.Cliente;
+import usuarios.Usuario;
 
 public class EscrituraUsuariosJsonTest {
 
@@ -36,17 +36,15 @@ public class EscrituraUsuariosJsonTest {
 	@Test
 	public void testEscrituraUsuarios() throws ArchivoException {
         List<Usuario> usuarios=new ArrayList<Usuario>();
-        List<Dispositivo> dispositivosInteligentes=new ArrayList<Dispositivo>();
+        List<DispositivoUsuario> dispositivosInteligentes=new ArrayList<DispositivoUsuario>();
                
 		Cliente cliente1 = new Cliente(dispositivosInteligentes);
 		cliente1.setNombre("Cliente1");
 
 		DispositivoInteligente dispositivo1 = new DispositivoInteligente(new ModoApagado());
-		dispositivo1.setNombre("Dispositivo1");
 		ModoEncendido modoEncendido=new ModoEncendido();
 		modoEncendido.encenderse(dispositivo1);
 		DispositivoInteligente dispositivo2 = new DispositivoInteligente(new ModoApagado());
-		dispositivo2.setNombre("Dispositivo2");
 		modoEncendido=new ModoEncendido();
 		modoEncendido.encenderse(dispositivo2);
 		
@@ -78,16 +76,14 @@ public class EscrituraUsuariosJsonTest {
 	@Test
 	public void testEscrituraClientes() throws ArchivoException {
         List<Cliente> clientes=new ArrayList<Cliente>();
-        List<Dispositivo> dispositivos=new ArrayList<Dispositivo>();
+        List<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
        
 		Cliente cliente1 = new Cliente(dispositivos);
 		cliente1.setNombre("Cliente1");
 
 		DispositivoInteligente dispositivo1 = new DispositivoInteligente(new ModoApagado());
-		dispositivo1.setNombre("Dispositivo1");
 			
 		DispositivoInteligente dispositivo2 = new DispositivoInteligente(new ModoApagado());
-		dispositivo2.setNombre("Dispositivo2");
 				
 		cliente1.agregarDispositivo(dispositivo1);
 		cliente1.agregarDispositivo(dispositivo2);

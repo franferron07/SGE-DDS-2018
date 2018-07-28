@@ -1,4 +1,6 @@
-package entities;
+package reglasYActuadores;
+
+import dispositivos.DispositivoInteligente;
 
 public class CambiarIntensidadLuzCommand implements ActuadorBase {
 

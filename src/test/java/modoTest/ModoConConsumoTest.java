@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Consumo;
-import entities.ModoEncendido;
+import dispositivos.Consumo;
+import dispositivos.ModoEncendido;
 
 public class ModoConConsumoTest {
 	

@@ -7,13 +7,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.JsonUsuariosDAO;
-import entities.Cliente;
-import entities.Dispositivo;
-import entities.DispositivoInteligente;
-import entities.ModoApagado;
+import dispositivos.DispositivoInteligente;
+import dispositivos.DispositivoUsuario;
+import dispositivos.ModoApagado;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
 import repositorios.RepositorioUsuarios;
+import usuarios.Cliente;
 
 public class ClienteTest {
 
@@ -21,9 +21,8 @@ public class ClienteTest {
 
 	@Before
 	public void init() {
-		List<Dispositivo> dispositivos=new ArrayList<Dispositivo>();
+		List<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
         DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado());
-        dispositivoInteligente.setNombre("DispositivoInteligente1");
         dispositivos.add(dispositivoInteligente);
                
 		cliente = new Cliente(dispositivos);

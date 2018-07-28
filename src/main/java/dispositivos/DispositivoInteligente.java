@@ -1,4 +1,4 @@
-package entities;
+package dispositivos;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DispositivoInteligente extends Dispositivo {
+public class DispositivoInteligente extends DispositivoUsuario {
 	
 	private Modo modo;
 	private List<Modo> logModos ;

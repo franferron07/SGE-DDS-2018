@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.DispositivoInteligente;
-import entities.Modo;
-import entities.ModoAhorroEnergia;
-import entities.ModoApagado;
-import entities.ModoEncendido;
+import dispositivos.DispositivoInteligente;
+import dispositivos.Modo;
+import dispositivos.ModoAhorroEnergia;
+import dispositivos.ModoApagado;
+import dispositivos.ModoEncendido;
 
 public class DispositivoInteligenteCambiosDeModoTest {
 

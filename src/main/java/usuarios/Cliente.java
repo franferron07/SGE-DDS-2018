@@ -1,9 +1,14 @@
-package entities;
+package usuarios;
 
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import dispositivos.DispositivoEstandar;
+import dispositivos.DispositivoInteligente;
+import dispositivos.DispositivoUsuario;
+import dispositivos.ModoApagado;
 
 public class Cliente extends Usuario {
 	
@@ -13,11 +18,11 @@ public class Cliente extends Usuario {
 	private LocalTime fechaAltaServicio;
 	private int telefonoContacto;
 	private Categoria categoria;
-	private List<Dispositivo> dispositivos;
+	private List<DispositivoUsuario> dispositivos;
 	private int puntaje;
 	
 	
-	public Cliente(List<Dispositivo> dispositivos) {
+	public Cliente(List<DispositivoUsuario> dispositivos) {
 		 this.dispositivos = dispositivos; 
 	}
 
@@ -78,11 +83,11 @@ public class Cliente extends Usuario {
 		
 	}
 	
-	public void quitarDispositivo(Dispositivo dispositivo) {
+	public void quitarDispositivo(DispositivoUsuario dispositivo) {
 		this.dispositivos.remove(dispositivo);
 	}
 	
-	public void agregarDispositivo(Dispositivo dispositivo) {
+	public void agregarDispositivo(DispositivoUsuario dispositivo) {
 		
 		if( dispositivo.esInteligente() == true ){
 			this.setPuntaje(puntaje+15);
@@ -134,11 +139,11 @@ public class Cliente extends Usuario {
 		this.categoria = categoria;
 	}
 
-	public List<Dispositivo> getDispositivos() {
+	public List<DispositivoUsuario> getDispositivos() {
 		return dispositivos;
 	}
 
-	public void setDispositivos(List<Dispositivo> dispositivos) {
+	public void setDispositivos(List<DispositivoUsuario> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
 

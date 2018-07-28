@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import dao.JsonUsuariosDAO;
-import entities.Administrador;
-import entities.Cliente;
-import entities.Usuario;
+import usuarios.Administrador;
+import usuarios.Cliente;
+import usuarios.Usuario;
 /**
  * Patron Strategy
  *

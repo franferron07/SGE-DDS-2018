@@ -1,4 +1,4 @@
-package entities;
+package usuarios;
 
 public class Categoria {
 

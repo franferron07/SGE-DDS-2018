@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Consumo;
+import dispositivos.Consumo;
 
 public class ConsumoTest {
 	

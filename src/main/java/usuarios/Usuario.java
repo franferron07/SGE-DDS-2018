@@ -1,4 +1,4 @@
-package entities;
+package usuarios;
 
 import java.io.Serializable;
 
