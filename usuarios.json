@@ -1,7 +1,7 @@
 {
 	"usuarios": [
 		[
-			"entities.Cliente",
+			"usuarios.Cliente",
 			{
 				"nombre": "User",
 				"apellido": "One",
@@ -31,7 +31,7 @@
 			}
 		],
 		[
-			"entities.Administrador",
+			"usuarios.Administrador",
 			{
 				"nombre": null,
 				"apellido": "ADM",

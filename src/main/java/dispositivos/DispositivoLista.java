@@ -11,7 +11,10 @@ public class DispositivoLista {
 	private boolean esBajoConsumo;
 	private boolean esInteligente;
 	
-	
+	//constructor
+	public DispositivoLista(){
+		
+	}
 	
 	
 	//getters and setters
