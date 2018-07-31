@@ -25,5 +25,12 @@ public class LecturaArchivoDispositivosListaTest {
 		List<DispositivoLista> dispositivos = daoTest.obtener();
 		Assert.assertEquals(22 , dispositivos.size());
 	}
+	
+	@Test
+	public void testDeserealizarArchivo(){
+		
+		String contenido = daoTest.deserealizarArchivo();
+		Assert.assertNotNull(contenido);
+	}
 
 }
