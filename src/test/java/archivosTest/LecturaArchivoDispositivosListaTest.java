@@ -5,18 +5,18 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import dao.JsonDispositivoListaDAO;
+import dao.DaoJson;
 import dispositivos.DispositivoLista;
 import junit.framework.Assert;
 
 public class LecturaArchivoDispositivosListaTest {
 	
-	JsonDispositivoListaDAO daoTest;
+	DaoJson<DispositivoLista> daoTest;
 	
 	@Before
 	public void init(){
 		
-		daoTest = new JsonDispositivoListaDAO("dispositivosLista.json");
+		daoTest = new DaoJson<DispositivoLista>("dispositivosLista.json");
 	}
 	
 	@Test
