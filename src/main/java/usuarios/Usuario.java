@@ -2,13 +2,8 @@ package usuarios;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable{
-	//public abstract class Usuario implements Serializable{
+public abstract class Usuario  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	protected String nombre;
 	protected String apellido;
 	protected String domicilio;

@@ -9,7 +9,7 @@ import dao.DaoJson;
 import dispositivos.DispositivoLista;
 import junit.framework.Assert;
 
-public class LecturaArchivoDispositivosListaTest {
+public class ArchivoDispositivosListaTest {
 	
 	DaoJson<DispositivoLista> daoTest;
 	DispositivoLista dispositivo;

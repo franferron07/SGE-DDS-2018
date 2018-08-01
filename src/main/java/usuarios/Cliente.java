@@ -1,6 +1,6 @@
 package usuarios;
 
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,11 +12,10 @@ import dispositivos.ModoApagado;
 
 public class Cliente extends Usuario {
 	
-	private static final long serialVersionUID = 1L;
 	private String tipoDocumento;
 	private int numeroDocumento;
-	private LocalTime fechaAltaServicio;
-	private int telefonoContacto;
+	private Date fechaAltaServicio;
+	private String telefonoContacto;
 	private Categoria categoria;
 	private List<DispositivoUsuario> dispositivos;
 	private int puntaje;
@@ -43,7 +42,6 @@ public class Cliente extends Usuario {
 		return inteligentes.stream().filter(disp -> !estaEncendido(disp)).collect(Collectors.toList()).size();
 	}
 
-	//aca debo discriminar los inteligentes que tienen el estandar distinto de null
 	public int cantidadDispositivos(){
 		return dispositivos.size();
 	}
@@ -115,19 +113,19 @@ public class Cliente extends Usuario {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	public LocalTime getFechaAltaServicio() {
+	public Date getFechaAltaServicio() {
 		return fechaAltaServicio;
 	}
 
-	public void setFechaAltaServicio(LocalTime fechaAltaServicio) {
+	public void setFechaAltaServicio(Date fechaAltaServicio) {
 		this.fechaAltaServicio = fechaAltaServicio;
 	}
 
-	public int getTelefonoContacto() {
+	public String getTelefonoContacto() {
 		return telefonoContacto;
 	}
 
-	public void setTelefonoContacto(int telefonoContacto) {
+	public void setTelefonoContacto(String telefonoContacto) {
 		this.telefonoContacto = telefonoContacto;
 	}
 

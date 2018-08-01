@@ -5,12 +5,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import dao.DaoJson;
 import dao.JsonUsuariosDAO;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
 import repositorios.RepositorioUsuarios;
 import usuarios.Administrador;
 import usuarios.Cliente;
+import usuarios.Usuario;
 
 public class LecturaArchivoUsuariosTest {
 
@@ -18,8 +20,8 @@ public class LecturaArchivoUsuariosTest {
 
 	@Before
 	public void init() {
-		JsonUsuariosDAO jsonUsuariosDAO=new JsonUsuariosDAO("usuarios.json");
-		repoUsuarios = new RepositorioUsuarios(jsonUsuariosDAO);
+		//DaoJson<Usuario> jsonUsuariosDAO=new DaoJson("usuarios.json");
+		//repoUsuarios = new RepositorioUsuarios(jsonUsuariosDAO);
 	}
 
 	@Test
