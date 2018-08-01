@@ -42,6 +42,11 @@ public class DispositivoLista {
 	public void setConsumoKwHora(float consumoKwHora) {
 		this.consumoKwHora = consumoKwHora;
 	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

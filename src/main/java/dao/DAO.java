@@ -2,10 +2,10 @@ package dao;
 
 import java.util.List;
 
-public abstract interface DAO<T> {
+public interface DAO<T> {
 
-	public abstract List<T> obtener();
-	public abstract void guardar(List<T> listaUsuarios);
-	public abstract void guardar(T usuario);			
-	public abstract void borrar(T usuario);
+	public  List<T> obtener();
+	public  void guardar(List<T> listaNodos);
+	public  void guardar(T nodo);			
+	public  void borrar(T nodo);
 }

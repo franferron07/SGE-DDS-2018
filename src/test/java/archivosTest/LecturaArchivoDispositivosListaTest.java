@@ -12,11 +12,16 @@ import junit.framework.Assert;
 public class LecturaArchivoDispositivosListaTest {
 	
 	DaoJson<DispositivoLista> daoTest;
+	DispositivoLista dispositivo;
 	
 	@Before
 	public void init(){
 		
 		daoTest = new DaoJson<DispositivoLista>("dispositivosLista.json");
+	    dispositivo= new DispositivoLista();
+		dispositivo.setNombre("test");
+		dispositivo.setDescripcion("test");
+		
 	}
 	
 	@Test
@@ -31,6 +36,21 @@ public class LecturaArchivoDispositivosListaTest {
 		
 		String contenido = daoTest.deserealizarArchivo();
 		Assert.assertNotNull(contenido);
+	}
+	
+	@Test
+	public void testAgregarDato(){
+
+		daoTest.guardar(dispositivo);
+		Assert.assertEquals(23, daoTest.datos.size());
+		
+	}
+	
+	@Test
+	public void testBorrarDato(){
+
+		daoTest.borrar(dispositivo);
+		Assert.assertEquals(22, daoTest.datos.size());
 	}
 
 }
