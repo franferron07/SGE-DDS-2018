@@ -1,10 +1,9 @@
-{
-	"usuarios": [
+[
 		[
 			"usuarios.Cliente",
 			{
-				"nombre": "User",
-				"apellido": "One",
+				"nombre": "cliNombre",
+				"apellido": "cliApellido",
 				"domicilio": "Medrano 951",
 				"nombreUsuario": "userOne",
 				"password": "userOne",
@@ -33,14 +32,24 @@
 		[
 			"usuarios.Administrador",
 			{
-				"nombre": null,
-				"apellido": "ADM",
-				"domicilio": null,
+				"nombre": admNombre,
+				"apellido": "admApellido",
+				"domicilio": "calle falsa 1234",
 				"nombreUsuario": null,
 				"password": null,
 				"fechaAltaSistema": null,
-				"identificadorSistema": 0
+				"identificadorSistema": 1
+			},
+			"usuarios.Administrador",
+			{
+				"nombre": admNombre2,
+				"apellido": "admApellido2",
+				"domicilio": "calle falsa 1234",
+				"nombreUsuario": null,
+				"password": null,
+				"fechaAltaSistema": null,
+				"identificadorSistema": 2
 			}
+			
 		]
-	]
-}
+]
