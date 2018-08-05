@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Polygon;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +10,13 @@ import usuarios.Cliente;
 public class ZonaGeografica {
 	
 	private List<Transformador> transformadores;
-	//private List<> limitesCoordenadas;
+	private Polygon limitesZona;
 
 	
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();
+		
 	}
 	
 	//asigna al transofmrador mas cerca un cliente

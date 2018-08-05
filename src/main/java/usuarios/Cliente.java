@@ -1,5 +1,6 @@
 package usuarios;
 
+import java.awt.Point;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class Cliente extends Usuario {
 	private Categoria categoria;
 	private List<DispositivoUsuario> dispositivos;
 	private int puntaje;
+	private Point coordenadas;
 	
 	
 	public Cliente(List<DispositivoUsuario> dispositivos) {
@@ -151,6 +153,14 @@ public class Cliente extends Usuario {
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
+	}
+
+	public Point getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(Point coordenadas) {
+		this.coordenadas = coordenadas;
 	}
 	
 }
