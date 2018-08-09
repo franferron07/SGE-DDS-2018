@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Point;
 import java.awt.Polygon;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ZonaGeografica {
 	}
 	
 	//asigna al transofmrador mas cerca un cliente
-	public void asignarTransformador(Transformador unTransformador , Cliente unCliente){
+	public void asignarTransformador(Cliente unCliente){
 		
 	}
 	
@@ -31,9 +32,17 @@ public class ZonaGeografica {
 	}
 	
 	//me da el consumo total de todos los transformadores en un instante
-	public float consumoTotal(LocalDateTime unInstante){
+	public double consumoTotal(LocalDateTime unInstante){
 		
-		return 0;
+		return transformadores.stream().mapToDouble(t->t.consumoTotal(unInstante)).sum();
+	}
+	
+	//me dice si la coordenada esta dentro del transformador
+	public boolean coordenadaEnZona(Point coordenada){
+		
+		if( limitesZona.contains(coordenada) ) return true;
+		
+		return false;
 	}
 	
 	
