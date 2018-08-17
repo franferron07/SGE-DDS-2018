@@ -22,6 +22,9 @@ public class Cliente extends Usuario {
 	private int puntaje;
 	private Point coordenadas;
 	
+	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
+	/*private ActuadorBase actuadorAutomatico; actuador que se ejecutara automaticamente.*/
+	
 	
 	public Cliente(List<DispositivoUsuario> dispositivos) {
 		 this.dispositivos = dispositivos; 
