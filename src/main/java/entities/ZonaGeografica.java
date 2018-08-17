@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import usuarios.Cliente;
@@ -23,12 +24,41 @@ public class ZonaGeografica {
 	//asigna al transofmrador mas cerca un cliente
 	public void asignarTransformador(Cliente unCliente){
 		
+		Transformador transformadorCercano = transformadorMasCercano(unCliente);
+		transformadorCercano.agregarCliente(unCliente);
+		
 	}
 	
 	//me devuelve el transformador mas cercano al cliente para asignar
 	public Transformador transformadorMasCercano( Cliente unCliente ){
 		
-		return null;
+		Transformador tMinimo=null;
+		double distanciaMinima= 0;
+		double distancia =0 ;
+		
+		Iterator<Transformador> it = transformadores.iterator();
+		// recorro lista de transformadores buscando la distancia minima.
+		while(it.hasNext()){
+			
+			Transformador transformador =it.next();
+			distancia = this.calcularDistancia(unCliente.getCoordenadas(), transformador.getCoordenadas() );
+			//entra a if si es la primera vez o si la distancia es menor a la minima
+			if( tMinimo == null || distancia < distanciaMinima ){
+				tMinimo = transformador;
+				distanciaMinima = distancia;			
+			}
+			
+		}
+		return tMinimo;
+	}
+	
+	//calculo la distancia entre dos puntos
+	public double calcularDistancia(Point p1 , Point p2){
+		
+		double distancia = Math.pow( p1.x - p2.x , 2 ) + Math.pow( p1.y - p2.y , 2 );
+		distancia = Math.sqrt(distancia);
+		
+		return distancia;
 	}
 	
 	//me da el consumo total de todos los transformadores en un instante
