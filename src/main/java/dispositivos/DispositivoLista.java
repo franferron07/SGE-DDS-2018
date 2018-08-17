@@ -10,6 +10,7 @@ public class DispositivoLista {
 	private float consumoKwHora;
 	private boolean esBajoConsumo;
 	private boolean esInteligente;
+	private boolean esEsencial;
 	
 	//constructor
 	public DispositivoLista(){
@@ -55,6 +56,16 @@ public class DispositivoLista {
 	}
 	public boolean isEsInteligente() {
 		return esInteligente;
+	}
+
+
+	public boolean isEsEsencial() {
+		return esEsencial;
+	}
+
+
+	public void setEsEsencial(boolean esEsencial) {
+		this.esEsencial = esEsencial;
 	}
 	
 	

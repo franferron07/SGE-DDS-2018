@@ -13,7 +13,8 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
 	
-	
+	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
+	/*private ActuadorBase actuadorAutomatico; actuador que se ejecutara automaticamente.*/
 	
 	//constructor
     public DispositivoInteligente(Modo m) {
@@ -111,6 +112,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 		return this.logModos.size();
 	}
+
 	
 	public void cambiarTemperaturaActuador() {
          System.out.println("Cambiando la temperatura");

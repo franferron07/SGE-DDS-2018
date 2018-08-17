@@ -13,6 +13,11 @@ public abstract class DispositivoUsuario {
 	public abstract boolean esInteligente();
 
 
+	public boolean esEsencial(){
+		return dispositivoLista.isEsEsencial();
+	}
+	
+	
 	//getters and setters
 	public DispositivoLista getDispositivoLista() {
 		return dispositivoLista;
