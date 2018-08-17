@@ -13,9 +13,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
 	
-	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
-	/*private ActuadorBase actuadorAutomatico; actuador que se ejecutara automaticamente.*/
-	
 	//constructor
     public DispositivoInteligente(Modo m) {
 		this.setModo(m);
