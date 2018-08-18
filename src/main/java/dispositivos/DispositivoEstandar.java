@@ -27,6 +27,15 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		return consumoEnElDia() * dias ; 
 	}
 	
+	
+	@Override
+	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+		
+		return horasPorDia * periodoEnDias(desde ,hasta);
+	}
+	
+	
+	
 	//calcula cuantos dias dura el periodo. 
 	public int periodoEnDias( LocalDateTime desde , LocalDateTime hasta ){
 		
@@ -51,11 +60,7 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	}
 
 	
-	@Override
-	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 
 

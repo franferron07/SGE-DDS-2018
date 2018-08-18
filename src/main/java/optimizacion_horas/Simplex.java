@@ -215,6 +215,11 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 				// TODO Auto-generated method stub
 				return false;
 			}
+			@Override
+			public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
 		};
 		lavaropas=new DispositivoUsuario() {
 			@Override
@@ -236,6 +241,12 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 			public boolean esInteligente() {
 				return false;
 			}
+
+			@Override
+			public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
 		};
 		ventilador=new DispositivoUsuario() {
 			@Override
@@ -253,6 +264,11 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 			@Override
 			public boolean esInteligente() {
 				return false;
+			}
+			@Override
+			public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+				// TODO Auto-generated method stub
+				return 0;
 			}
 
 		};
@@ -272,6 +288,11 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 			@Override
 			public boolean esInteligente() {
 				return false;
+			}
+			@Override
+			public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+				// TODO Auto-generated method stub
+				return 0;
 			}
 		};
 		Simplex simplex = new Simplex();
