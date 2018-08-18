@@ -9,6 +9,7 @@ import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
 import dispositivos.DispositivoUsuario;
+import geoposicionamiento.Transformador;
 import usuarios.Cliente;
 
 public class Simplex implements SimplexInterface,SimplexMatematica{
@@ -311,6 +312,33 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 	}
 	
 	
+	//metod que ejecutara el hilo para tomar decisiones sobre los dispositivos del cliente
+	public void analisarResultados( LocalDateTime desde , LocalDateTime hasta ){
+		
+		int i=0; //iterador
+		DispositivoUsuario dispositivo;
+		
+		//verifico que cliente tenga activada la opcion automatica 
+		if( clienteActual.isAccionadoAutomatico() ){
+
+			Iterator<ResultadoHora> it = resultados.iterator();
+			// recorro lista de transformadores buscando la distancia minima.
+			while(it.hasNext()){
+				
+				ResultadoHora resultado =it.next();
+				dispositivo = dispositivos.get(i);
+				
+				//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
+				if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
+				
+					
+					
+				}
+				
+				i++;
+			}
+		}
+	}
 	
 	
 }

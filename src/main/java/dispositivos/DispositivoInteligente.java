@@ -26,6 +26,17 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		return true;
 	}
 	
+	
+	@Override
+	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+		
+		float consumo = consumoPeriodo(desde,hasta);
+		double horasDeConsumo  = consumo / detalle.getConsumoKwHora();
+		
+		return horasDeConsumo;
+	}
+	
+	
 	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
@@ -154,11 +165,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	}
 
 
-	@Override
-	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 
 

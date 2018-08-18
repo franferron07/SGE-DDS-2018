@@ -165,5 +165,13 @@ public class Cliente extends Usuario {
 	public void setCoordenadas(Point coordenadas) {
 		this.coordenadas = coordenadas;
 	}
+
+	public boolean isAccionadoAutomatico() {
+		return accionadoAutomatico;
+	}
+
+	public void setAccionadoAutomatico(boolean accionadoAutomatico) {
+		this.accionadoAutomatico = accionadoAutomatico;
+	}
 	
 }

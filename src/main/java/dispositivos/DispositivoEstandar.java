@@ -18,6 +18,13 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		return false;
 	}
 	
+	
+	@Override
+	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+		
+		return horasPorDia * periodoEnDias(desde ,hasta);
+	}
+	
 	@Override
 	public float consumoPeriodo( LocalDateTime desde , LocalDateTime hasta  ){	
 		
@@ -25,13 +32,6 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		dias= periodoEnDias( desde , hasta );
 		
 		return consumoEnElDia() * dias ; 
-	}
-	
-	
-	@Override
-	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
-		
-		return horasPorDia * periodoEnDias(desde ,hasta);
 	}
 	
 	
