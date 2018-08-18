@@ -154,6 +154,13 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	}
 
 
+	@Override
+	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 	
 	

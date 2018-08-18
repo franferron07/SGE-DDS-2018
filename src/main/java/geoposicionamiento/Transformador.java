@@ -1,4 +1,4 @@
-package entities;
+package geoposicionamiento;
 
 import java.awt.Point;
 import java.time.LocalDateTime;

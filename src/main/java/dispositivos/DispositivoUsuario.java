@@ -12,7 +12,10 @@ public abstract class DispositivoUsuario {
 	
 	public abstract boolean esInteligente(); // esEsencial() lo reemplaza para el simplex
 
-
+	//metodo que me dice en un intervalo cuantas horas estuvo encendido
+	public abstract double horasDeUso( LocalDateTime desde, LocalDateTime hasta);
+	
+	
 	public boolean esEsencial(){
 		return detalle.isEsEsencial();
 	}

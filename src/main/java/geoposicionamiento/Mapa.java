@@ -1,4 +1,4 @@
-package entities;
+package geoposicionamiento;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Mapa {
 	
 	private DaoJson<Transformador> daoTransformador;
 	private DaoJson<ZonaGeografica> daoZonaGeografica;
-	private List<ZonaGeografica> zonasGeograficas;
+	private ArrayList<ZonaGeografica> zonasGeograficas;
 	
 	
 	//constructor
@@ -20,7 +20,7 @@ public class Mapa {
 		daoZonaGeografica = new DaoJson<ZonaGeografica>("zonasGeograficas.json");
 		daoTransformador = new DaoJson<Transformador>("transformadores.json");
 		
-		zonasGeograficas = daoZonaGeografica.obtener();
+		zonasGeograficas = (ArrayList<ZonaGeografica>) daoZonaGeografica.obtener();
 	}
 	
 	
@@ -57,6 +57,40 @@ public class Mapa {
 		
 		return null;
 	}
+
+
+	
+	//getters y setters
+	public DaoJson<Transformador> getDaoTransformador() {
+		return daoTransformador;
+	}
+
+
+	public void setDaoTransformador(DaoJson<Transformador> daoTransformador) {
+		this.daoTransformador = daoTransformador;
+	}
+
+
+	public DaoJson<ZonaGeografica> getDaoZonaGeografica() {
+		return daoZonaGeografica;
+	}
+
+
+	public void setDaoZonaGeografica(DaoJson<ZonaGeografica> daoZonaGeografica) {
+		this.daoZonaGeografica = daoZonaGeografica;
+	}
+
+
+	public List<ZonaGeografica> getZonasGeograficas() {
+		return zonasGeograficas;
+	}
+
+
+	public void setZonasGeograficas(ArrayList<ZonaGeografica> zonasGeograficas) {
+		this.zonasGeograficas = zonasGeograficas;
+	}
+	
+	
 
 
 }

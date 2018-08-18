@@ -1,4 +1,4 @@
-package entities;
+package geoposicionamiento;
 
 import java.awt.Point;
 import java.awt.Polygon;
@@ -11,15 +11,22 @@ import usuarios.Cliente;
 
 public class ZonaGeografica {
 	
-	private List<Transformador> transformadores;
+	private ArrayList<Transformador> transformadores;
 	private Polygon limitesZona;
 
 	
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();
-		
+		limitesZona = new Polygon();
 	}
+	
+	//constructor inicializando los limites.
+	public ZonaGeografica( int[] puntosX , int[] puntosY ){
+		transformadores = new ArrayList<Transformador>();
+		limitesZona = new Polygon(puntosX , puntosY , 4);
+	}
+	
 	
 	//asigna al transofmrador mas cerca un cliente
 	public void asignarTransformador(Cliente unCliente){
@@ -79,7 +86,25 @@ public class ZonaGeografica {
 	public void agregarTransformador(Transformador unTransformador){
 		transformadores.add(unTransformador);
 	}
+
 	
+
+	//getters y setters
+	public List<Transformador> getTransformadores() {
+		return transformadores;
+	}
+
+	public void setTransformadores(ArrayList<Transformador> transformadores) {
+		this.transformadores = transformadores;
+	}
+
+	public Polygon getLimitesZona() {
+		return limitesZona;
+	}
+
+	public void setLimitesZona(Polygon limitesZona) {
+		this.limitesZona = limitesZona;
+	}
 	
 	
 }

@@ -32,7 +32,7 @@ public class DaoJson<T> implements DAO<T> {
 		
 		contenido= this.deserealizarArchivo();
 		
-		Type listType = new TypeToken<ArrayList<T>>(){}.getType();
+		Type listType = new TypeToken<ArrayList<T>>(){}.getType();		
 		datos = g.fromJson(contenido,listType);
 
 		return datos;

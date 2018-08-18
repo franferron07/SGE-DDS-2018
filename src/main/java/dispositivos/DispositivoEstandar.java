@@ -49,6 +49,13 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	public void setHorasPorDia(float horasPorDia) {
 		this.horasPorDia = horasPorDia;
 	}
+
+	
+	@Override
+	public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 
