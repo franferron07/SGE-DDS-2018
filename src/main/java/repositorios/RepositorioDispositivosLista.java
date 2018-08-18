@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DaoJson;
-import dispositivos.DispositivoLista;
+import dispositivos.DispositivoDetalle;
 
 public class RepositorioDispositivosLista {
 
-	private DaoJson<DispositivoLista> dao;
-	private List<DispositivoLista> dispositivosLista;
+	private DaoJson<DispositivoDetalle> dao;
+	private List<DispositivoDetalle> dispositivosLista;
 	
 	//constructor
 	public RepositorioDispositivosLista(){
-		this.dao= new DaoJson<DispositivoLista>("dispositivosLista.json");
-		this.dispositivosLista = new ArrayList<DispositivoLista>();
+		this.dao= new DaoJson<DispositivoDetalle>("dispositivosLista.json");
+		this.dispositivosLista = new ArrayList<DispositivoDetalle>();
 		
 		cargarDatos();
 	}

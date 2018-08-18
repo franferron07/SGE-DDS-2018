@@ -1,7 +1,7 @@
 package dispositivos;
 
 //dispositivo con datos genericos del dispositivo que tendrá el usuario.
-public class DispositivoLista {
+public class DispositivoDetalle {
 	
 	private String nombre;
 	private String descripcion;
@@ -13,7 +13,7 @@ public class DispositivoLista {
 	private boolean esEsencial;
 	
 	//constructor
-	public DispositivoLista(){
+	public DispositivoDetalle(){
 		
 	}
 	

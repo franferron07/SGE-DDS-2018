@@ -6,19 +6,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dao.DaoJson;
-import dispositivos.DispositivoLista;
+import dispositivos.DispositivoDetalle;
 import junit.framework.Assert;
 
 public class ArchivoDispositivosListaTest {
 	
-	DaoJson<DispositivoLista> daoTest;
-	DispositivoLista dispositivo;
+	DaoJson<DispositivoDetalle> daoTest;
+	DispositivoDetalle dispositivo;
 	
 	@Before
 	public void init(){
 		
-		daoTest = new DaoJson<DispositivoLista>("dispositivosLista.json");
-	    dispositivo= new DispositivoLista();
+		daoTest = new DaoJson<DispositivoDetalle>("dispositivosLista.json");
+	    dispositivo= new DispositivoDetalle();
 		dispositivo.setNombre("test");
 		dispositivo.setDescripcion("test");
 		
@@ -27,7 +27,7 @@ public class ArchivoDispositivosListaTest {
 	@Test
 	public void testLecturaDispositivos(){
 		
-		List<DispositivoLista> dispositivos = daoTest.obtener();
+		List<DispositivoDetalle> dispositivos = daoTest.obtener();
 		Assert.assertEquals(22 , dispositivos.size());
 	}
 	

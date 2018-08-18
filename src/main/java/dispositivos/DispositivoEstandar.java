@@ -37,7 +37,7 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	
 	//me devuelve el consumo estimativo para un dia
 	private float consumoEnElDia() {
-		return horasPorDia * this.dispositivoLista.getConsumoKwHora();
+		return (float) (horasPorDia * this.getConsumoKwHora());
 	}
 
 
