@@ -8,8 +8,8 @@ import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
+import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
-import geoposicionamiento.Transformador;
 import usuarios.Cliente;
 
 public class Simplex implements SimplexInterface,SimplexMatematica{
@@ -331,7 +331,14 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 				//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
 				if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
 				
-					
+					//si el dispositivo es inteligente cambio al modo pedido
+					if( dispositivo.esInteligente() ){
+						
+						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
+						//aca deberia hacer el cambio de modo.
+						
+						
+					}
 					
 				}
 				

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
+import dispositivos.Modo;
 import dispositivos.ModoApagado;
 
 public class Cliente extends Usuario {
@@ -23,7 +24,7 @@ public class Cliente extends Usuario {
 	private Point coordenadas;
 	
 	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
-	/*private ActuadorBase actuadorAutomatico; actuador que se ejecutara automaticamente.*/
+	private Modo modoAutomatico; //modo que se activada automaticamente.
 	
 	
 	public Cliente(List<DispositivoUsuario> dispositivos) {
@@ -172,6 +173,14 @@ public class Cliente extends Usuario {
 
 	public void setAccionadoAutomatico(boolean accionadoAutomatico) {
 		this.accionadoAutomatico = accionadoAutomatico;
+	}
+
+	public Modo getModoAutomatico() {
+		return modoAutomatico;
+	}
+
+	public void setModoAutomatico(Modo modoAutomatico) {
+		this.modoAutomatico = modoAutomatico;
 	}
 	
 }
