@@ -1,20 +1,22 @@
 package timer;
 
-import java.io.File;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
+
+import java.util.Iterator;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import optimizacion_horas.Simplex;
+import repositorios.RepositorioClientes;
 import usuarios.Cliente;
 
 public class Tarea extends TimerTask {
 
 	public Timer timer = new Timer("Simplex");
 	public Simplex simplex = new Simplex();
+	public RepositorioClientes repositorioCliente;
 	public long horas;
 	
 	
@@ -22,15 +24,17 @@ public class Tarea extends TimerTask {
 		
 	}
 	
-	public Tarea(Cliente _cliente) {
-		this.cliente=_cliente;
+	public Tarea(long hora) {
+		repositorioCliente = new RepositorioClientes();
+		horas = hora;
 	}
 	
 	@Override
 	public void run() {
-		this.ejemploSaludar();
-		//ejecutarSimplex aca
+		ejemploSaludar();
+		ejecutarSimplex();
 	}
+	
 	public void ejemploSaludar() {
 		System.out.println("Lol");
 	}
@@ -39,17 +43,28 @@ public class Tarea extends TimerTask {
 		this.timer.cancel();
 	}
 	
-	
+	//ejecuto metodo run cada x horas, esto esta en milisegundos.
 	public void ejecutarCadaHora() {
 		this.timer.schedule(this, 0, this.horas*3600000);
 	}
 	
 	public void ejecutarSimplex() {
 		
-		this.simplex.cargarDispositivosEsenciales(_cliente);
-		this.simplex.maximizar();
-		this.simplex.analisarResultados(primerFechaMes(), LocalDateTime.now());//recibe desde y hasta
+		List<Cliente> clientes = repositorioCliente.filtrarClientesAccionAutomatica();
+		
+		Iterator<Cliente> it = clientes.iterator();
+		// recorro clientes para ejecutar simplex por cada cliente.
+		while(it.hasNext()){
+			
+			Cliente cliente =it.next();
+			//cargo los dipositivos del cliente y cliente en simplex y ejecuto
+			this.simplex.cargarDispositivosEsenciales(cliente);
+			this.simplex.maximizar();
+			this.simplex.analisarResultados(primerFechaMes(), LocalDateTime.now());//recibe desde y hasta
+		}
+
 	}
+	
 
 	//devuelve la primer fecha del mes corriente.
 	private LocalDateTime primerFechaMes() {

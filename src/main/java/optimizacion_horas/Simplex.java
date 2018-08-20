@@ -337,7 +337,6 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
 						//aca deberia hacer el cambio de modo.
 						
-						
 					}
 					
 				}
