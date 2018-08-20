@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import dispositivos.ModoApagado;
@@ -21,7 +22,7 @@ public class ClienteTest {
 	@Before
 	public void init() {
 		List<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
-        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado());
+        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado() , new DispositivoDetalle());
         dispositivos.add(dispositivoInteligente);
                
 		cliente = new Cliente(dispositivos);
@@ -38,7 +39,7 @@ public class ClienteTest {
 
 	@Test
 	public void testCantidadDesipositivos() {
-		Assert.assertEquals(0, cliente.cantidadDispositivos());
+		Assert.assertEquals(1, cliente.cantidadDispositivos());
 	}
 
 	

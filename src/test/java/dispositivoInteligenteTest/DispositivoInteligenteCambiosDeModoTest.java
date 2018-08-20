@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoInteligente;
 import dispositivos.Modo;
 import dispositivos.ModoAhorroEnergia;
@@ -20,12 +21,12 @@ public class DispositivoInteligenteCambiosDeModoTest {
 	    @Before
 	    public void init() {
 	        modo = new ModoEncendido(); // new ModoApagado() // new ModoAhorroEnergia()
-	        dispositivoInteligente=new DispositivoInteligente(modo);
+	        dispositivoInteligente=new DispositivoInteligente(modo , new DispositivoDetalle() );
 	    }
 
 	    @Test
 	    public void testEstadoInicial() {
-	        assertEquals(true, !dispositivoInteligente.estaEncendido());
+	        assertEquals(true, dispositivoInteligente.estaEncendido());
 	    }
 
 	    @Test

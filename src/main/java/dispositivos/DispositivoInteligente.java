@@ -14,10 +14,11 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	private DispositivoEstandar estandar;
 	
 	//constructor
-    public DispositivoInteligente(Modo m) {
+    public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {
 		this.setModo(m);
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
+		detalle = disp_detalle;
 	}
 	
 	

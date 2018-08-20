@@ -9,8 +9,9 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	
 
 	//constructor
-	public DispositivoEstandar(){
+	public DispositivoEstandar( DispositivoDetalle disp_detalle ){
 		
+		detalle = disp_detalle;
 	}
 	
 	@Override

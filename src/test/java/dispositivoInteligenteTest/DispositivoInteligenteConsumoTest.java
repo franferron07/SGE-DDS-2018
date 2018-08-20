@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoInteligente;
 import dispositivos.Modo;
 import dispositivos.ModoAhorroEnergia;
@@ -26,7 +27,7 @@ public class DispositivoInteligenteConsumoTest {
 		
 		apagado = new ModoApagado();
 		
-		di = new DispositivoInteligente(apagado);
+		di = new DispositivoInteligente(apagado , new DispositivoDetalle());
 		
 		di.encender();
 		di.ahorrarEnergia();

@@ -60,7 +60,7 @@ public class Cliente extends Usuario {
 	public void convertirEStandarInteligente( DispositivoEstandar dispositivoEstandar) {
 		
 		ModoApagado modoApagado=new ModoApagado();
-		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado);
+		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado , dispositivoEstandar.detalle);
 		
 		//agrego disposiutivo estandar en inteligente y lo agrego a la lista. 
 		dispositivoInteligente.setEstandar(dispositivoEstandar);
