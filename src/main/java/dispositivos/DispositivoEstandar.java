@@ -14,6 +14,11 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		detalle = disp_detalle;
 	}
 	
+	//constructor
+	public DispositivoEstandar(  ){
+		
+	}
+	
 	@Override
 	public boolean esInteligente() {
 		return false;

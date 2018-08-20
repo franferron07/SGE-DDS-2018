@@ -1,6 +1,7 @@
 package usuarios;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import dispositivos.ModoApagado;
 public class Cliente extends Usuario {
 	
 	private String tipoDocumento;
-	private int numeroDocumento;
+	private String numeroDocumento;
 	private Date fechaAltaServicio;
 	private String telefonoContacto;
 	private Categoria categoria;
@@ -26,6 +27,12 @@ public class Cliente extends Usuario {
 	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
 	private Modo modoAutomatico; //modo que se activada automaticamente.
 	
+	
+	//constructor 
+	public Cliente(){
+		dispositivos= new ArrayList<DispositivoUsuario>();
+		
+	}
 	
 	public Cliente(List<DispositivoUsuario> dispositivos) {
 		 this.dispositivos = dispositivos; 
@@ -111,11 +118,11 @@ public class Cliente extends Usuario {
 		this.tipoDocumento = tipoDocumento;
 	}
 
-	public int getNumeroDocumento() {
+	public String getNumeroDocumento() {
 		return numeroDocumento;
 	}
 
-	public void setNumeroDocumento(int numeroDocumento) {
+	public void setNumeroDocumento(String numeroDocumento) {
 		this.numeroDocumento = numeroDocumento;
 	}
 

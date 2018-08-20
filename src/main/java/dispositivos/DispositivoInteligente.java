@@ -20,6 +20,21 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos =  new ArrayList<Modo>();
 		detalle = disp_detalle;
 	}
+    
+    //constructor sin modo osea apagado.
+    public DispositivoInteligente(DispositivoDetalle disp_detalle) {
+		this.setModo(new ModoApagado());
+		this.estandar=null;
+		this.logModos =  new ArrayList<Modo>();
+		detalle = disp_detalle;
+	}
+    
+    //constructor
+    public DispositivoInteligente() {
+		this.setModo(new ModoApagado());
+		this.estandar=null;
+		this.logModos =  new ArrayList<Modo>();
+	}
 	
 	
 	@Override
