@@ -12,7 +12,6 @@ import dispositivos.DispositivoUsuario;
 import dispositivos.ModoApagado;
 import excepciones.ArchivoException;
 import junit.framework.Assert;
-import repositorios.RepositorioUsuarios;
 import usuarios.Cliente;
 
 public class ClienteTest {

@@ -36,6 +36,15 @@ public class RepositorioClientes {
 		
 		return (List<Cliente>) this.clientes.stream().filter(c -> c.isAccionadoAutomatico()) ; 
 	}
+	
+	//agrego cliente
+	public void agregarCliente(Cliente cliente){
+		clientes.add(cliente);
+	}
+	//borro cliente
+	public void borrarCliente(Cliente cliente){
+		clientes.remove(cliente);
+	}
 
 	
 	//getters y setters

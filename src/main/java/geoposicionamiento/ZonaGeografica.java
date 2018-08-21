@@ -11,7 +11,7 @@ import usuarios.Cliente;
 
 public class ZonaGeografica {
 	
-	private ArrayList<Transformador> transformadores;
+	private List<Transformador> transformadores;
 	private Polygon limitesZona;
 
 	
@@ -22,9 +22,9 @@ public class ZonaGeografica {
 	}
 	
 	//constructor inicializando los limites.
-	public ZonaGeografica( int[] puntosX , int[] puntosY ){
+	public ZonaGeografica( int[] puntosX , int[] puntosY , int cantidad ){
 		transformadores = new ArrayList<Transformador>();
-		limitesZona = new Polygon(puntosX , puntosY , 4);
+		limitesZona = new Polygon(puntosX , puntosY , cantidad);
 	}
 	
 	
@@ -74,7 +74,7 @@ public class ZonaGeografica {
 		return transformadores.stream().mapToDouble(t->t.consumoTotal(unInstante)).sum();
 	}
 	
-	//me dice si la coordenada esta dentro del transformador
+	//me dice si la coordenada esta dentro de la zona
 	public boolean coordenadaEnZona(Point coordenada){
 		
 		if( limitesZona.contains(coordenada) ) return true;

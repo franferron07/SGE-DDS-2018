@@ -12,6 +12,7 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import dispositivos.Modo;
 import dispositivos.ModoApagado;
+import optimizacion_horas.Simplex;
 
 public class Cliente extends Usuario {
 	
@@ -90,8 +91,7 @@ public class Cliente extends Usuario {
 			agregarDispositivo(estandar);
 			
 			puntaje= puntaje-10;
-		}
-		
+		}	
 	}
 	
 	public void quitarDispositivo(DispositivoUsuario dispositivo) {
@@ -105,9 +105,20 @@ public class Cliente extends Usuario {
 		}
 		
 		dispositivos.add(dispositivo);
-		
 	}
 
+	
+	//metodo para correr simplex
+	public String recomendacionHogarEficiente(){
+		
+		Simplex simplex = new Simplex();
+		simplex.cargarDispositivosEsenciales(this);
+		
+		return simplex.resultados.toString();
+		
+	}
+	
+	
 	
 	//getters y setters
 	public String getTipoDocumento() {

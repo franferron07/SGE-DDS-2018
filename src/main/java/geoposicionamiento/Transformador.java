@@ -19,11 +19,18 @@ public class Transformador {
 	}
 	
 	//constructor
-		public Transformador(ZonaGeografica zona , Point coordenada){
-			clientes= new ArrayList<Cliente>();
-			zonaAsignada = zona;
-			coordenadas = coordenada;
-		}
+	public Transformador(ZonaGeografica zona , Point coordenada){
+		clientes= new ArrayList<Cliente>();
+		zonaAsignada = zona;
+		coordenadas = coordenada;
+	}
+	
+	//constructor
+	public Transformador(Point coordenada){
+		clientes= new ArrayList<Cliente>();
+		coordenadas = coordenada;
+	}
+	
 	
 	//me da el consumo total en un determinado instante
 	public float consumoTotal( LocalDateTime unInstante ){

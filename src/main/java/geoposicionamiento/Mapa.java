@@ -3,6 +3,7 @@ package geoposicionamiento;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import dao.DaoJson;
 import usuarios.Cliente;
@@ -11,19 +12,19 @@ public class Mapa {
 	
 	private DaoJson<Transformador> daoTransformador;
 	private DaoJson<ZonaGeografica> daoZonaGeografica;
-	private ArrayList<ZonaGeografica> zonasGeograficas;
+	private List<ZonaGeografica> zonasGeograficas;
 	
 	
 	//constructor
 	public Mapa(){
-		zonasGeograficas = new ArrayList<ZonaGeografica>();
 		daoZonaGeografica = new DaoJson<ZonaGeografica>("zonasGeograficas.json");
 		daoTransformador = new DaoJson<Transformador>("transformadores.json");
 		
-		zonasGeograficas = (ArrayList<ZonaGeografica>) daoZonaGeografica.obtener();
+		zonasGeograficas = new ArrayList<ZonaGeografica>();
+		//zonasGeograficas = daoZonaGeografica.obtener();
 	}
 	
-	
+
 	//obtener y asignar transformadores a las zonas existentes
 	public void leerTransformador(){
 		
@@ -37,25 +38,33 @@ public class Mapa {
 	//le asigna la zona perteneciente a la ubicacion del transformador
 	public void asignarZonaTransformador(Transformador unTransformador){
 		
+		ZonaGeografica zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( unTransformador.getCoordenadas())).findAny().orElse(null);
+		
+		if( zona!=null )
+		{
+			zona.agregarTransformador(unTransformador);
+		}
+		
 	}
 	
 	// busca la zona a la que puede pertenecer el cliente y luego la zona le asignara el transformador correspondiente.
 	public void asignarZonaCliente( Cliente unCliente ){
 		
 		ZonaGeografica zonaPert = zonaPerteneciente(unCliente.getCoordenadas());
-		zonaPert.asignarTransformador(unCliente);
+		
+		if( zonaPert != null ){
+			zonaPert.asignarTransformador(unCliente);
+		}
+		
 	}
 	
 	//metodo que dada una coordenada me devolvera la zona a la que pertenece.
 	public ZonaGeografica zonaPerteneciente( Point coordenada ){
 		
-		List<ZonaGeografica >zonas = (List<ZonaGeografica>) zonasGeograficas.stream().filter(z -> z.coordenadaEnZona(coordenada));
-		
-		if( !zonas.isEmpty() ) {
-			return zonas.get(0);
-		}
-		
-		return null;
+		ZonaGeografica zona = null;
+		zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( coordenada )).findAny().orElse(null);
+
+		return zona;
 	}
 
 
@@ -86,11 +95,9 @@ public class Mapa {
 	}
 
 
-	public void setZonasGeograficas(ArrayList<ZonaGeografica> zonasGeograficas) {
+	public void setZonasGeograficas(List<ZonaGeografica> zonasGeograficas) {
 		this.zonasGeograficas = zonasGeograficas;
 	}
 	
-	
-
 
 }
