@@ -50,7 +50,6 @@ public class ConsumoTest {
 		LocalDateTime periodo_fin = LocalDateTime.now();
 		
 		assertEquals( false , consumo.cumplePeriodoConsumo(periodo_inicia, periodo_fin));
-		
 	}
 
 }
