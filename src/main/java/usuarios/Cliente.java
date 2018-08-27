@@ -1,6 +1,7 @@
 package usuarios;
 
 import java.awt.Point;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,9 +27,7 @@ public class Cliente extends Usuario {
 	private Point coordenadas;
 	
 	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
-	private Modo modoAutomatico; //modo que se activada automaticamente.
-	
-	
+
 	//constructor 
 	public Cliente(){
 		dispositivos= new ArrayList<DispositivoUsuario>();
@@ -107,6 +106,13 @@ public class Cliente extends Usuario {
 		dispositivos.add(dispositivo);
 	}
 
+	
+	public double consumoEnUnPeriodo(LocalDateTime desde , LocalDateTime hasta){
+		
+		return dispositivos.stream().mapToDouble(d -> d.consumoPeriodo(desde, hasta)).sum(); 
+		
+	}
+	
 	
 	//metodo para correr simplex
 	public String recomendacionHogarEficiente(){
@@ -193,12 +199,6 @@ public class Cliente extends Usuario {
 		this.accionadoAutomatico = accionadoAutomatico;
 	}
 
-	public Modo getModoAutomatico() {
-		return modoAutomatico;
-	}
 
-	public void setModoAutomatico(Modo modoAutomatico) {
-		this.modoAutomatico = modoAutomatico;
-	}
 	
 }

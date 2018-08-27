@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import reglasYActuadores.ActuadorBase;
+
 public class DispositivoInteligente extends DispositivoUsuario {
 	
 	private Modo modo;
 	private List<Modo> logModos ;
 	private int idDispositivo;
 	private DispositivoEstandar estandar;
+	private ActuadorBase accionaAutomaticaOptimizador; //activara esta accion el optimizador de horas al dispositivo
 	
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {
@@ -178,6 +181,22 @@ public class DispositivoInteligente extends DispositivoUsuario {
 
 	public void setLogModos(List<Modo> logModos) {
 		this.logModos = logModos;
+	}
+
+	public ActuadorBase getAccionaAutomaticaOptimizador() {
+		return accionaAutomaticaOptimizador;
+	}
+
+	public void setAccionaAutomaticaOptimizador(ActuadorBase accionaAutomaticaOptimizador) {
+		this.accionaAutomaticaOptimizador = accionaAutomaticaOptimizador;
+	}
+
+	public void ejecutarAccionAutomatica() {
+		
+		if( accionaAutomaticaOptimizador != null){
+			accionaAutomaticaOptimizador.ejecutarAccion();
+		}
+		
 	}
 
 

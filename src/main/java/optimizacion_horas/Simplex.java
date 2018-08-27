@@ -318,32 +318,29 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 		int i=0; //iterador
 		DispositivoUsuario dispositivo;
 		
-		//verifico que cliente tenga activada la opcion automatica 
-		if( clienteActual.isAccionadoAutomatico() ){
 
-			Iterator<ResultadoHora> it = resultados.iterator();
-			// recorro lista de transformadores buscando la distancia minima.
-			while(it.hasNext()){
-				
-				ResultadoHora resultado =it.next();
-				dispositivo = dispositivos.get(i);
-				
-				//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
-				if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
-				
-					//si el dispositivo es inteligente cambio al modo pedido
-					if( dispositivo.esInteligente() ){
-						
-						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
-						//aca deberia hacer el cambio de modo.
-						
-					}
+		Iterator<ResultadoHora> it = resultados.iterator();
+		// recorro lista de transformadores buscando la distancia minima.
+		while(it.hasNext()){
+			
+			ResultadoHora resultado =it.next();
+			dispositivo = dispositivos.get(i);
+			
+			//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
+			if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
+			
+				//si el dispositivo es inteligente ejecuto la accion
+				if( dispositivo.esInteligente() ){
 					
+					DispositivoInteligente di = (DispositivoInteligente) dispositivo;
+					di.ejecutarAccionAutomatica();
 				}
 				
-				i++;
 			}
+			
+			i++;
 		}
+		
 	}
 	
 	

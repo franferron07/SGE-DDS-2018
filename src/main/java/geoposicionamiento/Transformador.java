@@ -32,10 +32,12 @@ public class Transformador {
 	}
 	
 	
-	//me da el consumo total en un determinado instante
-	public float consumoTotal( LocalDateTime unInstante ){
+	//me da el consumo total en un determinado instante(se toma 1 hora el minimo)
+	public double consumoTotal( LocalDateTime desde , LocalDateTime hasta ){
 		
-		return 0;
+		double consumoTotal = clientes.stream().mapToDouble( c -> c.consumoEnUnPeriodo(desde, hasta)).sum();
+		
+		return consumoTotal;
 	}
 	
 	public void agregarCliente(Cliente unCliente){

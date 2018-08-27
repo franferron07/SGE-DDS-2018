@@ -6,19 +6,23 @@ import java.util.List;
 import java.util.Optional;
 
 import dao.DaoJson;
+import repositorios.RepositorioTransformadores;
+import repositorios.RepositorioZonas;
 import usuarios.Cliente;
 
 public class Mapa {
 	
-	private DaoJson<Transformador> daoTransformador;
-	private DaoJson<ZonaGeografica> daoZonaGeografica;
 	private List<ZonaGeografica> zonasGeograficas;
+	private RepositorioZonas repoZonas;
+	private RepositorioTransformadores repoTransformadores;
 	
 	
 	//constructor
 	public Mapa(){
-		daoZonaGeografica = new DaoJson<ZonaGeografica>("zonasGeograficas.json");
-		daoTransformador = new DaoJson<Transformador>("transformadores.json");
+		
+		repoZonas = new RepositorioZonas();
+		repoTransformadores = new RepositorioTransformadores();
+		
 		
 		zonasGeograficas = new ArrayList<ZonaGeografica>();
 		//zonasGeograficas = daoZonaGeografica.obtener();
@@ -28,7 +32,7 @@ public class Mapa {
 	//obtener y asignar transformadores a las zonas existentes
 	public void leerTransformador(){
 		
-		List<Transformador> transformadores = daoTransformador.obtener();
+		List<Transformador> transformadores = repoTransformadores.getTransformadores();
 		if( !transformadores.isEmpty() ){
 			//agrego transformador a las zonas.
 			transformadores.forEach(t->t.getZonaAsignada().agregarTransformador(t));	
@@ -70,25 +74,6 @@ public class Mapa {
 
 	
 	//getters y setters
-	public DaoJson<Transformador> getDaoTransformador() {
-		return daoTransformador;
-	}
-
-
-	public void setDaoTransformador(DaoJson<Transformador> daoTransformador) {
-		this.daoTransformador = daoTransformador;
-	}
-
-
-	public DaoJson<ZonaGeografica> getDaoZonaGeografica() {
-		return daoZonaGeografica;
-	}
-
-
-	public void setDaoZonaGeografica(DaoJson<ZonaGeografica> daoZonaGeografica) {
-		this.daoZonaGeografica = daoZonaGeografica;
-	}
-
 
 	public List<ZonaGeografica> getZonasGeograficas() {
 		return zonasGeograficas;

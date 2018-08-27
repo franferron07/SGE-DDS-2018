@@ -69,9 +69,9 @@ public class ZonaGeografica {
 	}
 	
 	//me da el consumo total de todos los transformadores en un instante
-	public double consumoTotal(LocalDateTime unInstante){
+	public double consumoTotal(LocalDateTime desde , LocalDateTime hasta){
 		
-		return transformadores.stream().mapToDouble(t->t.consumoTotal(unInstante)).sum();
+		return transformadores.stream().mapToDouble(t->t.consumoTotal(desde , hasta)).sum();
 	}
 	
 	//me dice si la coordenada esta dentro de la zona
