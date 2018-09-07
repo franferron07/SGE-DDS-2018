@@ -12,7 +12,7 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import usuarios.Cliente;
 
-public class Simplex implements SimplexInterface,SimplexMatematica{
+public class Optimizador {
 	public ArrayList<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
 	private double consumoMaximoDeEnergia=0;
 	public Cliente clienteActual=null;
@@ -26,15 +26,65 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 	
 //	public double consumoFijoDeEnergia;
 	
-	@Override
+	
 	public void maximizar() {
 		this.algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true); //true de variables positivas
 		this.resolverInecuacion();
 	}
-	@Override
+	
 	public void minimizar() {
 		this.algoritmo=new AlgoritmoSimplex(GoalType.MINIMIZE, true);//true de variables positivas
 		this.resolverInecuacion();
+	}
+	
+	private double[] crearVectorDeUnos(int n) {
+		double[] x=new double[n];
+		for (int i = 0; i < n; i++) {
+			x[i]=1;
+		}
+		return x;
+	}
+	private double[][] crearMatrizDeCeros(int filas , int columnas) {
+		double[][] matrizIdentidadDeSimplex=new double[filas][columnas];
+		for (int fila = 0; fila < filas; fila++) {
+			for (int columna = 0; columna < columnas; columna++) {
+				matrizIdentidadDeSimplex[fila][columna]=(double)0;
+			}
+		}
+		return matrizIdentidadDeSimplex;
+	}
+	private double[][] obtenerMatrizIdentidadDeSimplex(ArrayList<DispositivoUsuario> dispositivos) {
+		int filas=dispositivos.size()*2,columnas=dispositivos.size();
+		double[][] matrizIdentidadDeSimplex=this.crearMatrizDeCeros(filas,columnas);
+		int fila=0;
+		for (int columna = 0; columna < columnas ;) {
+			matrizIdentidadDeSimplex[fila][columna]=(double)1;
+			fila++;
+			matrizIdentidadDeSimplex[fila][columna]=(double)1;
+			fila++;
+			columna++;
+		}
+		return matrizIdentidadDeSimplex;
+	}
+	private double[] obtenerMatrizBDeSimplex(ArrayList<DispositivoUsuario> dispositivos){
+		int filas=dispositivos.size()*2;
+		double[]  matrizB = new double[filas]; 
+		int fila=0;
+		for (int columna = 0; columna < dispositivos.size() ;columna++) {
+			matrizB[fila]=dispositivos.get(columna).getHsMensualMaximo();
+			fila++;
+			matrizB[fila]=dispositivos.get(columna).getHsMensualMinimo();
+			fila++;
+			
+		}
+		return matrizB;
+	}
+	private double[] obtenerCoeficientesDeFuncionObjetivo(ArrayList<DispositivoUsuario> dispositivos) {
+		double[] consumos = new double[dispositivos.size()];
+		for (int i = 0; i < consumos.length; i++) {
+			
+		}
+		return  consumos;
 	}
 
 	public void resolverInecuacion() {	
@@ -78,7 +128,7 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 	private void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
 		this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);	
 	}
-	@Override
+	
 	public void cargarDispositivos(DispositivoUsuario... _dispositivoUsuarios_) {
 		for (int i = 0; i < _dispositivoUsuarios_.length ; i++) {
 			if (_dispositivoUsuarios_[i].esEsencial()) {
@@ -87,7 +137,7 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 		}
 	}
 		
-	@Override
+	
 	public void cargarDispositivosEsenciales(Cliente cliente) {
 		DispositivoUsuario[] dispositivos__ = (DispositivoUsuario[]) cliente.getDispositivos().stream().filter(dispositivo-> dispositivo.esEsencial()).toArray();
 		for (int i = 0; i < dispositivos__.length; i++) {
