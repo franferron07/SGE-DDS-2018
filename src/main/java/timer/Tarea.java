@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import optimizacion_horas.Simplex;
+import optimizacion_horas.InterfazOptimizador;
 import repositorios.RepositorioClientes;
 import usuarios.Cliente;
 
 public class Tarea extends TimerTask {
 
 	public Timer timer = new Timer("Simplex");
-	public Simplex simplex = new Simplex();
+	public InterfazOptimizador optimizador;
 	public RepositorioClientes repositorioCliente;
 	public long horas;
 	
@@ -58,9 +58,9 @@ public class Tarea extends TimerTask {
 			
 			Cliente cliente =it.next();
 			//cargo los dipositivos del cliente y cliente en simplex y ejecuto
-			this.simplex.cargarDispositivosEsenciales(cliente);
-			this.simplex.maximizar();
-			this.simplex.analisarResultados(primerFechaMes(), LocalDateTime.now());//recibe desde y hasta
+			this.optimizador.cargarDispositivosEsenciales(cliente);
+			this.optimizador.maximizar();
+			this.optimizador.analizarResultados(primerFechaMes(), LocalDateTime.now());//recibe desde y hasta
 		}
 
 	}
