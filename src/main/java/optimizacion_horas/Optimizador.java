@@ -12,7 +12,7 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import usuarios.Cliente;
 
-public class Optimizador {
+public class Optimizador implements InterfazOptimizador {
 	public ArrayList<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
 	private double consumoMaximoDeEnergia=0;
 	public Cliente clienteActual=null;
@@ -26,12 +26,13 @@ public class Optimizador {
 	
 //	public double consumoFijoDeEnergia;
 	
-	
+	@Override
 	public void maximizar() {
 		this.algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true); //true de variables positivas
 		this.resolverInecuacion();
 	}
 	
+	@Override
 	public void minimizar() {
 		this.algoritmo=new AlgoritmoSimplex(GoalType.MINIMIZE, true);//true de variables positivas
 		this.resolverInecuacion();
@@ -106,10 +107,13 @@ public class Optimizador {
 				this.agregarRestriccion(Relationship.GEQ,(double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
 		}
 	}
+	
 	private void crearFuncionEconomica(double ... crearVectorDeUnos_) {
 		this.algoritmo.crearFuncionEconomica(crearVectorDeUnos_);
 	}
-	private void calcularHoras() {
+	
+	@Override
+	public void calcularHoras() {
 		 PointValuePair solucion =this.algoritmo.resolver(); 
 		 this.maximaEnergiaResultado=solucion.getValue();
 		 for (int i = 0; i < this.cantidadDeDispositivos(); i++) {
@@ -120,15 +124,17 @@ public class Optimizador {
 		}
 	}
 	
-	private double consumoMaximoDeEnergia() {
+	@Override
+	public double consumoMaximoDeEnergia() {
 		return this.consumoMaximoDeEnergia;
 	}
 
-
-	private void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
+	@Override
+	public void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
 		this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);	
 	}
 	
+	@Override
 	public void cargarDispositivos(DispositivoUsuario... _dispositivoUsuarios_) {
 		for (int i = 0; i < _dispositivoUsuarios_.length ; i++) {
 			if (_dispositivoUsuarios_[i].esEsencial()) {
@@ -137,7 +143,7 @@ public class Optimizador {
 		}
 	}
 		
-	
+	@Override
 	public void cargarDispositivosEsenciales(Cliente cliente) {
 		DispositivoUsuario[] dispositivos__ = (DispositivoUsuario[]) cliente.getDispositivos().stream().filter(dispositivo-> dispositivo.esEsencial()).toArray();
 		for (int i = 0; i < dispositivos__.length; i++) {
@@ -147,7 +153,7 @@ public class Optimizador {
 	public int cantidadDeDispositivos() {
 		return this.dispositivos.size();
 	}
-	@Override
+	
 	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo() {
 		// TODO Auto-generated method stub
 		return this.resultados;
@@ -346,7 +352,8 @@ public class Optimizador {
 				return 0;
 			}
 		};
-		Simplex simplex = new Simplex();
+		
+		Optimizador simplex = new Optimizador();
 		simplex.setConsumoMaximoDeEnergia(450000);
 		simplex.cargarDispositivos(lcd,lavaropas,ventilador);
 		
@@ -363,7 +370,8 @@ public class Optimizador {
 	
 	
 	//metod que ejecutara el hilo para tomar decisiones sobre los dispositivos del cliente
-	public void analisarResultados( LocalDateTime desde , LocalDateTime hasta ){
+	@Override
+	public void analizarResultados( LocalDateTime desde , LocalDateTime hasta ){
 		
 		int i=0; //iterador
 		DispositivoUsuario dispositivo;
