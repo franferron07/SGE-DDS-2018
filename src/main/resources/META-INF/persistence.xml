@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
+    version="1.0"> 
+  
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	
+    	<class>models.entities.Usuario</class>
+		<class>models.entities.Cliente</class>
+		<class>models.entities.Administrador</class>
+		<class>models.entities.DispositivoDetalle</class>
+		<class>models.entities.DispositivoUsuario</class>
+		<class>models.entities.DispositivoEstandar</class>
+		<class>models.entities.DispositivoInteligente</class>
+		<class>models.entities.ModoAhorroEnergia</class>
+		<class>models.entities.ModoApagado</class>
+		<class>models.entities.ModoConConsumo</class>
+		<class>models.entities.ModoEnecendido</class>
+		<class>models.entities.Consumo</class>
+		<class>models.entities.Sensor</class>
+		<class>models.entities.Regla</class>
+		<class>models.entities.ReglaCompuesta</class>
+		<class>models.entities.ReglaSimple</class>
+		<class>models.entities.CondicionRegla</class>
+		<class>models.entities.ActuadorBase</class>
+		<class>models.entities.Transformador</class>
+		<class>models.entities.ZonaGeografica</class>
+		
+    	 
+        <properties> 
+	    <property name="hibernate.archive.autodetection" value="class"/>        
+        
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3307/tp-equipo3" /> 
+            <property name="hibernate.connection.username" value="root" /> 
+            <property name="hibernate.connection.password" value="" /> 
+                        
+            <property name="hibernate.show_sql" value="true" /> 
+            <property name="hibernate.format_sql" value="true" /> 
+            <property name="use_sql_comments" value="true" /> 
+            <property name="hibernate.hbm2ddl.auto" value="update" /> 
+        </properties>
+          
+    </persistence-unit> 
+  
+</persistence>
