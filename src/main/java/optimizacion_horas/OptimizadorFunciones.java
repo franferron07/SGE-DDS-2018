@@ -1,12 +1,17 @@
 package optimizacion_horas;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import org.apache.commons.math3.optim.PointValuePair;
+import org.apache.commons.math3.optim.linear.Relationship;
+import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
 import dispositivos.DispositivoUsuario;
+import usuarios.Cliente;
 
-public interface SimplexMatematica {
+public interface OptimizadorFunciones {
+	 
+	 //------------------------------
 	default double[] crearVectorDeUnos(int n) {
 		double[] x=new double[n];
 		for (int i = 0; i < n; i++) {
@@ -49,6 +54,7 @@ public interface SimplexMatematica {
 		}
 		return matrizB;
 	}
+	
 	default double[] obtenerCoeficientesDeFuncionObjetivo(ArrayList<DispositivoUsuario> dispositivos) {
 		double[] consumos = new double[dispositivos.size()];
 		for (int i = 0; i < consumos.length; i++) {
@@ -56,5 +62,8 @@ public interface SimplexMatematica {
 		}
 		return  consumos;
 	}
+	
+	
+	
 	
 }

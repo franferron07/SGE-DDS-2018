@@ -14,7 +14,7 @@ import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.linear.SimplexSolver;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 
-public class AlgoritmoSimplex {
+public class AlgoritmoSimplex implements OptimizadorFunciones {
 	private SimplexSolver simplex;
 	private LinearObjectiveFunction funcionEconomica;
 	private Collection<LinearConstraint> restricciones;

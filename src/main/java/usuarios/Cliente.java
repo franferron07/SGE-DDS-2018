@@ -13,7 +13,7 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import dispositivos.Modo;
 import dispositivos.ModoApagado;
-import optimizacion_horas.Simplex;
+import optimizacion_horas.Optimizador;
 
 public class Cliente extends Usuario {
 	
@@ -117,7 +117,7 @@ public class Cliente extends Usuario {
 	//metodo para correr simplex
 	public String recomendacionHogarEficiente(){
 		
-		Simplex simplex = new Simplex();
+		Optimizador simplex = new Optimizador();
 		simplex.cargarDispositivosEsenciales(this);
 		
 		return simplex.resultados.toString();

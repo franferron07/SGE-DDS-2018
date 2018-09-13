@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import optimizacion_horas.Simplex;
+import optimizacion_horas.Optimizador;
 import repositorios.RepositorioClientes;
 import usuarios.Cliente;
 
 public class Tarea extends TimerTask {
 
 	public Timer timer = new Timer("Simplex");
-	public Simplex simplex = new Simplex();
+	public Optimizador simplex = new Optimizador();
 	public RepositorioClientes repositorioCliente;
 	public long horas;
 	

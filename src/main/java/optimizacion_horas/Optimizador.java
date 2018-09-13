@@ -12,36 +12,48 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import usuarios.Cliente;
 
-public class Simplex implements SimplexInterface,SimplexMatematica{
+public class Optimizador implements OptimizadorFunciones{
+
 	public ArrayList<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
 	private double consumoMaximoDeEnergia=0;
 	public Cliente clienteActual=null;
-	public AlgoritmoSimplex algoritmo=null;
+//	public AlgoritmoSimplex algoritmo=null;
+//	public OptimizadorFunciones algoritmo=new OptimizadorFunciones() {
+//	};//cualquiera
+	public double maximaEnergiaResultado=0;//Z
+
 	
 	public double[]  coeficientesDeFuncionObjetivo;//ejemplo:  [a,b,c] de MAX f=aX0+bX1+cX2=Z
 	public double[][]  matrizIdentidadDeSimplex;
 	public double[] matrizB;//del tipo AX=B , en el que X es el vector de horas 
 	public ArrayList<ResultadoHora> resultados=new ArrayList<ResultadoHora>();
-	public double maximaEnergiaResultado;//Z
 	
-//	public double consumoFijoDeEnergia;
 	
-	@Override
-	public void maximizar() {
-		this.algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true); //true de variables positivas
-		this.resolverInecuacion();
-	}
-	@Override
-	public void minimizar() {
-		this.algoritmo=new AlgoritmoSimplex(GoalType.MINIMIZE, true);//true de variables positivas
-		this.resolverInecuacion();
-	}
-
-	public void resolverInecuacion() {	
-		this.plantearMatricesDeInecuacion();
-		this.calcularHoras();
-	}
 	
+	public AlgoritmoSimplex algoritmo = null;
+	 
+	 
+	 public void maximizar() {
+			this.algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true); //true de variables positivas
+			this.resolverInecuacion();
+		}
+		public void minimizar() {
+			this.algoritmo=new AlgoritmoSimplex(GoalType.MINIMIZE, true);//true de variables positivas
+			this.resolverInecuacion();
+		}
+		public void resolverInecuacion() {	
+			this.plantearMatricesDeInecuacion();
+			this.calcularHoras();
+		}
+		public PointValuePair resolver() {
+			return this.algoritmo.resolver(); 
+		}
+		public void crearFuncionEconomica(double ... crearVectorDeUnos_) {
+			this.algoritmo.crearFuncionEconomica(crearVectorDeUnos_);
+		}
+		public void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
+			this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);	
+		}
 	public void plantearMatricesDeInecuacion() {
 
 		this.crearFuncionEconomica(this.crearVectorDeUnos(this.cantidadDeDispositivos()));
@@ -56,52 +68,39 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 				this.agregarRestriccion(Relationship.GEQ,(double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
 		}
 	}
-	private void crearFuncionEconomica(double ... crearVectorDeUnos_) {
-		this.algoritmo.crearFuncionEconomica(crearVectorDeUnos_);
-	}
-	private void calcularHoras() {
-		 PointValuePair solucion =this.algoritmo.resolver(); 
-		 this.maximaEnergiaResultado=solucion.getValue();
-		 for (int i = 0; i < this.cantidadDeDispositivos(); i++) {
-			 double xi=solucion.getPoint()[i];
-//			 System.out.println("X"+i+" "+xi);
-			 ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),xi);
-			 this.resultados.add(par);
-		}
-	}
+	
 	
 	private double consumoMaximoDeEnergia() {
 		return this.consumoMaximoDeEnergia;
 	}
 
 
-	private void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
-		this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);	
+	public void cargarDispositivosEsenciales(Cliente cliente) {
+		DispositivoUsuario[] dispositivos__ = (DispositivoUsuario[]) cliente.getDispositivos().stream().filter(dispositivo-> dispositivo.esEsencial()).toArray();
+		for (int i = 0; i < dispositivos__.length; i++) {
+			this.dispositivos.add(i, dispositivos__[i]);
+		}
 	}
-	@Override
 	public void cargarDispositivos(DispositivoUsuario... _dispositivoUsuarios_) {
-		for (int i = 0; i < _dispositivoUsuarios_.length ; i++) {
-			if (_dispositivoUsuarios_[i].esEsencial()) {
+	for (int i = 0; i < _dispositivoUsuarios_.length ; i++) {
+		if (_dispositivoUsuarios_[i].esEsencial()) {
 				this.dispositivos.add(_dispositivoUsuarios_[i]);
 			}
 		}
 	}
-		
-	@Override
-	public void cargarDispositivosEsenciales(Cliente cliente) {
-		DispositivoUsuario[] dispositivos__ = (DispositivoUsuario[]) cliente.getDispositivos().stream().filter(dispositivo-> dispositivo.esEsencial()).toArray();
-		for (int i = 0; i < dispositivos__.length; i++) {
-			dispositivos.add(i, dispositivos__[i]);
+	public void calcularHoras() {
+		PointValuePair solucion =this.algoritmo.resolver(); 
+		this.maximaEnergiaResultado=solucion.getValue();
+		for (int i = 0; i < this.cantidadDeDispositivos(); i++) {
+			double xi=solucion.getPoint()[i];
+//			 System.out.println("X"+i+" "+xi);
+			ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),xi);
+			this.resultados.add(par);
 		}
-	}
-	public int cantidadDeDispositivos() {
-		return this.dispositivos.size();
-	}
-	@Override
-	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo() {
-		// TODO Auto-generated method stub
-		return this.resultados;
-	}
+}
+
+		
+	
 	
 	//ACCESORS
 	public ArrayList<DispositivoUsuario> getDispositivos() {
@@ -157,7 +156,15 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 	public double getMaximaEnergia() {
 		return maximaEnergiaResultado;
 	}
-
+	
+	
+	public int cantidadDeDispositivos() {
+		return this.dispositivos.size();
+	}
+	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo() {
+		// TODO Auto-generated method stub
+		return this.resultados;
+	}
 	public void setMaximaEnergia(double maximaEnergia) {
 		this.maximaEnergiaResultado = maximaEnergia;
 	}
@@ -296,7 +303,7 @@ public class Simplex implements SimplexInterface,SimplexMatematica{
 				return 0;
 			}
 		};
-		Simplex simplex = new Simplex();
+		Optimizador simplex = new Optimizador();
 		simplex.setConsumoMaximoDeEnergia(450000);
 		simplex.cargarDispositivos(lcd,lavaropas,ventilador);
 		
