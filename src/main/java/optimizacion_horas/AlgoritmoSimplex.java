@@ -45,23 +45,4 @@ public class AlgoritmoSimplex  {
 										new NonNegativeConstraint(this.variablesPositivas)
 				);
 	}
-	//probando funcionamiento que esta en el test DE LA CATEDRA, ... FUNCIONA correctamentee
-	public static void main(String[] args) {
-		AlgoritmoSimplex algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true);
-		double[] unos = {1,1,1};
-		double[] coeficientes = {0.18,0.875,0.06};
-		algoritmo.crearFuncionEconomica(unos);
-		algoritmo.agregarRestriccion(Relationship.LEQ, 440640, coeficientes);
-		algoritmo.agregarRestriccion(Relationship.GEQ, 90, 		1, 		0, 		0);
-		algoritmo.agregarRestriccion(Relationship.LEQ, 370, 	1, 		0, 		0);
-		algoritmo.agregarRestriccion(Relationship.GEQ, 6, 		0, 		1, 		0);
-		algoritmo.agregarRestriccion(Relationship.LEQ, 30, 		0, 		1, 		0);
-		algoritmo.agregarRestriccion(Relationship.GEQ, 120, 	0, 		0, 		1);
-		algoritmo.agregarRestriccion(Relationship.LEQ, 360, 	0, 		0, 		1);
-		PointValuePair solucion = algoritmo.resolver();
-		System.out.println("Z = " +solucion.getValue());
-		for (int i = 0; i < coeficientes.length; i++) {
-			System.out.println("X"+i+" "+solucion.getPoint()[i]);
-		}
-	}
 }

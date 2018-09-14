@@ -14,6 +14,7 @@ public interface Implementador {
 	public void setConsumoMaximoDeEnergia(double consumoMaximoDeEnergia) ;
 	public int cantidadDeDispositivos();
 	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo();
+	public ArrayList<ResultadoHora> resultados();
 	
 	 //------------------------------
 		default double[] crearVectorDeUnos(int n) {
@@ -61,7 +62,7 @@ public interface Implementador {
 		
 		default double[] obtenerCoeficientesDeFuncionObjetivo(ArrayList<DispositivoUsuario> dispositivos) {
 			double[] consumos = new double[dispositivos.size()];
-			for (int i = 0; i < consumos.length; i++) {
+			for (int i = 0; i < consumos.length; i++) {	
 				
 			}
 			return  consumos;

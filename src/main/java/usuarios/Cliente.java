@@ -120,7 +120,7 @@ public class Cliente extends Usuario {
 		Optimizador simplex = new Optimizador();
 		simplex.cargarDispositivosEsenciales(this);
 		
-		return simplex.resultados.toString();
+		return simplex.resultados().toString();
 		
 	}
 	

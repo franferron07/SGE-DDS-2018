@@ -107,13 +107,18 @@ public class UnaImplementacionSimplex implements Implementador{
 						
 						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
 						di.ejecutarAccionAutomatica();
-					}
-					
+					}			
 				}
 				
 				i++;
 			}
 			
 		}
+
+	@Override
+	public ArrayList<ResultadoHora> resultados() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

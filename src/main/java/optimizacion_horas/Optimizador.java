@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import dispositivos.DispositivoUsuario;
 import usuarios.Cliente;
 
-public class Optimizador_v2 {
+public class Optimizador {
 	private Implementador implementacion_simplex=new UnaImplementacionSimplex();
+	
 	
 	public void cargarDispositivosEsenciales(Cliente cliente) {
 		this.implementacion_simplex.cargarDispositivosEsenciales(cliente);
@@ -15,7 +16,6 @@ public class Optimizador_v2 {
 	public void maximizar() {
 		this.implementacion_simplex.maximizar();
 	}
-
 	public void analisarResultados(LocalDateTime desde, LocalDateTime hasta) {
 		this.implementacion_simplex.analisarResultados(desde, hasta);
 	}
@@ -31,6 +31,10 @@ public class Optimizador_v2 {
 	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo() {
 		return this.implementacion_simplex.getHorasDeCadaDispositivo();
 	}
+	public ArrayList<ResultadoHora> resultados(){
+		return this.implementacion_simplex.resultados();
+	}
+	
 		
 	public static void main(String[] args) {
 		DispositivoUsuario lcd,lavaropas,ventilador,heladera;
@@ -109,7 +113,6 @@ public class Optimizador_v2 {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-
 		};
 		heladera=new DispositivoUsuario() {	
 			@Override
@@ -134,14 +137,13 @@ public class Optimizador_v2 {
 				return 0;
 			}
 		};
-		Optimizador_v2 simplex = new Optimizador_v2();
+		Optimizador simplex = new Optimizador();
 		simplex.setConsumoMaximoDeEnergia(450000);
 		simplex.cargarDispositivos(lcd,lavaropas,ventilador);
-		
 		simplex.maximizar();
-
 		ArrayList<ResultadoHora> resultados=simplex.getHorasDeCadaDispositivo();
 		
+			
 		for (int i = 0; i < simplex.cantidadDeDispositivos(); i++) {
 			System.out.print(resultados.get(i).getDispositivo()+" = ");
 			System.out.println(resultados.get(i).getHorasQuePuedeConsumir());	
