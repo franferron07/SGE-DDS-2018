@@ -3,7 +3,12 @@ package dispositivos;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@DiscriminatorValue("encendido")
 public class ModoEncendido extends ModoConConsumo{
 
 	
@@ -17,15 +22,6 @@ public class ModoEncendido extends ModoConConsumo{
 	@Override
 	public void encenderse(DispositivoInteligente disp) {
        
-	}
-
-	@Override
-	public void ahorrarseEnergia(DispositivoInteligente disp) {
-		//agrego log de modo antes de cambiarlo y le seteo la fecha final
-		setFechaHoraFin(LocalDateTime.now());
-		disp.agregarLogModo( disp.getModo() );
-		
-		disp.setModo(new ModoAhorroEnergia());   	
 	}
 	
 	public String toString() {

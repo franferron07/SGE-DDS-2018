@@ -22,9 +22,8 @@ import reglasYActuadores.ActuadorBase;
 @DiscriminatorValue("inteligente")
 public class DispositivoInteligente extends DispositivoUsuario {
 	
-	@ManyToOne
-	@JoinColumn(name="modo_id" , referencedColumnName="id")
-	private Modo modo;
+
+	//contiene los modos, el ultimo modo es el modo actual
 	@OneToMany(mappedBy="modo" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Modo> logModos ;
 
@@ -37,25 +36,28 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {
-		this.setModo(m);
+
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
-		detalle = disp_detalle;
+		this.logModos.add(m);
+		this.detalle = disp_detalle;
 	}
     
     //constructor sin modo osea apagado.
     public DispositivoInteligente(DispositivoDetalle disp_detalle) {
-		this.setModo(new ModoApagado());
+
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
-		detalle = disp_detalle;
+		this.logModos.add(new ModoApagado());
+		this.detalle = disp_detalle;
 	}
     
     //constructor
     public DispositivoInteligente() {
-		this.setModo(new ModoApagado());
+
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
+		this.logModos.add(new ModoApagado());
 	}
 	
 	
@@ -78,16 +80,19 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	@Override
 	public float consumoPeriodo(LocalDateTime desde , LocalDateTime hasta) {
 		
-		ModoConConsumo modoActual;
-		float consumoActual=0;
 		double consumoTotal=0;
 		
+		//quito los modos apagados
+		//List<Modo> modosConConsumo = filtrarModosConConsumo( this.logModos );
+		
+		
 		//filtro los modos
-		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta );
+		List<Modo> modosFiltrados = filtrarModosEnPeriodo( desde , hasta , this.logModos );
 		
 		//calculo el consumo
 		consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
 		
+	/*
 		//sumo lo consumido por el modo actual
 		if( this.estaEncendido() ){
 			
@@ -98,27 +103,38 @@ public class DispositivoInteligente extends DispositivoUsuario {
 			}
 		
 			consumoTotal = consumoTotal + consumoActual;
-		}
+		}*/
 		
 		return (float) consumoTotal;
 	}
 	
+	
+	//filtro los modos con consumo
+	public List<Modo> filtrarModosConConsumo(List<Modo> modos) {
+		
+		Stream<Modo> modosFilt = modos.stream().filter( m -> m.encendido());
+		
+		return modosFilt.collect(Collectors.toList());
+	}
+	
+
 	//filtra los modos que entren en el intervalo pedido
-	public List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+	public List<Modo> filtrarModosEnPeriodo(LocalDateTime desde, LocalDateTime hasta , List<Modo> modos) {
 		
-		Stream<Modo> modos = this.logModos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );
+		Stream<Modo> modosFilt = modos.stream().filter( m -> m.cumpleIntervalo(desde,hasta) );
 		
-		return modos.collect(Collectors.toList());
+		return modosFilt.collect(Collectors.toList());
 	}
 	
 	//me da el consumo del dispositivo en las ultimas N horas. 
 	public float consumoUltimasNHoras(int horas){
 		
 		int horasNegativo = -1*horas;
+		/* armo intervalo */
 		LocalDateTime inicial = LocalDateTime.now().plusHours(horasNegativo);
 		LocalDateTime fin = LocalDateTime.now();
 		
-		float consumoNHoras = this.consumoPeriodo(inicial, fin);
+		float consumoNHoras = consumoPeriodo(inicial, fin);
 		
 		return consumoNHoras;
 	}
@@ -126,28 +142,37 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	//metodo desde el dispositivo hardware para avisar que se registro el consumo
 	public void avisoConsumo( LocalDateTime inicio , LocalDateTime fin , float consumo ){
 		
-		this.modo.registrarConsumo( inicio , fin , consumo );
-		
+		modoActual().registrarConsumo(inicio, fin, consumo);
 	}
 	
+	//me devuelve el modo actual(ultimo elemento de la lista) si la lista vacia devuelve null
+	public Modo modoActual() {
+		
+		if( !this.getLogModos().isEmpty() ){
+		return this.getLogModos().get(this.getLogModos().size() -1 );
+		}
+		
+		return null;
+	}
+
 	public boolean estaEncendido(){	
-		return this.modo.encendido();
+		return modoActual().encendido();
 	}
 	
 	public boolean estaApagado(){	
-		return !this.modo.encendido();
+		return !modoActual().encendido();
 	}
 	
 	public void apagar(){
-		this.modo.apagarse(this);
+		modoActual().apagarse(this);
 	}
 	
 	public void encender(){
-		this.modo.encenderse(this);
+		modoActual().encenderse(this);
 	}
 	
 	public void ahorrarEnergia(){
-		this.modo.ahorrarseEnergia(this);
+		modoActual().ahorrarseEnergia(this);
 	}
 	
 	public void agregarLogModo( Modo modo ){
@@ -177,15 +202,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	public void setEstandar(DispositivoEstandar estandar) {
 		this.estandar = estandar;
 	}
-	
-	public void setModo(Modo modo) {
-		this.modo = modo;
-	}
-
-	public Modo getModo() {
-		return modo;
-	}
-	
 
 	public List<Modo> getLogModos() {
 		return logModos;

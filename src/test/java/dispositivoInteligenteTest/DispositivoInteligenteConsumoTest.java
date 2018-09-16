@@ -1,3 +1,4 @@
+
 package dispositivoInteligenteTest;
 
 import static org.junit.Assert.assertEquals;
@@ -38,7 +39,7 @@ public class DispositivoInteligenteConsumoTest {
 	public void testCambiosDeModo()
 	{
 		
-		assertEquals( 2 , di.cantidadLogModo() );
+		assertEquals( 3 , di.cantidadLogModo() );
 	}
 	
 	@Test
@@ -47,9 +48,9 @@ public class DispositivoInteligenteConsumoTest {
 		LocalDateTime inicia= LocalDateTime.now().plusHours(-1);
 		LocalDateTime fin=inicia.plusHours(3);
 		
-		List<Modo> modos = di.filtrarModosEnPeriodo( inicia,fin );
+		List<Modo> modos = di.filtrarModosEnPeriodo( inicia,fin , di.getLogModos());
 		
-		assertEquals(1, modos.size());
+		assertEquals(2, modos.size());
 	}
 	
 	@Test
@@ -65,7 +66,7 @@ public class DispositivoInteligenteConsumoTest {
 		di.avisoConsumo(inicio, fin, 10);
 		
 		float consumoTotal = di.consumoPeriodo(inicio, fin);
-		ModoConConsumo encendido = (ModoConConsumo) di.getModo();
+		ModoConConsumo encendido = (ModoConConsumo) di.modoActual();
 		assertEquals(1,encendido.cantidadConsumos());
 		
 		assertEquals(20, consumoTotal  , 0);

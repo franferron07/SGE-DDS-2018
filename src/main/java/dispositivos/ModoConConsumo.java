@@ -5,31 +5,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class ModoConConsumo implements Modo {
-	
-	protected LocalDateTime fechaHoraInicio;
-	protected LocalDateTime fechaHoraFin;
-	protected List<Consumo> consumos;
-	
-	public abstract void encenderse(DispositivoInteligente disp);
-	public abstract void ahorrarseEnergia(DispositivoInteligente disp);
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+@MappedSuperclass
+public abstract class ModoConConsumo extends Modo {
 	
 
+	@OneToMany(mappedBy="consumo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)
+	protected List<Consumo> consumos;
+
+	
 	@Override
 	public boolean encendido() {
 		return true;
 	}
-	
-	@Override
-    public void apagarse(DispositivoInteligente disp) {		
-		
-		//agrego log de modo antes de cambiarlo y le seteo la fecha final
-		setFechaHoraFin(LocalDateTime.now());
-		disp.agregarLogModo( disp.getModo() );
-				
-		disp.setModo(new ModoApagado());
-	}
-	
+
 	//metodo que se utiliza para filtrar los modos en el DI. Con que una de las fechas este en el intervalo , devuelve true
 	@Override
 	public boolean cumpleIntervalo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
@@ -81,21 +74,7 @@ public abstract class ModoConConsumo implements Modo {
 	}
 	
 	//getters y setters
-	public LocalDateTime getFechaHoraInicio() {
-		return fechaHoraInicio;
-	}
 
-	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		this.fechaHoraInicio = fechaHoraInicio;
-	}
-
-	public LocalDateTime getFechaHoraFin() {
-		return fechaHoraFin;
-	}
-
-	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-		this.fechaHoraFin = fechaHoraFin;
-	}
 
 	public List<Consumo> getConsumos() {
 		return consumos;
