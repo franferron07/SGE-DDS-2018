@@ -3,8 +3,15 @@ package dispositivos;
 import java.time.LocalDateTime;
 import java.time.Period;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("estandar")
 public class DispositivoEstandar extends DispositivoUsuario {
 	
+	@Column(name = "horasPorDia")
 	private float horasPorDia; //horas encendido por dia
 	
 

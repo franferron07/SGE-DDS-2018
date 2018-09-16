@@ -2,19 +2,37 @@ package dispositivos;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dispositivo")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo")
 public abstract class DispositivoUsuario {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	@ManyToOne
+	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
 	public DispositivoDetalle detalle;
 	
 
-	//seguramente esto sea un date time, desde y hasta. Me da el consumo en un determinado periodo de tiempo. 
+	//Me da el consumo en un determinado periodo de tiempo. 
 	public abstract float consumoPeriodo( LocalDateTime desde , LocalDateTime hasta );
 	
 	public abstract boolean esInteligente(); // esEsencial() lo reemplaza para el simplex
 
-	//metodo que me dice en un intervalo cuantas horas estuvo encendido
+	//Me da horas de encendido en un periodo de tiempo
 	public abstract double horasDeUso( LocalDateTime desde, LocalDateTime hasta);
-	
 	
 	public boolean esEsencial(){
 		return detalle.isEsEsencial();
@@ -31,11 +49,15 @@ public abstract class DispositivoUsuario {
 	}
 	
 	
+	public int getId() {
+		return id;
+	}
+	
 //	//------ simplex
 	// en lugar de llamar cada momento a su atributo detalle ,esto lo simplifica haciendolo mas cohesivo ,
-	//dependeria menos de su atributo por que ese mismo podria borrarse y reemplazarse con una base de datos 
-	//o una especie de tabla mejorada 
 	
+	
+
 	public  double getConsumoKwHora() {
 		return this.detalle.getConsumoKwHora();
 	}

@@ -6,14 +6,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import reglasYActuadores.ActuadorBase;
 
+
+@Entity
+@DiscriminatorValue("inteligente")
 public class DispositivoInteligente extends DispositivoUsuario {
 	
+	@ManyToOne
+	@JoinColumn(name="modo_id" , referencedColumnName="id")
 	private Modo modo;
+	@OneToMany(mappedBy="modo" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Modo> logModos ;
-	private int idDispositivo;
+
+	@ManyToOne
+	@JoinColumn( name="estandar_id" , referencedColumnName="id" )
 	private DispositivoEstandar estandar;
+	@ManyToOne
+	@JoinColumn( name="actuador_id" , referencedColumnName="id" )
 	private ActuadorBase accionaAutomaticaOptimizador; //activara esta accion el optimizador de horas al dispositivo
 	
 	//constructor
@@ -167,13 +186,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		return modo;
 	}
 	
-	public int getIdDispositivo() {
-		return idDispositivo;
-	}
-
-	public void setIdDispositivo(int idDispositivo) {
-		this.idDispositivo = idDispositivo;
-	}
 
 	public List<Modo> getLogModos() {
 		return logModos;

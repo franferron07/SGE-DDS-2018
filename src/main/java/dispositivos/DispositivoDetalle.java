@@ -1,15 +1,36 @@
 package dispositivos;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 //dispositivo con datos genericos del dispositivo que tendrá el usuario.
+
+@Entity
+@Table(name="dispositivoDetalle")
 public class DispositivoDetalle {
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	@Column(name = "descripcion")
 	private String descripcion;
+	@Column(name="hsMensualMinimo")
 	private int hsMensualMinimo;
+	@Column(name="hsMensualMaximo")
 	private int hsMensualMaximo;
+	@Column(name="consumoKwHora")
 	private float consumoKwHora;
+	@Column(name="bajoConsumo")
 	private boolean esBajoConsumo;
+	@Column(name="inteligente")
 	private boolean esInteligente;
+	@Column(name="esencial")
 	private boolean esEsencial;
 	
 	//constructor
@@ -67,6 +88,14 @@ public class DispositivoDetalle {
 	public void setEsEsencial(boolean esEsencial) {
 		this.esEsencial = esEsencial;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	
 	
 	
 	
