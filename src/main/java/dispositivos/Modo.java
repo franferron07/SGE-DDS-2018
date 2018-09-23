@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,10 @@ public abstract class Modo {
 	protected LocalDateTime fechaHoraInicio;
 	@Column(name="fechaHoraFin")
 	protected LocalDateTime fechaHoraFin;
+	
+	@ManyToOne
+	@JoinColumn( name="inteligente_id" , referencedColumnName="id" )
+	protected DispositivoInteligente di;
 	
 	
 	public abstract boolean encendido();
@@ -62,6 +68,12 @@ public abstract class Modo {
 	
 	
 	
+	public int cantidadConsumos(){
+		
+		return 0;
+	}
+	
+
 	
 	//getters y setters
 	public LocalDateTime getFechaHoraInicio() {

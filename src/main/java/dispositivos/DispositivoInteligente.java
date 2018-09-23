@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import reglasYActuadores.ActuadorBase;
 
@@ -24,7 +24,8 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 
 	//contiene los modos, el ultimo modo es el modo actual
-	@OneToMany(mappedBy="modo" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	//@Transient
+	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Modo> logModos ;
 
 	@ManyToOne
@@ -41,6 +42,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(m);
 		this.detalle = disp_detalle;
+		this.activado = true;
 	}
     
     //constructor sin modo osea apagado.
@@ -50,6 +52,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(new ModoApagado());
 		this.detalle = disp_detalle;
+		this.activado = true;
 	}
     
     //constructor
@@ -58,6 +61,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(new ModoApagado());
+		this.activado = true;
 	}
 	
 	

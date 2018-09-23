@@ -66,7 +66,7 @@ public class DispositivoInteligenteConsumoTest {
 		di.avisoConsumo(inicio, fin, 10);
 		
 		float consumoTotal = di.consumoPeriodo(inicio, fin);
-		ModoConConsumo encendido = (ModoConConsumo) di.modoActual();
+		Modo encendido = di.modoActual();
 		assertEquals(1,encendido.cantidadConsumos());
 		
 		assertEquals(20, consumoTotal  , 0);

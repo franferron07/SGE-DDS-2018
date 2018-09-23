@@ -2,6 +2,7 @@ package dispositivos;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dispositivo")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="tipo")
 public abstract class DispositivoUsuario {
 	
@@ -24,6 +25,9 @@ public abstract class DispositivoUsuario {
 	@ManyToOne
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
 	public DispositivoDetalle detalle;
+	
+	@Column
+	protected boolean activado;
 	
 
 	//Me da el consumo en un determinado periodo de tiempo. 

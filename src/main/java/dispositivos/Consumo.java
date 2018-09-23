@@ -2,11 +2,25 @@ package dispositivos;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="consumo")
 public class Consumo {
 
-	
+	@Id
+	@GeneratedValue
+	private int id;
+	@Column(name = "fechaInicio")
 	private LocalDateTime inicio;
+	@Column(name = "fechaFin")
 	private LocalDateTime fin;
+	@Column(name = "consumo")
 	private float consumo;
 	
 	public Consumo( LocalDateTime i , LocalDateTime f , float c ){
@@ -36,6 +50,10 @@ public class Consumo {
 
 	public LocalDateTime getFin() {
 		return fin;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	

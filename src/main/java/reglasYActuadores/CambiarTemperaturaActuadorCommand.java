@@ -1,10 +1,15 @@
 package reglasYActuadores;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import dispositivos.DispositivoInteligente;
 
-public class CambiarTemperaturaActuadorCommand implements ActuadorBase{
+
+@Entity
+@DiscriminatorValue("temperatura")
+public class CambiarTemperaturaActuadorCommand extends ActuadorBase{
 	
-	private DispositivoInteligente dispositivo;
 
 	
 	public CambiarTemperaturaActuadorCommand(DispositivoInteligente d) {
@@ -17,13 +22,5 @@ public class CambiarTemperaturaActuadorCommand implements ActuadorBase{
 		dispositivo.cambiarTemperaturaActuador();		
 	}
 
-	public DispositivoInteligente getDispositivo() {
-		return dispositivo;
-	}
-
-
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
-	}
 
 }

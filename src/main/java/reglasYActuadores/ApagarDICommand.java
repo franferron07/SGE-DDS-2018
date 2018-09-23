@@ -1,10 +1,14 @@
 package reglasYActuadores;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import dispositivos.DispositivoInteligente;
 
-public class ApagarDICommand implements ActuadorBase {
+@Entity
+@DiscriminatorValue("apagar")
+public class ApagarDICommand extends ActuadorBase {
 
-	DispositivoInteligente dispositivo;
 	
 	public ApagarDICommand(DispositivoInteligente di) {
 		dispositivo = di;
@@ -16,13 +20,7 @@ public class ApagarDICommand implements ActuadorBase {
 		
 	}
 
-	public DispositivoInteligente getDispositivo() {
-		return dispositivo;
-	}
-
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
-	}
+	
 	
 	
 

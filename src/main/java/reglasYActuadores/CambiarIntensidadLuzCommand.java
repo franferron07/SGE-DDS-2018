@@ -1,10 +1,16 @@
 package reglasYActuadores;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import dispositivos.DispositivoInteligente;
 
-public class CambiarIntensidadLuzCommand implements ActuadorBase {
 
-	private DispositivoInteligente dispositivo;
+@Entity
+@DiscriminatorValue("luz")
+public class CambiarIntensidadLuzCommand extends ActuadorBase {
+
+
 	
 	public CambiarIntensidadLuzCommand(DispositivoInteligente d) {
 		dispositivo=d;
@@ -15,13 +21,6 @@ public class CambiarIntensidadLuzCommand implements ActuadorBase {
 		dispositivo.cambiarIntensidadLuz();		
 	}
 
-	public DispositivoInteligente getDispositivo() {
-		return dispositivo;
-	}
 
-
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
-	}
 
 }

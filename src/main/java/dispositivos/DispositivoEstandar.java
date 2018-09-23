@@ -19,12 +19,9 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	public DispositivoEstandar( DispositivoDetalle disp_detalle ){
 		
 		detalle = disp_detalle;
+		activado = true;
 	}
 	
-	//constructor
-	public DispositivoEstandar(  ){
-		
-	}
 	
 	@Override
 	public boolean esInteligente() {
