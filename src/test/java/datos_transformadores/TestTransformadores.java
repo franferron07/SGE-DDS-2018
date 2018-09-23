@@ -10,19 +10,18 @@ import org.junit.Test;
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
 import geoposicionamiento.ZonaGeografica;
-import junit.framework.Assert;
-import models.ModelHelper;
-import models.TransformadorModel;
+import models_transformadores.ModelHelper;
+import models_transformadores.TransformadorModel;
 import usuarios.Cliente;
 
 public class TestTransformadores {
 
-	public ModelHelper model=null;
-	public TransformadorModel transformadorModel=null;
-	private Mapa mapa=null;
-	Transformador t1=null;
-	Transformador t2=null;
-	Transformador t3=null;
+	public ModelHelper model;
+	public TransformadorModel transformadorModel;
+	private Mapa mapa;
+	public Transformador t1;
+	public Transformador t2;
+	public Transformador t3;
 	
 	
 	@Before
@@ -55,30 +54,31 @@ public class TestTransformadores {
 		this.model.agregar(t2);
 		this.model.agregar(t2);
 	}
-	@Test
-	public void testRecuperarTransformador() {
-		Transformador transformador = this.transformadorModel.buscarTransformadorPorID(1);
-		try {
-			Cliente cliente = new Cliente();
-			cliente.setApellido("unApellido");
-			cliente.setNumeroDocumento("111111");
-			transformador.agregarCliente(cliente);
-			this.model.modificar(transformador);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void testAgregarTransformadorDesdeJson() {
-		Transformador unTransformador = new Transformador();
+//	@Test
+//	public void testRecuperarTransformador() {
+//		Transformador transformador = this.transformadorModel.buscarTransformadorPorID(1);
+//		try {
+//			Cliente cliente = new Cliente();
+//			cliente.setApellido("unApellido");
+//			cliente.setNumeroDocumento("111111");
+//			transformador.agregarCliente(cliente);
+//			this.model.modificar(transformador);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public void testAgregarTransformadorDesdeJson() {
+//		Transformador unTransformador = new Transformador();
+//		
+////		this.model.modificar(un);
+//	}
+////	@Test
+////	public void testRecuperarUsuariosDelTransformador() {
+////		Transformador t = this.transformadorModel.buscarTransformadorPorID(1);
+////		for(Cliente cli : t.getClientes())
+////			System.out.println(cli.getNombre());
+////		}
+////	}
 		
-//		this.model.modificar(un);
 	}
-	@Test
-	public void testRecuperarUsuariosDelTransformador() {
-		Transformador t = this.transformadorModel.buscarTransformadorPorID(1);
-		for(Cliente cli : t.getClientes())
-			System.out.println(cli.getNombre());
-		}
-	}
-
