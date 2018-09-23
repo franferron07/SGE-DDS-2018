@@ -11,8 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,13 +27,20 @@ public class Transformador {
 	@GeneratedValue
 	private int id;
 	
-	@ManyToMany(mappedBy="transformador", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="transformador", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
 	
-	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Point coordenadas;
-	@OneToOne(mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="zona_geografica",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
+	
+	@Column(name="x")
+	private int x;
+	@Column(name="y")
+	private int y;
+	
 	
 	//constructor
 	public Transformador(){
@@ -49,6 +58,9 @@ public class Transformador {
 	public Transformador(Point coordenada){
 		clientes= new ArrayList<Cliente>();
 		coordenadas = coordenada;
+		
+		this.x=(int) coordenada.getX();
+		this.y=(int) coordenada.getY();
 	}
 	
 	
