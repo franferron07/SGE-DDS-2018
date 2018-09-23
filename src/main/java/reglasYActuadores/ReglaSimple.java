@@ -3,9 +3,17 @@ package reglasYActuadores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
+@Entity
+@DiscriminatorValue("reglaSimple")
 public class ReglaSimple extends Regla {
 
-	
+	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<CondicionRegla> condiciones;
 	
 	

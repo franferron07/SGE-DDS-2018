@@ -20,7 +20,7 @@ import entities.ObservadorSensor;
 
 @Entity
 @Table(name="regla")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo")
 public abstract class Regla implements ObservadorSensor {
 	

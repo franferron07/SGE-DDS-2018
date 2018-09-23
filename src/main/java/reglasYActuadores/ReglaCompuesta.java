@@ -3,9 +3,21 @@ package reglasYActuadores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@DiscriminatorValue("reglaCompuesta")
 public class ReglaCompuesta extends Regla {
 
+	
 	//son las condiciones de las reglas compuestas
+	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
 	private List<Regla> reglas;
 	
 	

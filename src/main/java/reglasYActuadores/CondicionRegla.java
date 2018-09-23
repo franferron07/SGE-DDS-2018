@@ -1,9 +1,21 @@
 package reglasYActuadores;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="condicion")
 public class CondicionRegla {
 
-	
+	@Id
+	@GeneratedValue
+	private int id;
+	@Column(name="comparador")
 	private String comparador;
+	@Column(name="valorComparable")
 	private float valorComparable;
 	
 	
