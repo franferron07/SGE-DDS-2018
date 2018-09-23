@@ -17,30 +17,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import usuarios.Cliente;
 
 @Entity
 @Table(name="transformador")
-public class Transformador {
-	@Id
-	@GeneratedValue
-	private int id;
+public class Transformador extends Ubicable {
 	
-	@OneToMany(mappedBy="transformador", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	
+//	@OneToMany(mappedBy="transformador", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@Transient
 	private List<Cliente> clientes;
 	
 //	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Point coordenadas;
 	@ManyToOne
-	@JoinColumn(name="zona_geografica",referencedColumnName="id")
+	@JoinColumn(name="mapa_id",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
 	
-	@Column(name="x")
-	private int x;
-	@Column(name="y")
-	private int y;
-	
+
 	
 	//constructor
 	public Transformador(){
@@ -59,8 +55,6 @@ public class Transformador {
 		clientes= new ArrayList<Cliente>();
 		coordenadas = coordenada;
 		
-		this.x=(int) coordenada.getX();
-		this.y=(int) coordenada.getY();
 	}
 	
 	
@@ -106,8 +100,6 @@ public class Transformador {
 	}
 	
 	
-	public int getId() {
-		return this.id;
-	}
+	
 
 }

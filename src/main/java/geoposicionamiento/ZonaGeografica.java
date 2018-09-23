@@ -15,22 +15,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import usuarios.Cliente;
 import usuarios.Usuario;
 
 
 @Entity
+@Table(name="zona_geografica")
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="tipo")
-public class ZonaGeografica {
-	@Id
-	@GeneratedValue
-	private int id;
+//@DiscriminatorColumn(name="zona_geografica")
+public class ZonaGeografica extends Ubicable{
 	
-	@ManyToMany(mappedBy="zona_geografica",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	
+	@OneToMany(mappedBy="zona_geografica",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//	@JoinColumn(name="")
 	private List<Transformador> transformadores;
 	
 	
@@ -127,8 +130,5 @@ public class ZonaGeografica {
 		this.limitesZona = limitesZona;
 	}
 	
-	public int getId() {
-		return this.id;
-	}
 	
 }

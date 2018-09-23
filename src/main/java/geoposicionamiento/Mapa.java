@@ -19,10 +19,8 @@ import repositorios.RepositorioZonas;
 import usuarios.Cliente;
 @Entity
 @Table(name ="mapa")
-public class Mapa {
-	@Id
-	@GeneratedValue
-	private int id;
+public class Mapa extends Ubicable{
+	
 	
 	@OneToMany(mappedBy="mapa",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ZonaGeografica> zonasGeograficas;
@@ -78,7 +76,6 @@ public class Mapa {
 	
 	//metodo que dada una coordenada me devolvera la zona a la que pertenece.
 	public ZonaGeografica zonaPerteneciente( Point coordenada ){
-		
 		ZonaGeografica zona = null;
 		zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( coordenada )).findAny().orElse(null);
 
@@ -98,9 +95,7 @@ public class Mapa {
 		this.zonasGeograficas = zonasGeograficas;
 	}
 	
-	public int getId() {
-		return this.id;
-	}
+	
 	
 
 }
