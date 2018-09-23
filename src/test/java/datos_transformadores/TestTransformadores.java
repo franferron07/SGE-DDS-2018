@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
+import geoposicionamiento.ZonaGeografica;
 import junit.framework.Assert;
 import models.ModelHelper;
 import models.TransformadorModel;
@@ -31,6 +32,20 @@ public class TestTransformadores {
 		t1= new Transformador( new Point(4,15) );
 		t2= new Transformador( new Point(8,19) );
 		t3= new Transformador( new Point(11,19) );
+		
+
+		int[] puntosX = {1,10,1,10};
+		int[] puntosY = {1,1,20,20};
+		//declaro zona
+		ZonaGeografica zona = new ZonaGeografica( puntosX , puntosY , 4);
+
+		//agrego zona en mapa ya que por archivo indica error
+		mapa.getZonasGeograficas().add(zona);
+		
+		//asigno transformador en la zona correcta
+		mapa.asignarZonaTransformador(t1);
+		mapa.asignarZonaTransformador(t2);
+		mapa.asignarZonaTransformador(t3);
 	}
 
 	@Test
@@ -52,6 +67,12 @@ public class TestTransformadores {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void testAgregarTransformadorDesdeJson() {
+		Transformador unTransformador = new Transformador();
+		
+//		this.model.modificar(un);
 	}
 
 }
