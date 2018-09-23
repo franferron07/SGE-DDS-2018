@@ -36,11 +36,7 @@
 		    <version>3.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.3</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -57,5 +53,32 @@
 			<version> 5.1.26 </version>
 		</dependency>
 		
+		
+		
+		
+		
+		<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>4.3.10.Final</version>
+		</dependency>
+		
+ 		<dependency>
+ 		<groupId>org.hibernate</groupId>
+ 		<artifactId>hibernate-entitymanager</artifactId>
+ 		<version>4.3.10.Final</version>
+ 		</dependency>
+		<dependency>
+			<groupId> org.hsqldb </groupId>
+			<artifactId> hsqldb </artifactId>
+			<version> 2.2.8 </version>
+		</dependency>
+		
+		
+		
 	</dependencies>
+	
+	
+	
+	
 </project>

@@ -25,7 +25,6 @@ public class GeoposicionamientoTest {
 	
 	@Before
 	public void init(){
-		
 		mapa = new Mapa();
 		
 	}
