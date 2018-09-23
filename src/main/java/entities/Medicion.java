@@ -33,6 +33,12 @@ public class Medicion {
 	public LocalDateTime fechaFin;
 	
 	
+	//constructor
+	public Medicion( double valor ){
+		
+		this.valor = valor;
+		
+	}
 	
 	
 	//getters y setters

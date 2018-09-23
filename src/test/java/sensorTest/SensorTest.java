@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Medicion;
 import entities.Sensor;
 import junit.framework.Assert;
 import reglasYActuadores.CambiarIntensidadLuzCommand;
@@ -63,7 +64,7 @@ public class SensorTest {
 		reglaSimple.agregarActuador(actuadorLuz);
 		reglaSimple.agregarActuador(actuadorTemperatura);
 		
-		sensor.obtenerMedicion(10f);		
+		sensor.obtenerMedicion(new Medicion(10));		
 	}
 	
 }

@@ -11,12 +11,14 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
 import reglasYActuadores.ActuadorBase;
+import reglasYActuadores.Regla;
 
 
 @Entity
@@ -37,7 +39,10 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
-	private DispositivoUsuario di_padre;
+	private DispositivoUsuario di_padre; //relacion de hijo a padre
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY) 
+	private List<Regla> reglas;
 	
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {

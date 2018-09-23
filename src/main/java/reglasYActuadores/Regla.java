@@ -12,9 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import dispositivos.DispositivoInteligente;
 import entities.Medicion;
 import entities.ObservadorSensor;
 
@@ -33,6 +35,9 @@ public abstract class Regla implements ObservadorSensor {
 	
 	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	protected List<ActuadorBase> actuadores;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	protected List<DispositivoInteligente> dispositivos;
 	
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
