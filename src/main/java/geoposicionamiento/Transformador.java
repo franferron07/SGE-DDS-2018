@@ -5,12 +5,33 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import usuarios.Cliente;
 
+@Entity
+@Table(name="transformador")
 public class Transformador {
+	@Id
+	@GeneratedValue
+	private int id;
 	
+	
+	
+	@ManyToMany(mappedBy="cliente", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
+	
+	@Column(name="coodenada")
 	private Point coordenadas;
+	@Column(name="zona_geografica")
 	private ZonaGeografica zonaAsignada;
 	
 	//constructor
@@ -74,6 +95,8 @@ public class Transformador {
 	}
 	
 	
-	
+	public int getId() {
+		return this.id;
+	}
 
 }

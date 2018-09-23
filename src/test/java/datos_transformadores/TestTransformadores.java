@@ -64,7 +64,6 @@ public class TestTransformadores {
 			transformador.agregarCliente(cliente);
 			this.model.modificar(transformador);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
