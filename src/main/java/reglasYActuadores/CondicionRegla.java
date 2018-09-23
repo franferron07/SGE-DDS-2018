@@ -13,7 +13,7 @@ public class CondicionRegla {
 	}
 	
 	//chequeo si se cumple o no la medicion segun el comparador pasado. siempre el valorComparable es el segundo miembro
-	public boolean cumpleMedicion(Float valor) {
+	public boolean cumpleMedicion(double valor) {
 		
 		if( this.comparador == ">" ){
 			

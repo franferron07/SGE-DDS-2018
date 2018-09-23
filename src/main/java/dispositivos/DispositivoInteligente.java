@@ -13,7 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.OneToOne;
+
 
 import reglasYActuadores.ActuadorBase;
 
@@ -24,7 +25,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 
 	//contiene los modos, el ultimo modo es el modo actual
-	//@Transient
 	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Modo> logModos ;
 
@@ -34,6 +34,10 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	@ManyToOne
 	@JoinColumn( name="actuador_id" , referencedColumnName="id" )
 	private ActuadorBase accionaAutomaticaOptimizador; //activara esta accion el optimizador de horas al dispositivo
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+	private DispositivoUsuario di_padre;
 	
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {

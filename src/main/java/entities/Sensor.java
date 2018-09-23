@@ -3,32 +3,57 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import enums.TipoMagnitud;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="sensor")
 public class Sensor  {
-
-	//si mide temparatura , movimiento, humedad,intensidad de luz
-	private TipoMagnitud magnitud ;
+	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
 	private List<ObservadorSensor> observadores;
+	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	private List<Medicion> mediciones;
 	
 	
 	public Sensor(){
 		observadores= new ArrayList<ObservadorSensor>();
+		mediciones= new ArrayList<Medicion>();
 	}
 	
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
-	public void obtenerMedicion( Float valor ){
-		/* procedimiento no definido. es externo*/
-		avisarMedicion(valor);
+	public void obtenerMedicion( Medicion medicion ){
+		/* procedimiento no definido. es externo*/	
+		agregarMedicion(medicion);
+		avisarMedicion(medicion);
 	}
 
 	//metodo que avisa a sus observadores(reglas) que realizo la medicion
-	private void avisarMedicion(Float valor) {
+	private void avisarMedicion(Medicion medicion) {
 		
-		this.observadores.forEach( r -> r.notificacionDeMedicion(valor));
+		this.observadores.forEach( r -> r.notificacionDeMedicion(medicion));
 		
 	}
 
+	
+	
+	public void agregarMedicion(Medicion unaMedicion){
+		 if (!mediciones.contains(unaMedicion)) {
+			 this.mediciones.add(unaMedicion); 
+		 }
+	}
+	
+	
+	
 	
 	public void agregarObservador(ObservadorSensor unObservador){
 		 if (!observadores.contains(unObservador)) {
@@ -42,13 +67,6 @@ public class Sensor  {
 	
 	
 	//getters y setters
-	public TipoMagnitud getTipoMagnitud() {
-		return magnitud;
-	}
-
-	public void setTipoMagnitud(TipoMagnitud tipoMagnitud) {
-		this.magnitud = tipoMagnitud;
-	}
 
 	public List<ObservadorSensor> getObservadorSensor() {
 		return observadores;
@@ -56,6 +74,14 @@ public class Sensor  {
 
 	public void setObservadorSensor(List<ObservadorSensor> observadores) {
 		this.observadores = observadores;
+	}
+
+	public List<Medicion> getMediciones() {
+		return mediciones;
+	}
+
+	public void setMediciones(List<Medicion> mediciones) {
+		this.mediciones = mediciones;
 	}
 
 

@@ -16,7 +16,7 @@ public class ReglaCompuesta extends Regla {
 
 	//filtra los modos que entren en el intervalo pedido
 	@Override
-	public boolean cumpleCondiciones(Float valor) {
+	public boolean cumpleCondiciones(double valor) {
 		
 		return this.reglas.stream().allMatch( c -> c.cumpleCondiciones(valor) );
 	}

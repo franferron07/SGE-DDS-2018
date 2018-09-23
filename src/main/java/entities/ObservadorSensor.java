@@ -3,6 +3,6 @@ package entities;
 public interface ObservadorSensor {
 	
 	
-	public void notificacionDeMedicion(Float valor);
+	public void notificacionDeMedicion(Medicion medicion);
 
 }

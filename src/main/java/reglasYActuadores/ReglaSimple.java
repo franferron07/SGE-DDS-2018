@@ -16,7 +16,7 @@ public class ReglaSimple extends Regla {
 
 	//filtra los modos que entren en el intervalo pedido
 	@Override
-	public boolean cumpleCondiciones(Float valor) {
+	public boolean cumpleCondiciones(double valor) {
 		
 		return this.condiciones.stream().allMatch( c -> c.cumpleMedicion(valor) );
 	}
