@@ -56,8 +56,8 @@ public class TestTransformadores {
 		this.model.agregar(t2);
 	}
 	@Test
-	public void testRecuperarTransformadorPorID() {
-		Transformador transformador = this.transformadorModel.buscarTransformador(1);
+	public void testRecuperarTransformador() {
+		Transformador transformador = this.transformadorModel.buscarTransformadorPorID(1);
 		try {
 			Cliente cliente = new Cliente();
 			cliente.setApellido("unApellido");
@@ -74,5 +74,11 @@ public class TestTransformadores {
 		
 //		this.model.modificar(un);
 	}
+	@Test
+	public void testRecuperarUsuariosDelTransformador() {
+		Transformador t = this.transformadorModel.buscarTransformadorPorID(1);
+		for(Cliente cli : t.getClientes())
+			System.out.println(cli.getNombre());
+		}
+	}
 
-}

@@ -11,11 +11,11 @@ public class TransformadorModel extends ModelHelper {
 		super();
 	}
 	
-	public Transformador buscarTransformador(int id) {
+	public Transformador buscarTransformadorPorID(int id) {
 		return super.buscar(Transformador.class, new ImmutablePair<>("id", id));
 	}
 	
-	public List<Transformador> buscarTodasLasFarmacias(){
+	public List<Transformador> buscarTodosLosTransformadores(){
 		return super.buscarTodos(Transformador.class);
 	}
 }
