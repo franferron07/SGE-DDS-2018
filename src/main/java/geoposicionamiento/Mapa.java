@@ -5,12 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import dao.DaoJson;
 import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioZonas;
 import usuarios.Cliente;
-
+@Entity
+@Table(name ="mapa")
 public class Mapa {
+	@Id
+	@GeneratedValue
+	private int id;
+	
 	
 	private List<ZonaGeografica> zonasGeograficas;
 	private RepositorioZonas repoZonas;
@@ -82,6 +92,10 @@ public class Mapa {
 
 	public void setZonasGeograficas(List<ZonaGeografica> zonasGeograficas) {
 		this.zonasGeograficas = zonasGeograficas;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 

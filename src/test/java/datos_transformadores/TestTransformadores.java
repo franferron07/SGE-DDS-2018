@@ -24,6 +24,7 @@ public class TestTransformadores {
 	Transformador t2=null;
 	Transformador t3=null;
 	
+	
 	@Before
 	private void init() {
 

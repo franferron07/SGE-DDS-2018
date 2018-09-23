@@ -7,11 +7,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import usuarios.Cliente;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
+import usuarios.Cliente;
+import usuarios.Usuario;
+
+
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name="tipo")
 public class ZonaGeografica {
+	@Id
+	@GeneratedValue
+	private int id;
 	
+	@ManyToMany(mappedBy="zona_geografica",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Transformador> transformadores;
+	
+	
 	private Polygon limitesZona;
 
 	
@@ -87,7 +109,6 @@ public class ZonaGeografica {
 		transformadores.add(unTransformador);
 	}
 
-	
 
 	//getters y setters
 	public List<Transformador> getTransformadores() {
@@ -106,5 +127,8 @@ public class ZonaGeografica {
 		this.limitesZona = limitesZona;
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 	
 }

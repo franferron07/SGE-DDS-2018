@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import usuarios.Cliente;
@@ -24,14 +25,12 @@ public class Transformador {
 	@GeneratedValue
 	private int id;
 	
-	
-	
-	@ManyToMany(mappedBy="cliente", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="transformador", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
 	
-	@Column(name="coodenada")
+	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Point coordenadas;
-	@Column(name="zona_geografica")
+	@OneToOne(mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private ZonaGeografica zonaAsignada;
 	
 	//constructor
