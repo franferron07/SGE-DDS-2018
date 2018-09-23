@@ -3,14 +3,29 @@ package repositorios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import dao.DaoJson;
 import geoposicionamiento.ZonaGeografica;
 
 
-
+@Entity
+@Table(name="repositorio_zonas")
 public class RepositorioZonas {
+	@Id
+	@GeneratedValue
+	private int id;
+	
 	
 	private DaoJson<ZonaGeografica> daoZonas;
+	
+	@OneToMany(mappedBy="repositorio_zonas",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ZonaGeografica> zonas;
 	
 	//constructor
@@ -44,6 +59,9 @@ public class RepositorioZonas {
 		this.daoZonas = daoZonas;
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 	
 	
 	

@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import dao.DaoJson;
@@ -21,8 +24,9 @@ public class Mapa {
 	@GeneratedValue
 	private int id;
 	
-	
+	@OneToMany(mappedBy="mapa",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ZonaGeografica> zonasGeograficas;
+	
 	private RepositorioZonas repoZonas;
 	private RepositorioTransformadores repoTransformadores;
 	
