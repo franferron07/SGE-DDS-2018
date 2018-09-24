@@ -12,31 +12,14 @@ import javax.persistence.Transient;
 import dispositivos.DispositivoInteligente;
 
 
-@Entity
+/*@Entity
 @Table(name="actuador")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo")
+@DiscriminatorColumn(name="tipo")*/
 public abstract class ActuadorBase {
 
-	@Id
-	@GeneratedValue
-	public int id;
 	
-	@Transient
-	protected DispositivoInteligente dispositivo;
-	
-	
-	public abstract void ejecutarAccion();
+	public abstract void ejecutarAccion( DispositivoInteligente dispositivo );
 
 	
-	
-	public DispositivoInteligente getDispositivo() {
-		return dispositivo;
-	}
-
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
-	}
-	
-
 }
