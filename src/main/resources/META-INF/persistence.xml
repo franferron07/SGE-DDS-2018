@@ -9,6 +9,8 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	<class>models.entities.Usuario</class>
+	<class>models.entities.Login</class>
+	<class>models.entities.Categoria</class>
 		<class>models.entities.Cliente</class>
 		<class>models.entities.Administrador</class>
 		<class>models.entities.DispositivoDetalle</class>
