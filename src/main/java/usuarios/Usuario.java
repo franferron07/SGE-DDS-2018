@@ -1,13 +1,36 @@
 package usuarios;
 
+import geoposicionamiento.Ubicable;
+
 import java.io.Serializable;
 
-public abstract class Usuario  {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Usuario")
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="tipo")
+@DiscriminatorValue(value="usuario")
+public abstract class Usuario extends Ubicable{
+
+
+	@Column(name="nombre")
 	protected String nombre;
+	@Column(name="apellido")
 	protected String apellido;
+	@Column(name="domicilio")
 	protected String domicilio;
+	@Column(name="nombreUsuario")
 	protected String nombreUsuario;
+	@Column(name="password")
 	protected String password;
 	
 	public Usuario() {
@@ -57,5 +80,5 @@ public abstract class Usuario  {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 }

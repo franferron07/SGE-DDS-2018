@@ -1,12 +1,34 @@
 package usuarios;
 
-public class Categoria {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="categoria")
+public class Categoria {
+	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="consumoMinimo")
 	private float consumoMinimo;
+	@Column(name="consumoMaximo")
 	private float consumoMaximo;
-	private String concepto;//Valores que puede tener Cargo fijo,Cargo variable u otro si abria en el futuro
+	@Column(name="concepto")
+	private String concepto; //Valores que puede tener Cargo fijo, Cargo variable u otro si hubiera en el futuro.
+	@Column(name="unidad")
 	private String unidad;
+	@Column(name="costoNormal")
 	private float costoNormal;
 
 	public Categoria() {
@@ -61,5 +83,8 @@ public class Categoria {
 		this.costoNormal = costoNormal;
 	}
 
+	public int getId() {
+		return id;
+	}
 	
 }
