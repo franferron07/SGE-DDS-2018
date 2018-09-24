@@ -3,6 +3,7 @@ package geoposicionamiento;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 //subir
@@ -11,7 +12,8 @@ import javax.persistence.Table;
 @Table(name="coordenada")
 public class Coordenada {
 	@Id
-	@GeneratedValue
+//	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int id;
 	
 	@Column(name="longitud")
