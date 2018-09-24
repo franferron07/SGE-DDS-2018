@@ -5,14 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import dao.DaoJson;
 import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioZonas;
 import usuarios.Cliente;
-
+//@Entity
+//@Table(name ="mapa")
 public class Mapa {
 	
+	
 	private List<ZonaGeografica> zonasGeograficas;
+	
 	private RepositorioZonas repoZonas;
 	private RepositorioTransformadores repoTransformadores;
 	
@@ -64,7 +75,6 @@ public class Mapa {
 	
 	//metodo que dada una coordenada me devolvera la zona a la que pertenece.
 	public ZonaGeografica zonaPerteneciente( Point coordenada ){
-		
 		ZonaGeografica zona = null;
 		zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( coordenada )).findAny().orElse(null);
 
@@ -83,6 +93,8 @@ public class Mapa {
 	public void setZonasGeograficas(List<ZonaGeografica> zonasGeograficas) {
 		this.zonasGeograficas = zonasGeograficas;
 	}
+	
+	
 	
 
 }

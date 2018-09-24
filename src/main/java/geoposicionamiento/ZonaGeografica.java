@@ -7,11 +7,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import usuarios.Cliente;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-public class ZonaGeografica {
+import usuarios.Cliente;
+import usuarios.Usuario;
+//subir
+
+@Entity
+@Table(name="zona_geografica")
+@DiscriminatorValue("zona_geografica")
+
+public class ZonaGeografica extends Ubicable{
 	
+	
+	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+//	@JoinColumn(name="")
 	private List<Transformador> transformadores;
+	
+	
 	private Polygon limitesZona;
 
 	
@@ -87,7 +113,6 @@ public class ZonaGeografica {
 		transformadores.add(unTransformador);
 	}
 
-	
 
 	//getters y setters
 	public List<Transformador> getTransformadores() {

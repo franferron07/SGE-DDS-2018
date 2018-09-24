@@ -5,13 +5,39 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import usuarios.Cliente;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-public class Transformador {
+import usuarios.Cliente;
+//subir
+@Entity
+@Table(name="transformador")
+@DiscriminatorValue(value="transformador")
+public class Transformador extends Ubicable {
 	
+	
+	@OneToMany(mappedBy="id", cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
+	
+//	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@Transient
 	private Point coordenadas;
+	@ManyToOne
+	@JoinColumn(name="zona_id",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
+	
 	
 	//constructor
 	public Transformador(){
@@ -29,6 +55,7 @@ public class Transformador {
 	public Transformador(Point coordenada){
 		clientes= new ArrayList<Cliente>();
 		coordenadas = coordenada;
+		
 	}
 	
 	
