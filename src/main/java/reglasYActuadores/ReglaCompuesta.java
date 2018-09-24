@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import dispositivos.DispositivoInteligente;
+
 @Entity
 @DiscriminatorValue("reglaCompuesta")
 public class ReglaCompuesta extends Regla {
@@ -35,13 +37,16 @@ public class ReglaCompuesta extends Regla {
 		
 	@Override
 	//ejecuto cada actuador de cada regla que se cumple + los actuadores propios
-	public void ejecutarActuadores() {
-		//ejecuto actuadores de las reglas
-		this.reglas.stream().forEach(r->r.ejecutarActuadores());
-		//ejecuto actuadores propios
-		this.actuadores.stream().forEach(a->a.ejecutarAccion());
+	public void ejecutarActuadores(DispositivoInteligente d) {
 		
+		//ejecuto actuadores de las reglas
+		this.reglas.stream().forEach(r->r.ejecutarAccionDispositivosActuadores());
+		
+		//ejecuto actuadores propios
+		this.actuadores.stream().forEach(a->a.ejecutarAccion(d));
 	}
+	
+
 	
 	//getters y setters
 	public List<Regla> getReglas() {
@@ -51,6 +56,8 @@ public class ReglaCompuesta extends Regla {
 	public void setReglas(List<Regla> reglas) {
 		this.reglas = reglas;
 	}
+
+	
 
 		
 

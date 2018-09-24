@@ -43,6 +43,7 @@ public abstract class Regla implements ObservadorSensor {
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
 	
+	
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
@@ -57,14 +58,22 @@ public abstract class Regla implements ObservadorSensor {
 	public void evaluarMedicion(Medicion medicion) {
 		
 		if( cumpleCondiciones(medicion.getValor()) ){
-			ejecutarActuadores();
+			ejecutarAccionDispositivosActuadores();
 		}
 		
 	}
 		
-	public abstract boolean cumpleCondiciones(double d);
 	
-	public abstract void ejecutarActuadores();
+	public abstract boolean cumpleCondiciones(double d);
+
+	
+	//accion que se ejecuta cuando se cumple la condicion. a partir de los dispoisitivos llama a los actuadores para ejecutarse
+	public void ejecutarAccionDispositivosActuadores() {
+		
+		this.dispositivos.stream().forEach(d->ejecutarActuadores(d));	
+	}
+	
+	public abstract void ejecutarActuadores(DispositivoInteligente d);
 	
 
 	//getters y setters

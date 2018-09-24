@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import dispositivos.DispositivoInteligente;
+
 @Entity
 @DiscriminatorValue("reglaSimple")
 public class ReglaSimple extends Regla {
@@ -22,18 +24,20 @@ public class ReglaSimple extends Regla {
 		this.condiciones = new ArrayList<CondicionRegla>();
 	}
 
-	//filtra los modos que entren en el intervalo pedido
+	
 	@Override
 	public boolean cumpleCondiciones(double valor) {
 		
 		return this.condiciones.stream().allMatch( c -> c.cumpleMedicion(valor) );
 	}
 	
+	
+	
 	//ejecuto actuadores de la regla.
 	@Override
-	public void ejecutarActuadores() {		
+	public void ejecutarActuadores( DispositivoInteligente d ) {		
 		
-		this.actuadores.stream().forEach(a->a.ejecutarAccion());		
+		this.actuadores.stream().forEach(a->a.ejecutarAccion(d));		
 	}
 	
 	//getters y setters
@@ -44,6 +48,8 @@ public class ReglaSimple extends Regla {
 	public void setCondiciones(List<CondicionRegla> condiciones) {
 		this.condiciones = condiciones;
 	}
+
+	
 
 	
 

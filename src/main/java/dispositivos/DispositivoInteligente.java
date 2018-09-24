@@ -235,7 +235,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	public void ejecutarAccionAutomatica() {
 		
 		if( accionaAutomaticaOptimizador != null){
-			accionaAutomaticaOptimizador.ejecutarAccion();
+			accionaAutomaticaOptimizador.ejecutarAccion(this);
 		}
 		
 	}
