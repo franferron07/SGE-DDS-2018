@@ -9,6 +9,8 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	<class>models.entities.Usuario</class>
+	<class>models.entities.Login</class>
+	<class>models.entities.Categoria</class>
 		<class>models.entities.Cliente</class>
 		<class>models.entities.Administrador</class>
 		<class>models.entities.DispositivoDetalle</class>
@@ -32,6 +34,12 @@
 		<class>models.entities.ActuadoresEnum</class>
 		<class>models.entities.Transformador</class>
 		<class>models.entities.ZonaGeografica</class>
+	    
+	    	<class>models.geoposicionamiento.Coordenada</class>
+		<class>models.geoposicionamiento.Mapa</class>
+		<class>models.geoposicionamiento.Trasformador</class>
+		<class>models.geoposicionamiento.Ubicable</class>
+		<class>models.geoposicionamiento.ZonaGeografica</class>
 		
     	 
         <properties> 

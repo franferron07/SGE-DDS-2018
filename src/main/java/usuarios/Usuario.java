@@ -8,10 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,24 +24,22 @@ import javax.persistence.Table;
 @DiscriminatorValue(value="usuario")
 public abstract class Usuario extends Ubicable{
 
-
+	
 	@Column(name="nombre")
 	protected String nombre;
 	@Column(name="apellido")
 	protected String apellido;
 	@Column(name="domicilio")
 	protected String domicilio;
-	@Column(name="nombreUsuario")
-	protected String nombreUsuario;
-	@Column(name="password")
-	protected String password;
+	
+	protected Login login;
 	
 	public Usuario() {
 		
 	}
 	
 	public boolean login(String nombreUsuario, String password) {
-		return ( this.nombreUsuario == nombreUsuario && this.password == password );
+		return (login.getUsername() == nombreUsuario && login.getPassword() == password);
 	}
 
 	public String getNombre() {
@@ -53,13 +54,6 @@ public abstract class Usuario extends Ubicable{
 		return domicilio;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public String getPassword() {
-		return password;
-	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -71,14 +65,6 @@ public abstract class Usuario extends Ubicable{
 
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 }
