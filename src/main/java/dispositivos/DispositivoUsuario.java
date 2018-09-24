@@ -26,7 +26,7 @@ public abstract class DispositivoUsuario {
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
 	public DispositivoDetalle detalle;
 	
-	@Column
+	@Column(name="activado")
 	protected boolean activado;
 	
 

@@ -5,7 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import models_transformadores.ModelHelper;
+import models.ModelHelper;
+
 
 public class ContextTest {
 	private ModelHelper model;

@@ -57,7 +57,6 @@ public class Cliente extends Usuario {
 	private Categoria categoria;
 	
 	@OneToMany(mappedBy="id", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name="dispositivo_id", referencedColumnName="id")
 	private List<DispositivoUsuario> dispositivos;
 	
 	@Column(name="puntaje")

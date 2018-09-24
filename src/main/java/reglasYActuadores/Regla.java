@@ -6,13 +6,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,13 +25,13 @@ import entities.ObservadorSensor;
 
 @Entity
 @Table(name="regla")
+@DiscriminatorValue("regla")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo")
-public abstract class Regla implements ObservadorSensor {
+public abstract class Regla extends ObservadorSensor {
 	
-	@Id
-	@GeneratedValue
-	private int id;
+	/*@Id
+	private int id;*/
 	
 	@Column(name="nombre")
 	private String nombreRegla;
@@ -42,6 +45,10 @@ public abstract class Regla implements ObservadorSensor {
 	
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
+	
+	@ManyToOne
+	@JoinColumn( name="regla_id" , referencedColumnName="id" )
+	private Regla regla_padre;
 	
 	
 	public Regla(String nombre){

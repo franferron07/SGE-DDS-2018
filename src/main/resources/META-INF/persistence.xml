@@ -15,17 +15,21 @@
 		<class>models.entities.DispositivoUsuario</class>
 		<class>models.entities.DispositivoEstandar</class>
 		<class>models.entities.DispositivoInteligente</class>
+		<class>models.entities.AdaptadorLog</class>
 		<class>models.entities.ModoAhorroEnergia</class>
 		<class>models.entities.ModoApagado</class>
 		<class>models.entities.ModoConConsumo</class>
 		<class>models.entities.ModoEnecendido</class>
 		<class>models.entities.Consumo</class>
 		<class>models.entities.Sensor</class>
+		<class>models.entities.ObservadorSensor</class>
+		<class>models.entities.Medicion</class>
 		<class>models.entities.Regla</class>
 		<class>models.entities.ReglaCompuesta</class>
 		<class>models.entities.ReglaSimple</class>
 		<class>models.entities.CondicionRegla</class>
 		<class>models.entities.ActuadorBase</class>
+		<class>models.entities.ActuadoresEnum</class>
 		<class>models.entities.Transformador</class>
 		<class>models.entities.ZonaGeografica</class>
 		

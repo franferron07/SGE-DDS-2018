@@ -10,8 +10,8 @@ import org.junit.Test;
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
 import geoposicionamiento.ZonaGeografica;
-import models_transformadores.ModelHelper;
-import models_transformadores.TransformadorModel;
+import models.ModelHelper;
+import models.TransformadorModel;
 import usuarios.Cliente;
 
 public class TestTransformadores {

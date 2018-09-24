@@ -22,6 +22,9 @@ public class ReglaCompuesta extends Regla {
 	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
 	private List<Regla> reglas;
 	
+	/*@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	private List<Regla> reglasHijas;*/
+	
 	
 	public ReglaCompuesta(String nombre) {
 		super(nombre);

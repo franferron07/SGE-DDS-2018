@@ -37,8 +37,8 @@ public class SensorTest {
 	//instanciacion de regla con actuadores
 	@Test
 	public void testReglasConActuadores(){	
-		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand(null);
-		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand(null);
+		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand();
+		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand();
 		ReglaSimple reglaSimple=new ReglaSimple("ReglaSimple1");
 		reglaSimple.agregarActuador(actuadorLuz);
 		reglaSimple.agregarActuador(actuadorTemperatura);
@@ -58,8 +58,8 @@ public class SensorTest {
 		
 		sensor.agregarObservador(reglaSimple);
 		
-		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand(null);
-		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand(null);
+		CambiarIntensidadLuzCommand actuadorLuz = new CambiarIntensidadLuzCommand();
+		CambiarTemperaturaActuadorCommand actuadorTemperatura = new CambiarTemperaturaActuadorCommand();
 		
 		reglaSimple.agregarActuador(actuadorLuz);
 		reglaSimple.agregarActuador(actuadorTemperatura);
