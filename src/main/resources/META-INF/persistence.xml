@@ -30,6 +30,12 @@
 		<class>models.entities.ActuadorBase</class>
 		<class>models.entities.Transformador</class>
 		<class>models.entities.ZonaGeografica</class>
+	    
+	    	<class>models.geoposicionamiento.Coordenada</class>
+		<class>models.geoposicionamiento.Mapa</class>
+		<class>models.geoposicionamiento.Trasformador</class>
+		<class>models.geoposicionamiento.Ubicable</class>
+		<class>models.geoposicionamiento.ZonaGeografica</class>
 		
     	 
         <properties> 
