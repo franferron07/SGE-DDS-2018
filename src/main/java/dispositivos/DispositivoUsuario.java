@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import usuarios.Categoria;
+import usuarios.Cliente;
+
 @Entity
 @Table(name="dispositivo")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -28,6 +31,10 @@ public abstract class DispositivoUsuario {
 	
 	@Column(name="activado")
 	protected boolean activado;
+	
+	@ManyToOne
+	@JoinColumn(name="cliente_id" , referencedColumnName="id")
+	private Cliente cliente;
 	
 
 	//Me da el consumo en un determinado periodo de tiempo. 
