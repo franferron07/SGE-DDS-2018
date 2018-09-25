@@ -33,9 +33,9 @@ import usuarios.Usuario;
 public class ZonaGeografica extends Ubicable{
 	
 	
-	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="zonaAsignada",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Transformador> transformadores;
-	
+
 	
 	private Polygon limitesZona;
 
