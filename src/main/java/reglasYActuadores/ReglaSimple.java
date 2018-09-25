@@ -15,7 +15,7 @@ import dispositivos.DispositivoInteligente;
 @DiscriminatorValue("reglaSimple")
 public class ReglaSimple extends Regla {
 
-	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="regla_simple" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<CondicionRegla> condiciones;
 	
 	

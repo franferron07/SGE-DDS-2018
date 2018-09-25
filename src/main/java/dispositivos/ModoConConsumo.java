@@ -15,13 +15,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-@Entity
+/*@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo")
+@DiscriminatorColumn(name="tipo")*/
 public abstract class ModoConConsumo extends Modo {
 	
 
-	@OneToMany(mappedBy="consumo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)
+	/*@OneToMany(mappedBy="consumo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)*/
 	protected List<Consumo> consumos;
 
 	

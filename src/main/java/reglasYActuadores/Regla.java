@@ -30,9 +30,7 @@ import entities.ObservadorSensor;
 @DiscriminatorColumn(name="tipo")
 public abstract class Regla extends ObservadorSensor {
 	
-	/*@Id
-	private int id;*/
-	
+
 	@Column(name="nombre")
 	private String nombreRegla;
 	

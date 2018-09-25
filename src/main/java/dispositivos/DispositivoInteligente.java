@@ -28,7 +28,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 
 	//contiene los modos, el ultimo modo es el modo actual
-	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="di" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Modo> logModos ;
 
 	@ManyToOne
@@ -43,7 +43,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	private ActuadoresEnum accionaAutomaticaOptimizadorEnum; //guardara el enum , sirve para obtenerlo de la base y luego instanciarlo al inicio
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "dispositivo_id")
 	private DispositivoUsuario di_padre; //relacion de hijo a padre
 	
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY) 
