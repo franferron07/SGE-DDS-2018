@@ -22,7 +22,7 @@ public class CondicionRegla {
 	
 	@ManyToOne
 	@JoinColumn( name="regla_id" , referencedColumnName="id" )
-	private Regla regla_simple;
+	private ReglaSimple regla_simple;
 	
 	
 	public CondicionRegla( String comparador , Float valorComparable ){

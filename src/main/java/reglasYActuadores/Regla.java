@@ -46,7 +46,7 @@ public abstract class Regla extends ObservadorSensor {
 	
 	@ManyToOne
 	@JoinColumn( name="regla_id" , referencedColumnName="id" )
-	private Regla regla_padre;
+	private ReglaCompuesta regla_padre;
 	
 	
 	public Regla(String nombre){

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="observador")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo")
 public abstract class ObservadorSensor {
 	

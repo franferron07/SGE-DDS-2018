@@ -28,7 +28,7 @@ import usuarios.Cliente;
 public class Transformador extends Ubicable {
 	
 	
-	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="transformador",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
 	
 //	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
