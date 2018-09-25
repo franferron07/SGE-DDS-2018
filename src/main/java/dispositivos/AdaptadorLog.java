@@ -27,7 +27,7 @@ public class AdaptadorLog {
 	
 	//@Id
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "adaptadorInteligente_id")
 	public DispositivoInteligente adaptador ;
 	
 	@Column(name="fechaInicio")

@@ -9,7 +9,6 @@ import models.ModelHelper;
 
 public class ContextTest {
 	private ModelHelper model;
-	
 	@Before
 	public void init() {
 		this.model = new ModelHelper();

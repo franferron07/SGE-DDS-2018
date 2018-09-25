@@ -17,8 +17,7 @@ import javax.persistence.OneToMany;
 public class ModoAhorroEnergia extends Modo {
 
 	
-	@OneToMany(mappedBy="consumo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)
-	protected List<Consumo> consumos;
+	
 	
 	
 	//constructor

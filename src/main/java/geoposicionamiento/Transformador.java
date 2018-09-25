@@ -28,7 +28,7 @@ import usuarios.Cliente;
 public class Transformador extends Ubicable {
 	
 	
-	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="transformador",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
 	
 //	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -38,7 +38,11 @@ public class Transformador extends Ubicable {
 	@ManyToOne
 	@JoinColumn(name="zona_id",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
+
 	
+	@OneToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="ubicable_id")
+	protected Ubicable ubicable;
 	
 	//constructor
 	public Transformador(){

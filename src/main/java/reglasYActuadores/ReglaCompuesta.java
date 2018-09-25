@@ -19,7 +19,7 @@ public class ReglaCompuesta extends Regla {
 
 	
 	//son las condiciones de las reglas compuestas
-	@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="regla_padre" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
 	private List<Regla> reglas;
 	
 	/*@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)

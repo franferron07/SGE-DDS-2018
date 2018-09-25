@@ -30,9 +30,7 @@ import entities.ObservadorSensor;
 @DiscriminatorColumn(name="tipo")
 public abstract class Regla extends ObservadorSensor {
 	
-	/*@Id
-	private int id;*/
-	
+
 	@Column(name="nombre")
 	private String nombreRegla;
 	
@@ -48,7 +46,7 @@ public abstract class Regla extends ObservadorSensor {
 	
 	@ManyToOne
 	@JoinColumn( name="regla_id" , referencedColumnName="id" )
-	private Regla regla_padre;
+	private ReglaCompuesta regla_padre;
 	
 	
 	public Regla(String nombre){

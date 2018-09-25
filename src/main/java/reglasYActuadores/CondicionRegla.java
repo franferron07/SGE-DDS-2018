@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +19,10 @@ public class CondicionRegla {
 	private String comparador;
 	@Column(name="valorComparable")
 	private float valorComparable;
+	
+	@ManyToOne
+	@JoinColumn( name="regla_id" , referencedColumnName="id" )
+	private ReglaSimple regla_simple;
 	
 	
 	public CondicionRegla( String comparador , Float valorComparable ){
