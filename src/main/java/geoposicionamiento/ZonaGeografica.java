@@ -34,7 +34,6 @@ public class ZonaGeografica extends Ubicable{
 	
 	
 	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@JoinColumn(name="id")
 	private List<Transformador> transformadores;
 	
 	

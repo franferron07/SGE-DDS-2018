@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 //subir
+
 
 @Entity
 @Table(name="coordenada")
@@ -20,10 +23,13 @@ public class Coordenada {
 	public double longitud;//x
 	@Column(name="latitud")
 	public double latitud;//y 
-//	@GeneratedValue
+
+	@Column(name="orden")
 	public int orden;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "ubicable_id", referencedColumnName = "id")
+	private Ubicable ubicable;
 	
 	public Coordenada() {
 	}

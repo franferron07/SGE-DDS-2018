@@ -18,13 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Usuario")
+@Table(name="usuario")
+@DiscriminatorValue(value="usuario")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="tipo")
-@DiscriminatorValue(value="usuario")
 public abstract class Usuario extends Ubicable{
 
-	
+
 	@Column(name="nombre")
 	protected String nombre;
 	@Column(name="apellido")
@@ -32,6 +32,8 @@ public abstract class Usuario extends Ubicable{
 	@Column(name="domicilio")
 	protected String domicilio;
 	
+	@OneToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="id")
 	protected Login login;
 	
 	public Usuario() {

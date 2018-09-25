@@ -4,26 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//subir
+
 @Entity
 @Table(name="ubicable")
 @Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
 public abstract class Ubicable {
+	
 	@Id
-//	@GeneratedValue
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	public int id;
-	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	
+	@OneToMany(mappedBy="ubicable",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public List<Coordenada> coordenadas;
 	
 	

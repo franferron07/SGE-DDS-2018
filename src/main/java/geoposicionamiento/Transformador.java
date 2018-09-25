@@ -28,8 +28,7 @@ import usuarios.Cliente;
 public class Transformador extends Ubicable {
 	
 	
-//	@OneToMany(mappedBy="id", cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="id",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Cliente> clientes;
 	
 //	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -37,7 +36,7 @@ public class Transformador extends Ubicable {
 	private Point coordenadas;
 	
 	@ManyToOne
-	@JoinColumn(name="id",referencedColumnName="id")
+	@JoinColumn(name="zona_id",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
 	
 	
