@@ -38,7 +38,11 @@ public class Transformador extends Ubicable {
 	@ManyToOne
 	@JoinColumn(name="zona_id",referencedColumnName="id")
 	private ZonaGeografica zonaAsignada;
+
 	
+	@OneToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="ubicable_id")
+	protected Ubicable ubicable;
 	
 	//constructor
 	public Transformador(){
