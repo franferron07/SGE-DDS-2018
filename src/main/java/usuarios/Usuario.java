@@ -2,6 +2,7 @@ package usuarios;
 
 import geoposicionamiento.Ubicable;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -16,6 +17,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.google.maps.errors.ApiException;
+
+import APIs.GeoCodingService;
 
 @Entity
 @Table(name="usuario")
@@ -65,8 +70,9 @@ public abstract class Usuario extends Ubicable{
 		this.apellido = apellido;
 	}
 
-	public void setDomicilio(String domicilio) {
+	public void setDomicilio(String domicilio) throws ApiException, InterruptedException, IOException {
 		this.domicilio = domicilio;
+		super.setUbicacion(GeoCodingService.getCoordinates(domicilio));
 	}
 	
 }

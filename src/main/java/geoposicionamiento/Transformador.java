@@ -80,14 +80,6 @@ public class Transformador extends Ubicable {
 	
 	//getters y setters
 	
-	public Point getCoordenadas() {
-		return coordenadas;
-	}
-
-
-	public void setCoordenadas(Point coordenadas) {
-		this.coordenadas = coordenadas;
-	}
 
 	public List<Cliente> getClientes() {
 		return clientes;

@@ -229,13 +229,6 @@ public class Cliente extends Usuario {
 		this.puntaje = puntaje;
 	}
 
-	public Point getCoordenadas() {
-		return coordenadas;
-	}
-
-	public void setCoordenadas(Point coordenadas) {
-		this.coordenadas = coordenadas;
-	}
 
 	public boolean isAccionadoAutomatico() {
 		return accionadoAutomatico;

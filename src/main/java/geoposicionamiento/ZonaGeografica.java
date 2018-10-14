@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import Negocio.Coordenadas;
+import Negocio.Transformador;
 import usuarios.Cliente;
 import usuarios.Usuario;
 //subir
@@ -36,21 +38,24 @@ public class ZonaGeografica extends Ubicable{
 	@OneToMany(mappedBy="zonaAsignada",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<Transformador> transformadores;
 
-	
-	private Polygon limitesZona;
 
 	
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();
-		limitesZona = new Polygon();
 	}
 	
-	//constructor inicializando los limites.
-	public ZonaGeografica( int[] puntosX , int[] puntosY , int cantidad ){
-		transformadores = new ArrayList<Transformador>();
-		limitesZona = new Polygon(puntosX , puntosY , cantidad);
+	public ZonaGeografica(List<Coordenada> xy) {
+		super();
+		this.coordenadas=xy;
 	}
+	
+	public ZonaGeografica(List<Coordenada> xy, List<Transformador> transformadores) {
+		super();
+		this.coordenadas=xy;
+		this.transformadores=transformadores;
+	}
+	
 	
 	
 	//asigna al transofmrador mas cerca un cliente
@@ -73,7 +78,7 @@ public class ZonaGeografica extends Ubicable{
 		while(it.hasNext()){
 			
 			Transformador transformador =it.next();
-			distancia = this.calcularDistancia(unCliente.getCoordenadas(), transformador.getCoordenadas() );
+			distancia = super.distanciaCoordenadas(unCliente.getUbicacion(), transformador.getUbicacion() );
 			//entra a if si es la primera vez o si la distancia es menor a la minima
 			if( tMinimo == null || distancia < distanciaMinima ){
 				tMinimo = transformador;
@@ -84,14 +89,6 @@ public class ZonaGeografica extends Ubicable{
 		return tMinimo;
 	}
 	
-	//calculo la distancia entre dos puntos
-	public double calcularDistancia(Point p1 , Point p2){
-		
-		double distancia = Math.pow( p1.x - p2.x , 2 ) + Math.pow( p1.y - p2.y , 2 );
-		distancia = Math.sqrt(distancia);
-		
-		return distancia;
-	}
 	
 	//me da el consumo total de todos los transformadores en un instante
 	public double consumoTotal(LocalDateTime desde , LocalDateTime hasta){
@@ -100,13 +97,15 @@ public class ZonaGeografica extends Ubicable{
 	}
 	
 	//me dice si la coordenada esta dentro de la zona
-	public boolean coordenadaEnZona(Point coordenada){
+	public boolean coordenadaEnZona(Coordenada coordenada){
 		
-		if( limitesZona.contains(coordenada) ) return true;
-		
-		return false;
+		return this.getPoligono().contains(coordenada.getLatitud(),coordenada.getLongitud());
 	}
 	
+	public boolean coordenadaEnZona(double x, double y){
+		
+		return this.getPoligono().contains(x,y);
+	}
 	
 	public void agregarTransformador(Transformador unTransformador){
 		transformadores.add(unTransformador);
@@ -122,13 +121,6 @@ public class ZonaGeografica extends Ubicable{
 		this.transformadores = transformadores;
 	}
 
-	public Polygon getLimitesZona() {
-		return limitesZona;
-	}
-
-	public void setLimitesZona(Polygon limitesZona) {
-		this.limitesZona = limitesZona;
-	}
 	
 	
 }
