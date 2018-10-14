@@ -115,5 +115,3 @@ public abstract class Ubicable {
 }
 
 	
-	
-}

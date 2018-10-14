@@ -31,8 +31,13 @@ public class Categoria {
 	@Column(name="costoNormal")
 	private float costoNormal;
 
-	public Categoria() {
+	
+	public Categoria(  ) {
 
+	}
+	
+	public Categoria( String nombre ) {
+		this.nombre = nombre;
 	}
 
 	public String getNombre() {

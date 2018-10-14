@@ -7,26 +7,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.Table;
 
 import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
-import dispositivos.Modo;
 import dispositivos.ModoApagado;
 import geoposicionamiento.Transformador;
 import optimizacion_horas.Optimizador;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,6 +27,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.Transient;
+
+
 
 
 @Entity
