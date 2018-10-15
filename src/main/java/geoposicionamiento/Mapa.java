@@ -1,19 +1,8 @@
 package geoposicionamiento;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import dao.DaoJson;
 import repositorios.RepositorioTransformadores;
 import repositorios.RepositorioZonas;
 import usuarios.Cliente;
@@ -39,6 +28,11 @@ public class Mapa {
 		//zonasGeograficas = daoZonaGeografica.obtener();
 	}
 	
+	public ZonaGeografica factoryZona() {
+		ZonaGeografica zona = new ZonaGeografica();
+		this.zonasGeograficas.add(zona);
+		return zona;
+	}
 
 	//obtener y asignar transformadores a las zonas existentes
 	public void leerTransformador(){
