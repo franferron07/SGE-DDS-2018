@@ -34,7 +34,7 @@ public abstract class DispositivoUsuario {
 	
 	@ManyToOne
 	@JoinColumn(name="cliente_id" , referencedColumnName="id")
-	private Cliente cliente;
+	public Cliente cliente;
 	
 
 	//Me da el consumo en un determinado periodo de tiempo. 

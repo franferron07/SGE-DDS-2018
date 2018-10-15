@@ -38,10 +38,15 @@ public class UsuarioDbTest1 {
 		
 	}
 	
+	
 	@Test
 	public void testCrearCliente(){
 		
 		model.agregar(categoria);
+		
+		/*di_estandar.cliente = cliente;
+		model.agregar(di_estandar);*/
+		
 		model.agregar(cliente);
 	}
 	
@@ -51,7 +56,6 @@ public class UsuarioDbTest1 {
 		
 		Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
 	}
-	
 	
 
 }

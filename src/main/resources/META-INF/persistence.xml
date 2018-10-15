@@ -8,37 +8,37 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
-    	<class>models.entities.Usuario</class>
-		<class>models.entities.Login</class>
-		<class>models.entities.Categoria</class>
-		<class>models.entities.Cliente</class>
-		<class>models.entities.Administrador</class>
-		<class>models.entities.DispositivoDetalle</class>
-		<class>models.entities.DispositivoUsuario</class>
-		<class>models.entities.DispositivoEstandar</class>
-		<class>models.entities.DispositivoInteligente</class>
-		<class>models.entities.AdaptadorLog</class>
-		<class>models.entities.ModoAhorroEnergia</class>
-		<class>models.entities.ModoApagado</class>
-		<class>models.entities.ModoEncendido</class>
-		<class>models.entities.Consumo</class>
-		<class>models.entities.Sensor</class>
-		<class>models.entities.ObservadorSensor</class>
-		<class>models.entities.Medicion</class>
-		<class>models.entities.Regla</class>
-		<class>models.entities.ReglaCompuesta</class>
-		<class>models.entities.ReglaSimple</class>
-		<class>models.entities.CondicionRegla</class>
-		<class>models.entities.ActuadorBase</class>
-		<class>models.entities.ActuadoresEnum</class>
-		<class>models.entities.Transformador</class>
-		<class>models.entities.ZonaGeografica</class>
+    	<class>usuarios.Usuario</class>
+		<class>usuarios.Login</class>
+		<class>usuarios.Categoria</class>
+		<class>usuarios.Cliente</class>
+		<class>usuarios.Administrador</class>
+		<class>dispositivos.DispositivoDetalle</class>
+		<class>dispositivos.DispositivoUsuario</class>
+		<class>dispositivos.DispositivoEstandar</class>
+		<class>dispositivos.DispositivoInteligente</class>
+		<class>dispositivos.AdaptadorLog</class>
+		<class>dispositivos.ModoAhorroEnergia</class>
+		<class>dispositivos.ModoApagado</class>
+		<class>dispositivos.ModoEncendido</class>
+		<class>dispositivos.Consumo</class>
+		<class>entities.Sensor</class>
+		<class>entities.ObservadorSensor</class>
+		<class>entities.Medicion</class>
+		<class>reglasYActuadores.Regla</class>
+		<class>reglasYActuadores.ReglaCompuesta</class>
+		<class>reglasYActuadores.ReglaSimple</class>
+		<class>reglasYActuadores.CondicionRegla</class>
+		<class>reglasYActuadores.ActuadorBase</class>
+		<class>reglasYActuadores.ActuadoresEnum</class>
+		<class>geoposicionamiento.Transformador</class>
+		<class>geoposicionamiento.ZonaGeografica</class>
 	    
-	    	<class>models.geoposicionamiento.Coordenada</class>
-		<class>models.geoposicionamiento.Mapa</class>
-		<class>models.geoposicionamiento.Trasformador</class>
-		<class>models.geoposicionamiento.Ubicable</class>
-		<class>models.geoposicionamiento.ZonaGeografica</class>
+	    <class>geoposicionamiento.Coordenada</class>
+		<class>geoposicionamiento.Mapa</class>
+		<class>geoposicionamiento.Trasformador</class>
+		<class>geoposicionamiento.Ubicable</class>
+		<class>geoposicionamiento.ZonaGeografica</class>
 		
     	 
         <properties> 
