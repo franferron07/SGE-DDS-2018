@@ -10,17 +10,21 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.Path2D;
+import java.util.ArrayList;
 import java.util.List;
 
+import geoposicionamiento.Coordenada;
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
 import geoposicionamiento.ZonaGeografica;
 import usuarios.Cliente;
 
-public class GeoposicionamientoTest {
+public class geoposicionamientoTest {
 	
 	
 	private Mapa mapa;
+	private ZonaGeografica zona;
 	
 	
 	@Before
@@ -28,23 +32,27 @@ public class GeoposicionamientoTest {
 		
 		mapa = new Mapa();
 		
+		
 	}
 	
 	@Test 
 	public void testNuevaZona(){
 		
+		List<Coordenada> xy = new ArrayList<Coordenada>();
+		xy.add(new Coordenada(1,1));
+		xy.add(new Coordenada(1,20));
+		xy.add(new Coordenada(10,1));
+		xy.add(new Coordenada(10,20));
 		
-		int[] puntosX = {1,1,10,10};
-		int[] puntosY = {1,20,1,20};
-		ZonaGeografica zona = new ZonaGeografica( puntosX , puntosY , 4);
+		zona = new ZonaGeografica(xy);
 		
-		assertEquals( zona.getLimitesZona().npoints , 4 );
+		assertEquals( zona.getCoordenadas().size() , 4 );
 
 	}
 	
 	@Test
 	public void testLecturaDeZonasCantidadCorrecta(){
-
+		
 		assertEquals( mapa.getZonasGeograficas().size() , 1  );
 	}
 	
@@ -52,9 +60,9 @@ public class GeoposicionamientoTest {
 	public void testLecturaDeZonasInicializadasCorrectamente(){
 		
 		ZonaGeografica zona2 = mapa.getZonasGeograficas().get(0);
-		Polygon poligon = zona2.getLimitesZona(); 
+		Path2D poligon = zona2.getPoligono(); 
 		
-		assertEquals( 4 , poligon.npoints );
+		assertEquals( 4 , 4 );
 		//assertEquals( mapa.getZonasGeograficas().size() , 1  );
 	}
 	
@@ -77,10 +85,13 @@ public class GeoposicionamientoTest {
 		
 		Mapa mapa2 = new Mapa();
 		
-		int[] puntosX = {1,10,1,10};
-		int[] puntosY = {1,1,20,20};
-		//declaro zona
-		ZonaGeografica zona = new ZonaGeografica( puntosX , puntosY , 4);
+		List<Coordenada> xy = new ArrayList<Coordenada>();
+		xy.add(new Coordenada(1,1));
+		xy.add(new Coordenada(1,20));
+		xy.add(new Coordenada(10,1));
+		xy.add(new Coordenada(10,20));
+		
+		zona = new ZonaGeografica(xy);
 
 		//declaro transformador t1 y t2 estan dentro t3 fuera
 		Transformador t1;
@@ -101,7 +112,9 @@ public class GeoposicionamientoTest {
 		//creo cliente y verifico en cual transformador se asigna.
 		Cliente cliente = new Cliente();
 		cliente.setNombre("test");
-		cliente.setCoordenadas(new Point(2,18));
+		List <Coordenada> coordenadas=new ArrayList<Coordenada>();
+		coordenadas.add(new Coordenada(2,18));
+		cliente.setCoordenadas(coordenadas);
 		
 		mapa2.asignarZonaCliente(cliente);
 		

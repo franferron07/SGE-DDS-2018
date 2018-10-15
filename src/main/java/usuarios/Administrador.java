@@ -61,7 +61,7 @@ public class Administrador extends Usuario {
 		int mesesPorAnio = 0;
 		int diasPorMes = 0;
 		int diasTipoMes = 0;
-		// Calculo de días del mes
+		// Calculo de dias del mes
 		if (mesInicio == 2) {
 			// Febrero
 			if ((anioFin % 4 == 0) && ((anioFin % 100 != 0) || (anioFin % 400 == 0))) {
@@ -86,7 +86,7 @@ public class Administrador extends Usuario {
 				diasTipoMes = 30;
 			}
 		}
-		// Calculo de diferencia de año, mes y dia
+		// Calculo de diferencia de ano, mes y dia
 		//
 		if ((anioInicio > anioFin) || (anioInicio == anioFin && mesInicio > mesFin)
 				|| (anioInicio == anioFin && mesInicio == mesFin && diaInicio > diaFin)) {
@@ -123,9 +123,9 @@ public class Administrador extends Usuario {
 	 
 		switch (tipo) {
 			case 0:
-				// Total Años
+				// Total Anos
 				returnValue = anios;
-			    System.out.println("Total años: " + returnValue + " Años.");
+			    System.out.println("Total aï¿½os: " + returnValue + " Aï¿½os.");
 				break;
 	 
 			case 1:
@@ -135,16 +135,16 @@ public class Administrador extends Usuario {
 				break;
 	 
 			case 2:
-				// Total Dias (se calcula a partir de los milisegundos por día)
+				// Total Dias (se calcula a partir de los milisegundos por dia)
 				long millsecsPerDay = 86400000; // Milisegundos al dia
 				returnValue = (fechaFin.getTime() - fechaInicio.getTime()) / millsecsPerDay;
-				System.out.println("Total días: " + returnValue + " Días.");
+				System.out.println("Total dï¿½as: " + returnValue + " Dï¿½as.");
 				break;
 	 
 			case 3:
-				// Meses del año
+				// Meses del ano
 				returnValue =mesesPorAnio;
-				System.out.println("Meses del año: " + returnValue);
+				System.out.println("Meses del aï¿½o: " + returnValue);
 				break;
 	 
 			default:

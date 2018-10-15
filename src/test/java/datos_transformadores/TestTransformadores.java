@@ -3,10 +3,13 @@ package datos_transformadores;
 import static org.junit.Assert.*;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import geoposicionamiento.Coordenada;
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
 import geoposicionamiento.ZonaGeografica;
@@ -33,11 +36,13 @@ public class TestTransformadores {
 		t2= new Transformador( new Point(8,19) );
 		t3= new Transformador( new Point(11,19) );
 		
-
-		int[] puntosX = {1,10,1,10};
-		int[] puntosY = {1,1,20,20};
-		//declaro zona
-		ZonaGeografica zona = new ZonaGeografica( puntosX , puntosY , 4);
+		List<Coordenada> xy = new ArrayList<Coordenada>();
+		xy.add(new Coordenada(1,1));
+		xy.add(new Coordenada(1,20));
+		xy.add(new Coordenada(10,1));
+		xy.add(new Coordenada(10,20));
+		
+		ZonaGeografica zona = new ZonaGeografica(xy);
 
 		//agrego zona en mapa ya que por archivo indica error
 		mapa.getZonasGeograficas().add(zona);

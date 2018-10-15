@@ -52,12 +52,6 @@ public abstract class Ubicable {
 		
 	}
 
-	public Path2D getPath2D(){
-		FactoryPath2D f=new FactoryPath2D();
-		Path2D p = f.factoryMethod(this.coordenadas);
-		return p;	
-		
-	}
 	
 	public void addCoordenadas(double x, double y) {
 		this.coordenadas.add( new Coordenada(x,y));
@@ -111,6 +105,12 @@ public abstract class Ubicable {
 		}
 		return masCercano;
 		
+	}
+	public List<Coordenada> getCoordenadas() {
+		return coordenadas;
+	}
+	public void setCoordenadas(List<Coordenada> coordenadas) {
+		this.coordenadas = coordenadas;
 	}
 }
 

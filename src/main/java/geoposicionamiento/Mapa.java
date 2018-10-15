@@ -53,7 +53,7 @@ public class Mapa {
 	//le asigna la zona perteneciente a la ubicacion del transformador
 	public void asignarZonaTransformador(Transformador unTransformador){
 		
-		ZonaGeografica zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( unTransformador.getCoordenadas())).findAny().orElse(null);
+		ZonaGeografica zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( unTransformador.getUbicacion())).findAny().orElse(null);
 		
 		if( zona!=null )
 		{
@@ -65,7 +65,7 @@ public class Mapa {
 	// busca la zona a la que puede pertenecer el cliente y luego la zona le asignara el transformador correspondiente.
 	public void asignarZonaCliente( Cliente unCliente ){
 		
-		ZonaGeografica zonaPert = zonaPerteneciente(unCliente.getCoordenadas());
+		ZonaGeografica zonaPert = zonaPerteneciente(unCliente.getUbicacion());
 		
 		if( zonaPert != null ){
 			zonaPert.asignarTransformador(unCliente);
@@ -74,7 +74,7 @@ public class Mapa {
 	}
 	
 	//metodo que dada una coordenada me devolvera la zona a la que pertenece.
-	public ZonaGeografica zonaPerteneciente( Point coordenada ){
+	public ZonaGeografica zonaPerteneciente( Coordenada coordenada ){
 		ZonaGeografica zona = null;
 		zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( coordenada )).findAny().orElse(null);
 
