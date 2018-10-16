@@ -41,16 +41,16 @@ public abstract class Usuario extends Ubicable{
 	@Column(name="password")
 	private String password;
 	
-	@OneToOne(fetch = FetchType.LAZY) 
+	/*@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="id")
-	protected Login login;
+	protected Login login;*/
 	
 	public Usuario() {
 		super();
 	}
 	
 	public boolean login(String nombreUsuario, String password) {
-		return (login.getUsername() == nombreUsuario && login.getPassword() == password);
+		return (getUsername() == nombreUsuario && getPassword() == password);
 	}
 
 	public String getNombre() {

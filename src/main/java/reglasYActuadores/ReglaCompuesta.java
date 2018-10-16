@@ -8,6 +8,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +20,8 @@ public class ReglaCompuesta extends Regla {
 
 	
 	//son las condiciones de las reglas compuestas
-	@OneToMany(mappedBy="regla_padre" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@JoinColumn( name="reglapadre_id" , referencedColumnName="id" )
 	private List<Regla> reglas;
 	
 	/*@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)

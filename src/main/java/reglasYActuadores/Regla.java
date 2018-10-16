@@ -31,6 +31,10 @@ import entities.ObservadorSensor;
 public abstract class Regla {
 	
 
+	@Id
+	@GeneratedValue
+	public int id;
+	
 	@Column(name="nombre")
 	private String nombreRegla;
 	
