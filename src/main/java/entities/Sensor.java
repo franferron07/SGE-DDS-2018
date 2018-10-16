@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import reglasYActuadores.Regla;
+
 @Entity
 @Table(name="sensor")
 public class Sensor  {
@@ -20,13 +22,13 @@ public class Sensor  {
 	private int id;
 	
 	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
-	private List<ObservadorSensor> observadores;
+	private List<Regla> observadores;
 	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Medicion> mediciones;
 	
 	
 	public Sensor(){
-		observadores= new ArrayList<ObservadorSensor>();
+		observadores= new ArrayList<Regla>();
 		mediciones= new ArrayList<Medicion>();
 	}
 	
@@ -55,9 +57,9 @@ public class Sensor  {
 	
 	
 	
-	public void agregarObservador(ObservadorSensor unObservador){
-		 if (!observadores.contains(unObservador)) {
-			 this.observadores.add(unObservador); 
+	public void agregarObservador(Regla regla){
+		 if (!observadores.contains(regla)) {
+			 this.observadores.add(regla); 
 		 }
 	}
 	
@@ -68,11 +70,11 @@ public class Sensor  {
 	
 	//getters y setters
 
-	public List<ObservadorSensor> getObservadorSensor() {
+	public List<Regla> getObservadorSensor() {
 		return observadores;
 	}
 
-	public void setObservadorSensor(List<ObservadorSensor> observadores) {
+	public void setObservadorSensor(List<Regla> observadores) {
 		this.observadores = observadores;
 	}
 

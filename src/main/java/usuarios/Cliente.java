@@ -63,8 +63,6 @@ public class Cliente extends Usuario {
 	@Column(name="puntaje")
 	private int puntaje;
 	
-	@Transient
-	private Point coordenadas;
 	
 	@Column(name="accionadoAutomatico")
 	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones

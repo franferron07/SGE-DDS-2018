@@ -28,7 +28,7 @@ import entities.ObservadorSensor;
 @DiscriminatorValue("regla")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo")
-public abstract class Regla extends ObservadorSensor {
+public abstract class Regla {
 	
 
 	@Column(name="nombre")
@@ -54,7 +54,6 @@ public abstract class Regla extends ObservadorSensor {
 		this.actuadores= new ArrayList<ActuadorBase>();
 	}
 	
-	@Override
 	public void notificacionDeMedicion(Medicion medicion) {
 		evaluarMedicion(medicion);
 	}
