@@ -37,4 +37,14 @@ public class AdaptadorLog {
 	public LocalDateTime fechaFin;
 	
 	
+	public AdaptadorLog( DispositivoInteligente di ){
+		
+		this.estandar = di.getEstandar();
+		this.adaptador = di;
+		this.fechaInicio = di.fecha_alta;
+		this.fechaFin = LocalDateTime.now();
+		
+	}
+	
+	
 }

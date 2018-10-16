@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import geoposicionamiento.*;
@@ -29,6 +31,7 @@ public abstract class Ubicable {
 	public int id;
 	
 	@OneToMany(mappedBy="ubicable",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OrderBy("orden ASC")
 	public List<Coordenada> coordenadas;
 	
 	
@@ -52,9 +55,11 @@ public abstract class Ubicable {
 		
 	}
 
-	
-	public void addCoordenadas(double x, double y) {
-		this.coordenadas.add( new Coordenada(x,y));
+	//agregamos coordenadas y setemoas el orden
+	public void addCoordenadas(Coordenada coordenada) {
+		
+		coordenada.setOrden( this.coordenadas.size() );
+		this.coordenadas.add(coordenada);
 	}
 	
 	public void setUbicacion(Coordenada coordenadas) {
@@ -66,9 +71,7 @@ public abstract class Ubicable {
 
 	}
 	
-	public void addCoordenadas(Coordenada coordenadas) {
-		this.coordenadas.add(coordenadas);
-	}
+	
 	
 	public void removeCoordenadas(Coordenada coordenadas) {
 		this.coordenadas.remove(coordenadas);

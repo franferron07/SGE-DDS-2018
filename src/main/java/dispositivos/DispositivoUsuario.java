@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -12,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 import usuarios.Categoria;
 import usuarios.Cliente;
@@ -25,6 +28,7 @@ public abstract class DispositivoUsuario {
 	@Id
 	@GeneratedValue
 	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
 	public DispositivoDetalle detalle;
@@ -32,8 +36,11 @@ public abstract class DispositivoUsuario {
 	@Column(name="activado")
 	protected boolean activado;
 	
-	@ManyToOne
-	@JoinColumn(name="cliente_id" , referencedColumnName="id")
+	@Column(name="fecha_alta")
+	protected LocalDateTime fecha_alta;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
 	public Cliente cliente;
 	
 
@@ -47,6 +54,16 @@ public abstract class DispositivoUsuario {
 	
 	public boolean esEsencial(){
 		return detalle.isEsEsencial();
+	}
+	
+	
+	public void activar(){
+		this.activado=true;
+	}
+	
+	public void desactivar(){
+		
+		this.activado=false;
 	}
 	
 	
@@ -64,18 +81,17 @@ public abstract class DispositivoUsuario {
 		return id;
 	}
 	
+	
+	
 //	//------ simplex
 	// en lugar de llamar cada momento a su atributo detalle ,esto lo simplifica haciendolo mas cohesivo ,
 	
-	
-
 	public  double getConsumoKwHora() {
 		return this.detalle.getConsumoKwHora();
 	}
 	public  String getIdentificacion() {
 		return this.detalle.getDescripcion();
 	}
-//	
 	public  double getHsMensualMinimo() {
 		return this.detalle.getHsMensualMinimo();
 	}

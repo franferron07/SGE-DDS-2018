@@ -53,11 +53,11 @@ public class Cliente extends Usuario {
 	@JoinColumn(name="categoria_id" , referencedColumnName="id")
 	private Categoria categoria;
 	
-	@OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST)
 	private List<DispositivoUsuario> dispositivos;
 	
-	@ManyToOne
-	@JoinColumn(name="transformador_id" , referencedColumnName="id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Transformador transformador;
 	
 	@Column(name="puntaje")
@@ -105,15 +105,14 @@ public class Cliente extends Usuario {
 	}
 
 	//conviero dispositivo estandar a inteligente y agrego inteligente a la lista. y saco el estandar de la lista
-	public void convertirEStandarInteligente( DispositivoEstandar dispositivoEstandar) {
+	public void convertirEstandarInteligente( DispositivoEstandar dispositivoEstandar) {
 		
 		ModoApagado modoApagado=new ModoApagado();
 		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado , dispositivoEstandar.detalle);
 		
-		//agrego disposiutivo estandar en inteligente y lo agrego a la lista. 
-		dispositivoInteligente.setEstandar(dispositivoEstandar);
+		//agrego disposiutivo estandar en inteligente y lo agrego a la lista.
+		dispositivoInteligente.convertirDispositivoEstandar( dispositivoEstandar );
 		agregarDispositivo(dispositivoInteligente);
-		
 		quitarDispositivo(dispositivoEstandar);
 		
 		puntaje+=10;
@@ -126,7 +125,7 @@ public class Cliente extends Usuario {
 		DispositivoEstandar estandar = inteligente.getEstandar();
 		
 		if( estandar != null ){
-			inteligente.setEstandar(null);
+			inteligente.quitarAdaptador();
 			quitarDispositivo(inteligente);
 			agregarDispositivo(estandar);
 			

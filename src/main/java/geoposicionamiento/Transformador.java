@@ -35,8 +35,8 @@ public class Transformador extends Ubicable {
 	@Transient
 	private Point coordenadas;
 	
-	@ManyToOne
-	@JoinColumn(name="zona_id",referencedColumnName="id")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
 	private ZonaGeografica zonaAsignada;
 
 	

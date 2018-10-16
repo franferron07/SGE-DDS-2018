@@ -36,6 +36,8 @@ public class Coordenada {
 		this.longitud=lon;
 	}
 
+	
+	//getters y setters
 	public double getLongitud() {
 		return longitud;
 	}
@@ -50,6 +52,14 @@ public class Coordenada {
 
 	public void setLatitud(double latitud) {
 		this.latitud = latitud;
+	}
+	
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int orden) {
+		this.orden = orden;
 	}
 
 }

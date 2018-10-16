@@ -20,6 +20,7 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		
 		detalle = disp_detalle;
 		activado = true;
+		this.fecha_alta = LocalDateTime.now();
 	}
 	
 	

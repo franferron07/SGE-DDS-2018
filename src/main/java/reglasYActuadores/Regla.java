@@ -44,8 +44,8 @@ public abstract class Regla extends ObservadorSensor {
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
 	
-	@ManyToOne
-	@JoinColumn( name="regla_id" , referencedColumnName="id" )
+	@ManyToOne( fetch = FetchType.LAZY )
+	@JoinColumn
 	private ReglaCompuesta regla_padre;
 	
 	

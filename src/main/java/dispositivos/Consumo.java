@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,8 +26,8 @@ public class Consumo {
 	@Column(name = "consumo")
 	private float consumo;
 	
-	@ManyToOne
-	@JoinColumn( name="modo_id" , referencedColumnName="id" )
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
 	private Modo modo;
 	
 	public Consumo( LocalDateTime i , LocalDateTime f , float c ){

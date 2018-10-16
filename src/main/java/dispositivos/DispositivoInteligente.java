@@ -57,6 +57,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos.add(m);
 		this.detalle = disp_detalle;
 		this.activado = true;
+		this.fecha_alta = LocalDateTime.now();
 	}
     
     //constructor sin modo osea apagado.
@@ -67,6 +68,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos.add(new ModoApagado());
 		this.detalle = disp_detalle;
 		this.activado = true;
+		this.fecha_alta = LocalDateTime.now();
 	}
     
     //constructor
@@ -76,6 +78,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(new ModoApagado());
 		this.activado = true;
+		this.fecha_alta = LocalDateTime.now();
 	}
 	
 	
@@ -109,19 +112,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		
 		//calculo el consumo
 		consumoTotal = modosFiltrados.stream().mapToDouble(disp -> disp.consumoEnPeriodo( desde , hasta )).sum();
-		
-	/*
-		//sumo lo consumido por el modo actual
-		if( this.estaEncendido() ){
-			
-			modoActual = (ModoConConsumo) this.getModo();
-			//chequeo si esta en intervalo
-			if(modoActual.cumpleIntervalo(desde, hasta)){
-				consumoActual = modoActual.consumoEnPeriodo(desde, hasta);
-			}
-		
-			consumoTotal = consumoTotal + consumoActual;
-		}*/
 		
 		return (float) consumoTotal;
 	}
@@ -172,6 +162,20 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		
 		return null;
 	}
+	
+	//desactivo el dispositivo inteligente.  este metodo va a tener que insertar en tabla de disposisitovs adaptados log este dispositivo.
+	public void quitarAdaptador(){
+		
+		this.estandar.activar();
+		desactivar();
+	}
+	
+	public void convertirDispositivoEstandar(DispositivoEstandar dispositivoEstandar) {
+		
+		setEstandar(dispositivoEstandar);
+		this.estandar.desactivar();
+	}
+	
 
 	public boolean estaEncendido(){	
 		return modoActual().encendido();
@@ -244,6 +248,8 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		}
 		
 	}
+
+	
 
 
 	

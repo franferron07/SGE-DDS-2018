@@ -44,18 +44,17 @@ public class UsuarioDbTest1 {
 		
 		model.agregar(categoria);
 		
-		/*di_estandar.cliente = cliente;
-		model.agregar(di_estandar);*/
+		di_estandar.cliente = cliente;
 		
 		model.agregar(cliente);
 	}
 	
-	@Test
+	/*@Test
 	public void testRecuperarCliente(){
 		Cliente cliente2 = model.buscar(Cliente.class, 1);
 		
 		Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
-	}
+	}*/
 	
 
 }

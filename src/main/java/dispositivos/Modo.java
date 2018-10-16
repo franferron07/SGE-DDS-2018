@@ -31,8 +31,9 @@ public abstract class Modo {
 	@Column(name="fechaHoraFin")
 	protected LocalDateTime fechaHoraFin;
 	
-	@ManyToOne
-	@JoinColumn( name="inteligente_id" , referencedColumnName="id" )
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
 	protected DispositivoInteligente di;
 	
 	@OneToMany(mappedBy="modo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)
