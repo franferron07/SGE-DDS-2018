@@ -44,9 +44,11 @@ public class Cliente extends Usuario {
 	@Column(name="numeroDocumento")
 	private String numeroDocumento;
 	@Column(name="fechaAltaServicio")
-	private Date fechaAltaServicio;
+	private String fechaAltaServicio_s;
 	@Column(name="telefonoContacto")
 	private String telefonoContacto;
+	@Transient
+	private LocalDateTime fechaAltaServicio;
 	
 	@ManyToOne
 	@JoinColumn(name="categoria_id" , referencedColumnName="id")
@@ -67,6 +69,7 @@ public class Cliente extends Usuario {
 	public Cliente(){
 		super();
 		dispositivos= new ArrayList<DispositivoUsuario>();
+		fechaAltaServicio=LocalDateTime.now();
 		
 	}
 	
@@ -178,11 +181,11 @@ public class Cliente extends Usuario {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	public Date getFechaAltaServicio() {
+	public LocalDateTime getFechaAltaServicio() {
 		return fechaAltaServicio;
 	}
 
-	public void setFechaAltaServicio(Date fechaAltaServicio) {
+	public void setFechaAltaServicio(LocalDateTime fechaAltaServicio) {
 		this.fechaAltaServicio = fechaAltaServicio;
 	}
 

@@ -47,9 +47,10 @@ public class DispositivoInteligente extends DispositivoUsuario {
     @JoinColumn(name = "dispositivo_id")
 	private DispositivoUsuario di_padre; //relacion de hijo a padre
 	
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY) 
+	/*
+	@ManyToMany 
 	private List<Regla> reglas;
-	
+	*/
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {
 

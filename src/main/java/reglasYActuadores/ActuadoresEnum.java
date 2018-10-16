@@ -21,7 +21,8 @@ public enum ActuadoresEnum {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	/*
+	@ManyToMany
 	private List<Regla> reglas;
-
+	*/
 }
