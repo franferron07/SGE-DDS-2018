@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="ubicable")
 @Inheritance(strategy=InheritanceType.JOINED)

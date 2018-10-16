@@ -9,7 +9,6 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	<class>usuarios.Usuario</class>
-		<class>usuarios.Login</class>
 		<class>usuarios.Categoria</class>
 		<class>usuarios.Cliente</class>
 		<class>usuarios.Administrador</class>
@@ -23,7 +22,6 @@
 		<class>dispositivos.ModoEncendido</class>
 		<class>dispositivos.Consumo</class>
 		<class>entities.Sensor</class>
-		<class>entities.ObservadorSensor</class>
 		<class>entities.Medicion</class>
 		<class>reglasYActuadores.Regla</class>
 		<class>reglasYActuadores.ReglaCompuesta</class>

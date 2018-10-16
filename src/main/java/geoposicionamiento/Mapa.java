@@ -31,6 +31,7 @@ public class Mapa {
 
 	public Transformador factoryTransformador() {
 		Transformador trafo = new Transformador();
+		this.asignarZonaTransformador(trafo);
 		this.transformadores.add(trafo);
 		return trafo;
 	}
