@@ -12,19 +12,14 @@ public class Mapa {
 	
 	
 	private List<ZonaGeografica> zonasGeograficas;
-	
-	private RepositorioZonas repoZonas;
-	private RepositorioTransformadores repoTransformadores;
+	private List<Transformador> transformadores;
 	
 	
 	//constructor
 	public Mapa(){
 		
-		repoZonas = new RepositorioZonas();
-		repoTransformadores = new RepositorioTransformadores();
-		
-		
 		zonasGeograficas = new ArrayList<ZonaGeografica>();
+		transformadores=new ArrayList<Transformador>();
 		//zonasGeograficas = daoZonaGeografica.obtener();
 	}
 	
@@ -34,10 +29,15 @@ public class Mapa {
 		return zona;
 	}
 
+	public Transformador factoryTransformador() {
+		Transformador trafo = new Transformador();
+		this.transformadores.add(trafo);
+		return trafo;
+	}
+
 	//obtener y asignar transformadores a las zonas existentes
 	public void leerTransformador(){
 		
-		List<Transformador> transformadores = repoTransformadores.getTransformadores();
 		if( !transformadores.isEmpty() ){
 			//agrego transformador a las zonas.
 			transformadores.forEach(t->t.getZonaAsignada().agregarTransformador(t));	
