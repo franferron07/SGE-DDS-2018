@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 //subir
 
@@ -27,9 +25,6 @@ public class Coordenada {
 	@Column(name="orden")
 	public int orden;
 	
-	@ManyToOne
-	@JoinColumn(name = "ubicable_id", referencedColumnName = "id")
-	private Ubicable ubicable;
 	
 	public Coordenada(double lat,double lon) {
 		this.latitud=lat;

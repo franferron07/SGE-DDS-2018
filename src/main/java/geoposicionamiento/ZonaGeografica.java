@@ -1,29 +1,20 @@
 package geoposicionamiento;
 
-import java.awt.Point;
-import java.awt.Polygon;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import usuarios.Cliente;
-import usuarios.Usuario;
 //subir
 
 @Entity
@@ -33,11 +24,11 @@ import usuarios.Usuario;
 public class ZonaGeografica extends Ubicable{
 	
 	
-	@OneToMany(mappedBy="zonaAsignada",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@JoinColumn( name="zonaAsignada_id" , referencedColumnName="id" )
 	private List<Transformador> transformadores;
 
 
-	
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();

@@ -40,7 +40,7 @@ public abstract class Usuario extends Ubicable{
 	protected Login login;
 	
 	public Usuario() {
-		
+		super();
 	}
 	
 	public boolean login(String nombreUsuario, String password) {

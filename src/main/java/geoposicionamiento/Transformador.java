@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,17 +24,15 @@ import usuarios.Cliente;
 public class Transformador extends Ubicable {
 	
 	
-	@OneToMany(mappedBy="transformador",cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@JoinColumn( name="transformador_id" , referencedColumnName="id" )
 	private List<Cliente> clientes;
 	
-//	@OneToOne( mappedBy="transformador",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@Transient
 	private Point coordenadas;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
 	private ZonaGeografica zonaAsignada;
-
 	
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="ubicable_id")

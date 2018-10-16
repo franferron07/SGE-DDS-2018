@@ -28,7 +28,8 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 
 	//contiene los modos, el ultimo modo es el modo actual
-	@OneToMany(mappedBy="di" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@JoinColumn( name="dispositivo_id" , referencedColumnName="id" )
 	private List<Modo> logModos ;
 
 	@ManyToOne

@@ -13,12 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
-import geoposicionamiento.*;
+
 
 @Entity
 @Table(name="ubicable")
@@ -30,7 +30,8 @@ public abstract class Ubicable {
 	@GeneratedValue
 	public int id;
 	
-	@OneToMany(mappedBy="ubicable",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@JoinColumn( name="ubicable_id" , referencedColumnName="id" )
 	@OrderBy("orden ASC")
 	public List<Coordenada> coordenadas;
 	

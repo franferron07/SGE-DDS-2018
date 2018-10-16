@@ -14,7 +14,6 @@ import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import dispositivos.ModoApagado;
-import geoposicionamiento.Transformador;
 import optimizacion_horas.Optimizador;
 
 import javax.persistence.Column;
@@ -53,12 +52,9 @@ public class Cliente extends Usuario {
 	@JoinColumn(name="categoria_id" , referencedColumnName="id")
 	private Categoria categoria;
 	
-	@OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@JoinColumn( name="cliente_id" , referencedColumnName="id" )
 	private List<DispositivoUsuario> dispositivos;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Transformador transformador;
 	
 	@Column(name="puntaje")
 	private int puntaje;
@@ -71,6 +67,7 @@ public class Cliente extends Usuario {
 
 	//constructor 
 	public Cliente(){
+		super();
 		dispositivos= new ArrayList<DispositivoUsuario>();
 		
 	}

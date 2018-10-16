@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,12 +30,8 @@ public abstract class Modo {
 	@Column(name="fechaHoraFin")
 	protected LocalDateTime fechaHoraFin;
 	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-	protected DispositivoInteligente di;
-	
-	@OneToMany(mappedBy="modo",cascade=CascadeType.PERSIST , fetch=FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@JoinColumn( name="modo_id" , referencedColumnName="id" )
 	protected List<Consumo> consumos;
 	
 	

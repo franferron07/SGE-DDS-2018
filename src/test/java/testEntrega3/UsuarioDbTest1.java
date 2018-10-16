@@ -27,6 +27,7 @@ public class UsuarioDbTest1 {
 		cliente.setNombre("Francisco");
 		cliente.setApellido("Ferron");
 		cliente.setTipoDocumento("DNI");
+		//cliente.setDomicilio("calle falsa 1234");
 		cliente.setTelefonoContacto("44442222");
 		cliente.setPuntaje(0);
 		cliente.setAccionadoAutomatico(false);
@@ -42,10 +43,9 @@ public class UsuarioDbTest1 {
 	@Test
 	public void testCrearCliente(){
 		
+		cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );
+		
 		model.agregar(categoria);
-		
-		di_estandar.cliente = cliente;
-		
 		model.agregar(cliente);
 	}
 	
@@ -53,7 +53,10 @@ public class UsuarioDbTest1 {
 	public void testRecuperarCliente(){
 		Cliente cliente2 = model.buscar(Cliente.class, 1);
 		
-		Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
+		cliente2.agregarDispositivo(di_estandar);
+		model.modificar(cliente2);
+		
+		//Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
 	}*/
 	
 
