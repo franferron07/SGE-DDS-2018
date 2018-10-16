@@ -44,9 +44,11 @@ public abstract class Regla {
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
 	
+	/*
 	@ManyToOne( fetch = FetchType.LAZY )
 	@JoinColumn
 	private ReglaCompuesta regla_padre;
+	*/
 	
 	
 	public Regla(String nombre){

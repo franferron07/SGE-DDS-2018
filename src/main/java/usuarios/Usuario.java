@@ -35,6 +35,12 @@ public abstract class Usuario extends Ubicable{
 	@Column(name="domicilio")
 	protected String domicilio;
 	
+
+	@Column(name="username")
+	private String username;
+	@Column(name="password")
+	private String password;
+	
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="id")
 	protected Login login;
@@ -72,5 +78,22 @@ public abstract class Usuario extends Ubicable{
 		this.domicilio = domicilio;
 		super.setUbicacion(GeoCodingService.getCoordinates(domicilio));
 	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	
 }
