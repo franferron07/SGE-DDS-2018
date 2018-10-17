@@ -1,6 +1,7 @@
 package dispositivos;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="modo")
@@ -27,10 +29,12 @@ public abstract class Modo {
 	@Id
 	@GeneratedValue
 	protected int id;
+	
 	@Column(name="fechaHoraInicio")
-	protected LocalDateTime fechaHoraInicio;
+	protected String fechaHoraInicio_s;
+
 	@Column(name="fechaHoraFin")
-	protected LocalDateTime fechaHoraFin;
+	protected String fechaHoraFin_s;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
@@ -39,12 +43,19 @@ public abstract class Modo {
 	@OneToMany(mappedBy="modo", cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	protected List<Consumo> consumos;
 	
+	@Transient
+	protected LocalDateTime fechaHoraInicio;
+	@Transient
+	protected LocalDateTime fechaHoraFin;
 	
 	//constructor
 	public Modo( DispositivoInteligente di ){
 		this.fechaHoraInicio= LocalDateTime.now();
     	this.consumos = new ArrayList<Consumo>();
 		this.dispositivo_inteligente = di;
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		fechaHoraInicio_s= fechaHoraInicio.format(formatter);
 	}
 	
 	
@@ -82,6 +93,13 @@ public abstract class Modo {
 	
 	
 	
+	//parsea fecha
+	public LocalDateTime parsearFecha( String fecha_s ){
+		
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		return LocalDateTime.parse(fecha_s, formatter);
+	}
+	
 	
 	public int cantidadConsumos(){
 		
@@ -91,20 +109,46 @@ public abstract class Modo {
 
 	
 	//getters y setters
+	
 	public LocalDateTime getFechaHoraInicio() {
+		
+		this.fechaHoraInicio = parsearFecha(fechaHoraInicio_s);
 		return fechaHoraInicio;
 	}
-
-	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-		this.fechaHoraInicio = fechaHoraInicio;
-	}
-
+	
 	public LocalDateTime getFechaHoraFin() {
+		
+		this.fechaHoraFin = parsearFecha(fechaHoraFin_s);
 		return fechaHoraFin;
 	}
+	
+	public String getFechaHoraInicio_s() {
+		return fechaHoraInicio_s;
+	}
 
+
+	public void setFechaHoraInicio_s(String fechaHoraInicio_s) {
+		this.fechaHoraInicio_s = fechaHoraInicio_s;
+	}
+
+
+	public String getFechaHoraFin_s() {
+		return fechaHoraFin_s;
+	}
+
+
+	public void setFechaHoraFin_s(String fechaHoraFin_s) {
+		this.fechaHoraFin_s = fechaHoraFin_s;
+	}
+
+	
 	public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
 		this.fechaHoraFin = fechaHoraFin;
+		
+		/* seteo hora parseada final */
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		fechaHoraFin_s= fechaHoraFin.format(formatter);
+		
 	}
 
 	public int getId() {

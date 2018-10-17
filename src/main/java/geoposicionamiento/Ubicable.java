@@ -60,17 +60,7 @@ public abstract class Ubicable {
 		this.coordenadas.add(coordenada);
 	}
 	
-	public void setUbicacion(Coordenada coordenadas) {
-		if(!this.coordenadas.isEmpty())
-		{
-			this.coordenadas=new ArrayList<Coordenada>();
-		}
-		this.coordenadas.add(coordenadas);
 
-	}
-	
-	
-	
 	public void removeCoordenadas(Coordenada coordenadas) {
 		this.coordenadas.remove(coordenadas);
 	}

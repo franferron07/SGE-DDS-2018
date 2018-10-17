@@ -45,7 +45,7 @@ public class ModoEncendido extends Modo{
 	@Override
 	public void registrarConsumo(LocalDateTime inicio, LocalDateTime fin , float consumo) {
 		
-		Consumo consumoModo = new Consumo( inicio , fin , consumo );
+		Consumo consumoModo = new Consumo( this , inicio , fin , consumo );
 		this.agregarConsumo( consumoModo );
 	}
 	

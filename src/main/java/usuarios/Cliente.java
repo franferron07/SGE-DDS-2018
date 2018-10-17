@@ -47,6 +47,7 @@ public class Cliente extends Usuario {
 	private String telefonoContacto;
 	@Column(name="fechaAltaServicio")
 	private String fechaAltaServicio_s;
+
 	@Transient
 	private LocalDateTime fechaAltaServicio;
 	
@@ -69,6 +70,7 @@ public class Cliente extends Usuario {
 	private boolean accionadoAutomatico; //variable que utiliza el simplex para ejecutar automaticamente acciones
 
 	//constructor 
+	
 	public Cliente(){
 		super();
 		dispositivos= new ArrayList<DispositivoUsuario>();
@@ -157,7 +159,7 @@ public class Cliente extends Usuario {
 		
 	}
 	
-	
+	//setea la fecha del alta correctamente
 	public void parsearFecha( String fecha_s ){
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -178,6 +180,16 @@ public class Cliente extends Usuario {
 	
 	
 	//getters y setters
+	
+	public String getFechaAltaServicio_s() {
+		parsearFecha(this.fechaAltaServicio_s);
+		return fechaAltaServicio_s;
+	}
+
+	public void setFechaAltaServicio_s(String fechaAltaServicio_s) {
+		this.fechaAltaServicio_s = fechaAltaServicio_s;
+	}
+	
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}

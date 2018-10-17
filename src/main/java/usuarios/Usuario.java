@@ -1,20 +1,15 @@
 package usuarios;
 
-import geoposicionamiento.Coordenada;
 import geoposicionamiento.Ubicable;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.google.maps.errors.ApiException;
@@ -52,16 +47,6 @@ public abstract class Usuario extends Ubicable{
 		return (getUsername() == nombreUsuario && getPassword() == password);
 	}
 
-
-	//coordenadas
-	public Coordenada getCoordenada() {
-	
-		return this.coordenadas.get(0);
-	}
-	
-	
-	
-	
 	
 	public String getNombre() {
 		return nombre;
@@ -86,7 +71,7 @@ public abstract class Usuario extends Ubicable{
 
 	public void setDomicilio(String domicilio) throws ApiException, InterruptedException, IOException {
 		this.domicilio = domicilio;
-		super.setUbicacion(GeoCodingService.getCoordinates(domicilio));
+		this.addCoordenadas(GeoCodingService.getCoordinates(domicilio));
 	}
 	
 	public String getUsername() {

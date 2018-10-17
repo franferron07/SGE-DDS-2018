@@ -1,6 +1,7 @@
 package dispositivos;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -19,10 +21,15 @@ public class Consumo {
 	@Id
 	@GeneratedValue
 	private int id;
-	@Column(name = "fechaInicio")
-	private LocalDateTime inicio;
-	@Column(name = "fechaFin")
-	private LocalDateTime fin;
+	
+	
+	@Column(name="fechaInicio")
+	protected String fechaInicio_s;
+
+	@Column(name="fechaFin")
+	protected String fechaFin_s;
+	
+
 	@Column(name = "consumo")
 	private float consumo;
 	
@@ -30,10 +37,20 @@ public class Consumo {
 	@JoinColumn
 	protected Modo modo;
 	
-	public Consumo( LocalDateTime i , LocalDateTime f , float c ){
+	@Transient
+	private LocalDateTime inicio;
+	@Transient
+	private LocalDateTime fin;
+	
+	public Consumo( Modo m  , LocalDateTime i , LocalDateTime f , float c  ){
 		this.inicio=i;
 		this.fin=f;
 		this.consumo=c;
+		this.modo = m;
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		this.fechaInicio_s= inicio.format(formatter);
+		this.fechaFin_s= fin.format(formatter);
 	}
 
 	//metodo que indica si esta dentro del periodo pasado o no.por decision de diseño debe estar el inicio y fin en el periodo pasado
@@ -47,15 +64,28 @@ public class Consumo {
 	}
 	
 	
+	//parsea fecha
+	public LocalDateTime parsearFecha( String fecha_s ){
+		
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		return LocalDateTime.parse(fecha_s, formatter);
+	}
+	
+	
+	//getters y seters
 	public double getConsumo() {
 		return consumo;
 	}
 	
 	public LocalDateTime getInicio() {
+		
+		this.inicio = parsearFecha(this.fechaInicio_s);
 		return inicio;
 	}
 
 	public LocalDateTime getFin() {
+		
+		this.fin =  parsearFecha(this.fechaFin_s);
 		return fin;
 	}
 	

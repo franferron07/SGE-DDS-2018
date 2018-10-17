@@ -1,5 +1,7 @@
 package testEntrega3;
 
+import java.time.LocalDateTime;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,37 +41,38 @@ public class UsuarioDbTest1 {
 		
 		cliente.agregarDispositivo(di_estandar);
 		
-	}
-	
-	
-	@Test
-	public void testCrearCliente(){
-		
-		cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );
-		
 		model.agregar(categoria);
 		model.agregar(cliente);
+		
 	}
 	
+	
 	@Test
-	public void testRecuperarCliente(){
-		Cliente cliente2 = model.buscar(Cliente.class, 1);
+	public void testCrearClienteRecuperarYModificar(){
 		
-		cliente2.agregarDispositivo(di_estandar);
-		model.modificar(cliente2);
+		/*cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );*/
 		
-		Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
+		Cliente cliente2 = model.buscar(Cliente.class, cliente.id);
+		
+		Coordenada c = new Coordenada(cliente2, 54545,54545 );
+		cliente2.addCoordenadas( c );
+		
+		//model.modificar(cliente2);
+		
+		Coordenada c2 = cliente2.getCoordenada();
+		Assert.assertEquals(54545.0, c.latitud);
+		Assert.assertEquals(54545.0, c.longitud);
+		
 	}
 	
 	
 	@Test
 	public void testRecuperarClienteFechaCorrecta(){
-		Cliente cliente2 = model.buscar(Cliente.class, 6);
-		
-		
-		System.out.println("TEST" + " " + cliente2.getFechaAltaServicio());
+		Cliente cliente2 = model.buscar(Cliente.class, cliente.id);
+
+		System.out.println("TEST" + " " + cliente2.getFechaAltaServicio_s() + "--"+cliente2.getFechaAltaServicio());
 	}
-	
+
 	
 
 }

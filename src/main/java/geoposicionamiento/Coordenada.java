@@ -31,6 +31,11 @@ public class Coordenada {
 	@Column(name="orden")
 	public int orden;
 	
+	public Coordenada(Ubicable ubicable , double lat,double lon) {
+		this.latitud=lat;
+		this.longitud=lon;
+		this.ubicable = ubicable;
+	}
 	
 	public Coordenada(double lat,double lon) {
 		this.latitud=lat;
@@ -38,11 +43,6 @@ public class Coordenada {
 		this.ubicable = null;
 	}
 	
-	public Coordenada(Ubicable ubicable , double lat,double lon) {
-		this.latitud=lat;
-		this.longitud=lon;
-		this.ubicable = ubicable;
-	}
 
 	
 	//getters y setters
