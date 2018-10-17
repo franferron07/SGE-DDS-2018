@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -12,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import usuarios.Cliente;
 
 @Entity
 @Table(name="dispositivo")
@@ -23,7 +26,7 @@ public abstract class DispositivoUsuario {
 	@GeneratedValue
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
 	public DispositivoDetalle detalle;
 	
@@ -32,6 +35,10 @@ public abstract class DispositivoUsuario {
 	
 	@Column(name="fecha_alta")
 	protected LocalDateTime fecha_alta;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+	protected Cliente cliente;
 	
 	
 	//Me da el consumo en un determinado periodo de tiempo. 
@@ -71,6 +78,13 @@ public abstract class DispositivoUsuario {
 		return id;
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 	
 //	//------ simplex

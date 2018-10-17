@@ -9,8 +9,6 @@ import org.junit.Test;
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
-import dispositivos.ModoApagado;
-import excepciones.ArchivoException;
 import junit.framework.Assert;
 import usuarios.Cliente;
 
@@ -21,7 +19,7 @@ public class ClienteTest {
 	@Before
 	public void init() {
 		List<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
-        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new ModoApagado() , new DispositivoDetalle());
+        DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(new DispositivoDetalle());
         dispositivos.add(dispositivoInteligente);
                
 		cliente = new Cliente(dispositivos);

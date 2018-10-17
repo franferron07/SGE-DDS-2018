@@ -1,6 +1,7 @@
 package dispositivos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,9 +32,20 @@ public abstract class Modo {
 	@Column(name="fechaHoraFin")
 	protected LocalDateTime fechaHoraFin;
 	
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
-	@JoinColumn( name="modo_id" , referencedColumnName="id" )
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	protected DispositivoInteligente dispositivo_inteligente;
+
+	@OneToMany(mappedBy="modo", cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	protected List<Consumo> consumos;
+	
+	
+	//constructor
+	public Modo( DispositivoInteligente di ){
+		this.fechaHoraInicio= LocalDateTime.now();
+    	this.consumos = new ArrayList<Consumo>();
+		this.dispositivo_inteligente = di;
+	}
 	
 	
 	public abstract boolean encendido();
@@ -47,25 +60,24 @@ public abstract class Modo {
 	public abstract boolean cumpleIntervalo(LocalDateTime desde, LocalDateTime hasta);
 
 	
-	
 	public void apagarse(DispositivoInteligente disp) {		
 		//agrego log de modo antes de cambiarlo y le seteo la fecha final
 		setFechaHoraFin(LocalDateTime.now());
 		
-		disp.agregarLogModo(new ModoApagado() );
+		disp.agregarLogModo(new ModoApagado( getDispositivo_inteligente() ) );
 	}
 	
 	public void encenderse(DispositivoInteligente disp) {
 		//agrego log de modo antes de cambiarlo
 		setFechaHoraFin(LocalDateTime.now());
-		disp.agregarLogModo( new ModoEncendido() );
+		disp.agregarLogModo( new ModoEncendido( getDispositivo_inteligente() ) );
 	}
 	
 	public void ahorrarseEnergia(DispositivoInteligente disp) {
 		//agrego log de modo antes de cambiarlo y le seteo la fecha final
 		setFechaHoraFin(LocalDateTime.now());
 		
-		disp.agregarLogModo( new ModoAhorroEnergia() );
+		disp.agregarLogModo( new ModoAhorroEnergia( getDispositivo_inteligente() ) );
 	}
 	
 	
@@ -99,5 +111,12 @@ public abstract class Modo {
 		return id;
 	}
 	
+	public DispositivoInteligente getDispositivo_inteligente() {
+		return dispositivo_inteligente;
+	}
+
+	public void setDispositivo_inteligente(DispositivoInteligente dispositivo_inteligente) {
+		this.dispositivo_inteligente = dispositivo_inteligente;
+	}
 
 }

@@ -18,15 +18,11 @@ import javax.persistence.Table;
 public class ModoEncendido extends Modo{
 
 	
-
-	//constructor
-    public ModoEncendido() {
-    	
-    	this.fechaHoraInicio= LocalDateTime.now();
-    	this.consumos = new ArrayList<Consumo>();
+    
+	public ModoEncendido(DispositivoInteligente di) {
+		super(di);
+		// TODO Auto-generated constructor stub
 	}
-    
-    
 
 	@Override
 	public boolean encendido() {

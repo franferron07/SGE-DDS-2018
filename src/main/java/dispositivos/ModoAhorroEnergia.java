@@ -19,15 +19,10 @@ public class ModoAhorroEnergia extends Modo {
 	
 	
 	
-	
-	//constructor
-	public ModoAhorroEnergia() {
-		
-		this.fechaHoraInicio= LocalDateTime.now();
-		this.consumos = new ArrayList<Consumo>();
+	public ModoAhorroEnergia(DispositivoInteligente di) {
+		super(di);
 	}
-	
-	
+
 	@Override
 	public boolean encendido() {
 		return true;

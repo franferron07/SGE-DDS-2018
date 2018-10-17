@@ -14,7 +14,6 @@ import dispositivos.DispositivoInteligente;
 import dispositivos.Modo;
 import dispositivos.ModoAhorroEnergia;
 import dispositivos.ModoApagado;
-import dispositivos.ModoConConsumo;
 import dispositivos.ModoEncendido;
 
 public class DispositivoInteligenteConsumoTest {
@@ -26,7 +25,7 @@ public class DispositivoInteligenteConsumoTest {
 	@Before
 	public void init(){
 		
-		apagado = new ModoApagado();
+		apagado = new ModoApagado( di );
 		
 		di = new DispositivoInteligente(apagado , new DispositivoDetalle());
 		

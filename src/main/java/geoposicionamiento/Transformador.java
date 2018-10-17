@@ -24,14 +24,14 @@ import usuarios.Cliente;
 public class Transformador extends Ubicable {
 	
 	
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
-	@JoinColumn( name="transformador_id" , referencedColumnName="id" )
+	@OneToMany(mappedBy="transformador", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
 	private List<Cliente> clientes;
 	
 	@Transient
 	private Point coordenadas;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
 	private ZonaGeografica zonaAsignada;
 	
 	@OneToOne(fetch = FetchType.LAZY) 

@@ -28,8 +28,7 @@ public abstract class Ubicable {
 	@GeneratedValue
 	public int id;
 	
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
-	@JoinColumn( name="ubicable_id" , referencedColumnName="id" )
+	@OneToMany(mappedBy="ubicable", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
 	@OrderBy("orden ASC")
 	public List<Coordenada> coordenadas;
 	
@@ -108,12 +107,27 @@ public abstract class Ubicable {
 		return masCercano;
 		
 	}
+	
 	public List<Coordenada> getCoordenadas() {
 		return coordenadas;
 	}
 	public void setCoordenadas(List<Coordenada> coordenadas) {
 		this.coordenadas = coordenadas;
 	}
+	
+	//me da la coordenada para un cliente o un transformador. (su ultima coordenada en la lista es la actual)
+	public Coordenada getCoordenada() {
+		return ultimoElemento();
+	}
+	
+	public Coordenada ultimoElemento() {
+		int total = this.coordenadas.size();
+		if(total > 0 ){
+			return coordenadas.get(total-1);
+		}
+		return null;
+	}
+	
 }
 
 	

@@ -20,7 +20,7 @@ public class DispositivoInteligenteCambiosDeModoTest {
 
 	    @Before
 	    public void init() {
-	        modo = new ModoEncendido(); // new ModoApagado() // new ModoAhorroEnergia()
+	        modo = new ModoEncendido( dispositivoInteligente ); // new ModoApagado() // new ModoAhorroEnergia()
 	        dispositivoInteligente=new DispositivoInteligente(modo , new DispositivoDetalle() );
 	    }
 
@@ -32,13 +32,13 @@ public class DispositivoInteligenteCambiosDeModoTest {
 	    @Test
 	    public void testApagadoEncender() {
 	        dispositivoInteligente.encender();
-	        assertEquals(new ModoEncendido().toString(),dispositivoInteligente.modoActual().toString());
+	        assertEquals(new ModoEncendido( dispositivoInteligente ).toString(),dispositivoInteligente.modoActual().toString());
 	    }
 
 	    @Test
 	    public void testApagadoApagar() {
 	        dispositivoInteligente.apagar();
-	        assertEquals(new ModoApagado().toString(),dispositivoInteligente.modoActual().toString());
+	        assertEquals(new ModoApagado( dispositivoInteligente ).toString(),dispositivoInteligente.modoActual().toString());
 	    }
 
 	    @Test
@@ -56,7 +56,7 @@ public class DispositivoInteligenteCambiosDeModoTest {
 	    public void testEncendidoAhorroEnergia() {
 	        try {
 	            dispositivoInteligente.ahorrarEnergia();
-	            assertEquals(new ModoAhorroEnergia().toString(),dispositivoInteligente.modoActual().toString());
+	            assertEquals(new ModoAhorroEnergia( dispositivoInteligente ).toString(),dispositivoInteligente.modoActual().toString());
 	        } catch (UnsupportedOperationException ignored) {
 	            ignored.toString();
 	        }

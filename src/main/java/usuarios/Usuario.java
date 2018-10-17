@@ -1,9 +1,10 @@
 package usuarios;
 
+import geoposicionamiento.Coordenada;
 import geoposicionamiento.Ubicable;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -34,8 +35,6 @@ public abstract class Usuario extends Ubicable{
 	protected String apellido;
 	@Column(name="domicilio")
 	protected String domicilio;
-	
-
 	@Column(name="username")
 	private String username;
 	@Column(name="password")
@@ -53,6 +52,17 @@ public abstract class Usuario extends Ubicable{
 		return (getUsername() == nombreUsuario && getPassword() == password);
 	}
 
+
+	//coordenadas
+	public Coordenada getCoordenada() {
+	
+		return this.coordenadas.get(0);
+	}
+	
+	
+	
+	
+	
 	public String getNombre() {
 		return nombre;
 	}

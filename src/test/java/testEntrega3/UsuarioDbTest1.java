@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoEstandar;
+import geoposicionamiento.Coordenada;
 import junit.framework.Assert;
 import models.ModelHelper;
 import usuarios.Categoria;
@@ -32,6 +33,7 @@ public class UsuarioDbTest1 {
 		cliente.setPuntaje(0);
 		cliente.setAccionadoAutomatico(false);
 		cliente.setCategoria( categoria );
+		cliente.addCoordenadas(new Coordenada(cliente, 3333,3333 ));
 		
 		di_estandar = new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1));
 		
@@ -49,15 +51,25 @@ public class UsuarioDbTest1 {
 		model.agregar(cliente);
 	}
 	
-	/*@Test
+	@Test
 	public void testRecuperarCliente(){
 		Cliente cliente2 = model.buscar(Cliente.class, 1);
 		
 		cliente2.agregarDispositivo(di_estandar);
 		model.modificar(cliente2);
 		
-		//Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
-	}*/
+		Assert.assertEquals(cliente.getNombre(), cliente2.getNombre());
+	}
+	
+	
+	@Test
+	public void testRecuperarClienteFechaCorrecta(){
+		Cliente cliente2 = model.buscar(Cliente.class, 6);
+		
+		
+		System.out.println("TEST" + " " + cliente2.getFechaAltaServicio());
+	}
+	
 	
 
 }

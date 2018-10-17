@@ -9,19 +9,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dispositivos.Consumo;
+import dispositivos.DispositivoInteligente;
 import dispositivos.ModoEncendido;
 
 public class ModoConConsumoTest {
 	
-	
+	private DispositivoInteligente di;
 	private ModoEncendido modoEncendido;
 	
 	@Before
 	public void init(){		
 		//creo modo encendido con 2 consumos
-		
+		di = new DispositivoInteligente(null);
 		LocalDateTime fin = LocalDateTime.now().plusDays(3);
-		modoEncendido = new ModoEncendido();
+		modoEncendido = new ModoEncendido(di);
 		modoEncendido.setFechaHoraFin(fin);
 		
 		LocalDateTime inicio_1 = modoEncendido.getFechaHoraInicio();
@@ -40,7 +41,7 @@ public class ModoConConsumoTest {
 	public void testCrearModo(){
 		
 		LocalDateTime fecha=LocalDateTime.now();
-		ModoEncendido modoEncendidoPrueba= new ModoEncendido();
+		ModoEncendido modoEncendidoPrueba= new ModoEncendido(di);
 		
 		assertEquals(fecha.getDayOfMonth(), modoEncendidoPrueba.getFechaHoraInicio().getDayOfMonth());
 		assertEquals(0, modoEncendidoPrueba.getConsumos().size());

@@ -11,7 +11,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,7 +18,6 @@ import javax.persistence.Transient;
 
 import reglasYActuadores.ActuadorBase;
 import reglasYActuadores.ActuadoresEnum;
-import reglasYActuadores.Regla;
 
 
 @Entity
@@ -28,8 +26,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	
 
 	//contiene los modos, el ultimo modo es el modo actual
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
-	@JoinColumn( name="dispositivo_id" , referencedColumnName="id" )
+	@OneToMany(mappedBy="dispositivo_inteligente", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
 	private List<Modo> logModos ;
 
 	@ManyToOne
@@ -62,26 +59,17 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.fecha_alta = LocalDateTime.now();
 	}
     
-    //constructor sin modo osea apagado.
+    //constructor 
     public DispositivoInteligente(DispositivoDetalle disp_detalle) {
 
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
-		this.logModos.add(new ModoApagado());
+		this.logModos.add(new ModoApagado( this ));
 		this.detalle = disp_detalle;
 		this.activado = true;
 		this.fecha_alta = LocalDateTime.now();
 	}
     
-    //constructor
-    public DispositivoInteligente() {
-
-		this.estandar=null;
-		this.logModos =  new ArrayList<Modo>();
-		this.logModos.add(new ModoApagado());
-		this.activado = true;
-		this.fecha_alta = LocalDateTime.now();
-	}
 	
 	
 	@Override

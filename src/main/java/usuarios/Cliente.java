@@ -1,10 +1,9 @@
 
 package usuarios;
 
-import java.awt.Point;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +13,7 @@ import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import dispositivos.ModoApagado;
+import geoposicionamiento.Transformador;
 import optimizacion_horas.Optimizador;
 
 import javax.persistence.Column;
@@ -43,10 +43,10 @@ public class Cliente extends Usuario {
 	private String tipoDocumento;
 	@Column(name="numeroDocumento")
 	private String numeroDocumento;
-	@Column(name="fechaAltaServicio")
-	private String fechaAltaServicio_s;
 	@Column(name="telefonoContacto")
 	private String telefonoContacto;
+	@Column(name="fechaAltaServicio")
+	private String fechaAltaServicio_s;
 	@Transient
 	private LocalDateTime fechaAltaServicio;
 	
@@ -54,8 +54,11 @@ public class Cliente extends Usuario {
 	@JoinColumn(name="categoria_id" , referencedColumnName="id")
 	private Categoria categoria;
 	
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
-	@JoinColumn( name="cliente_id" , referencedColumnName="id" )
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+	private Transformador transformador;
+	
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
 	private List<DispositivoUsuario> dispositivos;
 	
 	@Column(name="puntaje")
@@ -71,6 +74,8 @@ public class Cliente extends Usuario {
 		dispositivos= new ArrayList<DispositivoUsuario>();
 		fechaAltaServicio=LocalDateTime.now();
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		fechaAltaServicio_s= fechaAltaServicio.format(formatter);
 	}
 	
 	public Cliente(List<DispositivoUsuario> dispositivos) {
@@ -105,8 +110,8 @@ public class Cliente extends Usuario {
 	//conviero dispositivo estandar a inteligente y agrego inteligente a la lista. y saco el estandar de la lista
 	public void convertirEstandarInteligente( DispositivoEstandar dispositivoEstandar) {
 		
-		ModoApagado modoApagado=new ModoApagado();
-		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(modoApagado , dispositivoEstandar.detalle);
+		DispositivoInteligente dispositivoInteligente=new DispositivoInteligente(dispositivoEstandar.detalle);
+		dispositivoInteligente.setCliente(this);
 		
 		//agrego disposiutivo estandar en inteligente y lo agrego a la lista.
 		dispositivoInteligente.convertirDispositivoEstandar( dispositivoEstandar );
@@ -142,6 +147,7 @@ public class Cliente extends Usuario {
 		}
 		
 		dispositivos.add(dispositivo);
+		dispositivo.setCliente(this);
 	}
 
 	
@@ -149,6 +155,13 @@ public class Cliente extends Usuario {
 		
 		return dispositivos.stream().mapToDouble(d -> d.consumoPeriodo(desde, hasta)).sum(); 
 		
+	}
+	
+	
+	public void parsearFecha( String fecha_s ){
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		this.fechaAltaServicio = LocalDateTime.parse(fecha_s, formatter);
 	}
 	
 	
@@ -185,9 +198,6 @@ public class Cliente extends Usuario {
 		return fechaAltaServicio;
 	}
 
-	public void setFechaAltaServicio(LocalDateTime fechaAltaServicio) {
-		this.fechaAltaServicio = fechaAltaServicio;
-	}
 
 	public String getTelefonoContacto() {
 		return telefonoContacto;

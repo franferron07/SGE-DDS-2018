@@ -24,8 +24,7 @@ import usuarios.Cliente;
 public class ZonaGeografica extends Ubicable{
 	
 	
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
-	@JoinColumn( name="zonaAsignada_id" , referencedColumnName="id" )
+	@OneToMany(mappedBy="zonaAsignada", cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	private List<Transformador> transformadores;
 
 

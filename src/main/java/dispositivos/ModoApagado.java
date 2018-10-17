@@ -10,13 +10,12 @@ import javax.persistence.Entity;
 public class ModoApagado extends Modo {
 
 	
-	
-	 //constructor
-	 public ModoApagado() {
-		 
-		 this.fechaHoraInicio= LocalDateTime.now();
-	 }	
-	 	 
+	 
+	public ModoApagado(DispositivoInteligente di) {
+		super(di);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public float consumoEnPeriodo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
     
