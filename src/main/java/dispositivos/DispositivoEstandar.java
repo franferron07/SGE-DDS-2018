@@ -17,10 +17,8 @@ public class DispositivoEstandar extends DispositivoUsuario {
 
 	//constructor
 	public DispositivoEstandar( DispositivoDetalle disp_detalle ){
-		
+		super();
 		detalle = disp_detalle;
-		activado = true;
-		this.fecha_alta = LocalDateTime.now();
 	}
 	
 	

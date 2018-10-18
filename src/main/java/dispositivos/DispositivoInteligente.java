@@ -50,13 +50,11 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	*/
 	//constructor
     public DispositivoInteligente(Modo m , DispositivoDetalle disp_detalle) {
-
+    	super();
 		this.estandar=null;
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(m);
 		this.detalle = disp_detalle;
-		this.activado = true;
-		this.fecha_alta = LocalDateTime.now();
 	}
     
     //constructor 
@@ -66,12 +64,9 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos =  new ArrayList<Modo>();
 		this.logModos.add(new ModoApagado( this ));
 		this.detalle = disp_detalle;
-		this.activado = true;
-		this.fecha_alta = LocalDateTime.now();
 	}
     
-	
-	
+
 	@Override
 	public boolean esInteligente() {
 		return true;

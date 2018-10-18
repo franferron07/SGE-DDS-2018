@@ -21,8 +21,8 @@ public class ModoEncendido extends Modo{
     
 	public ModoEncendido(DispositivoInteligente di) {
 		super(di);
-		// TODO Auto-generated constructor stub
 	}
+	
 
 	@Override
 	public boolean encendido() {
