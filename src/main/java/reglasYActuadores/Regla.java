@@ -25,7 +25,6 @@ import entities.ObservadorSensor;
 
 @Entity
 @Table(name="regla")
-@DiscriminatorValue("regla")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo")
 public abstract class Regla {

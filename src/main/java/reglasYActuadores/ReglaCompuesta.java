@@ -62,6 +62,9 @@ public class ReglaCompuesta extends Regla {
 		this.reglas = reglas;
 	}
 
+	public void addRegla(Regla regla) {
+		this.reglas.add(regla);
+	}
 	
 
 		

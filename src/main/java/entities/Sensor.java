@@ -21,9 +21,9 @@ public class Sensor  {
 	@GeneratedValue
 	private int id;
 	
-	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
 	private List<Regla> observadores;
-	@OneToMany( mappedBy="id" ,cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
 	private List<Medicion> mediciones;
 	
 	
