@@ -8,36 +8,29 @@ import repositorios.RepositorioZonas;
 import usuarios.Cliente;
 //@Entity
 //@Table(name ="mapa")
-public class Mapa {
+public abstract class Mapa {
 	
 	
-	private List<ZonaGeografica> zonasGeograficas;
-	private List<Transformador> transformadores;
+	private static List<ZonaGeografica> zonasGeograficas=new ArrayList<ZonaGeografica>();;
+	private static List<Transformador> transformadores=new ArrayList<Transformador>();;
 	
 	
-	//constructor
-	public Mapa(){
-		
-		zonasGeograficas = new ArrayList<ZonaGeografica>();
-		transformadores=new ArrayList<Transformador>();
-		//zonasGeograficas = daoZonaGeografica.obtener();
-	}
-	
-	public ZonaGeografica factoryZona() {
+
+	public static ZonaGeografica factoryZona() {
 		ZonaGeografica zona = new ZonaGeografica();
-		this.zonasGeograficas.add(zona);
+		zonasGeograficas.add(zona);
 		return zona;
 	}
 
-	public Transformador factoryTransformador() {
+	public static Transformador factoryTransformador() {
 		Transformador trafo = new Transformador();
-		this.asignarZonaTransformador(trafo);
-		this.transformadores.add(trafo);
+		asignarZonaTransformador(trafo);
+		transformadores.add(trafo);
 		return trafo;
 	}
 
 	//obtener y asignar transformadores a las zonas existentes
-	public void leerTransformador(){
+	public static void leerTransformador(){
 		
 		if( !transformadores.isEmpty() ){
 			//agrego transformador a las zonas.
@@ -46,7 +39,7 @@ public class Mapa {
 	}
 	
 	//le asigna la zona perteneciente a la ubicacion del transformador
-	public void asignarZonaTransformador(Transformador unTransformador){
+	public static void asignarZonaTransformador(Transformador unTransformador){
 		
 		ZonaGeografica zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( unTransformador.getUbicacion())).findAny().orElse(null);
 		
@@ -58,7 +51,7 @@ public class Mapa {
 	}
 	
 	// busca la zona a la que puede pertenecer el cliente y luego la zona le asignara el transformador correspondiente.
-	public void asignarZonaCliente( Cliente unCliente ){
+	public static void asignarZonaCliente( Cliente unCliente ){
 		
 		ZonaGeografica zonaPert = zonaPerteneciente(unCliente.getUbicacion());
 		
@@ -69,7 +62,7 @@ public class Mapa {
 	}
 	
 	//metodo que dada una coordenada me devolvera la zona a la que pertenece.
-	public ZonaGeografica zonaPerteneciente( Coordenada coordenada ){
+	public static ZonaGeografica zonaPerteneciente( Coordenada coordenada ){
 		ZonaGeografica zona = null;
 		zona = zonasGeograficas.stream().filter( z -> z.coordenadaEnZona( coordenada )).findAny().orElse(null);
 
@@ -85,8 +78,8 @@ public class Mapa {
 	}
 
 
-	public void setZonasGeograficas(List<ZonaGeografica> zonasGeograficas) {
-		this.zonasGeograficas = zonasGeograficas;
+	public static void setZonasGeograficas(List<ZonaGeografica> zonas) {
+		zonasGeograficas = zonas;
 	}
 	
 	
