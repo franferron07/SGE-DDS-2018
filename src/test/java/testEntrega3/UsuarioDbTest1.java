@@ -20,6 +20,7 @@ public class UsuarioDbTest1 {
 	private Cliente cliente;
 	private Categoria categoria;
 	private DispositivoEstandar di_estandar;
+	
 	@Before
 	public void init() {
 		this.model = new ModelHelper();
@@ -41,16 +42,32 @@ public class UsuarioDbTest1 {
 		
 		cliente.agregarDispositivo(di_estandar);
 		
-		model.agregar(categoria);
-		model.agregar(cliente);
+		
 		
 	}
 	
 	
 	@Test
-	public void testCrearClienteRecuperarYModificar(){
+	public void testCrearCliente(){
 		
-		/*cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );*/
+		//CREO CLIENTE
+		model.agregar(categoria);
+		model.agregar(cliente);
+		Assert.assertEquals("Francisco", cliente.getNombre());
+		
+		//BUSCO CLIENTE
+		Cliente cliente2 = model.buscar(Cliente.class, cliente.id);
+		Assert.assertEquals(cliente.id, cliente2.id);
+		
+		//MODIFICO CLIENTE
+		cliente2.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );
+		model.modificar(cliente2);
+	}
+
+	/*@Test
+	public void test2CrearClienteRecuperarYModificar(){
+		
+		cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );
 		
 		Cliente cliente2 = model.buscar(Cliente.class, cliente.id);
 		
@@ -61,13 +78,12 @@ public class UsuarioDbTest1 {
 		
 		Coordenada c2 = cliente2.getCoordenada();
 		Assert.assertEquals(54545.0, c.latitud);
-		Assert.assertEquals(54545.0, c.longitud);
-		
-	}
+		Assert.assertEquals(54545.0, c.longitud);		
+	}*/
 	
 	
 	@Test
-	public void testRecuperarClienteFechaCorrecta(){
+	public void test1RecuperarClienteFechaCorrecta(){
 		Cliente cliente2 = model.buscar(Cliente.class, cliente.id);
 
 		System.out.println("TEST" + " " + cliente2.getFechaAltaServicio_s() + "--"+cliente2.getFechaAltaServicio());

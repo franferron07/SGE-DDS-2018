@@ -1,0 +1,18 @@
+.navbar .btn-group .dropdown-menu a:hover {
+color: #000 !important;
+}
+.navbar .btn-group .dropdown-menu a:active {
+color: #fff !important;
+}
+.form-header {
+    color: #fff;
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border-radius: 2px;
+.w-auto {
+    width: auto;
+}
+
+                

@@ -18,19 +18,20 @@ import geoposicionamiento.Coordenada;
 import geoposicionamiento.Mapa;
 import geoposicionamiento.Transformador;
 import geoposicionamiento.ZonaGeografica;
+import repositorios.RepositorioZonas;
 import usuarios.Cliente;
 
 public class geoposicionamientoTest {
 	
 	
-	private Mapa mapa;
+	private RepositorioZonas mapa;
 	private ZonaGeografica zona;
 	
 	
 	@Before
 	public void init(){
 		
-		mapa = new Mapa();
+		mapa = new RepositorioZonas();
 		
 		
 	}
@@ -53,13 +54,13 @@ public class geoposicionamientoTest {
 	@Test
 	public void testLecturaDeZonasCantidadCorrecta(){
 		
-		assertEquals( mapa.getZonasGeograficas().size() , 1  );
+		assertEquals( mapa.getZonas().size() , 1  );
 	}
 	
 	@Test
 	public void testLecturaDeZonasInicializadasCorrectamente(){
 		
-		ZonaGeografica zona2 = mapa.getZonasGeograficas().get(0);
+		ZonaGeografica zona2 = mapa.getZonas().get(0);
 		Path2D poligon = zona2.getPoligono(); 
 		
 		assertEquals( 4 , 4 );
@@ -83,7 +84,7 @@ public class geoposicionamientoTest {
 	@Test
 	public void testPruebaMapa(){
 		
-		Mapa mapa2 = new Mapa();
+		RepositorioZonas mapa2 = new RepositorioZonas();
 		
 		List<Coordenada> xy = new ArrayList<Coordenada>();
 		xy.add(new Coordenada(1,1));
