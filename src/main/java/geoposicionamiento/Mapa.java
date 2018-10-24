@@ -73,7 +73,7 @@ public abstract class Mapa {
 	
 	//getters y setters
 
-	public List<ZonaGeografica> getZonasGeograficas() {
+	public static List<ZonaGeografica> getZonasGeograficas() {
 		return zonasGeograficas;
 	}
 

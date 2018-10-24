@@ -21,20 +21,19 @@ public class TestTransformadores {
 
 	public ModelHelper model;
 	public TransformadorModel transformadorModel;
-	private Mapa mapa;
 	public Transformador t1;
 	public Transformador t2;
 	public Transformador t3;
 	
 	
 	@Before
-	private void init() {
+	public void init() {
 
 		this.model = new ModelHelper();
 		this.transformadorModel=new TransformadorModel();
-		t1= new Transformador( new Point(4,15) );
-		t2= new Transformador( new Point(8,19) );
-		t3= new Transformador( new Point(11,19) );
+		t1= new Transformador( new Coordenada(4,15) );
+		t2= new Transformador( new Coordenada(8,19) );
+		t3= new Transformador( new Coordenada(11,19) );
 		
 		List<Coordenada> xy = new ArrayList<Coordenada>();
 		xy.add(new Coordenada(1,1));
@@ -45,12 +44,12 @@ public class TestTransformadores {
 		ZonaGeografica zona = new ZonaGeografica(xy);
 
 		//agrego zona en mapa ya que por archivo indica error
-		mapa.getZonasGeograficas().add(zona);
+		Mapa.getZonasGeograficas().add(zona);
 		
 		//asigno transformador en la zona correcta
-		mapa.asignarZonaTransformador(t1);
-		mapa.asignarZonaTransformador(t2);
-		mapa.asignarZonaTransformador(t3);
+		Mapa.asignarZonaTransformador(t1);
+		Mapa.asignarZonaTransformador(t2);
+		Mapa.asignarZonaTransformador(t3);
 	}
 
 	@Test

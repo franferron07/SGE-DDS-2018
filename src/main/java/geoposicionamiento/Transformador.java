@@ -27,8 +27,6 @@ public class Transformador extends Ubicable {
 	@OneToMany(mappedBy="transformador", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
 	private List<Cliente> clientes;
 	
-	@Transient
-	private Point coordenadas;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
@@ -44,16 +42,16 @@ public class Transformador extends Ubicable {
 	}
 	
 	//constructor
-	public Transformador(ZonaGeografica zona , Point coordenada){
+	public Transformador(ZonaGeografica zona , Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
 		zonaAsignada = zona;
-		coordenadas = coordenada;
+		coordenadas.add(coordenada);
 	}
 	
 	//constructor
-	public Transformador(Point coordenada){
+	public Transformador(Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
-		coordenadas = coordenada;
+		coordenadas.add(coordenada);
 		
 	}
 	
