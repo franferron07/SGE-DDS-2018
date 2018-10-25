@@ -21,6 +21,12 @@ public abstract class Mapa {
 		zonasGeograficas.add(zona);
 		return zona;
 	}
+	
+	public static ZonaGeografica factoryZona(List<Coordenada> coordenadas) {
+		ZonaGeografica zona = new ZonaGeografica(coordenadas);
+		zonasGeograficas.add(zona);
+		return zona;
+	}
 
 	public static Transformador factoryTransformador() {
 		Transformador trafo = new Transformador();

@@ -1,6 +1,7 @@
 package geoposicionamiento;
 
 
+import java.awt.geom.Path2D;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ import usuarios.Cliente;
 public class ZonaGeografica extends Ubicable{
 	
 	
-	@OneToMany(mappedBy="zonaAsignada", cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
+	@OneToMany(mappedBy= "zonaAsignada",cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	private List<Transformador> transformadores;
 
 
@@ -35,7 +36,8 @@ public class ZonaGeografica extends Ubicable{
 	
 	public ZonaGeografica(List<Coordenada> xy) {
 		super();
-		this.coordenadas=xy;
+		this.setCoordenadas(xy);
+		transformadores = new ArrayList<Transformador>();
 	}
 	
 	public ZonaGeografica(List<Coordenada> xy, List<Transformador> transformadores) {
@@ -86,8 +88,9 @@ public class ZonaGeografica extends Ubicable{
 	
 	//me dice si la coordenada esta dentro de la zona
 	public boolean coordenadaEnZona(Coordenada coordenada){
-		
-		return this.getPoligono().contains(coordenada.getLatitud(),coordenada.getLongitud());
+		Path2D poligono = this.getPoligono();
+		boolean isInPoligono = poligono.contains(coordenada.getLatitud(),coordenada.getLongitud());
+		return isInPoligono;
 	}
 	
 	public boolean coordenadaEnZona(double x, double y){
@@ -97,6 +100,7 @@ public class ZonaGeografica extends Ubicable{
 	
 	public void agregarTransformador(Transformador unTransformador){
 		transformadores.add(unTransformador);
+		unTransformador.setZonaAsignada(this);
 	}
 
 

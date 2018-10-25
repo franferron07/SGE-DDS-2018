@@ -31,6 +31,10 @@ public class Coordenada {
 	@Column(name="orden")
 	public int orden;
 	
+	public Coordenada() {
+		
+	}
+	
 	public Coordenada(Ubicable ubicable , double lat,double lon) {
 		this.latitud=lat;
 		this.longitud=lon;
@@ -68,6 +72,22 @@ public class Coordenada {
 
 	public void setOrden(int orden) {
 		this.orden = orden;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Ubicable getUbicable() {
+		return ubicable;
+	}
+
+	public void setUbicable(Ubicable ubicable) {
+		this.ubicable = ubicable;
 	}
 
 }

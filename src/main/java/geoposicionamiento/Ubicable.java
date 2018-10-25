@@ -58,11 +58,13 @@ public abstract class Ubicable {
 		
 		coordenada.setOrden( this.coordenadas.size() );
 		this.coordenadas.add(coordenada);
+		coordenada.setUbicable(this);
 	}
 	
 
 	public void removeCoordenadas(Coordenada coordenadas) {
 		this.coordenadas.remove(coordenadas);
+		coordenadas.setUbicable(null);
 	}
 	
 	public double distanciaCoordenadas(Coordenada xy, Coordenada yz) {    
@@ -103,6 +105,9 @@ public abstract class Ubicable {
 	}
 	public void setCoordenadas(List<Coordenada> coordenadas) {
 		this.coordenadas = coordenadas;
+		for (Coordenada coordenada : coordenadas) {
+			coordenada.setUbicable(this);
+		}
 	}
 	
 	//me da la coordenada para un cliente o un transformador. (su ultima coordenada en la lista es la actual)

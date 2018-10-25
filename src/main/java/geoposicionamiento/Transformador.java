@@ -1,6 +1,5 @@
 package geoposicionamiento;
 
-import java.awt.Point;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import usuarios.Cliente;
 //subir
 @Entity
@@ -32,9 +29,11 @@ public class Transformador extends Ubicable {
     @JoinColumn
 	private ZonaGeografica zonaAsignada;
 	
+	/*
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="ubicable_id")
 	protected Ubicable ubicable;
+	*/
 	
 	//constructor
 	public Transformador(){
@@ -44,14 +43,14 @@ public class Transformador extends Ubicable {
 	//constructor
 	public Transformador(ZonaGeografica zona , Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
-		zonaAsignada = zona;
-		coordenadas.add(coordenada);
+		this.setZonaAsignada(zona);
+		super.addCoordenadas(coordenada);
 	}
 	
 	//constructor
 	public Transformador(Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
-		coordenadas.add(coordenada);
+		super.addCoordenadas(coordenada);
 		
 	}
 	
