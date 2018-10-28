@@ -2,6 +2,9 @@ var RED_ZONE=600;
 var YELLOW_ZONE=400;
 var GREEN_ZONE=200;
 
+var RED_MARKER=600;
+var YELLOW_MARKER=400;
+var GREEN_MARKER=200;
 
 $( document ).ready(function() {
 
@@ -15,7 +18,7 @@ $( document ).ready(function() {
 
 	mapa = L.map('mapa', {
 		center: [-34.598313, -58.463745],
-		zoom: 10,  
+		zoom: 11,  
 		minZoom: 4,
 		maxZoom:17,
 		zoomControl:true 
@@ -24,9 +27,9 @@ $( document ).ready(function() {
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: ''}).addTo(mapa);
 
-
-	getTrafos();
 	getZonePolygons();
+	getTrafos();
+	
 	//displayZonePolygons(polygons);
 
 
@@ -57,7 +60,43 @@ $( document ).ready(function() {
 		//iter trafos
 		$.each(data, function() {
 			console.log(this.id);
-		  	L.marker([this.coordenadas.longitud,this.coordenadas.latitud]).addTo(mapa).bindPopup("<p>Transformador "+"id:"+this.id+"</br>"+"Coordenadas: "+this.coordenadas.latitud+", "+this.coordenadas.longitud+"</br>"+"Clientes:"+this.clientes+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+
+		  	L.circleMarker([this.coordenadas.longitud,this.coordenadas.latitud],{radius:styleRadius(this.consumo),color: styleCMarker(this.consumo)}).addTo(mapa).bindPopup("<p>Transformador "+"id:"+this.id+"</br>"+"Coordenadas: "+this.coordenadas.latitud+", "+this.coordenadas.longitud+"</br>"+"Clientes:"+this.clientes+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>").bringToFront();
+		
+			function styleRadius(consumo){
+				switch(true){
+					case (consumo>=RED_MARKER):
+						return 9;
+						break;
+					case (consumo>=YELLOW_MARKER):
+						return 7;
+						break;
+					case (consumo>=GREEN_MARKER):
+						return 5;
+						break;
+					default:
+						return 3;
+						break;
+				}
+			}
+
+			function styleCMarker(consumo){
+				switch(true){
+					case (consumo>=RED_MARKER):
+						return 'red';
+						break;
+					case (consumo>=YELLOW_MARKER):
+						return 'yellow';
+						break;
+					case (consumo>=GREEN_MARKER):
+						return 'green';
+						break;
+					default:
+						return 'white';
+						break;
+				}
+			}
+
 		});
 
 	}
@@ -96,7 +135,7 @@ $( document ).ready(function() {
 				coordenadas.push([this.longitud,this.latitud]);
 			});
 
-		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>").bringToBack();
 			function styleColor(consumo){
 				switch(true){
 					case (consumo>=RED_ZONE):
@@ -109,7 +148,7 @@ $( document ).ready(function() {
 						return 'green';
 						break;
 					default:
-						return 'white';
+						return 'blue';
 						break;
 				}
 			}
