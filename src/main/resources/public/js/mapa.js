@@ -1,3 +1,8 @@
+var RED_ZONE=600;
+var YELLOW_ZONE=400;
+var GREEN_ZONE=200;
+
+
 $( document ).ready(function() {
 
  	$(document).ajaxStart(function () {
@@ -79,6 +84,9 @@ $( document ).ready(function() {
 	}
 
 	function displayZonas(data){
+
+
+
 		console.log("displayZonas");
 		var coordenadas = [];
 		//iter
@@ -87,7 +95,24 @@ $( document ).ready(function() {
 			$.each(this.coordenadas,function(){
 				coordenadas.push([this.longitud,this.latitud]);
 			});
-		  	L.polygon(coordenadas).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+
+		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+			function styleColor(consumo){
+				switch(true){
+					case (consumo>=RED_ZONE):
+						return 'red';
+						break;
+					case (consumo>=YELLOW_ZONE):
+						return 'yellow';
+						break;
+					case (consumo>=GREEN_ZONE):
+						return 'green';
+						break;
+					default:
+						return 'white';
+						break;
+				}
+			}
 		});
 
 	}
