@@ -34,7 +34,13 @@ public class Optimizador {
 	public ArrayList<ResultadoHora> resultados(){
 		return this.implementacion_simplex.resultados();
 	}
-	
+
+	public double getMaximaEnergiaResultado(){
+		return this.implementacion_simplex.maximaEnergiaResultado();
+	}
+	public boolean consumioSuMaximaEnergia(){
+		return this.implementacion_simplex.consumioSuMaximaEnergia();
+	}
 		
 	public static void main(String[] args) {
 		DispositivoUsuario lcd,lavaropas,ventilador,heladera;

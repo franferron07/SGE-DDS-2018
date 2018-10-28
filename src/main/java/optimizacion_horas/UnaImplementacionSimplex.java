@@ -21,7 +21,7 @@ public class UnaImplementacionSimplex implements Implementador{
 	public ArrayList<ResultadoHora> resultados=new ArrayList<ResultadoHora>();
 	private AlgoritmoSimplex algoritmo=null;
 	public double maximaEnergiaResultado=0;//Z
-	private double consumoMaximoDeEnergia=0;
+	private double consumoMaximoDeEnergia=0;//setteable , energia maxima de un cliente segun su categoria , criterio de eficiencia
 	
 	
 	@Override
@@ -63,7 +63,8 @@ public class UnaImplementacionSimplex implements Implementador{
 		}
 	}
 	public PointValuePair resolver() {
-		return this.algoritmo.resolver(); 
+		return this.algoritmo.resolver();
+		//return this.maximaEnergiaResultado=this.algoritmo.resolver();
 	}
 	public void crearFuncionEconomica(double ... crearVectorDeUnos_) {
 		this.algoritmo.crearFuncionEconomica(crearVectorDeUnos_);
@@ -107,12 +108,12 @@ public class UnaImplementacionSimplex implements Implementador{
 						
 						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
 						di.ejecutarAccionAutomatica();
-					}			
+					}
 				}
-				
+
 				i++;
 			}
-			
+
 		}
 
 	@Override
@@ -121,4 +122,15 @@ public class UnaImplementacionSimplex implements Implementador{
 		return null;
 	}
 
+	//entrega 4 ----------------
+	public double maximaEnergiaResultado(){
+		double energia_consumida=0;
+		for(int i=0;i<this.cantidadDeDispositivos();i++){
+			energia_consumida+=this.dispositivos.get(i).getConsumoKwHora()*this.resultados.get(i).getHorasQuePuedeConsumir();
+		}
+		return energia_consumida;
+	}
+	public boolean consumioSuMaximaEnergia(){
+		return this.consumoMaximoDeEnergia<this.maximaEnergiaResultado;//supero el consumo maximo
+	}
 }

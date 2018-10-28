@@ -20,6 +20,7 @@ import usuarios.Cliente;
 
 public class HorasMaximasConDispositivosTest {
 	ArrayList<ResultadoHora> resultados=null;
+	Optimizador simplex=null;
 	@Before
 	public void init() {
 		DispositivoUsuario lcd,lavaropas,ventilador,heladera;
@@ -122,7 +123,7 @@ public class HorasMaximasConDispositivosTest {
 				return 0;
 			}
 		};
-		Optimizador simplex = new Optimizador();
+		simplex = new Optimizador();
 		simplex.setConsumoMaximoDeEnergia(450000);
 		simplex.cargarDispositivos(lcd,lavaropas,ventilador);
 		simplex.maximizar();
@@ -135,6 +136,8 @@ public class HorasMaximasConDispositivosTest {
 		Assert.assertEquals(resultados.get(1).getHorasQuePuedeConsumir(),30.0,0.001);
 		Assert.assertEquals(resultados.get(2).getHorasQuePuedeConsumir(),360.0,0.001);
 		Assert.assertEquals(resultados.get(0).getDispositivo(),"lcd");
+		System.out.print("kWh que consume el cliente en esas horas optimizadas : "+simplex.getMaximaEnergiaResultado());
+		Assert.assertTrue(!simplex.consumioSuMaximaEnergia());//no supèro su maxima energia
 	}
 
 }

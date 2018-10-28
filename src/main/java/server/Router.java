@@ -1,7 +1,6 @@
 package server;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import controllers.OptimizadorController;
 
 import controllers.InicioController;
 import controllers.LoginController;
@@ -35,6 +34,9 @@ private static HandlebarsTemplateEngine engine;
 		LoginController loginController = new LoginController();
 		InicioController inicioController = new InicioController();
 		MapController mapController = new MapController();
+
+		OptimizadorController simplexControler = new OptimizadorController();
+
 		
 		Spark.get("/", loginController::loguin, Router.engine);
 		
@@ -44,10 +46,16 @@ private static HandlebarsTemplateEngine engine;
 	
 		Spark.get("/api/transformadores", (req, res) -> mapController.getTrafos(req, res));
 		Spark.get("/api/zonas", (req, res) -> mapController.getZonas(req, res));
-		
-		
-		
-		
+
+
+
+
+		//Spark.get("/usuarios",simplexControler::mostrarUsuariosController,Router.engine);
+		//Spark.get("/usuarios/simplex",(req, res) ->simplexControler.mostrarHorasDeUsuariosSimplexController(req, res));
+		//-------Spark.get("/usuarios/optimizador",simplexControler::mostrarHorasDeUsuariosSimplexController,Router.engine);
+		//Spark.get("/saludo/*/:nombre", (req,res) -> "Hola "+req.splat()[0]+" "+req.params("nombre"));
+
+
 	}
 	
 	
