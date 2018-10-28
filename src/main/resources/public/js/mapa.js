@@ -14,26 +14,41 @@ $( document ).ready(function() {
 	getTrafos();
 
 
-	polygons = getZonePolygons();
-	displayZonePolygons(polygons);
+	//getZonePolygons();
+	//displayZonePolygons(polygons);
 
 
 
 	function getTrafos(){
+		console.log("getTrafos");
 		$.ajax({
-			url: 'localhost:9000/api/transformadores',
+			url: '/api/transformadores',
 			data: {
 				format: 'json'
 			},
-			error: function() {
-				$('#info').html('<p>An error has occurred</p>');
+			error: function(error) {
+				console.log("error");	
+				console.log(error);
 			},
-			dataType: 'jsonp',
+			dataType: 'json',
 			success: function(data) {
+				console.log("success");
+				console.log(data);
 				displayTrafos(data);
 			},
 			type: 'GET'
 		});
 	}
+
+	function displayTrafos(data){
+		console.log("displayTrafos");
+		//iter trafos
+		$.each(data, function() {
+			console.log(this.id);
+		  	L.marker([this.coordenadas.longitud,this.coordenadas.latitud]).addTo(mapa).bindPopup("<p>Transformador "+"id:"+this.id+"</br>"+"Coordenadas: "+this.coordenadas.latitud+", "+this.coordenadas.longitud+"</br>"+"Clientes:"+this.clientes+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+		});
+
+	}
 }
 
+);

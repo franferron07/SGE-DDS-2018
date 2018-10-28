@@ -1,6 +1,7 @@
 package controllers;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +48,7 @@ public class MapController {
 				clientes.add(cliente.getId());
 			}
 			
-			trafojson.add(new TrafoJson(transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId()));
+			trafojson.add(new TrafoJson( transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId(), transformador.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
 		}
 		
 		GsonBuilder b = new GsonBuilder();
@@ -54,6 +56,7 @@ public class MapController {
 		Gson gson = b.create();
 		
 		String json = gson.toJson(trafojson);
+		System.out.println(json);
 		return json;
 		
 	}

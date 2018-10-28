@@ -3,9 +3,11 @@ package datos_transformadores;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -32,7 +34,7 @@ public class APIReturnAll {
 			for (Cliente cliente : transformador.getClientes()) {
 				clientes.add(cliente.getId());
 			}
-			trafojson.add(new TrafoJson(transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId()));
+			trafojson.add(new TrafoJson( transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId(), transformador.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
 		}
 		
 		GsonBuilder b = new GsonBuilder();

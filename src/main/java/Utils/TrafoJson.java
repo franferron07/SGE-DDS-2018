@@ -16,6 +16,8 @@ public class TrafoJson {
 	private Coordenada coordenadas;
 	private List<Integer> clientes;
 	private int zonaGeografica;
+	private double consumo;
+	
 	public int getId() {
 		return id;
 	}
@@ -40,12 +42,19 @@ public class TrafoJson {
 	public void setZonaGeografica(int zonaGeografica) {
 		this.zonaGeografica = zonaGeografica;
 	}
-	public TrafoJson(int id, Coordenada coordenadas, List<Integer> clientes, int zonaGeografica) {
+	public TrafoJson(int id, Coordenada coordenadas, List<Integer> clientes, int zonaGeografica, double consumo) {
 		super();
 		this.id = id;
 		this.coordenadas = coordenadas;
 		this.clientes = clientes;
 		this.zonaGeografica = zonaGeografica;
+		this.consumo=consumo;
+	}
+	public double getConsumo() {
+		return consumo;
+	}
+	public void setConsumo(double consumo) {
+		this.consumo = consumo;
 	}
 	
 	
