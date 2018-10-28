@@ -1,11 +1,21 @@
 ﻿{{#partial "contenido"}}
+<link href="/css/spinner.css" rel="stylesheet">
+<link href="/css/mapa.css" rel="stylesheet">
 <script src="js/mapa.js"></script>
 
+<div class="loading">
 
-<div id="mapa" style="height: 500px;z-index=1">
-						</div> 
-						
-						
+	<div class="spinner">
+	  <div class="rect1"></div>
+	  <div class="rect2"></div>
+	  <div class="rect3"></div>
+	  <div class="rect4"></div>
+	  <div class="rect5"></div>
+	</div>
+	
+</div>		
+<div id="mapa" style="height: 500px">
+							</div> 					
 {{/partial}}
 
 {{>layout.hbs}}

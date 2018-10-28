@@ -1,4 +1,13 @@
 $( document ).ready(function() {
+
+ 	$(document).ajaxStart(function () {
+                $(".loading").show();
+            });
+
+    $(document).ajaxComplete(function () {
+        $(".loading").hide();
+    });
+
 	mapa = L.map('mapa', {
 		center: [-34.598313, -58.463745],
 		zoom: 10,  
@@ -12,9 +21,7 @@ $( document ).ready(function() {
 
 
 	getTrafos();
-
-
-	//getZonePolygons();
+	getZonePolygons();
 	//displayZonePolygons(polygons);
 
 
@@ -49,6 +56,42 @@ $( document ).ready(function() {
 		});
 
 	}
+
+	function getZonePolygons(){
+		console.log("getZonas");
+		$.ajax({
+			url: '/api/zonas',
+			data: {
+				format: 'json'
+			},
+			error: function(error) {
+				console.log("error");	
+				console.log(error);
+			},
+			dataType: 'json',
+			success: function(data) {
+				console.log("success");
+				console.log(data);
+				displayZonas(data);
+			},
+			type: 'GET'
+		});
+	}
+
+	function displayZonas(data){
+		console.log("displayZonas");
+		var coordenadas = [];
+		//iter
+		$.each(data, function() {
+			console.log(this.id);
+			$.each(this.coordenadas,function(){
+				coordenadas.push([this.longitud,this.latitud]);
+			});
+		  	L.polygon(coordenadas).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>");
+		});
+
+	}
+
 }
 
 );

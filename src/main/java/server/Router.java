@@ -41,8 +41,10 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/inicio", inicioController::inicio, Router.engine);
 		
 		Spark.get("/mapa", mapController::drawMap, Router.engine);
-		
+	
 		Spark.get("/api/transformadores", (req, res) -> mapController.getTrafos(req, res));
+		Spark.get("/api/zonas", (req, res) -> mapController.getZonas(req, res));
+		
 		
 		
 		
