@@ -92,23 +92,23 @@ public class geoposicionamientoTest {
 		xy.add(new Coordenada(10,1));
 		xy.add(new Coordenada(10,20));
 		
-		zona = new ZonaGeografica(xy);
+		zona = Mapa.factoryZona(xy);
 
 		//declaro transformador t1 y t2 estan dentro t3 fuera
 		Transformador t1;
 		Transformador t2;
 		Transformador t3;
-		t1= new Transformador( new Point(4,15) );
-		t2= new Transformador( new Point(8,19) );
-		t3= new Transformador( new Point(11,19) );
+		t1= new Transformador( new Coordenada(4,15) );
+		t2= new Transformador( new Coordenada(8,19) );
+		t3= new Transformador( new Coordenada(11,19) );
 		
 		//agrego zona en mapa ya que por archivo indica error
-		mapa2.getZonasGeograficas().add(zona);
+		
 		
 		//asigno transformador en la zona correcta
-		mapa2.asignarZonaTransformador(t1);
-		mapa2.asignarZonaTransformador(t2);
-		mapa2.asignarZonaTransformador(t3);
+		Mapa.asignarZonaTransformador(t1);
+		Mapa.asignarZonaTransformador(t2);
+		Mapa.asignarZonaTransformador(t3);
 		
 		//creo cliente y verifico en cual transformador se asigna.
 		Cliente cliente = new Cliente();
@@ -117,9 +117,9 @@ public class geoposicionamientoTest {
 		coordenadas.add(new Coordenada(2,18));
 		cliente.setCoordenadas(coordenadas);
 		
-		mapa2.asignarZonaCliente(cliente);
+	    Mapa.asignarZonaCliente(cliente);
 		
-		assertEquals( mapa2.getZonasGeograficas().size() , 1  );
+		assertEquals( Mapa.getZonasGeograficas().size() , 1  );
 		assertEquals(2 , zona.getTransformadores().size());
 		
 		assertEquals( 1 , t1.getClientes().size()  );
