@@ -28,10 +28,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Transient;
 
 
-
-
 @Entity
-@Table(name="cliente")
 @DiscriminatorValue("cliente")
 public class Cliente extends Usuario {
 	

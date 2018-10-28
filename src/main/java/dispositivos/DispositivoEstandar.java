@@ -21,6 +21,9 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		detalle = disp_detalle;
 	}
 	
+	public DispositivoEstandar(){
+		super();
+	}
 	
 	@Override
 	public boolean esInteligente() {

@@ -18,11 +18,10 @@ import APIs.GeoCodingService;
 
 @Entity
 @Table(name="usuario")
-@DiscriminatorValue(value="usuario")
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="tipo")
+@DiscriminatorValue("usuario")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo_usuario")
 public abstract class Usuario extends Ubicable{
-
 
 	@Column(name="nombre")
 	protected String nombre;
@@ -30,7 +29,7 @@ public abstract class Usuario extends Ubicable{
 	protected String apellido;
 	@Column(name="domicilio")
 	protected String domicilio;
-	@Column(name="username")
+	@Column(name="username" , unique=true)
 	private String username;
 	@Column(name="password")
 	private String password;
