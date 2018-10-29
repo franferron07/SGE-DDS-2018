@@ -1,0 +1,34 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 id="tituloModal" class="modal-title">Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+             <div class="form-group">
+                <label>Nombre</label>
+                <input id="usuario-nombre" type="string" name="nombre" class="form-control" placeholder="Ingrese un nombre" value="{{usuario.nombre}}" {{#unless permiteEdicion}} disabled {{/unless}}>
+            </div>
+            <div class="form-group">
+                <label>Apellido</label>
+                <input id="usuario-apellido" type="string" name="apellido" class="form-control" placeholder="Ingrese un apellido" value="{{usuario.apellido}}" {{#unless permiteEdicion}} disabled {{/unless}}>
+            </div>
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input id="usuario-username" type="string" name="nombreDeUsuario" class="form-control" placeholder="Ingrese un nombre de usuario" value="{{usuario.nombreDeUsuario}}" {{#unless permiteEdicion}} disabled {{/unless}}>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cerrar
+            </button>
+            {{#if permiteEdicion}}
+            <button type="button" class="btn btn-primary" onclick="usuarioGuardar('{{usuario.id}}')">
+                Guardar
+            </button>
+            {{/if}}
+        </div>
+    </div>
+</div>

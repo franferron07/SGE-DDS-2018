@@ -5,6 +5,7 @@ import java.util.List;
 
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoEstandar;
+import dispositivos.DispositivoUsuario;
 import models.UsuarioModel;
 import usuarios.Cliente;
 import usuarios.Usuario;
@@ -54,7 +55,11 @@ public class RepositorioUsuarios {
 	public   Usuario buscarUsuario(int id){
 		
 		return usuarios.stream().filter( u -> id == u.getId()).findFirst().get();
-		//return usuarioModel.buscarUsuarioPorUsername(username);
+	}
+
+	public DispositivoUsuario buscarDispositivo(Cliente cliente, int id_disp) {
+		
+		return cliente.getDispositivos().stream().filter(d -> d.id == id_disp).findFirst().get();
 	}
 	
 	

@@ -18,13 +18,9 @@ public class ClienteController {
 	}
 	
 	public ModelAndView ver(Request request, Response response) {
-		
-		
 		Map<String, Object> model=new HashMap<>();
 		
 		int id = request.session().attribute("id");
-		
-		//int id = Integer.parseInt(request.params("id"));
 		Cliente cliente = (Cliente) repo.buscarUsuario(id);
 		model.put("cliente", cliente);
 		return new ModelAndView(model, "cliente.hbs");

@@ -58,6 +58,9 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/cliente/consumo/:id/:inicio/:fin", clienteController::consumoPeriodo , Router.engine);
 		
 		Spark.get("/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
+		Spark.get("/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);
+		Spark.post("/cliente/dispositivo", dispositivoUsuarioController::guardar, Router.engine);
+		
 		Spark.get("/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
 		Spark.put("/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
 		Spark.post("/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
