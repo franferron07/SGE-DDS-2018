@@ -41,7 +41,9 @@ private static HandlebarsTemplateEngine engine;
 		DispositivoUsuarioController dispositivoUsuarioController = new DispositivoUsuarioController();
 		
 		Spark.get("/", loginController::ver, Router.engine);
+		Spark.get("/login", loginController::ver, Router.engine);
 		Spark.post("/login",loginController::loguear,engine);
+		Spark.get("/logout",loginController::logout,engine);
 		
 		Spark.get("/inicio", inicioController::inicio, Router.engine);
 		
@@ -50,12 +52,12 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/api/transformadores", (req, res) -> mapController.getTrafos(req, res));
 		Spark.get("/api/zonas", (req, res) -> mapController.getZonas(req, res));
 		
-		Spark.get("/cliente/:id" , clienteController::ver, Router.engine);
+		Spark.get("/cliente" , clienteController::ver, Router.engine);
 		Spark.get("/cliente/estado/:id", clienteController::estado , Router.engine);
 		Spark.get("/cliente/estado/:id", clienteController::estado , Router.engine);
 		Spark.get("/cliente/consumo/:id/:inicio/:fin", clienteController::consumoPeriodo , Router.engine);
 		
-		Spark.get("/cliente/dispositivos/:id" , dispositivoUsuarioController::dispositivos, Router.engine);
+		Spark.get("/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
 		Spark.get("/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
 		Spark.put("/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
 		Spark.post("/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);

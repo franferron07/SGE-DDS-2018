@@ -1,0 +1,85 @@
+﻿{{#partial "contenido"}}
+
+ <!--Main Layout-->
+    <main>
+         <div class="container mt-5 pt-5">
+
+
+            <div class="card card-cascade wider reverse my-4">
+                <div class="card-body">
+
+                    <!--Header-->
+                    <div class="form-header primary-color">
+                        <h3><i class="fa fa-male "></i> Perfil</h3>
+                    </div>
+    				
+
+                    <form>
+
+                    	<!-- Grid row -->
+						  <div class="form-row">
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputNombre4">Nombre</label>
+						      <input type="text" class="form-control" id="inputNombre4" placeholder="{{cliente.nombre}}" disabled>
+						    </div>
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputApellido4">Apellido</label>
+						      <input type="text" class="form-control" id="inputApellido4" placeholder="{{cliente.apellido}}" disabled>
+						    </div>
+						 </div>
+						  <!-- Grid row -->
+
+						  <!-- Grid row -->
+						  <div class="form-row">
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputnumeroDocumento4">DNI</label>
+						      <input type="text" class="form-control" id="inputnumeroDocumento4" placeholder="{{cliente.numeroDocumento}}" disabled>
+						    </div>
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputtelefonoContacto4">Telefono</label>
+						      <input type="text" class="form-control" id="inputtelefonoContacto4" placeholder="{{cliente.telefonoContacto}}" disabled>
+						    </div>
+						 </div>
+						  <!-- Grid row -->
+
+						  <!-- Grid row -->
+						  <div class="form-row">
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputdomicilio4">Dirección</label>
+						      <input type="text" class="form-control" id="inputdomicilio4" placeholder="{{cliente.domicilio}}" disabled>
+						    </div>
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="inputfechaAltaServicio_s4">Fecha de Alta</label>
+						      <input type="text" class="form-control" id="inputfechaAltaServicio_s4" placeholder="{{cliente.fechaAltaServicio_s}}" disabled>
+						    </div>
+						 </div>
+						  <!-- Grid row -->
+					 
+					 <div class="form-group">
+					    <label for="username">Nombre de usuario</label>
+					    <input type="text" class="form-control" id="username" placeholder="{{cliente.username}}" disabled>
+					 </div>
+
+					</form>
+					<!-- Default form group -->
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+
+{{/partial}}
+
+{{>layout.hbs}}
+
+

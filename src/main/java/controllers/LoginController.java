@@ -7,13 +7,23 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import usuarios.Cliente;
 import usuarios.Usuario;
 
 public class LoginController {
 	
+
 	
 	public ModelAndView ver(Request request, Response response) {
 
+		return new ModelAndView(null, "login.hbs");
+	}
+	
+	public ModelAndView logout(Request req, Response res){
+		
+		req.session().removeAttribute("id");
+		/*res.redirect("/login");
+		return null;*/
 		return new ModelAndView(null, "login.hbs");
 	}
 	
@@ -31,24 +41,27 @@ public class LoginController {
 		
 		if( usuario == null ){
 			mensaje="El nombre de usuario es incorrecto";
+			return new ModelAndView(model, "login.hbs");
 		}
 		
-		if( password == usuario.getPassword() ){
+		if(  password.equals( usuario.getPassword()  ) ){
 		
 			//login correcto verifico si es cliente o admin.
 			mensaje= "Inicio de sesión correcto";
-			request.session(true);                     // create and return session
-			request.session().attribute("user");       // Get session attribute 'user'
-			request.session().attribute("user","foo"); 
-			
+			request.session(true);              
+			request.session().attribute("id",usuario.getId());
+			request.session().attribute("tipo",1); //tipo a cliente que recibe el layout. 1 es cliente . 0 Administrador
+			return new ModelAndView(null, "inicio.hbs");
 		}
 		else{
 			mensaje= "El password es incorrecto";
+			model.put("mensaje", mensaje);
+			return new ModelAndView(model, "login.hbs");
 		}
 		
-		model.put("mensaje", mensaje);
 		
-		return new ModelAndView(model, "login.hbs");
+		
+		
 	}
 	
 	

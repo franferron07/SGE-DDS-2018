@@ -73,6 +73,10 @@ public abstract class Usuario extends Ubicable{
 		this.addCoordenadas(GeoCodingService.getCoordinates(domicilio));
 	}
 	
+	public void setDomicilio2(String domicilio) {
+		this.domicilio = domicilio;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

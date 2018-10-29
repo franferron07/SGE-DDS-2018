@@ -14,7 +14,7 @@ public class DispositivoDetalle {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	public int id;
 	
 	@Column(name = "nombre")
 	private String nombre;

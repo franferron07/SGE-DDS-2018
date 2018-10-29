@@ -26,7 +26,7 @@ public abstract class DispositivoUsuario {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	public int id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
@@ -89,8 +89,21 @@ public abstract class DispositivoUsuario {
 	
 	
 	
-	public DispositivoDetalle getDispositivoDetalle() {
+
+	public DispositivoDetalle getDetalle() {
 		return detalle;
+	}
+
+	public void setDetalle(DispositivoDetalle detalle) {
+		this.detalle = detalle;
+	}
+
+	public boolean isActivado() {
+		return activado;
+	}
+
+	public void setActivado(boolean activado) {
+		this.activado = activado;
 	}
 
 	public String getFecha_alta_s() {

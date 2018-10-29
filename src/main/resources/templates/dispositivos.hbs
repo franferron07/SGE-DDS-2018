@@ -1,0 +1,44 @@
+﻿{{#partial "contenido"}}
+
+ <!--Main Layout-->
+    <main>
+         <div class="container mt-5 pt-5">
+
+
+            <table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">Tipo</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Descripcion</th>
+			      <th scope="col">Fecha de Alta</th>
+			      <th scope="col"></th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{{#each dispositivos}}
+
+				    <tr>
+				      <td>Mark</td>
+				      <td>{{detalle.nombre}}</td>
+				      <td>{{detalle.descripcion}}</td>
+				      <td>{{fecha_alta_s}}</td>
+				      <td><button type="button" class="btn btn-primary" onclick="modificar('{{id}}',true)">Modificar</button></td>
+				      <td><button type="button" class="btn btn-danger" onclick="borrar('{{id}}')">Borrar</button></td>
+				    </tr>
+
+				{{/each}}
+
+			  </tbody>
+			</table>
+
+
+        </div>
+    </main>
+<script type="text/javascript" src="/js/dispositivosUsuario.js"></script>
+{{/partial}}
+
+{{>layout.hbs}}
+
+
