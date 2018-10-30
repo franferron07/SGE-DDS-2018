@@ -84,6 +84,9 @@ public class DispositivoDetalle {
 		return esEsencial;
 	}
 
+	public void setEsInteligente(boolean esInteligente) {
+		this.esInteligente = esInteligente;
+	}
 
 	public void setEsEsencial(boolean esEsencial) {
 		this.esEsencial = esEsencial;
