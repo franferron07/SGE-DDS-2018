@@ -7,6 +7,7 @@ import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoUsuario;
 import models.UsuarioModel;
+import usuarios.Administrador;
 import usuarios.Cliente;
 import usuarios.Usuario;
 
@@ -21,6 +22,7 @@ public class RepositorioUsuarios {
 		usuarioModel = new UsuarioModel();
 		usuarios = new ArrayList<Usuario>();
 		
+		/* creo cliente */
 		Cliente cliente =  new Cliente();
 		cliente.setUsername("test");
 		cliente.setPassword("test");
@@ -29,6 +31,17 @@ public class RepositorioUsuarios {
 		cliente.setDomicilio2("calle falsa 1234");
 		cliente.setTelefonoContacto("4444-2222");
 		cliente.id= 1;
+		
+		/* creo admin */
+		Administrador admin = new Administrador();
+		admin.id= 2;
+		admin.setUsername("admin");
+		admin.setPassword("admin");
+		admin.setNombre("adminNombre");
+		admin.setApellido("adminApellido");
+		admin.setDomicilio2("calle falsa 1234");
+		
+		
 		
 		/* agrego dispositivo a cliente */
 		DispositivoDetalle detalle = new DispositivoDetalle();
@@ -40,8 +53,8 @@ public class RepositorioUsuarios {
 		cliente.agregarDispositivo(estandar);
 		
 		
-		
 		usuarios.add(cliente);
+		usuarios.add(admin);
 	}
 	
 	public   Usuario buscarUsuario(String username){

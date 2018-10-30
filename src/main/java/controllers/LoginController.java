@@ -7,6 +7,7 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import usuarios.Administrador;
 import usuarios.Cliente;
 import usuarios.Usuario;
 
@@ -44,14 +45,29 @@ public class LoginController {
 			return new ModelAndView(model, "login.hbs");
 		}
 		
-		if(  password.equals( usuario.getPassword()  ) ){
 		
-			//login correcto verifico si es cliente o admin.
-			mensaje= "Inicio de sesión correcto";
+		if(  password.equals( usuario.getPassword()  ) ){
+			//login correcto verifico si es cliente o admin
+			
+			int validador= 0;
+			String salida="";
+			if( usuario.getClass() == Cliente.class ){
+				Cliente cli = (Cliente) usuario ;
+				validador= 1;
+				salida="inicioCliente.hbs";
+			}
+			else{
+				validador= 0;
+				salida="inicioAdministrador.hbs";
+			}
+			
+			model.put("usuario", usuario);
+			
 			request.session(true);              
 			request.session().attribute("id",usuario.getId());
-			request.session().attribute("tipo",1); //tipo a cliente que recibe el layout. 1 es cliente . 0 Administrador
-			return new ModelAndView(null, "inicio.hbs");
+			request.session().attribute("tipo",validador); //tipo a cliente que recibe el layout. 1 es cliente . 0 Administrador
+			return new ModelAndView(model, salida);
+			
 		}
 		else{
 			mensaje= "El password es incorrecto";
