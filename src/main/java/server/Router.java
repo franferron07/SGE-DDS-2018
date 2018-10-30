@@ -59,26 +59,26 @@ private static HandlebarsTemplateEngine engine;
 		
 		/* CLIENTE */
 		Spark.get("/sge/cliente" , clienteController::ver, Router.engine);
-		Spark.get("/cliente/estado", clienteController::estado , Router.engine);
-		Spark.post("/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
+		Spark.get("/sge/cliente/estado", clienteController::estado , Router.engine);
+		Spark.post("/sge/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
 		
-		Spark.get("/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
-		Spark.get("/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);
-		Spark.post("/cliente/dispositivo", dispositivoUsuarioController::guardar, Router.engine);
+		Spark.get("/sge/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
+		Spark.get("/sge/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);
+		Spark.post("/sge/cliente/dispositivo", dispositivoUsuarioController::guardar, Router.engine);
 		
-		Spark.get("/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
-		Spark.put("/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
-		Spark.post("/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
+		Spark.get("/sge/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
+		Spark.put("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
+		Spark.post("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
 		
 		/* ADMINISTRADOR */
-	    Spark.get("/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);
-	    Spark.get("/administrador/dispositivo", administradorController::crear, Router.engine);
-		Spark.post("/administrador/dispositivo", administradorController::guardar, Router.engine);
+	    Spark.get("/sge/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);
+	    Spark.get("/sge/administrador/dispositivo", administradorController::crear, Router.engine);
+		Spark.post("/sge/administrador/dispositivo", administradorController::guardar, Router.engine);
 		
 		//Reportes
-		Spark.get("/reportes", administradorController::reportes, Router.engine);
+		Spark.get("/sge/reportes", administradorController::reportes, Router.engine);
 
-		Spark.get("/optimizador/:id",optimizadorController::mostrarResultadosOptimizador,Router.engine);
+		Spark.get("/sge/optimizador",optimizadorController::mostrarResultadosOptimizador,Router.engine);
 
 
 	}
