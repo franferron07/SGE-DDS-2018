@@ -17,13 +17,13 @@ public class UnaImplementacionSimplex implements Implementador{
 	public  Cliente clienteActual=null;
 	public double[]  coeficientesDeFuncionObjetivo;//ejemplo:  [a,b,c] de MAX f=aX0+bX1+cX2=Z
 	public double[][]  matrizIdentidadDeSimplex;
-	public double[] matrizB;//del tipo AX=B , en el que X es el vector de horas 
+	public double[] matrizB;//del tipo AX=B , en el que X es el vector de horas
 	public ArrayList<ResultadoHora> resultados=new ArrayList<ResultadoHora>();
 	private AlgoritmoSimplex algoritmo=null;
 	public double maximaEnergiaResultado=0;//Z
-	private double consumoMaximoDeEnergia=0;
-	
-	
+	private double consumoMaximoDeEnergia=0;//setteable , energia maxima de un cliente segun su categoria , criterio de eficiencia
+
+
 	@Override
 	public void cargarDispositivosEsenciales(Cliente cliente) {
 		DispositivoUsuario[] dispositivos__ = (DispositivoUsuario[]) cliente.getDispositivos().stream().filter(dispositivo-> dispositivo.esEsencial()).toArray();
@@ -37,12 +37,12 @@ public class UnaImplementacionSimplex implements Implementador{
 		this.algoritmo = new AlgoritmoSimplex(GoalType.MAXIMIZE, true); //true de variables positivas
 		this.resolverInecuacion();
 	}
-	public void resolverInecuacion() {	
+	public void resolverInecuacion() {
 		this.plantearMatricesDeInecuacion();
 		this.calcularHoras();
 	}
 	public void calcularHoras() {
-		PointValuePair solucion =this.algoritmo.resolver(); 
+		PointValuePair solucion =this.algoritmo.resolver();
 		this.maximaEnergiaResultado=solucion.getValue();
 		for (int i = 0; i < this.cantidadDeDispositivos(); i++) {
 			double xi=solucion.getPoint()[i];
@@ -57,19 +57,20 @@ public class UnaImplementacionSimplex implements Implementador{
 		this.matrizB=this.obtenerMatrizBDeSimplex(this.dispositivos);
 		this.agregarRestriccion(Relationship.LEQ, this.consumoMaximoDeEnergia,this.coeficientesDeFuncionObjetivo);
 		for (int i = 0; i <2* this.cantidadDeDispositivos(); i++) {//esto crea la matriz A al AlgoritmoSimplex
-				this.agregarRestriccion(Relationship.LEQ, (double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
-				i++;
-				this.agregarRestriccion(Relationship.GEQ,(double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
+			this.agregarRestriccion(Relationship.LEQ, (double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
+			i++;
+			this.agregarRestriccion(Relationship.GEQ,(double) this.matrizB[i], this.matrizIdentidadDeSimplex[i]);
 		}
 	}
 	public PointValuePair resolver() {
-		return this.algoritmo.resolver(); 
+		return this.algoritmo.resolver();
+		//return this.maximaEnergiaResultado=this.algoritmo.resolver();
 	}
 	public void crearFuncionEconomica(double ... crearVectorDeUnos_) {
 		this.algoritmo.crearFuncionEconomica(crearVectorDeUnos_);
 	}
 	public void agregarRestriccion(Relationship leq_, double consumoMaximoDeEnergia2_, double ... coeficientesDeFuncionObjetivo2_) {
-		this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);	
+		this.algoritmo.agregarRestriccion(leq_, consumoMaximoDeEnergia2_, coeficientesDeFuncionObjetivo2_);
 	}
 	public void setConsumoMaximoDeEnergia(double consumoMaximoDeEnergia) {
 		this.consumoMaximoDeEnergia = consumoMaximoDeEnergia;
@@ -81,44 +82,53 @@ public class UnaImplementacionSimplex implements Implementador{
 		// TODO Auto-generated method stub
 		return this.resultados;
 	}
-	
+
 	@Override
 	public void cargarDispositivos(DispositivoUsuario... _dispositivoUsuarios_) {
 		for (int i = 0; i < _dispositivoUsuarios_.length ; i++) {
 			if (_dispositivoUsuarios_[i].esEsencial()) {
-					this.dispositivos.add(_dispositivoUsuarios_[i]);
-				}
+				this.dispositivos.add(_dispositivoUsuarios_[i]);
 			}
 		}
+	}
 	@Override	//metod que ejecutara el hilo para tomar decisiones sobre los dispositivos del cliente
-		public void analisarResultados( LocalDateTime desde , LocalDateTime hasta ){		
-			int i=0; //iterador
-			DispositivoUsuario dispositivo;
-			Iterator<ResultadoHora> it = resultados.iterator();
-			// recorro lista de transformadores buscando la distancia minima.
-			while(it.hasNext()){			
-				ResultadoHora resultado =it.next();
-				dispositivo = dispositivos.get(i);		
-				//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
-				if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
-				
-					//si el dispositivo es inteligente ejecuto la accion
-					if( dispositivo.esInteligente() ){
-						
-						DispositivoInteligente di = (DispositivoInteligente) dispositivo;
-						di.ejecutarAccionAutomatica();
-					}			
+	public void analisarResultados( LocalDateTime desde , LocalDateTime hasta ){
+		int i=0; //iterador
+		DispositivoUsuario dispositivo;
+		Iterator<ResultadoHora> it = resultados.iterator();
+		// recorro lista de transformadores buscando la distancia minima.
+		while(it.hasNext()){
+			ResultadoHora resultado =it.next();
+			dispositivo = dispositivos.get(i);
+			//si ya se uso mas de lo que deberia deberia accionar la accion del cliente
+			if( dispositivo.horasDeUso(desde, hasta) >  resultado.horasQuePuedeConsumir  ){
+
+				//si el dispositivo es inteligente ejecuto la accion
+				if( dispositivo.esInteligente() ){
+
+					DispositivoInteligente di = (DispositivoInteligente) dispositivo;
+					di.ejecutarAccionAutomatica();
 				}
-				
-				i++;
 			}
-			
+			i++;
 		}
+
+	}
 
 	@Override
 	public ArrayList<ResultadoHora> resultados() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.resultados;
 	}
 
+	//entrega 4 ----------------
+	public double maximaEnergiaResultado(){
+		double energia_consumida=0;
+		for(int i=0;i<this.cantidadDeDispositivos();i++){
+			energia_consumida+=this.dispositivos.get(i).getConsumoKwHora()*this.resultados.get(i).getHorasQuePuedeConsumir();
+		}
+		return energia_consumida;
+	}
+	public boolean consumioSuMaximaEnergia(){
+		return this.consumoMaximoDeEnergia<this.maximaEnergiaResultado;//supero el consumo maximo
+	}
 }

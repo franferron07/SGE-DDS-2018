@@ -15,6 +15,11 @@ public interface Implementador {
 	public int cantidadDeDispositivos();
 	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo();
 	public ArrayList<ResultadoHora> resultados();
+
+
+	//para entrega 4, para saber si se paso de consump
+	public double maximaEnergiaResultado();
+	public boolean consumioSuMaximaEnergia();
 	
 	 //------------------------------
 		default double[] crearVectorDeUnos(int n) {

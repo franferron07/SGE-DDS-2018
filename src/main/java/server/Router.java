@@ -1,13 +1,10 @@
 package server;
 
+import controllers.*;
+import optimizacion_horas.Optimizador;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import controllers.ClienteController;
-import controllers.DispositivoUsuarioController;
-import controllers.InicioController;
-import controllers.LoginController;
-import controllers.MapController;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.BooleanHelper;
@@ -39,6 +36,9 @@ private static HandlebarsTemplateEngine engine;
 		MapController mapController = new MapController();
 		ClienteController clienteController = new ClienteController();
 		DispositivoUsuarioController dispositivoUsuarioController = new DispositivoUsuarioController();
+		AdministradorController administradorController = new AdministradorController();
+
+		OptimizadorController optimizadorController = new OptimizadorController();
 		
 		Spark.get("/", loginController::ver, Router.engine);
 		Spark.get("/login", loginController::ver, Router.engine);
@@ -61,10 +61,18 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);
 		Spark.post("/cliente/dispositivo", dispositivoUsuarioController::guardar, Router.engine);
 		
+		
 		Spark.get("/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
 		Spark.put("/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
 		Spark.post("/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
 		
+	    Spark.get("/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);
+	    Spark.get("/administrador/dispositivo", administradorController::crear, Router.engine);
+		Spark.post("/administrador/dispositivo", administradorController::guardar, Router.engine);
+
+		Spark.get("/optimizador/:id",optimizadorController::mostrarResultadosOptimizador,Router.engine);
+
+
 	}
 	
 	

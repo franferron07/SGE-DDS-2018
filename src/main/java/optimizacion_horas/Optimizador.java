@@ -8,8 +8,8 @@ import usuarios.Cliente;
 
 public class Optimizador {
 	private Implementador implementacion_simplex=new UnaImplementacionSimplex();
-	
-	
+
+
 	public void cargarDispositivosEsenciales(Cliente cliente) {
 		this.implementacion_simplex.cargarDispositivosEsenciales(cliente);
 	}
@@ -34,12 +34,18 @@ public class Optimizador {
 	public ArrayList<ResultadoHora> resultados(){
 		return this.implementacion_simplex.resultados();
 	}
-	
-		
+
+	public double getMaximaEnergiaResultado(){
+		return this.implementacion_simplex.maximaEnergiaResultado();
+	}
+	public boolean consumioSuMaximaEnergia(){
+		return this.implementacion_simplex.consumioSuMaximaEnergia();
+	}
+
 	public static void main(String[] args) {
 		DispositivoUsuario lcd,lavaropas,ventilador,heladera;
 		lcd=new DispositivoUsuario() {
-			
+
 			@Override
 			public float consumoPeriodo(LocalDateTime desde, LocalDateTime hasta) {	return 0;}
 			@Override
@@ -51,7 +57,7 @@ public class Optimizador {
 			public double getHsMensualMinimo() {	return 90;}
 			@Override
 			public double getHsMensualMaximo() {	return 370;}
-			@Override 
+			@Override
 			public boolean esEsencial() {return true;}
 			@Override
 			public boolean esInteligente() {
@@ -67,7 +73,7 @@ public class Optimizador {
 		lavaropas=new DispositivoUsuario() {
 			@Override
 			public float consumoPeriodo(LocalDateTime desde, LocalDateTime hasta) {	return 0;}
-			
+
 			@Override
 			public double getConsumoKwHora() {	return 0.875;}
 			@Override
@@ -77,7 +83,7 @@ public class Optimizador {
 			@Override
 			public double getHsMensualMaximo() {	return 30;}
 
-			@Override 
+			@Override
 			public boolean esEsencial() {return true;}
 
 			@Override
@@ -102,7 +108,7 @@ public class Optimizador {
 			public double getHsMensualMinimo() {	return 120;}
 			@Override
 			public double getHsMensualMaximo() {	return 360;}
-			@Override 
+			@Override
 			public boolean esEsencial() {return true;}
 			@Override
 			public boolean esInteligente() {
@@ -114,7 +120,7 @@ public class Optimizador {
 				return 0;
 			}
 		};
-		heladera=new DispositivoUsuario() {	
+		heladera=new DispositivoUsuario() {
 			@Override
 			public float consumoPeriodo(LocalDateTime desde, LocalDateTime hasta) {	return 0;}
 			@Override
@@ -125,7 +131,7 @@ public class Optimizador {
 			public double getHsMensualMinimo() {	return 0;}
 			@Override
 			public double getHsMensualMaximo() {	return 0;}
-			@Override 
+			@Override
 			public boolean esEsencial() {return true;}
 			@Override
 			public boolean esInteligente() {
@@ -142,11 +148,11 @@ public class Optimizador {
 		simplex.cargarDispositivos(lcd,lavaropas,ventilador);
 		simplex.maximizar();
 		ArrayList<ResultadoHora> resultados=simplex.getHorasDeCadaDispositivo();
-		
-			
+
+
 		for (int i = 0; i < simplex.cantidadDeDispositivos(); i++) {
 			System.out.print(resultados.get(i).getDispositivo()+" = ");
-			System.out.println(resultados.get(i).getHorasQuePuedeConsumir());	
+			System.out.println(resultados.get(i).getHorasQuePuedeConsumir());
 		}
 	}
 }
