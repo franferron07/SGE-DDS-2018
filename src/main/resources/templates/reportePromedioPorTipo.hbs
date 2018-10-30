@@ -25,6 +25,7 @@
 						      <input type="text" class="form-control" id="dispositivo_nombre" placeholder="" >
 						    </div>
 
+						    <!-- Grid row -->
 
 						    <!-- Default input -->
 						    <div class="form-group col-md-6">
@@ -35,7 +36,7 @@
 
 						    <!-- Grid row -->
 						    <!-- Default input -->
-						  <div class="form-group">
+						  <div class="form-group col-md-5">
 						    <label for="es_inteligente">Dispositivo inteligente</label>
 				            <select class="mdb-select md-form" id="es_inteligente">
                 				<option value="0">No</option>
@@ -48,7 +49,7 @@
 						 </div>
 						 
 						    <!-- Default input -->
-						  <div class="form-group">
+						  <div class="form-group col-md-5">
 						    <label for="es_esencial">Dispositivo esencial</label>
 				            <select class="mdb-select md-form" id="es_esencial">
                 				<option value="0">No</option>
@@ -61,21 +62,16 @@
 						 </div>
 
 						  <!-- Grid row -->
-						  <div class="form-group">
+						  <div class="form-group col-md-4">
 					    	<label for="horas_minimas">Horas de uso mensuales mínimas</label>
 					    	<input type="number" class="form-control" id="horas_minimas" placeholder="" >
 						 </div>
 
 						 <!-- Grid row -->
-						 <div class="form-group">
+						 <div class="form-group col-md-4">
 					    	<label for="horas_maximas">Horas de uso mensuales maximas</label>
 					    	<input type="number" class="form-control" id="horas_maximas" placeholder="" >
 						 </div>
-
-						 <div class="text-center">
-                        	<button class="btn btn-primary">Crear</button>
-                    	</div>
-
 
 
 					</form>
@@ -94,6 +90,6 @@
 
 {{/partial}}
 
-{{>layoutAdministrador.hbs}}
+{{>layout.hbs}}
 
 
