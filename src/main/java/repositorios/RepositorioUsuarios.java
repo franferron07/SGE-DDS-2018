@@ -74,6 +74,13 @@ public class RepositorioUsuarios {
 		
 		return cliente.getDispositivos().stream().filter(d -> d.id == id_disp).findFirst().get();
 	}
+
+	
+	public void agregar_dispositivo_usuario(int id, DispositivoUsuario dispositivo) {
+		
+		Cliente cliente = (Cliente) buscarUsuario(id);
+		cliente.agregarDispositivo(dispositivo);
+	}
 	
 	
 

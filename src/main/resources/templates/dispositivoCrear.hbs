@@ -14,14 +14,19 @@
                     </div>
     				
 
-                    <form action="/login" method="POST" >
+                    <form action="/cliente/dispositivo" method="POST" >
 
                     	<!-- Grid row -->
 						  <div class="form-row">
 						    <!-- Default input -->
 						    <div class="form-group col-md-6">
 						      <label for="dispositivo_detalle">Dispisitivo</label>
-						      <input type="text" class="form-control" id="dispositivo_detalle" placeholder="" >
+				              <select class="mdb-select md-form" id="dispositivo_detalle" name="dispositivo_detalle">
+				              	<option value="-1">(Seleccionar)</option>
+				              	{{#each dispositivos}}
+                				<option value="{{id}}" esInteligente="{{esInteligente}}">{{nombre}} {{descripcion}}</option>
+                				{{/each}} 
+           					  </select>
 						    </div>
 						    <!-- Default input -->
 						    <div class="form-group col-md-6">
@@ -42,21 +47,23 @@
 						  <!-- Grid row -->
 
 						  <!-- Grid row -->
-						  <div class="form-group">
+						  <div class="form-group" id="horas_div">
 					    	<label for="horas">Horas de uso por dia</label>
-					    	<input type="number" class="form-control" id="horas" placeholder="" >
+					    	<input type="number" class="form-control" id="horas" name="horas" placeholder="" >
 						 </div>
 
-						  <!-- Grid row -->
-						  <div class="form-group">
+						  <!-- Grid row
+						  <div class="form-group" id="accionado_div" style="display: none;">
 						    <label for="accionado">Accionado automático</label>
-				            <select class="mdb-select md-form" id="accionado">
+				            <select class="mdb-select md-form" id="accionado" name="accionado">
                 				<option value="0">No</option>
                 				<option value="1" selected>Si</option>
            					</select>
-						  </div>
+						  </div> -->
 						  
-
+						 <div class="text-center">
+                        	<button class="btn btn-primary">Crear</button>
+                    	</div>
 
 					</form>
 					<!-- Default form group -->
@@ -69,9 +76,8 @@
 
         </div>
     </main>
-
+<script type="text/javascript" src="/js/dispositivosUsuarioCrear.js"></script>
 {{/partial}}
-
 {{>layoutCliente.hbs}}
 
 

@@ -1,4 +1,5 @@
 [{
+	"id":"1",
 	"nombre": "Aire Acondicionado",
 	"descripcion": "De 3500 frigorias",
 	"hsMensualMinimo": 90.0,
@@ -8,6 +9,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"2",
 	"nombre": "Aire Acondicionado",
 	"descripcion": "De 2200 frigorias",
 	"hsMensualMinimo": 90.0,
@@ -17,6 +19,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"3",
 	"nombre": "Televisor",
 	"descripcion": "Color de tubo fluorescente de 21�",
 	"hsMensualMinimo": 90.0,
@@ -26,6 +29,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"4",
 	"nombre": "Televisor",
 	"descripcion": "Color de tubo fluorescente de 29 a 34",
 	"hsMensualMinimo": 90.0,
@@ -35,6 +39,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"5",
 	"nombre": "Televisor",
 	"descripcion": "LCD de 40",
 	"hsMensualMinimo": 90.0,
@@ -44,6 +49,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"6",
 	"nombre": "Televisor",
 	"descripcion": "LED 24",
 	"hsMensualMinimo": 90.0,
@@ -53,6 +59,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"7",
 	"nombre": "Televisor",
 	"descripcion": "LED 32",
 	"hsMensualMinimo": 90.0,
@@ -62,6 +69,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"8",
 	"nombre": "Televisor",
 	"descripcion": "LED 40",
 	"hsMensualMinimo": 90.0,
@@ -71,6 +79,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"9",
 	"nombre": "Heladera",
 	"descripcion": "Con freezer",
 	"consumoKwHora": 0.09,
@@ -78,6 +87,7 @@
 	"esEsencial": true,
 	"esInteligente": true
 }, {
+	"id":"10",
 	"nombre": "Heladera",
 	"descripcion": "Sin freezer",
 	"consumoKwHora": 0.075,
@@ -85,6 +95,7 @@
 	"esEsencial": true,
 	"esInteligente": true
 }, {
+	"id":"11",
 	"nombre": "Lavarropas",
 	"descripcion": "Automatico de 5 kg con calentamiento de agua",
 	"hsMensualMinimo": 6.0,
@@ -94,6 +105,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"12",
 	"nombre": "Lavarropas",
 	"descripcion": "Automatico de 5 kg",
 	"hsMensualMinimo": 6.0,
@@ -103,6 +115,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"13",
 	"nombre": "Lavarropas",
 	"descripcion": "Semi-automatico de 5 kg",
 	"hsMensualMinimo": 6.0,
@@ -112,6 +125,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"14",
 	"nombre": "Ventilador",
 	"descripcion": "De pie",
 	"hsMensualMinimo": 120.0,
@@ -121,6 +135,7 @@
 	"esEsencial": false,
 	"esInteligente": false
 }, {
+	"id":"15",
 	"nombre": "Ventilador",
 	"descripcion": "De techo",
 	"hsMensualMinimo": 120.0,
@@ -130,6 +145,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"16",
 	"nombre": "Lampara",
 	"descripcion": "Halogenas de 40 W",
 	"hsMensualMinimo": 90.0,
@@ -139,6 +155,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"17",
 	"nombre": "Lampara",
 	"descripcion": "Halogenas de 60 W",
 	"hsMensualMinimo": 90.0,
@@ -148,6 +165,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"18",
 	"nombre": "Lampara",
 	"descripcion": "Halogenas de 100 W",
 	"hsMensualMinimo": 90.0,
@@ -157,6 +175,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"19",
 	"nombre": "Lampara",
 	"descripcion": "De 11 W",
 	"hsMensualMinimo": 90.0,
@@ -166,6 +185,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"20",
 	"nombre": "Lampara",
 	"descripcion": "De 15 W",
 	"hsMensualMinimo": 90.0,
@@ -175,6 +195,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"21",
 	"nombre": "Lampara",
 	"descripcion": "De 20 W",
 	"hsMensualMinimo": 90.0,
@@ -184,6 +205,7 @@
 	"esEsencial": false,
 	"esInteligente": true
 }, {
+	"id":"22",
 	"nombre": "PC",
 	"descripcion": "De escritorio",
 	"hsMensualMinimo": 90.0,
