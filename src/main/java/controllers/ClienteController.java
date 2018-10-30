@@ -31,7 +31,7 @@ public class ClienteController {
 		int id = Integer.parseInt(request.params("id"));
 		Cliente cliente =  (Cliente) repo.buscarUsuario(id);
 		model.put("cliente", cliente);
-		return new ModelAndView(model, "modalEstado.hbs");
+		return new ModelAndView(model, "cliente.hbs");
 	}
 	
 	public ModelAndView consumoPeriodo(Request request, Response response) {

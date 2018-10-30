@@ -21,7 +21,7 @@ function showInModal(unModal, unContenido){
 }
 
 function modificar(id, permiteEdicion = false){
-	alert("hola");
+
 	var ruta = "/cliente/dispositivo/"+id;
 	var metodo = "GET";
 	if(permiteEdicion) metodo = "PUT";
