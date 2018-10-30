@@ -36,8 +36,15 @@ private static HandlebarsTemplateEngine engine;
 		ClienteController clienteController = new ClienteController();
 		DispositivoUsuarioController dispositivoUsuarioController = new DispositivoUsuarioController();
 		AdministradorController administradorController = new AdministradorController();
-
 		OptimizadorController optimizadorController = new OptimizadorController();
+		
+		
+		Spark.before("/sge/*",(req,res)->{
+			Integer id = req.session().attribute("id");
+			if (id==null) {
+				res.redirect("/login");
+			}
+		});
 		
 		/* LOGIN */
 		Spark.get("/", loginController::ver, Router.engine);
@@ -51,7 +58,7 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/api/zonas", (req, res) -> mapController.getZonas(req, res));
 		
 		/* CLIENTE */
-		Spark.get("/cliente" , clienteController::ver, Router.engine);
+		Spark.get("/sge/cliente" , clienteController::ver, Router.engine);
 		Spark.get("/cliente/estado", clienteController::estado , Router.engine);
 		Spark.post("/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
 		
@@ -67,6 +74,9 @@ private static HandlebarsTemplateEngine engine;
 	    Spark.get("/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);
 	    Spark.get("/administrador/dispositivo", administradorController::crear, Router.engine);
 		Spark.post("/administrador/dispositivo", administradorController::guardar, Router.engine);
+		
+		//Reportes
+		Spark.get("/reportes", administradorController::reportes, Router.engine);
 
 		Spark.get("/optimizador/:id",optimizadorController::mostrarResultadosOptimizador,Router.engine);
 

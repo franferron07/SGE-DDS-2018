@@ -28,6 +28,7 @@ public class OptimizadorController {
     public ModelAndView mostrarResultadosOptimizador(Request request, Response res ){
         Map<String, Object> model=new HashMap<>();
 
+        Integer user_id = request.session().attribute("id");
         //Integer user_id=Integer.parseInt(request.queryParams("id"));
         this.setearValoresAUsuario();
         modelHelper.agregar(cliente_seleccionado);

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import repositorios.RepositorioUsuarios;
+import server.SessionUtils;
 import repositorios.RepositorioClientes;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,6 +22,20 @@ public class AdministradorController {
 	
 	public AdministradorController(){
 		repositorio_usuarios = new RepositorioUsuarios();
+	}
+	
+	public ModelAndView reportes (Request request,Response response) {
+		Map<String, Object> model=new HashMap<>();
+		
+		return new ModelAndView(model, "reportes.hbs");
+	}
+	
+	public ModelAndView postReporte (Request request,Response response) {
+		Map<String, Object> model=new HashMap<>();
+		
+		response = SessionUtils.checkSessionAndRedirect(request, response);
+		
+		return new ModelAndView(model, "reportes.hbs");
 	}
 	
 	
