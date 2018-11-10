@@ -32,7 +32,7 @@ public class ZonaGeografica{
 	@OneToMany(mappedBy= "zonaAsignada",cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	private List<Transformador> transformadores;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST  )
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL  )
 	@JoinColumn(name = "ubicable_id")
 	public Ubicable ubicable = new Ubicable();
 	

@@ -24,7 +24,7 @@ public class Transformador {
 	@GeneratedValue
 	public int id;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST )
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL )
 	@JoinColumn(name = "ubicable_id")
 	public Ubicable ubicable = new Ubicable();
 	
