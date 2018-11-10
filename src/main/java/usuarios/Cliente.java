@@ -150,11 +150,19 @@ public class Cliente extends Usuario {
 		
 	}
 	
-	//setea la fecha del alta correctamente
+	/*//setea la fecha del alta correctamente
 	public void parsearFecha( String fecha_s ){
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		this.fechaAltaServicio = LocalDateTime.parse(fecha_s, formatter);
+	}
+	*/
+	
+	//parsea fecha
+	public LocalDateTime parsearFecha( String fecha_s ){
+		
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		return LocalDateTime.parse(fecha_s, formatter);
 	}
 	
 	
@@ -175,9 +183,9 @@ public class Cliente extends Usuario {
 	}
 	
 	//getters y setters
-	
 	public String getFechaAltaServicio_s() {
-		parsearFecha(this.fechaAltaServicio_s);
+		this.fechaAltaServicio =parsearFecha(this.fechaAltaServicio_s);
+		
 		return fechaAltaServicio_s;
 	}
 
@@ -202,6 +210,8 @@ public class Cliente extends Usuario {
 	}
 
 	public LocalDateTime getFechaAltaServicio() {
+		
+		this.fechaAltaServicio = parsearFecha(fechaAltaServicio_s);
 		return fechaAltaServicio;
 	}
 

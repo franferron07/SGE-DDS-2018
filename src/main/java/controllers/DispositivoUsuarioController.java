@@ -16,14 +16,15 @@ import usuarios.Cliente;
 
 public class DispositivoUsuarioController {
 
-	public RepositorioDispositivosLista dispositivos;
+	//public RepositorioDispositivosLista dispositivos;
 	
 	public DispositivoUsuarioController(){
 		
-		dispositivos = new RepositorioDispositivosLista();
+		//dispositivos = new RepositorioDispositivosLista();
 	}
 	
 	
+	//listamos dispositivos
 	public ModelAndView dispositivos(Request request, Response response) {
 		Map<String, Object> model=new HashMap<>();	
 		int id = request.session().attribute("id");
@@ -44,7 +45,7 @@ public class DispositivoUsuarioController {
 		Map<String, Object> model=new HashMap<>();
 		
 		
-		model.put("dispositivos", dispositivos.getDispositivosLista());
+		model.put("dispositivos", RepositorioDispositivosLista.getDispositivosLista());
 		
 		return new ModelAndView(model, "dispositivoCrear.hbs");
 	}
@@ -55,16 +56,18 @@ public class DispositivoUsuarioController {
 		int id_detalle =Integer.parseInt(request.queryParams("dispositivo_detalle"));
 		String tipo = request.queryParams("tipo");
 		
+		DispositivoDetalle detalle = RepositorioDispositivosLista.buscarDispositivoDetalle(id_detalle);
+		
 
 		if(tipo == "estandar"){
-			DispositivoEstandar estandar = new DispositivoEstandar(null);
+			DispositivoEstandar estandar = new DispositivoEstandar(detalle);
 			estandar.setHorasPorDia(Float.parseFloat(request.queryParams("horas") ) );
 			
 			RepositorioUsuarios.agregar_dispositivo_usuario( id , estandar );
 		}
 		else
 		{
-			DispositivoInteligente inteligente = new DispositivoInteligente(null);
+			DispositivoInteligente inteligente = new DispositivoInteligente(detalle);
 			RepositorioUsuarios.agregar_dispositivo_usuario( id , inteligente );
 		}
 		
@@ -88,10 +91,24 @@ public class DispositivoUsuarioController {
 		int id = request.session().attribute("id");
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 
-		DispositivoUsuario disp = RepositorioUsuarios.buscarDispositivo( cliente , id_disp );
-		model.put("dispositivo", disp);
+		DispositivoUsuario dispositivo = RepositorioUsuarios.buscarDispositivo( cliente , id_disp );
+		
 		model.put("permiteEdicion", permiteEdicion);
-		return new ModelAndView(model, "modalDispositivo.hbs");
+		
+		/* Chequeo si es inteligente o estandar para verificar cual modal mostrar. */
+		if( dispositivo.getClass() == DispositivoInteligente.class ){
+			DispositivoInteligente di_inteligente = (DispositivoInteligente) dispositivo ;
+			
+			model.put("dispositivo", di_inteligente);
+			return new ModelAndView(model, "modalDispositivoInteligente.hbs");
+		}
+		else{
+			DispositivoEstandar di_estandar = (DispositivoEstandar) dispositivo ;
+			
+			model.put("dispositivo", di_estandar);
+			return new ModelAndView(model, "modalDispositivoEstandar.hbs");
+		}
+		
 	}
 	
 	

@@ -15,14 +15,15 @@ function vaciar(unaVariableDelDocumento){
 }
 
 function showInModal(unModal, unContenido){
+
 	vaciar(unModal);
 	agregarA(unModal,unContenido);
 	modal_show(unModal);
 }
 
 function modificar(id, permiteEdicion = false){
-
-	var ruta = "/cliente/dispositivo/"+id;
+	alert(permiteEdicion);
+	var ruta = "/sge/cliente/dispositivo/"+id;
 	var metodo = "GET";
 	if(permiteEdicion) metodo = "PUT";
     $.ajax({

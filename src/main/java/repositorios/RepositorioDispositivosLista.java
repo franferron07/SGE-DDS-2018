@@ -39,6 +39,12 @@ public class RepositorioDispositivosLista {
 	}
 	
 	
+	public static DispositivoDetalle buscarDispositivoDetalle(int id_disp) {
+		
+		return dispositivosLista.stream().filter(d -> d.id == id_disp).findFirst().get();
+	}
+	
+	
 	
 	//carga datos del archivo
 	public void cargarDatos(){
@@ -47,7 +53,7 @@ public class RepositorioDispositivosLista {
 		}
 	}
 
-	public List<DispositivoDetalle> getDispositivosLista() {
+	public static List<DispositivoDetalle> getDispositivosLista() {
 		
 		return dispositivosLista;
 	}
@@ -56,7 +62,7 @@ public class RepositorioDispositivosLista {
 		this.dispositivosLista = dispositivosLista;
 	}
 	
-	public DispositivoDetalle buscarDispositivo( int id_disp) {
+	public static DispositivoDetalle buscarDispositivo( int id_disp) {
 		
 		return dispositivosLista.stream().filter(d -> d.getId() == id_disp).findFirst().get();
 	}

@@ -60,7 +60,8 @@ private static HandlebarsTemplateEngine engine;
 		/* CLIENTE */
 		Spark.get("/sge/cliente" , clienteController::ver, Router.engine);
 		Spark.get("/sge/cliente/estado", clienteController::estado , Router.engine);
-		Spark.post("/sge/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
+		Spark.get("/sge/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
+		Spark.post("/sge/cliente/consumo/:desde/:hasta", clienteController::consumoPeriodoResultado , Router.engine);
 		
 		Spark.get("/sge/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
 		Spark.get("/sge/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);
