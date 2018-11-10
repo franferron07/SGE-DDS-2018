@@ -7,7 +7,6 @@ import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuarios.Administrador;
 import usuarios.Cliente;
 import usuarios.Usuario;
 
@@ -31,14 +30,11 @@ public class LoginController {
 	
 	public ModelAndView loguear(Request request, Response response) {
 		
-		RepositorioUsuarios repo = new RepositorioUsuarios();
-		
-		
 		Map<String, Object> model=new HashMap<>();
 		String username = request.queryParams("usuario");
 		String password= request.queryParams("password");
 		String mensaje = null;
-		Usuario usuario = repo.buscarUsuario(username);
+		Usuario usuario = RepositorioUsuarios.buscarUsuario(username);
 		
 		if( usuario == null ){
 			mensaje="El nombre de usuario es incorrecto";

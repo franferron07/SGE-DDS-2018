@@ -33,7 +33,7 @@ public class UsuarioDbTest1 {
 		cliente.setNombre("Francisco");
 		cliente.setApellido("Ferron");
 		cliente.setTipoDocumento("DNI");
-		//cliente.setUsername("test");
+		cliente.setUsername("test");
 		cliente.setPassword("test");
 		//cliente.setDomicilio("calle falsa 1234");
 		cliente.setTelefonoContacto("44442222");

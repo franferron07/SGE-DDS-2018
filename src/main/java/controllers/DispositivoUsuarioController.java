@@ -16,13 +16,10 @@ import usuarios.Cliente;
 
 public class DispositivoUsuarioController {
 
-	
-	public RepositorioUsuarios repositorio_usuario;
 	public RepositorioDispositivosLista dispositivos;
 	
 	public DispositivoUsuarioController(){
 		
-		repositorio_usuario = new RepositorioUsuarios();
 		dispositivos = new RepositorioDispositivosLista();
 	}
 	
@@ -31,7 +28,7 @@ public class DispositivoUsuarioController {
 		Map<String, Object> model=new HashMap<>();	
 		int id = request.session().attribute("id");
 		
-		Cliente cliente = (Cliente) repositorio_usuario.buscarUsuario(id);
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		model.put("dispositivos", cliente.getDispositivos());
 		return new ModelAndView(model, "dispositivos.hbs");
 	}
@@ -58,22 +55,21 @@ public class DispositivoUsuarioController {
 		int id_detalle =Integer.parseInt(request.queryParams("dispositivo_detalle"));
 		String tipo = request.queryParams("tipo");
 		
-		//DispositivoDetalle detalle = dispositivos.buscarDispositivo(id_detalle);
 
 		if(tipo == "estandar"){
 			DispositivoEstandar estandar = new DispositivoEstandar(null);
 			estandar.setHorasPorDia(Float.parseFloat(request.queryParams("horas") ) );
 			
-			repositorio_usuario.agregar_dispositivo_usuario( id , estandar );
+			RepositorioUsuarios.agregar_dispositivo_usuario( id , estandar );
 		}
 		else
 		{
 			DispositivoInteligente inteligente = new DispositivoInteligente(null);
-			repositorio_usuario.agregar_dispositivo_usuario( id , inteligente );
+			RepositorioUsuarios.agregar_dispositivo_usuario( id , inteligente );
 		}
 		
 		Map<String, Object> model=new HashMap<>();	
-		Cliente cliente = (Cliente) repositorio_usuario.buscarUsuario(id);
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		model.put("dispositivos", cliente.getDispositivos());
 		return new ModelAndView(model, "dispositivos.hbs");
 	}
@@ -90,9 +86,9 @@ public class DispositivoUsuarioController {
 		int id_disp = Integer.parseInt(request.params("id"));
 		
 		int id = request.session().attribute("id");
-		Cliente cliente = (Cliente) repositorio_usuario.buscarUsuario(id);
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 
-		DispositivoUsuario disp = repositorio_usuario.buscarDispositivo( cliente , id_disp );
+		DispositivoUsuario disp = RepositorioUsuarios.buscarDispositivo( cliente , id_disp );
 		model.put("dispositivo", disp);
 		model.put("permiteEdicion", permiteEdicion);
 		return new ModelAndView(model, "modalDispositivo.hbs");

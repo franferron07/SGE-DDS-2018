@@ -6,12 +6,17 @@ import java.util.List;
 import dao.DaoJson;
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoUsuario;
+import models.ModelHelper;
 import usuarios.Cliente;
+import usuarios.Usuario;
 
 public class RepositorioDispositivosLista {
 
 	public DaoJson<DispositivoDetalle> dao;
-	public List<DispositivoDetalle> dispositivosLista;
+	
+	public static List<DispositivoDetalle> dispositivosLista;
+	
+	public static ModelHelper model;
 	
 	//constructor
 	public RepositorioDispositivosLista(){
@@ -21,6 +26,19 @@ public class RepositorioDispositivosLista {
 		cargarDatos();
 		
 	}
+	
+	
+	
+	public static void cargarDispositiosLista(){
+		
+		model = new ModelHelper();
+		dispositivosLista = new ArrayList<DispositivoDetalle>();
+		
+		dispositivosLista.addAll(model.buscarTodos(DispositivoDetalle.class));
+		
+	}
+	
+	
 	
 	//carga datos del archivo
 	public void cargarDatos(){

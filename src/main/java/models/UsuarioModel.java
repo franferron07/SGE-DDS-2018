@@ -26,5 +26,7 @@ public class UsuarioModel extends ModelHelper {
 		return super.buscarTodos(Usuario.class);
 	}
 	
+	
+	
 
 }
