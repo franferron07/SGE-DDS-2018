@@ -24,9 +24,9 @@ public class Transformador {
 	@GeneratedValue
 	public int id;
 	
-	@OneToOne(fetch=FetchType.EAGER )
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST )
 	@JoinColumn(name = "ubicable_id")
-	public Ubicable ubicable;
+	public Ubicable ubicable = new Ubicable();
 	
 	
 	@OneToMany(mappedBy="transformador", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
@@ -56,7 +56,10 @@ public class Transformador {
 		this.getUbicable().addCoordenadas(coordenada);
 		
 	}
-	
+
+	public List<Coordenada> getCoordenadas() {
+		return this.ubicable.getCoordenadas();
+	}
 	
 	//me da el consumo total en un determinado instante(se toma 1 hora el minimo)
 	public double consumoTotal( LocalDateTime desde , LocalDateTime hasta ){
@@ -103,7 +106,7 @@ public class Transformador {
 	}
 
 	public Ubicable getUbicable() {
-		return ubicable;
+		return this.ubicable;
 	}
 
 	public void setUbicable(Ubicable ubicable) {

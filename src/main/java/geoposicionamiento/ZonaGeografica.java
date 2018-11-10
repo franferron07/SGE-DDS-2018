@@ -32,9 +32,9 @@ public class ZonaGeografica{
 	@OneToMany(mappedBy= "zonaAsignada",cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	private List<Transformador> transformadores;
 
-	@OneToOne(fetch=FetchType.EAGER )
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST  )
 	@JoinColumn(name = "ubicable_id")
-	public Ubicable ubicable;
+	public Ubicable ubicable = new Ubicable();
 	
 	
 	//constructor
@@ -54,7 +54,9 @@ public class ZonaGeografica{
 		this.transformadores=transformadores;
 	}
 	
-	
+	public List<Coordenada> getCoordenadas() {
+		return this.ubicable.getCoordenadas();
+	}
 	
 	//asigna al transofmrador mas cerca un cliente
 	public void asignarTransformador(Cliente unCliente){
