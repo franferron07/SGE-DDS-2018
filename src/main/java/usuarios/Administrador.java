@@ -6,19 +6,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 
 @Entity
 @DiscriminatorValue("administrador")
 public class Administrador extends Usuario {
 	
-	@OneToOne(fetch = FetchType.LAZY) 
+	/*@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="id")
-	private Usuario usuario;
+	private Usuario usuario;*/
 
 	@Column(name="fechaAltaSistema")
 	private Date fechaAltaSistema;

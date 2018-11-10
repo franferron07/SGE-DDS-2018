@@ -5,20 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import usuarios.Cliente;
-//subir
+
 @Entity
 @Table(name="transformador")
-@DiscriminatorValue(value="transformador")
-public class Transformador extends Ubicable {
+public class Transformador {
+	
+	@Id
+	@GeneratedValue
+	public int id;
+	
+	@OneToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name = "ubicable_id")
+	public Ubicable ubicable;
 	
 	
 	@OneToMany(mappedBy="transformador", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
@@ -29,11 +37,6 @@ public class Transformador extends Ubicable {
     @JoinColumn
 	private ZonaGeografica zonaAsignada;
 	
-	/*
-	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="ubicable_id")
-	protected Ubicable ubicable;
-	*/
 	
 	//constructor
 	public Transformador(){
@@ -44,13 +47,13 @@ public class Transformador extends Ubicable {
 	public Transformador(ZonaGeografica zona , Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
 		this.setZonaAsignada(zona);
-		super.addCoordenadas(coordenada);
+		this.getUbicable().addCoordenadas(coordenada);
 	}
 	
 	//constructor
 	public Transformador(Coordenada coordenada){
 		clientes= new ArrayList<Cliente>();
-		super.addCoordenadas(coordenada);
+		this.getUbicable().addCoordenadas(coordenada);
 		
 	}
 	
@@ -68,6 +71,9 @@ public class Transformador extends Ubicable {
 	}
 
 	
+	public Coordenada getUbicacion() {
+		return this.getUbicable().getUbicacion();
+	}
 	
 	//getters y setters
 	
@@ -86,6 +92,22 @@ public class Transformador extends Ubicable {
 
 	public void setZonaAsignada(ZonaGeografica zonaAsignada) {
 		this.zonaAsignada = zonaAsignada;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Ubicable getUbicable() {
+		return ubicable;
+	}
+
+	public void setUbicable(Ubicable ubicable) {
+		this.ubicable = ubicable;
 	}
 	
 	

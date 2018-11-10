@@ -20,15 +20,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ubicable")
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo")
-public abstract class Ubicable {
+public class Ubicable {
 	
 	@Id
 	@GeneratedValue
 	public int id;
 	
-	@OneToMany(mappedBy="ubicable", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
+	@OneToMany(mappedBy="ubicable", cascade = CascadeType.ALL , fetch = FetchType.LAZY )
 	@OrderBy("orden ASC")
 	public List<Coordenada> coordenadas;
 	

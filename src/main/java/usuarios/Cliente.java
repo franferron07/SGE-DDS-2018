@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Table;
-
 import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
-import dispositivos.ModoApagado;
+import geoposicionamiento.Coordenada;
 import geoposicionamiento.Transformador;
 import optimizacion_horas.Optimizador;
 
@@ -22,7 +20,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.Transient;
@@ -32,9 +29,6 @@ import javax.persistence.Transient;
 @DiscriminatorValue("cliente")
 public class Cliente extends Usuario {
 	
-	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="id")
-	private Usuario usuario;
 	
 	@Column(name="tipoDocumento")
 	private String tipoDocumento;
@@ -56,7 +50,7 @@ public class Cliente extends Usuario {
     @JoinColumn
 	private Transformador transformador;
 	
-	@OneToMany(mappedBy="cliente", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY )
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL , fetch = FetchType.LAZY )
 	private List<DispositivoUsuario> dispositivos;
 	
 	@Column(name="puntaje")
@@ -175,6 +169,10 @@ public class Cliente extends Usuario {
 	}
 	
 	
+	
+	public Coordenada getUbicacion() {
+		return this.getUbicable().getUbicacion();
+	}
 	
 	//getters y setters
 	

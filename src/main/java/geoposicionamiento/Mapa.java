@@ -3,11 +3,9 @@ package geoposicionamiento;
 import java.util.ArrayList;
 import java.util.List;
 
-import repositorios.RepositorioTransformadores;
-import repositorios.RepositorioZonas;
 import usuarios.Cliente;
-//@Entity
-//@Table(name ="mapa")
+
+
 public abstract class Mapa {
 	
 	

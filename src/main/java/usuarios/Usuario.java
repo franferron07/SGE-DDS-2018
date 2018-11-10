@@ -4,12 +4,17 @@ import geoposicionamiento.Ubicable;
 
 import java.io.IOException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.google.maps.errors.ApiException;
@@ -18,10 +23,17 @@ import APIs.GeoCodingService;
 
 @Entity
 @Table(name="usuario")
-@DiscriminatorValue("usuario")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_usuario")
-public abstract class Usuario extends Ubicable{
+public abstract class Usuario{
+	
+	@Id
+	@GeneratedValue
+	public int id;
+	
+	@OneToOne(fetch=FetchType.EAGER ,cascade = CascadeType.ALL )
+	@JoinColumn(name = "ubicable_id")
+	public Ubicable ubicable;
 
 	@Column(name="nombre")
 	protected String nombre;
@@ -34,10 +46,7 @@ public abstract class Usuario extends Ubicable{
 	@Column(name="password")
 	private String password;
 	
-	/*@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="id")
-	protected Login login;*/
-	
+
 	public Usuario() {
 		super();
 	}
@@ -70,7 +79,7 @@ public abstract class Usuario extends Ubicable{
 
 	public void setDomicilio(String domicilio) throws ApiException, InterruptedException, IOException {
 		this.domicilio = domicilio;
-		this.addCoordenadas(GeoCodingService.getCoordinates(domicilio));
+		this.getUbicable().addCoordenadas(GeoCodingService.getCoordinates(domicilio));
 	}
 	
 	public void setDomicilio2(String domicilio) {
@@ -92,6 +101,24 @@ public abstract class Usuario extends Ubicable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Ubicable getUbicable() {
+		return ubicable;
+	}
+
+	public void setUbicable(Ubicable ubicable) {
+		this.ubicable = ubicable;
+	}
+	
+	
 	
 	
 }

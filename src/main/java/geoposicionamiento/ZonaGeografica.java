@@ -8,27 +8,35 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import usuarios.Cliente;
-//subir
+
 
 @Entity
 @Table(name="zona_geografica")
-@DiscriminatorValue("zona_geografica")
-
-public class ZonaGeografica extends Ubicable{
+public class ZonaGeografica{
 	
+	
+	@Id
+	@GeneratedValue
+	public int id;
 	
 	@OneToMany(mappedBy= "zonaAsignada",cascade = CascadeType.PERSIST , fetch = FetchType.EAGER )
 	private List<Transformador> transformadores;
 
-
+	@OneToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name = "ubicable_id")
+	public Ubicable ubicable;
+	
+	
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();
@@ -36,13 +44,13 @@ public class ZonaGeografica extends Ubicable{
 	
 	public ZonaGeografica(List<Coordenada> xy) {
 		super();
-		this.setCoordenadas(xy);
+		this.getUbicable().setCoordenadas(xy);
 		transformadores = new ArrayList<Transformador>();
 	}
 	
 	public ZonaGeografica(List<Coordenada> xy, List<Transformador> transformadores) {
 		super();
-		this.coordenadas=xy;
+		this.getUbicable().coordenadas=xy;
 		this.transformadores=transformadores;
 	}
 	
@@ -68,7 +76,7 @@ public class ZonaGeografica extends Ubicable{
 		while(it.hasNext()){
 			
 			Transformador transformador =it.next();
-			distancia = super.distanciaCoordenadas(unCliente.getUbicacion(), transformador.getUbicacion() );
+			distancia = this.getUbicable().distanciaCoordenadas(unCliente.getUbicacion(), transformador.getUbicacion() );
 			//entra a if si es la primera vez o si la distancia es menor a la minima
 			if( tMinimo == null || distancia < distanciaMinima ){
 				tMinimo = transformador;
@@ -88,14 +96,14 @@ public class ZonaGeografica extends Ubicable{
 	
 	//me dice si la coordenada esta dentro de la zona
 	public boolean coordenadaEnZona(Coordenada coordenada){
-		Path2D poligono = this.getPoligono();
+		Path2D poligono = this.getUbicable().getPoligono();
 		boolean isInPoligono = poligono.contains(coordenada.getLatitud(),coordenada.getLongitud());
 		return isInPoligono;
 	}
 	
 	public boolean coordenadaEnZona(double x, double y){
 		
-		return this.getPoligono().contains(x,y);
+		return this.getUbicable().getPoligono().contains(x,y);
 	}
 	
 	public void agregarTransformador(Transformador unTransformador){
@@ -113,6 +121,24 @@ public class ZonaGeografica extends Ubicable{
 		this.transformadores = transformadores;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Ubicable getUbicable() {
+		return ubicable;
+	}
+
+	public void setUbicable(Ubicable ubicable) {
+		this.ubicable = ubicable;
+	}
+
+	
+	
 	
 	
 }
