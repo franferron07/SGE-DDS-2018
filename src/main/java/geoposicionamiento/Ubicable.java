@@ -44,6 +44,11 @@ public class Ubicable {
 		return this.coordenadas.iterator().next();
 	}
 	
+	public void setUbicacion(Coordenada ubicacion) {
+		this.coordenadas = new ArrayList<Coordenada>();
+		this.coordenadas.add(ubicacion);
+	}
+	
 	public Path2D getPoligono(){
 		FactoryPath2D f=new FactoryPath2D();
 		Path2D p = f.factoryMethod(this.coordenadas);

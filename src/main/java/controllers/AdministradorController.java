@@ -6,7 +6,6 @@ import java.util.Map;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import repositorios.RepositorioUsuarios;
-import server.SessionUtils;
 import repositorios.RepositorioClientes;
 import spark.ModelAndView;
 import spark.Request;
@@ -30,29 +29,15 @@ public class AdministradorController {
 		return new ModelAndView(model, "reportes.hbs");
 	}
 	
-	public ModelAndView postReporte (Request request,Response response) {
-		Map<String, Object> model=new HashMap<>();
-		
-		response = SessionUtils.checkSessionAndRedirect(request, response);
-		
-		return new ModelAndView(model, "reportes.hbs");
-	}
 	
 	
-	public ModelAndView verHogares(Request request, Response response) {
+	public String reportes_results(Request request, Response response) {
 		Map<String, Object> model=new HashMap<>();
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		
-		LocalDateTime desde = LocalDateTime.parse(request.queryParams("fechaDesde"), formatter);
-		LocalDateTime hasta = LocalDateTime.parse(request.queryParams("fechaHasta"), formatter);
-		
-		Cliente cliente = new Cliente();
-		
-		int id = request.session().attribute("id");
-		Administrador admin = (Administrador) repositorio_usuarios.buscarUsuario(id);
-		model.put("admin", admin);
-		return new ModelAndView(model, "administrador.hbs");
+		String id = Integer.toString(request.session().attribute("id"));
+		String body = request.body();
+		return "";
 	}
 	
 /*

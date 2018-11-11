@@ -1,0 +1,58 @@
+﻿{{#partial "contenido"}}
+<script src="/js/reportes.js"></script>
+
+<div class="container mt-5 pt-5">
+
+  <div class="row">
+    <div class="col">
+        Seleccione un reporte a visualizar
+    </div>
+    <div class = "col">
+
+        <!--Menu-->
+        <select class="browser-default custom-select" id="reporte">
+          <option value="hogar" selected>Consumo por hogar</option>
+          <option value="promedio-dispositivo">Consumo promedio por tipo de dispositivo</option>
+          <option value="transformador">Consumo por transformador</option>
+      </select>
+
+  </div>
+</div>
+
+<div class="row">
+    <div class="col">
+      Fecha de inicio del reporte
+  </div>
+  <div class="col">
+    <input type="text" id="date-picker-desde">
+</div>
+</div>
+
+<div class="row">
+    <div class="col">
+      Fecha de fin del reporte
+  </div>
+  <div class="col">
+    <input type="text" id="date-picker-hasta">
+    </div>
+</div>
+
+
+<div class="row">
+    <button class="btn btn-default" id ="execute" type="submit">Ejecutar reporte</button>
+</div>
+
+<div class="row">
+    <div id="resultados">
+    </div>
+</div>
+
+
+</div>
+
+{{/partial}}
+
+{{>layoutAdministrador.hbs}}
+
+
+

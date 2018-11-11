@@ -1,5 +1,6 @@
 package usuarios;
 
+import geoposicionamiento.Coordenada;
 import geoposicionamiento.Ubicable;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public abstract class Usuario{
 	
 	@OneToOne(fetch=FetchType.EAGER ,cascade = CascadeType.ALL )
 	@JoinColumn(name = "ubicable_id")
-	public Ubicable ubicable;
+	public Ubicable ubicable=new Ubicable();
 
 	@Column(name="nombre")
 	protected String nombre;
@@ -118,7 +119,13 @@ public abstract class Usuario{
 		this.ubicable = ubicable;
 	}
 	
+	public Coordenada getUbicacion() {
+		return this.ubicable.getUbicacion();
+	}
 	
+	public void setUbicacion(Coordenada ubicacion) {
+		this.ubicable.setUbicacion(ubicacion);
+	}
 	
 	
 }
