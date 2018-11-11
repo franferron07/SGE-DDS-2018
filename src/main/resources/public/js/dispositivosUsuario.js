@@ -31,7 +31,8 @@ function modificar(id, permiteEdicion = false){
     			url 	: ruta,
     			dataType: "html",
     	 		success : function(result){
-            		showInModal("modal",result);
+    	 			$(" <button type='button'>Click Me!</button> ").appendTo('body').modal();
+            		//showInModal("modal",result);
         		}
         	});
 }
