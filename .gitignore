@@ -3,6 +3,9 @@
 .project
 .settings/
 
+#persistence
+src/main/resources/META-INF/persistence.xml
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

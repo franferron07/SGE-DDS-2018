@@ -1,0 +1,99 @@
+{{#partial "contenido"}}
+
+<div class="container mt-5 pt-5">
+
+	<div class="row">
+		<div class="col">
+			<h2>Últimos consumos</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<table class = "table table-hover">
+				<thead>
+					<th scope="col">Id</th>
+					<th scope="col">Consumo</th>
+					<th scope="col">Fecha Inicio</th>
+					<th scope="col">Fecha Fin</th>
+				</thead>
+				<tbody>
+					{{#each consumos}}
+					<tr>
+						<td>{{id}}</td>
+						<td>{{consumo}}</td>
+						<td>{{fechaInicio_s}}</td>
+						<td>{{fechaFin_s}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<h2>Dispositivos</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<table class = "table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Descripción</th>
+						<th scope="col">Activo</th>
+						<th scope="col">Fecha de alta</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each dispositivos}}
+					<tr>
+						<td>{{id}}</td>
+						<td>{{detalle.nombre}}</td>
+						<td>{{detalle.descripcion}}</td>
+						<td>{{activado}}</td>
+						<td>{{fecha_alta_s}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<h2>Reglas</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<table class = "table table-hover">
+				<thead>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Tipo</th>
+				</thead>
+				<tbody>
+					{{#each reglas}}
+					<tr>
+						<td>{{id}}</td>
+						<td>{{nombreRegla}}</td>
+						<td>{{tipo}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+{{/partial}}
+
+{{>layoutCliente.hbs}}

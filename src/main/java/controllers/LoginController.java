@@ -62,6 +62,7 @@ public class LoginController {
 			request.session(true);              
 			request.session().attribute("id",usuario.getId());
 			request.session().attribute("tipo",validador); //tipo a cliente que recibe el layout. 1 es cliente . 0 Administrador
+			
 			return new ModelAndView(model, salida);
 			
 		}
