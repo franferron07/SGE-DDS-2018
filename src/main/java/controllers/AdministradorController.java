@@ -3,6 +3,11 @@ package controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import repositorios.RepositorioUsuarios;
@@ -36,7 +41,19 @@ public class AdministradorController {
 		
 		
 		String id = Integer.toString(request.session().attribute("id"));
-		String body = request.body();
+		
+		List<NameValuePair> pairs = URLEncodedUtils.parse(request.body(), Charset.defaultCharset());
+
+        Map<String, String> params = toMap(pairs);
+
+        String desde = params.get("desde");
+        String hasta = params.get("hasta");
+        String reporte = params.get("reporte");
+        
+        System.out.println(desde);
+        System.out.println(hasta);
+        System.out.println(reporte);
+        
 		return "";
 	}
 	
@@ -90,4 +107,15 @@ public class AdministradorController {
 		return new ModelAndView(model, "dispositivoDetalle.hbs");
 	}
 
+	
+	
+	
+	   private static Map<String, String> toMap(List<NameValuePair> pairs){
+	        Map<String, String> map = new HashMap<>();
+	        for(int i=0; i<pairs.size(); i++){
+	            NameValuePair pair = pairs.get(i);
+	            map.put(pair.getName(), pair.getValue());
+	        }
+	        return map;
+	    }
 }
