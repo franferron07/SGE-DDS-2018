@@ -1,28 +1,7 @@
-function valorDe(unaVariableDelDocumento){
-	return $("#"+unaVariableDelDocumento+"").val();
-}
 
-function modal_show(unModal){
-	$("#"+unModal+"").modal('show');
-}
-
-function agregarA(unaVariableDelDocumento, unValor){
-	$("#"+unaVariableDelDocumento+"").append(unValor);
-}
-
-function vaciar(unaVariableDelDocumento){
-	$("#"+unaVariableDelDocumento+"").empty();
-}
-
-function showInModal(unModal, unContenido){
-
-	vaciar(unModal);
-	agregarA(unModal,unContenido);
-	modal_show(unModal);
-}
 
 function modificar(id, permiteEdicion = false){
-	alert(permiteEdicion);
+
 	var ruta = "/sge/cliente/dispositivo/"+id;
 	var metodo = "GET";
 	if(permiteEdicion) metodo = "PUT";
@@ -31,20 +10,13 @@ function modificar(id, permiteEdicion = false){
     			url 	: ruta,
     			dataType: "html",
     	 		success : function(result){
-    	 			$(" <button type='button'>Click Me!</button> ").appendTo('body').modal();
+    	 			$(result).appendTo('body').modal();
             		//showInModal("modal",result);
         		}
         	});
 }
 
-function recuperarDatosUsuario(){
-	var datos = {
-		nombre 			: valorDe("usuario-nombre"),
-		apellido 		: valorDe("usuario-apellido"),
-		nombreDeUsuario : valorDe("usuario-username")
-	};
-	return datos;
-}
+
 
 function usuarioGuardar(id = null){
 	var datos = recuperarDatosUsuario();
@@ -55,6 +27,28 @@ function usuarioGuardar(id = null){
     			url 	: ruta,
     			dataType: "html",
     			data 	: datos,
+    	 		success : function(result){
+            		showInModal("modal",result);
+        		}
+        	});
+}
+
+function pedidoBorrar(id){
+
+		if (confirm("¿Está seguro que desea eliminar el dispositivo?")) {
+			borrarDispositivo(id);
+		}
+		return false;
+	
+}
+
+function borrarDispositivo(id){
+	var ruta = "/sge/cliente/dispositivo/"+id;
+	var metodo = "DELETE";
+    $.ajax({
+    			type	: metodo,
+    			url 	: ruta,
+    			dataType: "html",
     	 		success : function(result){
             		showInModal("modal",result);
         		}
