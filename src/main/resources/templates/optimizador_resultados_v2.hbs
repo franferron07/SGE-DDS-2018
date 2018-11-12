@@ -1,0 +1,39 @@
+{{#partial "contenido"}}
+
+    <!--Main Layout-->
+    <main>
+        <div class="container mt-5 pt-5">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Usuario ID</th>
+                    <th scope="col">Usuario Nombre</th>
+                    <th scope="col"> Se Paso de Consumo</th>
+                    <th scope="col">Dispositivo Descripcion o ID</th>
+                    <th scope="col">Horas Maximas que debe el Dispositivo</th>
+                    <th scope="col">Boton De Deteccion de Dispositivo</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each resultados}}
+                    <tr>
+                        <td>{{user_id}}</td>
+                        <td>{{user_name}}</td>
+                        <td>{{se_paso_de_cosumo}}</td>
+                        <td>{{dispositivo_id}}</td>
+                        <td>{{horasQuePuedeConsumir}}</td>
+                        <td>-</td>
+                    </tr>
+                {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script type="text/javascript" src="/js/dispositivosUsuario.js"></script>
+
+{{/partial}}
+
+{{>layoutCliente.hbs}}
+
+
