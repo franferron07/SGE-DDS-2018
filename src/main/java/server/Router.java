@@ -70,6 +70,8 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/sge/cliente/dispositivo/:id" , dispositivoUsuarioController::ver, Router.engine);
 		Spark.put("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
 		Spark.post("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
+		Spark.delete("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::eliminar , Router.engine);
+		
 		
 		/* ADMINISTRADOR */
 	    Spark.get("/sge/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);

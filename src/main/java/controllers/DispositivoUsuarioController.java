@@ -1,5 +1,6 @@
 package controllers;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoEstandar;
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
+import models.UsuarioModel;
 import repositorios.RepositorioDispositivosLista;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
@@ -117,6 +119,27 @@ public class DispositivoUsuarioController {
 		
 		return new ModelAndView(null, "modalDispositivos.hbs");
 	}
-
 	
+	
+	public ModelAndView eliminar(Request request, Response response) {
+
+		Map<String, Object> model=new HashMap<>();
+		int id_disp = Integer.parseInt(request.params("id"));
+		
+		int id = request.session().attribute("id");
+		
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+		
+		//// modifico disposisitivo en la db y lo borro de la lista 
+		DispositivoUsuario dispositivo = RepositorioUsuarios.buscarDispositivo( cliente , id_disp );
+		dispositivo.desactivar();		
+		UsuarioModel modelusuario = new UsuarioModel();
+		modelusuario.modificar(dispositivo);
+		cliente.quitarDispositivo(dispositivo);
+		
+		model.put("dispositivos", cliente.getDispositivos());
+		return new ModelAndView(model, "dispositivos.hbs");
+	}
+	
+
 }
