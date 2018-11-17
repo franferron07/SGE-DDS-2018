@@ -1,8 +1,11 @@
 package dbTest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDateTime;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoEstandar;
@@ -77,6 +80,11 @@ public class InicializacionDatosTest {
 		
 		
 	}
+	
+	@Test
+    public void testInicial() {
+       
+    }
 	
 
 }
