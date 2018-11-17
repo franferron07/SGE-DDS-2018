@@ -1,13 +1,12 @@
 package testEntrega3;
 
-import java.time.LocalDateTime;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import dispositivos.DispositivoDetalle;
 import dispositivos.DispositivoInteligente;
 import geoposicionamiento.Coordenada;
+import geoposicionamiento.Ubicable;
 import junit.framework.Assert;
 import models.ModelHelper;
 import usuarios.Cliente;
@@ -24,13 +23,14 @@ public class DispositivoDbTest2 {
 		this.model = new ModelHelper();
 
 		cliente = new Cliente();
+		cliente.setUbicable(new Ubicable());
 		cliente.setNombre("Francisco");
 		cliente.setApellido("Ferron");
 		cliente.setTipoDocumento("DNI");
 		cliente.setTelefonoContacto("44442222");
 		cliente.setPuntaje(0);
 		cliente.setAccionadoAutomatico(false);
-		cliente.addCoordenadas(new Coordenada(cliente, 3333,3333 ));
+		cliente.getUbicable().addCoordenadas(new Coordenada(cliente.getUbicable(), 3333,3333 ));
 		
 		detalle= model.buscar(DispositivoDetalle.class, 1);
 		

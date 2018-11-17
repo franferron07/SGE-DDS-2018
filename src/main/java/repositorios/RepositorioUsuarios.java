@@ -50,7 +50,7 @@ public class RepositorioUsuarios {
 		
 		Cliente cliente = (Cliente) buscarUsuario(id);
 		cliente.agregarDispositivo(dispositivo);
-		usuarioModel.modificar(cliente);
+		usuarioModel.agregar(dispositivo);
 		
 	}
 	

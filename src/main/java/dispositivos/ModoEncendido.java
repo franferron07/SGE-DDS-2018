@@ -19,6 +19,10 @@ public class ModoEncendido extends Modo{
 
 	
     
+	public ModoEncendido(){
+		
+	}
+	
 	public ModoEncendido(DispositivoInteligente di) {
 		super(di);
 	}

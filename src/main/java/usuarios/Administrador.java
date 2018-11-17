@@ -1,5 +1,6 @@
 package usuarios;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +23,8 @@ public class Administrador extends Usuario {
 	private int identificadorSistema;
 
 	public Administrador() {
-
+		
+		this.fechaAltaSistema = new Date();
 	}
 	
 	public long cantidadMesesComoAdmin(){

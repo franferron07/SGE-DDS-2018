@@ -8,6 +8,7 @@
             <table class="table table-striped">
 			  <thead>
 			    <tr>
+			      <th scope="col">Id</th>	
 			      <th scope="col">Tipo</th>
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Descripcion</th>
@@ -20,7 +21,12 @@
 			  	{{#each dispositivos}}
 
 				    <tr>
-				      <td>-</td>
+				      <td>{{id}}</td>
+				      {{#if detalle.esInteligente}}
+				      	<td>Estandar</td>
+				      {{else}}
+					  	<td>Inteligente</td>
+  					  {{/if}}
 				      <td>{{detalle.nombre}}</td>
 				      <td>{{detalle.descripcion}}</td>
 				      <td>{{fecha_alta_s}}</td>

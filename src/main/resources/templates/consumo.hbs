@@ -1,80 +1,38 @@
 ﻿{{#partial "contenido"}}
+<script src="/js/consumo.js"></script>
 
- <!--Main Layout-->
-    <main>
-         <div class="container mt-5 pt-5">
+<div class="container mt-5 pt-5">
 
-   		<!-- Grid row -->
-			<div class="container">
-    			<div class="row">
-        			<div class='col-sm-6'>
-            			<div class="form-group">
-                			<div class='input-group date' >
-                				<label for="desde">Fecha de inicio del período</label>
-                    			<input type='text' id="desde" name="desde" class="form-control" />
-                    			<span class="input-group-addon">
-                        		<span class="glyphicon glyphicon-calendar"></span>
-                    			</span>
-                			</div>
-            			</div>
-        			</div>
-    			</div>
-			</div>
-
-   		<!-- Grid row -->
-			<div class="container">
-    			<div class="row">
-        			<div class='col-sm-6'>
-            			<div class="form-group">
-                			<div class='input-group date' >
-                				<label for="hasta">Fecha de fin del período</label>
-                    			<input type='text' id="hasta" name="hasta" class="form-control" />
-                    			<span class="input-group-addon">
-                        		<span class="glyphicon glyphicon-calendar"></span>
-                    			</span>
-                			</div>
-
-<div class="md-form">
-  <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
-  <label for="date-picker-example">Try me...</label>
+<div class="row">
+    <div class="col">
+      Fecha de inicio 
+  </div>
+  <div class="col">
+    <input type="text" id="date-picker-desde">
+</div>
 </div>
 
-            			</div>
-        			</div>
-    			</div>
-			</div>
+<div class="row">
+    <div class="col">
+      Fecha de fin
+  </div>
+  <div class="col">
+    <input type="text" id="date-picker-hasta">
+    </div>
+</div>
 
 
+<div class="row">
+    <button class="btn btn-primary" id ="execute" type="submit">Buscar consumo</button>
+</div>
 
-            <table class="table table-striped">
-			  <thead>
-			    <tr>
-			      <th scope="col">Domicilio</th>
-			      <th scope="col">Consumo</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-
-			  </tbody>
-			</table>
+<div class="row">
+    <div id="resultados">
+    </div>
+</div>
 
 
-        </div>
-    </main>
-
-    <script type="text/javascript">
-            $(function () {
-                $('#hasta').datepicker();
-            });
-    </script>
-
-
-        <script type="text/javascript">
-            $(function () {
-                $('#desde').datepicker();
-            });
-    </script>
-
+</div>
 
 {{/partial}}
 

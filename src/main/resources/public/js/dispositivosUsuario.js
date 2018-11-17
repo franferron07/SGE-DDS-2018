@@ -18,20 +18,32 @@ function modificar(id, permiteEdicion = false){
 
 
 
-function usuarioGuardar(id = null){
-	var datos = recuperarDatosUsuario();
-	var ruta = "usuario/"+id;
-	var metodo = "POST";
-	$.ajax({
-    			type	: metodo,
-    			url 	: ruta,
-    			dataType: "html",
-    			data 	: datos,
-    	 		success : function(result){
-            		showInModal("modal",result);
-        		}
-        	});
-}
+// this is the id of the form
+$("#form_disp").submit(function(e) {
+
+	alert("esta haciendo submit");
+    var form = $(this);
+    var url = form.attr('action');
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+              // alert("Dispositivo modificado"); 
+              location.reload();
+           }
+         });
+
+    location.reload();
+
+    e.preventDefault(); 
+});
+
+
+
+
 
 function pedidoBorrar(id){
 
@@ -50,7 +62,7 @@ function borrarDispositivo(id){
     			url 	: ruta,
     			dataType: "html",
     	 		success : function(result){
-            		showInModal("modal",result);
+            		location.reload();
         		}
         	});
 }

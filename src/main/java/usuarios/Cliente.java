@@ -24,6 +24,8 @@ import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Where;
+
 
 @Entity
 @DiscriminatorValue("cliente")
@@ -50,7 +52,8 @@ public class Cliente extends Usuario {
     @JoinColumn
 	private Transformador transformador;
 	
-	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL , fetch = FetchType.LAZY )
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL , fetch = FetchType.EAGER )
+	@Where(clause = "activado = 1")
 	private List<DispositivoUsuario> dispositivos;
 	
 	@Column(name="puntaje")

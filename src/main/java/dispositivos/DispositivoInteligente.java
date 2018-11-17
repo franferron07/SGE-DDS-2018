@@ -66,6 +66,10 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.detalle = disp_detalle;
 	}
     
+    public DispositivoInteligente(){
+    	
+    }
+    
 
 	@Override
 	public boolean esInteligente() {

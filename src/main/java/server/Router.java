@@ -1,9 +1,6 @@
 package server;
 
 import controllers.*;
-import optimizacion_horas.Optimizador;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -61,7 +58,7 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/sge/cliente" , clienteController::ver, Router.engine);
 		Spark.get("/sge/cliente/estado", clienteController::estado , Router.engine);
 		Spark.get("/sge/cliente/consumo", clienteController::consumoPeriodo , Router.engine);
-		Spark.post("/sge/cliente/consumo/:desde/:hasta", clienteController::consumoPeriodoResultado , Router.engine);
+		Spark.post("/sge/cliente/consumo", clienteController::consumoPeriodoResultado , Router.engine);
 		
 		Spark.get("/sge/cliente/dispositivos" , dispositivoUsuarioController::dispositivos, Router.engine);
 		Spark.get("/sge/cliente/dispositivo", dispositivoUsuarioController::crear, Router.engine);

@@ -58,6 +58,10 @@ public abstract class Modo {
 		fechaHoraInicio_s= fechaHoraInicio.format(formatter);
 	}
 	
+	public Modo(){
+		
+	}
+	
 	
 	public abstract boolean encendido();
 	

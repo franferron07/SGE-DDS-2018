@@ -10,10 +10,14 @@ import javax.persistence.Entity;
 public class ModoApagado extends Modo {
 
 	
-	 
+	
+	
+	public ModoApagado(){
+		
+	}
+	
 	public ModoApagado(DispositivoInteligente di) {
 		super(di);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -18,6 +18,9 @@ public class ModoAhorroEnergia extends Modo {
 
 	
 	
+	public ModoAhorroEnergia(){
+		
+	}
 	
 	public ModoAhorroEnergia(DispositivoInteligente di) {
 		super(di);

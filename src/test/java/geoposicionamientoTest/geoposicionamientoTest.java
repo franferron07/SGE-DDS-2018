@@ -3,13 +3,8 @@ package geoposicionamientoTest;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import dao.DaoJson;
-
 import static org.junit.Assert.assertEquals;
 
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +56,7 @@ public class geoposicionamientoTest {
 	public void testLecturaDeZonasInicializadasCorrectamente(){
 		
 		ZonaGeografica zona2 = mapa.getZonas().get(0);
-		Path2D poligon = zona2.getPoligono(); 
+		Path2D poligon = zona2.getUbicable().getPoligono(); 
 		
 		assertEquals( 4 , 4 );
 		//assertEquals( mapa.getZonasGeograficas().size() , 1  );
@@ -115,7 +110,7 @@ public class geoposicionamientoTest {
 		cliente.setNombre("test");
 		List <Coordenada> coordenadas=new ArrayList<Coordenada>();
 		coordenadas.add(new Coordenada(2,18));
-		cliente.setCoordenadas(coordenadas);
+		cliente.getUbicable().setCoordenadas(coordenadas);
 		
 	    Mapa.asignarZonaCliente(cliente);
 		
