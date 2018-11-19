@@ -37,8 +37,8 @@ public class ModoEncendido extends Modo{
 	@Override
 	public boolean cumpleIntervalo( LocalDateTime fechaInicial , LocalDateTime fechaFinal ){
 		
-		if(  ( this.fechaHoraInicio.compareTo(fechaInicial) >= 0  && this.fechaHoraInicio.compareTo(fechaFinal) <= 0   ) || 
-		     ( this.fechaHoraFin.compareTo(fechaInicial) >= 0  && this.fechaHoraFin.compareTo(fechaFinal) <= 0 )  )  
+		if(  ( this.getFechaHoraInicio().compareTo(fechaInicial) >= 0  && this.getFechaHoraInicio().compareTo(fechaFinal) <= 0   ) || 
+		     ( this.getFechaHoraFin().compareTo(fechaInicial) >= 0  && this.getFechaHoraFin().compareTo(fechaFinal) <= 0 )  )  
 		{
 			return true;
 		}

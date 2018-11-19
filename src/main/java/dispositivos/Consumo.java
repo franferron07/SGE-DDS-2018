@@ -52,11 +52,16 @@ public class Consumo {
 		this.fechaInicio_s= inicio.format(formatter);
 		this.fechaFin_s= fin.format(formatter);
 	}
+	
+	
+	public Consumo(){
+		
+	}
 
 	//metodo que indica si esta dentro del periodo pasado o no.por decision de diseño debe estar el inicio y fin en el periodo pasado
 	public boolean cumplePeriodoConsumo(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 		
-		if( this.inicio.compareTo(fechaInicial) >= 0  && this.fin.compareTo(fechaFinal) <= 0 )  
+		if( this.getInicio().compareTo(fechaInicial) >= 0  && this.getFin().compareTo(fechaFinal) <= 0 )  
 			{
 				return true;
 			}

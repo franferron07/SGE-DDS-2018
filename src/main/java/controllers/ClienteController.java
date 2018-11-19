@@ -1,6 +1,10 @@
 package controllers;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,8 +83,6 @@ public class ClienteController {
 		int id = request.session().attribute("id");
 		//Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 
-		model.put("total_consumo", 0);
-		model.put("es_consulta", false);
 		return new ModelAndView(model, "consumo.hbs");
 	}
 	
@@ -90,23 +92,36 @@ public class ClienteController {
 
 		int id = request.session().attribute("id");
 		
-		String desde = request.params("desde");
-		String hasta = request.params("hasta");
+		String desde = request.queryParams("desde");
+		String hasta = request.queryParams("hasta");
 		
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		
-		LocalDateTime fecha_desde = cliente.parsearFecha(desde);
-		LocalDateTime fecha_hasta = cliente.parsearFecha(hasta);
+		LocalDateTime fecha_desde = parsFecha(desde);
+		LocalDateTime fecha_hasta = parsFecha(hasta);
 		
 		/* Calculo el consumo */
 		double total_consumo = cliente.consumoEnUnPeriodo(fecha_desde, fecha_hasta  );
 		
+		//model.put("consumos", consumos );
 		
-		model.put("total_consumo", total_consumo);
-		model.put("es_consulta", true);
-		return new ModelAndView(model, "consumo.hbs");
+		NumberFormat formatter = new DecimalFormat("#0.00");     
+		System.out.println(formatter.format(total_consumo));
+		model.put("total_consumo", formatter.format(total_consumo));
+		return new ModelAndView(model, "resultadoConsumo.hbs");
 	}
 	
+	
+	
+	public LocalDateTime parsFecha( String fecha ){
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		return LocalDateTime.parse(fecha, formatter);
+
+		
+		
+		
+	}
 	
 	
 	

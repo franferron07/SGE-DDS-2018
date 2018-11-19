@@ -56,13 +56,14 @@ public class InicializacionDatosTest {
 		cliente.getUbicable().addCoordenadas(new Coordenada(cliente.getUbicable(), 3333,3333 ));
 		
 		DispositivoEstandar di_estandar = new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1));
-		
+		di_estandar.setHorasPorDia(4);
 		cliente.agregarDispositivo(di_estandar);
 		
 		cliente.agregarDispositivo(new DispositivoEstandar(model.buscar(DispositivoDetalle.class, 1)) );
 		
 		//agrego di inteligente con modos y consumo
 		DispositivoInteligente di = new DispositivoInteligente(model.buscar(DispositivoDetalle.class, 5));
+		cliente.agregarDispositivo(di);
 		di.encender();
 		di.ahorrarEnergia();
 		
@@ -73,7 +74,7 @@ public class InicializacionDatosTest {
 		di.encender();
 		di.avisoConsumo(inicio, fin, 10);
 		
-		model.agregar(di);
+		//model.agregar(di);
 		model.agregar(categoria);
 		model.agregar(cliente);
 		
