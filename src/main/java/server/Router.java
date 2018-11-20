@@ -32,6 +32,7 @@ private static HandlebarsTemplateEngine engine;
 		MapController mapController = new MapController();
 		ClienteController clienteController = new ClienteController();
 		DispositivoUsuarioController dispositivoUsuarioController = new DispositivoUsuarioController();
+		ReglaController reglaController = new ReglaController();
 		AdministradorController administradorController = new AdministradorController();
 		OptimizadorController optimizadorController = new OptimizadorController();
 		
@@ -68,6 +69,15 @@ private static HandlebarsTemplateEngine engine;
 		Spark.put("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::modificar, Router.engine);
 		Spark.post("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::update, Router.engine);
 		Spark.delete("/sge/cliente/dispositivo/:id", dispositivoUsuarioController::eliminar , Router.engine);
+		
+		Spark.get("/sge/cliente/reglas" , reglaController::reglas, Router.engine);
+		Spark.get("/sge/cliente/regla", reglaController::crear, Router.engine);
+		Spark.post("/sge/cliente/regla", reglaController::guardar, Router.engine);
+		
+		Spark.put("/sge/cliente/regla/:id", reglaController::modificar, Router.engine);
+		Spark.post("/sge/cliente/regla/:id", reglaController::update, Router.engine);
+		Spark.delete("/sge/cliente/regla/:id", reglaController::eliminar , Router.engine);
+		
 		
 		
 		/* ADMINISTRADOR */

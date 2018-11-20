@@ -47,11 +47,8 @@ public abstract class Regla {
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
 	
-	/*
-	@ManyToOne( fetch = FetchType.LAZY )
-	@JoinColumn
-	private ReglaCompuesta regla_padre;
-	*/
+	@Column(name="activado")
+	protected boolean activado;
 	
 	
 	public Regla(String nombre){
@@ -85,14 +82,40 @@ public abstract class Regla {
 	public abstract void ejecutarActuadores(DispositivoInteligente d);
 	
 
-	//getters y setters
+	public void activar(){
+		this.activado=true;
+	}
 	
+	public void desactivar(){
+		
+		this.activado=false;
+	}
+	
+	
+	//getters y setters
+
 	public void agregarActuador(ActuadorBase unActuador){
 		if (!actuadores.contains(unActuador)) {
 			this.actuadores.add(unActuador); 
 		}		
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<DispositivoInteligente> getDispositivos() {
+		return dispositivos;
+	}
+
+	public void setDispositivos(List<DispositivoInteligente> dispositivos) {
+		this.dispositivos = dispositivos;
+	}
+
 	public List<ActuadorBase> getActuadores() {
 		return actuadores;
 	}
@@ -107,6 +130,14 @@ public abstract class Regla {
 
 	public void setNombreRegla(String nombreRegla) {
 		this.nombreRegla = nombreRegla;
+	}
+
+	public boolean isActivado() {
+		return activado;
+	}
+
+	public void setActivado(boolean activado) {
+		this.activado = activado;
 	}
 
 	

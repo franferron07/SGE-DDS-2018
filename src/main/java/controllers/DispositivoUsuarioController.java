@@ -1,6 +1,5 @@
 package controllers;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,11 +18,9 @@ import usuarios.Cliente;
 
 public class DispositivoUsuarioController {
 
-	//public RepositorioDispositivosLista dispositivos;
 	
 	public DispositivoUsuarioController(){
 		
-		//dispositivos = new RepositorioDispositivosLista();
 	}
 	
 	
@@ -163,8 +160,6 @@ public class DispositivoUsuarioController {
 
 		}
 
-		
-		
 		
 		model.put("dispositivos", cliente.getDispositivos());
 		return new ModelAndView(model, "dispositivos.hbs");

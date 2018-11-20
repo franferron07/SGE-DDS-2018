@@ -2,16 +2,12 @@ package controllers;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 import dispositivos.Consumo;
 import models.ModelHelper;
@@ -81,7 +77,7 @@ public class ClienteController {
 		Map<String, Object> model=new HashMap<>();
 
 		int id = request.session().attribute("id");
-		//Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+
 
 		return new ModelAndView(model, "consumo.hbs");
 	}
