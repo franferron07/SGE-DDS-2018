@@ -1,0 +1,127 @@
+﻿{{#partial "contenido"}}
+
+ <!--Main Layout-->
+    <main>
+
+    	<style>
+
+    	.pt-3-half {
+			padding-top: 1.4rem;
+		}
+
+		.hide{
+			display: none;
+		}
+
+
+    	</style>
+
+
+         <div class="container mt-5 pt-5">
+
+
+            <div class="card card-cascade wider reverse my-4">
+                <div class="card-body">
+
+                    <!--Header-->
+                    <div class="form-header primary-color">
+                        <h3><i class="fa fa-laptop"></i>Agregar Dispositivo</h3>
+                    </div>
+    				
+
+                    <form action="/sge/cliente/regla" method="POST" >
+
+                    	<!-- Grid row -->
+						  <div class="form-row">
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="nombre">Nombre</label>
+				              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" >
+						    </div>
+
+
+						    <div class="form-group col-md-6">
+						      <label for="dispositivo_detalle">Actuadores</label>
+				              <select class="mdb-select md-form" id="dispositivo_detalle" name="dispositivo_detalle">
+				              	<option value="-1">(Seleccionar)</option>
+				              	{{#each actuadores}}
+                				<option value="{{id}}" >{{nombre}} {{descripcion}}</option>
+                				{{/each}} 
+           					  </select>
+						    </div>
+						    <!-- Default input -->
+						    <div class="form-group col-md-6">
+						      <label for="tipo">Tipo</label>
+           					  <div class="form-check mb-3">
+    							<input class="form-check-input" type="radio" id="tipo1" name="tipo" value="0" checked>
+    							<label class="form-check-label" for="radio1">Regla simple</label>
+							  </div>
+
+							  <div class="form-check mb-3">
+    							<input class="form-check-input" type="radio" id="tipo2" name="tipo" value="1">
+    							<label class="form-check-label" for="radio2">Regla compuesta</label>
+							  </div>
+
+						    </div>
+
+
+
+						    <!-- Editable table -->
+							<div class="card">
+							  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Condiciones</h3>
+							  <div class="card-body">
+							    <div id="table" class="table-editable">
+							      <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x"
+							            aria-hidden="true"></i></a></span>
+							      <table class="table table-bordered table-responsive-md table-striped text-center" id="tablaCondiciones">
+							        <tr>
+							          <th class="text-center">Comparador</th>
+							          <th class="text-center">Valor comparable</th>
+							          <th class="text-center">Eliminar</th>
+							        </tr>
+
+
+							        <!-- This is our clonable table line -->
+							        <tr class="hide">
+							          <td class="pt-3-half"  contenteditable="true"><input type="text" class="form-control" tipo-dato="comparador" placeholder="" ></td>
+							          <td class="pt-3-half"  contenteditable="true"><input type="text" class="form-control" tipo-dato="valorComparable" placeholder="" ></td>
+							          <td>
+							            <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+							          </td>
+							        </tr>
+
+							      </table>
+							    </div>
+							  </div>
+							</div>
+							<!-- Editable table -->
+
+
+
+
+
+						 </div>
+						  <!-- Grid row -->
+
+						 <div class="text-center">
+                        	<button class="btn btn-primary" id="crear">Crear</button>
+                        	<input type="button" class="btn btn-primary" id="export-btn" />
+                        	<input type="text" style="display:none;" id="export" value=""/>
+                    	</div>
+
+					</form>
+					<!-- Default form group -->
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+<script type="text/javascript" src="/js/reglaCrear.js"></script>
+{{/partial}}
+{{>layoutCliente.hbs}}
+
+

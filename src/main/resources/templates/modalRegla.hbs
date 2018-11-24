@@ -1,0 +1,38 @@
+
+<div class="modal modal-content">
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 font-weight-bold">Modificar Dispositivo</h3>
+      </div>
+
+
+      <form action="/sge/cliente/dispositivo/{{dispositivo.id}}" id="form_disp" method="POST" >
+
+      <div class="modal-body mx-3">
+
+      	{{#if dispositivo.estandar}}
+        <div class="form-group">
+	      <label for="adaptador">Quitar adaptador inteligente</label>
+          <select class="mdb-select md-form" id="adaptador" name="adaptador">
+          	<option value="0">No</option>
+			<option value="1">Si</option>
+		 </select>
+	    </div>
+	     {{/if}}
+
+	    <div class="form-group">
+	      <label for="regla">Insertar regla</label>
+          <select class="mdb-select md-form" id="regla" name="regla">
+          	<option value="0">No</option>
+			<option value="1">Si</option>
+		 </select>
+	    </div>
+
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary" onclick="dispositivoGuardar('{{dispositivo.id}}')">Modificar</button>
+      </div>
+
+  	 </form>
+
+ </div>
