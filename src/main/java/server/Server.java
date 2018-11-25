@@ -5,8 +5,13 @@ import repositorios.RepositorioUsuarios;
 import spark.Spark;
 import spark.debug.DebugScreen;
 
-public class Server {
-	public static void main(String[] args) {
+public class Server extends Thread{
+	
+	public Server(String msg) {
+		super(msg);
+	}
+	
+	public void run() {
 		
 		
 		RepositorioUsuarios.cargarUsuarios();
