@@ -1,0 +1,89 @@
+<div class="container mt-5 pt-5">
+
+  <div class="row">
+    <div class="col">
+      <h2>Consumo por cliente</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class = "table table-hover">
+        <thead>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Domicilio</th>
+          <th scope="col">Consumo total</th>
+        </thead>
+        <tbody>
+          {{#each consumos}}
+          <tr>
+            <td>{{nombre}}</td>
+            <td>{{apellido}}</td>
+            <td>{{domicilio}}</td>
+            <td>{{consumo_total}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2>Consumo por tipo de dispositivo</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class = "table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Consumo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each dispositivos}}
+          <tr>
+            <td>{{tipo}</td>
+            <td>{{consumo}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2>Consumo por transformador</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class = "table table-hover">
+        <thead>
+          <th scope="col">Id</th>
+          <th scope="col">Coordenada: Longitud</th>
+          <th scope="col">Coordenada: Latitud</th>
+          <th scope="col">Consumo total</th>
+        </thead>
+        <tbody>
+          {{#each reglas}}
+          <tr>
+            <td>{{id}}</td>
+            <td>{{longitud}}</td>
+            <td>{{latitud}}</td>
+            <td>{{consumo_total}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
