@@ -25,6 +25,10 @@ public class CondicionRegla {
 	private ReglaSimple regla_simple;
 	
 	
+	public CondicionRegla(){
+		
+	}
+	
 	public CondicionRegla( String comparador , Float valorComparable ){
 		this.comparador = comparador;
 		this.valorComparable = valorComparable;
@@ -86,6 +90,23 @@ public class CondicionRegla {
 	public void setValorComparable(float valorComparable) {
 		this.valorComparable = valorComparable;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public ReglaSimple getRegla_simple() {
+		return regla_simple;
+	}
+
+	public void setRegla_simple(ReglaSimple regla_simple) {
+		this.regla_simple = regla_simple;
+	}
+	
 	
 	
 

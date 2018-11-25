@@ -1,8 +1,22 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import Utils.HibernateProxyTypeAdapter;
+import dispositivos.DispositivoUsuario;
+import models.ModelHelper;
+import models.UsuarioModel;
+import reglasYActuadores.CondicionRegla;
+import reglasYActuadores.Regla;
+import reglasYActuadores.ReglaSimple;
+import repositorios.RepositorioRegla;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,8 +35,7 @@ public class ReglaController {
 		Map<String, Object> model=new HashMap<>();	
 		int id = request.session().attribute("id");
 		
-		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
-		model.put("reglas", cliente.getDispositivos());
+		model.put("reglas", RepositorioRegla.getReglas());
 		return new ModelAndView(model, "reglas.hbs");
 	}
 	
@@ -34,9 +47,40 @@ public class ReglaController {
 	}
 	
 	public ModelAndView guardar(Request request, Response response) {
+		
+		Map<String, Object> model=new HashMap<>();			
+
+		ModelHelper modelHelper = new ModelHelper();
 		int id = request.session().attribute("id");
 		
-		return new ModelAndView(null, "reglas.hbs");
+		String nombreRegla =request.queryParams("nombre");
+		String condiciones_json =request.queryParams("export");
+		String actuadores =request.queryParams("actuadores");
+		int tipo = Integer.parseInt(request.queryParams("tipo"));  //0 simple , 1 compuesta
+		
+		Gson gson = new Gson();
+		List<CondicionRegla> condiciones = gson.fromJson(condiciones_json, new TypeToken<List<CondicionRegla>>(){}.getType());
+		
+		
+		// REGLA SIMPLE
+		if( tipo == 0 ){
+			
+			ReglaSimple regla = new ReglaSimple(nombreRegla);
+			
+			regla.agregarCondiciones(condiciones);
+			
+			modelHelper.agregar(regla);
+			
+			RepositorioRegla.agregarRegla(regla);
+		}
+		else{
+			/* FALTA DEFINIR */
+			
+		}
+		
+		model.put("reglas", RepositorioRegla.getReglas());
+		//System.out.println( condiciones.size()+"******************" );
+		return new ModelAndView(model , "reglas.hbs");
 	}
 	
 	public ModelAndView modificar(Request request, Response response) {
@@ -54,10 +98,19 @@ public class ReglaController {
 	
 	public ModelAndView eliminar(Request request, Response response) {
 
+		//int id = request.session().attribute("id");
 		Map<String, Object> model=new HashMap<>();
-		int id = request.session().attribute("id");
+		int id_regla = Integer.parseInt(request.params("id"));
+
+		//// modifico regla en db y lo guardo
+		Regla regla = (Regla) RepositorioRegla.buscarRegla(id_regla);
+		regla.desactivar();		
+		ModelHelper modelHelper = new ModelHelper();
+		modelHelper.modificar(regla);
+		//RepositorioRegla.quitarRegla(regla);
 		
-		return new ModelAndView(null, "reglas.hbs");
+		model.put("reglas", RepositorioRegla.getReglas());
+		return new ModelAndView(model, "reglas.hbs");
 	}
 	
 

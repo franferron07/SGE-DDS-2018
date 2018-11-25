@@ -1,6 +1,7 @@
 package reglasYActuadores;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,9 +16,13 @@ import dispositivos.DispositivoInteligente;
 @DiscriminatorValue("reglaSimple")
 public class ReglaSimple extends Regla {
 
-	@OneToMany(mappedBy="regla_simple" , cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="regla_simple" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private List<CondicionRegla> condiciones;
 	
+	
+	public ReglaSimple(){
+		
+	}
 	
 	public ReglaSimple(String nombre) {
 		super(nombre);
@@ -40,6 +45,23 @@ public class ReglaSimple extends Regla {
 		this.actuadores.stream().forEach(a->a.ejecutarAccion(d));		
 	}
 	
+	
+	public void agregarCondiciones( List<CondicionRegla> condiciones ){
+		
+		this.condiciones.addAll(condiciones);
+		
+		//seteo la regla a cada elemento agregado
+		Iterator<CondicionRegla> iterator = condiciones.iterator();
+		while (iterator.hasNext()) {
+			CondicionRegla cond = iterator.next();
+			cond.setRegla_simple(this);			
+		}
+		
+	}
+	
+	
+	
+	
 	//getters y setters
 	public List<CondicionRegla> getCondiciones() {
 		return condiciones;
@@ -48,6 +70,8 @@ public class ReglaSimple extends Regla {
 	public void setCondiciones(List<CondicionRegla> condiciones) {
 		this.condiciones = condiciones;
 	}
+	
+	
 
 	
 

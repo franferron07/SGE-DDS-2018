@@ -8,28 +8,27 @@
             <table class="table table-striped">
 			  <thead>
 			    <tr>
-			      <th scope="col">Id</th>	
+			      <th scope="col">Id</th>
+			      <th scope="col">Activa</th>		
 			      <th scope="col">Tipo</th>
 			      <th scope="col">Nombre</th>
-			      <th scope="col">Descripcion</th>
-			      <th scope="col">Fecha de Alta</th>
 			      <th scope="col"></th>
 			      <th scope="col"></th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	{{#each dispositivos}}
+			  	{{#each reglas}}
 
 				    <tr>
 				      <td>{{id}}</td>
-				      {{#if detalle.esInteligente}}
+				      <!--{{#if detalle.esInteligente}}
 				      	<td>Estandar</td>
 				      {{else}}
 					  	<td>Inteligente</td>
-  					  {{/if}}
-				      <td>{{detalle.nombre}}</td>
-				      <td>{{detalle.descripcion}}</td>
-				      <td>{{fecha_alta_s}}</td>
+  					  {{/if}}-->
+  					  <td>{{activado}}</td>
+  					  <td></td>
+				      <td>{{nombreRegla}}</td>
 				      <td><button type="button" class="btn btn-primary" onclick="modificar('{{id}}',true)">Modificar</button></td>
 				      <td><button type="button" class="btn btn-danger" onclick="pedidoBorrar('{{id}}')">Borrar</button></td>
 				    </tr>
@@ -42,7 +41,7 @@
 
         </div>
     </main>
-<script type="text/javascript" src="/js/dispositivosUsuario.js"></script>
+<script type="text/javascript" src="/js/reglas.js"></script>
 
 {{/partial}}
 

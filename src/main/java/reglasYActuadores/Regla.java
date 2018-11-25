@@ -51,9 +51,14 @@ public abstract class Regla {
 	protected boolean activado;
 	
 	
+	public Regla(){
+		
+	}
+	
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
+		this.activado=true;
 	}
 	
 	public void notificacionDeMedicion(Medicion medicion) {

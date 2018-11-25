@@ -28,6 +28,10 @@ public class ReglaCompuesta extends Regla {
 	private List<Regla> reglasHijas;*/
 	
 	
+	public ReglaCompuesta(){
+		
+	}
+	
 	public ReglaCompuesta(String nombre) {
 		super(nombre);
 		this.reglas=new ArrayList<Regla>();

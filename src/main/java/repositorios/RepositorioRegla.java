@@ -10,6 +10,7 @@ import reglasYActuadores.Regla;
 
 public class RepositorioRegla {
 
+	
 	public static List<Regla> reglas;
 	public static  ModelHelper model;
 	
@@ -26,6 +27,28 @@ public class RepositorioRegla {
 		
 		return reglas.stream().filter( u -> id == u.getId()).findFirst().get();
 	}
+	
+	
+	public static void agregarRegla( Regla regla ){
+		
+		reglas.add(regla);
+	}
+	
+	//getter y setters
+	public static List<Regla> getReglas() {
+		return reglas;
+	}
+
+	public static void setReglas(List<Regla> reglas) {
+		RepositorioRegla.reglas = reglas;
+	}
+
+	public static void quitarRegla(Regla regla) {
+		
+		reglas.remove(regla);
+	}
+	
+	
 	
 	
 }
