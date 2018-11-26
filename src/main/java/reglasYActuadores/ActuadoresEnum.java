@@ -1,13 +1,10 @@
 package reglasYActuadores;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -21,8 +18,35 @@ public enum ActuadoresEnum {
 	@Id
 	@GeneratedValue
 	private int id;
-	/*
-	@ManyToMany
-	private List<Regla> reglas;
-	*/
+	
+	@Column(name="valorEnum")
+	private String valorEnum;
+
+	
+	ActuadoresEnum(){
+		
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getValorEnum() {
+		return valorEnum;
+	}
+
+
+	public void setValorEnum(String valorEnum) {
+		this.valorEnum = valorEnum;
+	}
+	
+	
+	
 }

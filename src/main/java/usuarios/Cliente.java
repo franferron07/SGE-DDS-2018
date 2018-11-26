@@ -79,9 +79,17 @@ public class Cliente extends Usuario {
 	}
 
 	//filtro los dispositivos inteligentes
-	private List<DispositivoInteligente> filtrarDispositivosInteligentes(){
-		List<DispositivoInteligente> inteligentes ;
-		inteligentes = (List<DispositivoInteligente>) this.dispositivos.stream().filter(d -> d.esInteligente()) ; 
+	public List<DispositivoInteligente> filtrarDispositivosInteligentes(){
+		
+		/*List<DispositivoUsuario> inteligentes ;
+		inteligentes = this.dispositivos.stream().filter(d -> d.esInteligente()).collect(Collectors.toList()) ;*/
+		
+		List<DispositivoInteligente> inteligentes = this.dispositivos.stream().filter(p -> p instanceof DispositivoInteligente).map(p -> (DispositivoInteligente) p).collect(Collectors.toList());
+		
+		/*List<DispositivoUsuario> dispositivos = this.dispositivos.stream().filter(d -> d.esInteligente()).collect() ;
+		
+		return (List<DispositivoInteligente>) dispositivos.stream().map(DispositivoInteligente.class::cast);*/
+
 		return inteligentes ;
 	}
 	
@@ -259,5 +267,6 @@ public class Cliente extends Usuario {
 	public void setAccionadoAutomatico(boolean accionadoAutomatico) {
 		this.accionadoAutomatico = accionadoAutomatico;
 	}
+
 	
 }

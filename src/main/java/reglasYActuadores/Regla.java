@@ -41,6 +41,10 @@ public abstract class Regla {
 	protected List<ActuadorBase> actuadores;
 	
 	//enum de actuadores , los que voy a guardar en la base. 
+	/*@ElementCollection(targetClass = Skill.class)
+	@CollectionTable(name = "person_skill",joinColumns = @JoinColumn(name = "person_id"))
+	@Enumerated(EnumType.STRING)
+	@Column(name = "skill_id")*/
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<ActuadoresEnum> actuadores_enums;
 	
@@ -58,6 +62,7 @@ public abstract class Regla {
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
+		this.actuadores_enums = new ArrayList<ActuadoresEnum>();
 		this.activado=true;
 	}
 	
@@ -103,6 +108,11 @@ public abstract class Regla {
 		if (!actuadores.contains(unActuador)) {
 			this.actuadores.add(unActuador); 
 		}		
+	}
+	
+	public void agregarActuadorEnum(ActuadoresEnum unActuador){
+		
+		this.actuadores_enums.add(unActuador);
 	}
 	
 	public int getId() {

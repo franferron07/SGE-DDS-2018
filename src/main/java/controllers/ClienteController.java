@@ -42,7 +42,7 @@ public class ClienteController {
 		//Query DB for consumo
 		String queryConsumo = "SELECT c.* from usuario u "+
 					"join dispositivo d on d.cliente_id=u.id "+
-					"join DispositivoInteligente di on di.dispositivo_id "+
+					"join DispositivoInteligente di on di.id =d.id"+
 					"join modo m on m.dispositivo_inteligente_id=di.id "+
 					"join consumo c on c.modo_id=m.id "+
 					"where u.id="+Integer.toString(id)+

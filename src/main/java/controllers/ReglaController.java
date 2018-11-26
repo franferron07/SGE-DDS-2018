@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -10,9 +11,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import Utils.HibernateProxyTypeAdapter;
+import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
 import models.ModelHelper;
 import models.UsuarioModel;
+import reglasYActuadores.ActuadoresEnum;
 import reglasYActuadores.CondicionRegla;
 import reglasYActuadores.Regla;
 import reglasYActuadores.ReglaSimple;
@@ -41,7 +44,16 @@ public class ReglaController {
 	
 	
 	public ModelAndView crear(Request request, Response response) {
+		
+		int id = request.session().attribute("id");
+		
 		Map<String, Object> model=new HashMap<>();
+		
+		List<Enum> enumValues = Arrays.asList(ActuadoresEnum.values());
+		model.put("actuadores", enumValues);
+		
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+		model.put("dispositivos" , cliente.filtrarDispositivosInteligentes() );
 		
 		return new ModelAndView(model, "reglaCrear.hbs");
 	}
@@ -55,7 +67,12 @@ public class ReglaController {
 		
 		String nombreRegla =request.queryParams("nombre");
 		String condiciones_json =request.queryParams("export");
-		String actuadores =request.queryParams("actuadores");
+		
+		String actuadores =  request.queryParams("actuadores");
+		
+		
+		
+		
 		int tipo = Integer.parseInt(request.queryParams("tipo"));  //0 simple , 1 compuesta
 		
 		Gson gson = new Gson();
@@ -68,6 +85,10 @@ public class ReglaController {
 			ReglaSimple regla = new ReglaSimple(nombreRegla);
 			
 			regla.agregarCondiciones(condiciones);
+			
+			ActuadoresEnum actuador = ActuadoresEnum.valueOf(actuadores);
+			actuador.setValorEnum(actuadores);
+			regla.agregarActuadorEnum(actuador);
 			
 			modelHelper.agregar(regla);
 			
