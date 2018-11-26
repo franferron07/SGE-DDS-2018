@@ -1,0 +1,33 @@
+<div class="container mt-5 pt-5">
+
+  <div class="row">
+    <div class="col">
+      <h2>Consumo por cliente</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class = "table table-hover">
+        <thead>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Domicilio</th>
+          <th scope="col">Consumo total</th>
+        </thead>
+        <tbody>
+          {{#each consumos}}
+          <tr>
+            <td>{{nombre}}</td>
+            <td>{{apellido}}</td>
+            <td>{{domicilio}}</td>
+            <td>{{consumo_total}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +22,13 @@ import usuarios.Cliente;
 import Utils.ConsumoHogar;
 import Utils.ConsumoTipoDispositivo;
 import Utils.ConsumoTransformador;
+import Utils.TrafoJson;
 import dispositivos.Consumo;
 import dispositivos.DispositivoDetalle;
+import geoposicionamiento.Coordenada;
+import geoposicionamiento.Transformador;
 import models.ModelHelper;
+import models.TransformadorModel;
 
 public class AdministradorController {
 	
@@ -59,88 +64,124 @@ public class AdministradorController {
         LocalDateTime fechaParse_desde = this.parsFecha(desde);
         LocalDateTime fechaParse_hasta = this.parsFecha(hasta);
         
-        String queryConsumoPorHogar = "SELECT u.nombre, u.apellido, u.domicilio, SUM(c.consumo) + SUM(DATEDIFF(" + fechaParse_desde + ", " + fechaParse_hasta + ") * de.horasPorDia)"+
-				   "FROM usuario u"+
-				   "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
-				   "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
-				   "JOIN dispositivoesencial de on de.id = d.id"+
-				   "JOIN dispositivointeligente di on di.dispositivo_id = d.id"+
-				   "JOIN modo m on m.dispositivo_inteligente_id = di.id"+
-				   "JOIN consumo c ON c.modo_id = m.id"+
-				   
-				   "WHERE c.fechainicio >="+ fechaParse_desde+
-				   "AND c.fechafin <="+ fechaParse_hasta+
-				 
-				   "GROUP BY u.nombre, u.apellido, u.domicilio";
+        switch(reporte) {
         
         
-        //En caso de querer obtener las queries de los consumos por cliente correspondientes a sus dispositivos inteligentes
-        //y estándares por separado, se usarían las siguientes quieries (ligeramente modificadas, ya que no están completas).
-        /*
-        String queryConsumoXClienteXInteligente = "SELECT u.nombre, u.apellido, u.domicilio, SUM(c.consumo)"+
-        							   "FROM usuario u"+
-        							   "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
-        							   "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
-        							   "JOIN dispositivointeligente di on di.dispositivo_id = d.id"+
-        							   "JOIN modo m on m.dispositivo_inteligente_id = di.id"+
-        							   "JOIN consumo c ON c.modo_id = m.id"+
-        							   
-        							   "WHERE c.fechainicio >="+ fechaParse_desde+
-        							   "AND c.fechafin <="+ fechaParse_hasta+
-        							 
-        							   "GROUP BY u.nombre, u.apellido, u.domicilio";
-        							   
-        							   
-        String queryConsumoXClienteXEsencialr = "SELECT u.nombre, u.apellido, u.domicilio, SUM(SELECT DATEDIFF"+ fechaParse_desde + ", " +  fechaParse_hasta + ") * de.horasPorDia"+
-        							  "FROM usuario u"+
-        							  "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
-        							  "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
-        							  "JOIN dispositivoesencial de on de.id = d.id"+
-
-        							  
-									  "GROUP BY u.nombre, u.apellido, u.domicilio";
-        */							   
-        							   
-        javax.persistence.Query queryA = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPorHogar, ConsumoHogar.class);
-		List<ConsumoHogar> consumoHogares = queryA.getResultList();
-		model.put("consumoHogares", consumoHogares);
-        							   
-        							   
-		//Creo que esta query está conceptualmente mal. Es muy sencillo separarla en dos, obteniendo así el consumo total de todos los dispositivos inteligentes por un lado
-		//y el consumo total de los dispositivos esenciales por el otro, pero no sabría como pasarle ambas queries al persistence.Query juntas.
-        String queryConsumoTipoDispositivo = "SELECT di.id as 'Dispositivo Inteligente', SUM(c.consumo) as 'Consumo de dispositivos inteligentes', de.id as 'dispositivo esencial', SUM(DATEDIFF(" + fechaParse_desde + ", " + fechaParse_hasta + ") * de.horasPorDia) as 'Consumo de dispositivos esenciales'"+
-        										 "FROM dispositivo d"+
-        										 "JOIN dispositivointeligente di ON di.dispositivo_id = d.id"+
-        										 "JOIN dispositivoesencial de on de.id = d.id"+
-        										 "JOIN modo m ON m.inteligente_id = d.id"+
-        										 "JOIN consumo c ON c.modo_id = m.id"+
-        										 
-        										 "WHERE u.tipo_usuario = 'cliente'"+
-        										 "GROUP BY di_id, de.id";
-        										 
-        /*
-        String queryConsumoPorDE = "SELECT SUM(c.consumo)"+
-        										 "FROM dispositivo d"+
-        										 "JOIN modo m ON m.inteligente_id = d.id"+
-        										 "JOIN consumo c ON u.id = c.id"+
-        										 "WHERE u.tipo_usuario = 'cliente'";
-        */
-        
-        javax.persistence.Query queryB = ModelHelper.getEntityManager().createNativeQuery(queryConsumoTipoDispositivo, ConsumoTipoDispositivo.class);
-		List<ConsumoTipoDispositivo> consumoTipoDispositivos = queryB.getResultList();
-		model.put("consumoTipoDispositivos", consumoTipoDispositivos);
-        										 
-        
-		//Falta completar
-        String queryConsumoPorTransformador = "SELECT t.id, c.longitud, c.latitud, SUM(consumo)"+
-                								 "FROM transformador t"+
-                								 "JOIN ubicable u ON u.ubicable_id = t.ubicable_id"+
-                								 "JOIN coordenada c ON u.ubicable_id = c.ubicable_id";
-        
-        javax.persistence.Query queryC = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPorHogar, ConsumoTransformador.class);
-		List<ConsumoTransformador> consumoTransformadores = queryC.getResultList();
-		model.put("consumoTransformadores", consumoTransformadores);
-                								 
+        	case "hogar":
+	        String queryConsumoPorHogar = "SELECT u.nombre, u.apellido, u.domicilio, SUM(c.consumo) + SUM(DATEDIFF(" + fechaParse_desde + ", " + fechaParse_hasta + ") * de.horasPorDia)"+
+					   "FROM usuario u"+
+					   "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
+					   "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
+					   "JOIN dispositivoesencial de on de.id = d.id"+
+					   "JOIN dispositivointeligente di on di.dispositivo_id = d.id"+
+					   "JOIN modo m on m.dispositivo_inteligente_id = di.id"+
+					   "JOIN consumo c ON c.modo_id = m.id"+
+					   
+					   "WHERE c.fechainicio >="+ fechaParse_desde+
+					   "AND c.fechafin <="+ fechaParse_hasta+
+					 
+					   "GROUP BY u.nombre, u.apellido, u.domicilio";
+	        
+	        
+	        //En caso de querer obtener las queries de los consumos por cliente correspondientes a sus dispositivos inteligentes
+	        //y estándares por separado, se usarían las siguientes quieries (ligeramente modificadas, ya que no están completas).
+	        /*
+	        String queryConsumoXClienteXInteligente = "SELECT u.nombre, u.apellido, u.domicilio, SUM(c.consumo)"+
+	        							   "FROM usuario u"+
+	        							   "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
+	        							   "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
+	        							   "JOIN dispositivointeligente di on di.dispositivo_id = d.id"+
+	        							   "JOIN modo m on m.dispositivo_inteligente_id = di.id"+
+	        							   "JOIN consumo c ON c.modo_id = m.id"+
+	        							   
+	        							   "WHERE c.fechainicio >="+ fechaParse_desde+
+	        							   "AND c.fechafin <="+ fechaParse_hasta+
+	        							 
+	        							   "GROUP BY u.nombre, u.apellido, u.domicilio";
+	        							   
+	        							   
+	        String queryConsumoXClienteXEsencialr = "SELECT u.nombre, u.apellido, u.domicilio, SUM(SELECT DATEDIFF"+ fechaParse_desde + ", " +  fechaParse_hasta + ") * de.horasPorDia"+
+	        							  "FROM usuario u"+
+	        							  "JOIN cliente cl ON u.usuario_id = cl.usuario_id"+
+	        							  "JOIN dispositivo d on d.cliente_id = cl.usuario_id"+
+	        							  "JOIN dispositivoesencial de on de.id = d.id"+
+	
+	        							  
+										  "GROUP BY u.nombre, u.apellido, u.domicilio";
+	        */							   
+	        							   
+	        javax.persistence.Query queryA = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPorHogar, ConsumoHogar.class);
+			List<ConsumoHogar> consumoHogares = queryA.getResultList();
+			model.put("consumoHogares", consumoHogares);
+			
+			break;
+	        							   
+	        
+        	case "dispositivo":
+			//Creo que esta query está conceptualmente mal. Es muy sencillo separarla en dos, obteniendo así el consumo total de todos los dispositivos inteligentes por un lado
+			//y el consumo total de los dispositivos esenciales por el otro, pero no sabría como pasarle ambas queries al persistence.Query juntas.
+	        String queryConsumoTipoDispositivo = "SELECT SUM(c.consumo) as 'Consumo de dispositivos inteligentes', SUM(DATEDIFF(" + fechaParse_desde + ", " + fechaParse_hasta + ") * de.horasPorDia) as 'Consumo de dispositivos esenciales'"+
+	        										 "FROM dispositivo d"+
+	        										 "JOIN dispositivointeligente di ON di.dispositivo_id = d.id"+
+	        										 "JOIN dispositivoesencial de on de.id = d.id"+
+	        										 "JOIN modo m ON m.inteligente_id = d.id"+
+	        										 "JOIN consumo c ON c.modo_id = m.id";
+	        										 
+	        										 
+	        /*
+	        String queryConsumoPorDI = "SELECT SUM(c.consumo)"+
+	        										 "FROM dispositivo d"+
+	        										 "JOIN dispositivointeligente di ON di.dispositivo_id = d.id"+
+	        										 "JOIN modo m ON m.inteligente_id = d.id"+
+	        										 "JOIN consumo c ON u.id = c.id";
+	        										 
+	        String queryConsumoPorDE = "SELECT SUM(DATEDIFF(" + fechaParse_desde + ", " + fechaParse_hasta + ") * de.horasPorDia) as 'Consumo de dispositivos esenciales'"+
+	        										 "FROM dispositivo d"+
+	        										 "JOIN dispositivoesencial de on de.id = d.id";								 
+	        
+	        */
+	        
+	        javax.persistence.Query queryB = ModelHelper.getEntityManager().createNativeQuery(queryConsumoTipoDispositivo, ConsumoTipoDispositivo.class);
+			List<ConsumoTipoDispositivo> consumoTipoDispositivos = queryB.getResultList();
+			model.put("consumoTipoDispositivos", consumoTipoDispositivos);
+	        break;
+			
+        	case "transformador":
+			/*
+	        String queryConsumoPorTransformador = "SELECT t.id, c.longitud, c.latitud, SUM(consumo)"+
+	                								 "FROM transformador t"+
+	                								 "JOIN ubicable u ON u.ubicable_id = t.ubicable_id"+
+	                								 "JOIN coordenada c ON u.ubicable_id = c.ubicable_id";
+	        */
+        		
+        	/*
+			TransformadorModel tm = new TransformadorModel();
+			List<Transformador> transformadores = tm.buscarTodosLosTransformadores();
+			List<TrafoJson> trafojson = new ArrayList<TrafoJson>();
+			List<Integer> clientes = new ArrayList<Integer>();
+			
+			for (Transformador transformador : transformadores) {
+				for (Cliente cliente : transformador.getClientes()) {
+					clientes.add(cliente.getId());
+				}
+				
+				trafojson.add(new TrafoJson( transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId(), transformador.consumoTotal(fechaParse_desde, fechaParse_hasta) ));
+			}																																														
+			*/
+			
+			TransformadorModel transformadorModel = new TransformadorModel();
+			List<Transformador> transformadores = transformadorModel.buscarTodosLosTransformadores();
+			List<ConsumoTransformador> consumoTransformadores = new ArrayList<ConsumoTransformador>();
+			
+			for (Transformador transformador : transformadores) {
+				
+				consumoTransformadores.add(new ConsumoTransformador(transformador.getId(), transformador.getUbicacion().getLongitud(), transformador.getUbicacion().getLatitud(), transformador.consumoTotal(fechaParse_desde, fechaParse_hasta)));
+			}	
+	        
+			model.put("consumoTransformadores", consumoTransformadores);
+			
+			break;
+        }        								 
 	
                
         //String desde = params.get("desde");
