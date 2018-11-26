@@ -67,12 +67,13 @@ public class ReglaController {
 		
 		String nombreRegla =request.queryParams("nombre");
 		String condiciones_json =request.queryParams("export");
-		
 		String actuadores =  request.queryParams("actuadores");
+		int id_dispositivo = Integer.parseInt(request.queryParams("dispositivos"));
 		
-		
-		
-		
+		/* Busco Dispositivo inteligente */
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+        DispositivoInteligente inteligente = (DispositivoInteligente) RepositorioUsuarios.buscarDispositivo(cliente, id_dispositivo);
+        
 		int tipo = Integer.parseInt(request.queryParams("tipo"));  //0 simple , 1 compuesta
 		
 		Gson gson = new Gson();
@@ -85,6 +86,7 @@ public class ReglaController {
 			ReglaSimple regla = new ReglaSimple(nombreRegla);
 			
 			regla.agregarCondiciones(condiciones);
+			regla.agregarDispositivo( inteligente );
 			
 			ActuadoresEnum actuador = ActuadoresEnum.valueOf(actuadores);
 			actuador.setValorEnum(actuadores);

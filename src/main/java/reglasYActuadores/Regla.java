@@ -48,7 +48,7 @@ public abstract class Regla {
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	protected List<ActuadoresEnum> actuadores_enums;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	protected List<DispositivoInteligente> dispositivos;
 	
 	@Column(name="activado")
@@ -63,6 +63,7 @@ public abstract class Regla {
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
 		this.actuadores_enums = new ArrayList<ActuadoresEnum>();
+		this.dispositivos = new ArrayList<DispositivoInteligente>();
 		this.activado=true;
 	}
 	
@@ -99,6 +100,10 @@ public abstract class Regla {
 	public void desactivar(){
 		
 		this.activado=false;
+	}
+	
+	public void agregarDispositivo(DispositivoInteligente inteligente) {
+		this.dispositivos.add(inteligente);
 	}
 	
 	

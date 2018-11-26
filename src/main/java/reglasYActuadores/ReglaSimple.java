@@ -70,6 +70,8 @@ public class ReglaSimple extends Regla {
 	public void setCondiciones(List<CondicionRegla> condiciones) {
 		this.condiciones = condiciones;
 	}
+
+
 	
 	
 

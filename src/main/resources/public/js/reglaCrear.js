@@ -97,7 +97,7 @@
           var item =     {"comparador":0,"valorComparable":0 };
           
           // asigno al objeto los datos de la fila
-          item.comparador = fila.find('input[tipo-dato="comparador"]').val();
+          item.comparador = fila.find('select[tipo-dato="comparador"]').val();
           item.valorComparable= fila.find('input[tipo-dato="valorComparable"]').val();
           //item.datatype= fila.find('select[tipo-dato="datatype"]').val() ;
 
