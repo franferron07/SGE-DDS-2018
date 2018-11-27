@@ -27,6 +27,9 @@
                     <div class="form-header primary-color">
                         <h3><i class="fa fa-laptop"></i>Agregar Regla</h3>
                     </div>
+                    <div class="form-header danger-color">
+                        <h4>Para seleccionar múltiples opciones, utilizar Ctrl + click</h4>
+                    </div>
     				
 
                     <form action="/sge/cliente/regla" method="POST" >
@@ -42,7 +45,7 @@
 
 						    <div class="form-group col-md-6">
 						      <label for="dispositivos">Dispositivos</label>
-				              <select class="mdb-select md-form"  id="dispositivos" name="dispositivos" multiple>
+				              <select id="dispositivos" name="dispositivos" multiple>
 				              	<option value="-1">(Seleccionar)</option>
 				              	{{#each dispositivos}}
                 				<option value="{{id}}" >{{detalle.nombre}}-{{detalle.descripcion}}</option>
