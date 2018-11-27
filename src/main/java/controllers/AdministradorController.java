@@ -107,7 +107,7 @@ public class AdministradorController {
 			
 			model.put("consumo", consumoHogares);
 			return new ModelAndView(model, "resultadoReporteHogar.hbs");
-			
+
 			
 		case "dispositivo":
 	        String queryConsumoTipoDispositivo = "SELECT SUM(c.consumo) as 'Consumo de dispositivos inteligentes', SUM(DATEDIFF(" + hasta + ", " + desde + ") * de.horasPorDia) as 'Consumo de dispositivos esenciales'"+
