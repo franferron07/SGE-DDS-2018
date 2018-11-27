@@ -87,7 +87,7 @@ private static HandlebarsTemplateEngine engine;
 		
 		//Reportes
 		Spark.get("/sge/reportes", administradorController::reportes, Router.engine);
-		Spark.post("/api/reportes", (req, res) -> administradorController.reportes_results(req, res));
+		Spark.post("/api/reportes", administradorController::reportes_results, Router.engine);
 
 		
 		
