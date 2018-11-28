@@ -7,6 +7,10 @@
 
  	$("#execute").click(function(){
 
+
+ 		$('.resultadoReporte').hide();
+
+
  		var reporte = $("#reporte").val();
  		var desde = $("#date-picker-desde").val();
  		var hasta = $("#date-picker-hasta").val();

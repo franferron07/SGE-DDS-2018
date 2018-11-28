@@ -125,35 +125,36 @@ public class AdministradorController {
 		        							 
 		        
 		        String queryConsumoPromedioDI = "SELECT IFNULL(AVG(c.consumo), 0) AS consumo_inteligentes"+
-		        										 "FROM dispositivo d"+
-		        										 "LEFT JOIN dispositivointeligente di ON di.id = d.id"+
-		        										 "LEFT JOIN modo m ON m.dispositivo_inteligente_id = d.id"+
-		        										 "LEFT JOIN consumo c ON c.modo_id = m.id"+
-		        										 "WHERE c.fechaInicio >="+ desde +
-		        										 "AND c.fechaFin <=" + hasta;
+		        										 " FROM dispositivo d"+
+		        										 " LEFT JOIN dispositivointeligente di ON di.id = d.id"+
+		        										 " LEFT JOIN modo m ON m.dispositivo_inteligente_id = d.id"+
+		        										 " LEFT JOIN consumo c ON c.modo_id = m.id"+
+		        										 " WHERE c.fechaInicio >= '"+ desde +
+		        										 "' AND c.fechaFin <= '" + hasta+"'";
 		        										 
-		        String queryConsumoPromedioDE = "SELECT IFNULL(AVG(DATEDIFF(" + hasta + ", " + desde + ") * de.horasPorDia), 0) AS consumo_estandar"+
-		        										 "FROM dispositivo d"+
-		        										 "LEFT JOIN dispositivoestandar de ON de.id = d.id";								 
+		        String queryConsumoPromedioDE = "SELECT IFNULL(AVG(DATEDIFF('" + hasta + "', '" + desde + "') * de.horasPorDia), 0) AS consumo_estandar"+
+		        										 " FROM dispositivo d"+
+		        										 " LEFT JOIN dispositivoestandar de ON de.id = d.id";								 
 		        
 		        
 		        
-		        javax.persistence.Query queryB = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPromedioDI, double.class);
+		        javax.persistence.Query queryB = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPromedioDI);
 		        
-		        javax.persistence.Query queryC = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPromedioDE, double.class);
+		        javax.persistence.Query queryC = ModelHelper.getEntityManager().createNativeQuery(queryConsumoPromedioDE);
 		        
-				double resultadoInteligentes = (double) queryB.getSingleResult();
-				double resultadoEstandares = (double) queryC.getSingleResult();
+				List<Double> resultBList = queryB.getResultList();
+		        double resultadoInteligentes = resultBList.get(0);
+				
+		        List<Double> resultCList = queryC.getResultList();
+		        double resultadoEstandares = resultCList.get(0);
 				
 				
 				model.put("resultadoInteligentes", resultadoInteligentes);
 				model.put("resultadoEstandares", resultadoEstandares);
 				
 				System.out.println("****************************************");
-				
-				System.out.println(resultadoInteligentes);
-				
-				System.out.println(resultadoEstandares);
+				System.out.println("resultaldo inteligente" + resultadoInteligentes);
+				System.out.println("resultado estandar" + resultadoEstandares);
 				
 				return new ModelAndView(model, "resultadoReporteTipoDispositivo.hbs");
 			

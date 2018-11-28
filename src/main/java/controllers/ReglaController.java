@@ -1,5 +1,6 @@
 package controllers;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,10 +68,13 @@ public class ReglaController {
 		
 		String nombreRegla =request.queryParams("nombre");
 		String condiciones_json =request.queryParams("export");
-		String actuadores =  request.queryParams("actuadores");
+		//String actuadores =  request.queryParams("actuadores");
 		int id_dispositivo = Integer.parseInt(request.queryParams("dispositivos"));
 		
-		/* Busco Dispositivo inteligente */
+		
+		
+		
+		// Busco Dispositivo inteligente 
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
         DispositivoInteligente inteligente = (DispositivoInteligente) RepositorioUsuarios.buscarDispositivo(cliente, id_dispositivo);
         
@@ -78,7 +82,7 @@ public class ReglaController {
 		
 		Gson gson = new Gson();
 		List<CondicionRegla> condiciones = gson.fromJson(condiciones_json, new TypeToken<List<CondicionRegla>>(){}.getType());
-		
+		/*
 		
 		// REGLA SIMPLE
 		if( tipo == 0 ){
@@ -97,12 +101,23 @@ public class ReglaController {
 			RepositorioRegla.agregarRegla(regla);
 		}
 		else{
-			/* FALTA DEFINIR */
+			// FALTA DEFINIR 
 			
 		}
 		
 		model.put("reglas", RepositorioRegla.getReglas());
 		//System.out.println( condiciones.size()+"******************" );
+		
+		*/
+		
+		Gson gson2 = new Gson();
+		String actuadores_string = request.queryParams("actuadores");
+	
+		String[] actuadores_array = gson2.fromJson(actuadores_string, String[].class);
+		for(String act : actuadores_array){
+		    System.out.println(act);
+		}
+		
 		return new ModelAndView(model , "reglas.hbs");
 	}
 	

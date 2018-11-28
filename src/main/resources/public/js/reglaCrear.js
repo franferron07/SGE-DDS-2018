@@ -69,6 +69,16 @@
       });
 
 
+     $('#actuadores').change(function(){
+        
+        
+        
+        console.log( $('#actuadores').val() );
+   
+
+      });
+
+
     /* $('#export-btn').click(function(e){
         
      
