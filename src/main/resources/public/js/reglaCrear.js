@@ -72,9 +72,13 @@
      $('#actuadores').change(function(){
         
         
+        var checkboxes = $('#actuadores').val();
         
+        var valor = checkboxes.toString();
+
+        $('#actuadores_string').val( valor );
+        console.log( valor);
         console.log( $('#actuadores').val() );
-   
 
       });
 

@@ -66,10 +66,14 @@ public class ReglaController {
 		ModelHelper modelHelper = new ModelHelper();
 		int id = request.session().attribute("id");
 		
+		//recibo params
 		String nombreRegla =request.queryParams("nombre");
 		String condiciones_json =request.queryParams("export");
 		//String actuadores =  request.queryParams("actuadores");
 		int id_dispositivo = Integer.parseInt(request.queryParams("dispositivos"));
+		
+		String actuadores_string = request.queryParams("actuadores_string");
+		String[] acts = actuadores_string.split(",");
 		
 		
 		
@@ -82,7 +86,7 @@ public class ReglaController {
 		
 		Gson gson = new Gson();
 		List<CondicionRegla> condiciones = gson.fromJson(condiciones_json, new TypeToken<List<CondicionRegla>>(){}.getType());
-		/*
+		
 		
 		// REGLA SIMPLE
 		if( tipo == 0 ){
@@ -92,9 +96,18 @@ public class ReglaController {
 			regla.agregarCondiciones(condiciones);
 			regla.agregarDispositivo( inteligente );
 			
-			ActuadoresEnum actuador = ActuadoresEnum.valueOf(actuadores);
+			// agrego actuadores en reglas
+			for (String a: acts) {           
+				
+				ActuadoresEnum actuador = ActuadoresEnum.valueOf(a);
+				actuador.setValorEnum(a);
+				regla.agregarActuadorEnum(actuador);
+				
+		    }
+			
+			/*ActuadoresEnum actuador = ActuadoresEnum.valueOf(actuadores);
 			actuador.setValorEnum(actuadores);
-			regla.agregarActuadorEnum(actuador);
+			regla.agregarActuadorEnum(actuador);*/
 			
 			modelHelper.agregar(regla);
 			
@@ -108,15 +121,13 @@ public class ReglaController {
 		model.put("reglas", RepositorioRegla.getReglas());
 		//System.out.println( condiciones.size()+"******************" );
 		
-		*/
-		
-		Gson gson2 = new Gson();
-		String actuadores_string = request.queryParams("actuadores");
 	
-		String[] actuadores_array = gson2.fromJson(actuadores_string, String[].class);
-		for(String act : actuadores_array){
-		    System.out.println(act);
-		}
+		
+		
+		
+		
+		
+		
 		
 		return new ModelAndView(model , "reglas.hbs");
 	}
