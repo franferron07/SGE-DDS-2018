@@ -35,6 +35,7 @@ private static HandlebarsTemplateEngine engine;
 		ReglaController reglaController = new ReglaController();
 		AdministradorController administradorController = new AdministradorController();
 		OptimizadorController optimizadorController = new OptimizadorController();
+		CLIController cliController = new CLIController();
 		
 		
 		Spark.before("/sge/*",(req,res)->{
@@ -89,6 +90,11 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/sge/reportes", administradorController::reportes, Router.engine);
 		Spark.post("/api/reportes", administradorController::reportes_results, Router.engine);
 
+		//CLI
+		Spark.get("/api/dispositivos/:id", (req, res) -> cliController.getDispositivos(req, res));
+		Spark.get("/api/apagar_dispositivo/:id/:dispositivo", (req, res) -> cliController.apagarDispositivo(req, res));
+		Spark.get("/api/encender_dispositivo/:id/:dispositivo", (req, res) -> cliController.encenderDispositivo(req, res));
+		Spark.get("/api/ahorro_dispositivo/:id/:dispositivo", (req, res) -> cliController.ahorroDispositivo(req, res));
 		
 		
 		Spark.get("/sge/optimizador",optimizadorController::mostrarResultadosOptimizador,Router.engine);
