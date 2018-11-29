@@ -1,7 +1,7 @@
 # Equipo-03
 
 ### Generate executable jar
-Ensure that `persistence.xml` is referencing RDS instance db and not `localhost:3306/`. RDS endpoint must be commented in the file.
+Ensure that `persistence.xml` is referencing RDS instance db and not `localhost:3306/`. RDS endpoint should be commented in the file, uncomment it and comment the localhost jbdc and password.
 
 To deploy a fat jar (jar with dependences) simply run in the project directory:
 ``` 
