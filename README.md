@@ -23,7 +23,8 @@ mysql -h equipo3.c8laxzmm3pst.us-east-2.rds.amazonaws.com -u root -p
 It may seem insecure to have the 3306 mysql port public, but in this case, we shouldn't dedicate time for security vulnerabilities.
 
 #### Import whole .sql database dump
-First, generate a single file dump, save it as standard `.sql`.
+First, generate a single file dump, save it as standard `.sql`, tick the option that says `Include Create Schema`.
+For reference: https://dev.mysql.com/doc/workbench/en/wb-admin-export-import-management.html
 Ensure you have access to the RDS instance by completing the previous step.
 In the terminal run the following:
 ```
