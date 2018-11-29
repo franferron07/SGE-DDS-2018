@@ -146,5 +146,14 @@ public class CLIController {
 		return status;
 	}
 	
+	public String consumoUltimoMes(Request request,Response response) {
+		
+		int id = Integer.parseInt(request.params("id"));
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+		
+		double consumo_ultimo_mes;
+		consumo_ultimo_mes = cliente.consumoEnUnPeriodo(LocalDateTime.now().minusDays(30), LocalDateTime.now());
+		return "Su consumo fue del último mes fue de " + consumo_ultimo_mes + " KW";
+	}
 	
 }

@@ -95,6 +95,7 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/api/apagar_dispositivo/:id/:dispositivo", (req, res) -> cliController.apagarDispositivo(req, res));
 		Spark.get("/api/encender_dispositivo/:id/:dispositivo", (req, res) -> cliController.encenderDispositivo(req, res));
 		Spark.get("/api/ahorro_dispositivo/:id/:dispositivo", (req, res) -> cliController.ahorroDispositivo(req, res));
+		Spark.get("/api/consumo_ultimo_mes/:id", (req, res) -> cliController.consumoUltimoMes(req, res));
 		
 		
 		Spark.get("/sge/optimizador",optimizadorController::mostrarResultadosOptimizador,Router.engine);

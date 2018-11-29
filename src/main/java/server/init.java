@@ -1,7 +1,9 @@
+package server;
+
 import server.Server;
 import server.SubscriberMQTT;
 
-public class init {
+public class init{
 
 	public static void main(String[] args) {
 		Thread server = new Server("spark_server");
