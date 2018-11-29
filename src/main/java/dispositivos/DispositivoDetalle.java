@@ -100,8 +100,12 @@ public class DispositivoDetalle {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
+
+
+	public void setEsBajoConsumo(Boolean consumo){
+		this.esBajoConsumo=consumo;
+	}
 	
 	
 

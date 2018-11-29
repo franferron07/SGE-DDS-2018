@@ -1,0 +1,46 @@
+[{
+	"nombre": "LCD",
+	"descripcion": "De 8 pulgadas",
+	"hsMensualMinimo": 90.0,
+	"hsMensualMaximo": 370.0,
+	"consumoKwHora": 0.18,
+	"esBajoConsumo": true,
+	"esEsencial": true,
+	"esInteligente": true
+}, {
+	"nombre": "lavarropas",
+	"descripcion": "Comprarada de Easy",
+	"hsMensualMinimo": 6,
+	"hsMensualMaximo": 30.0,
+	"consumoKwHora": 0.875,
+	"esBajoConsumo": true,
+	"esEsencial": true,
+	"esInteligente": true
+}, {
+	"nombre": "Ventilador",
+	"descripcion": "con dos paletas",
+	"hsMensualMinimo": 120.0,
+	"hsMensualMaximo": 360.0,
+	"consumoKwHora": 0.06,
+	"esBajoConsumo": false,
+	"esEsencial": true,
+	"esInteligente": false
+}, {
+	"nombre": "Televisor",
+	"descripcion": "Color de tubo fluorescente de 29 a 34",
+	"hsMensualMinimo": 90.0,
+	"hsMensualMaximo": 360.0,
+	"consumoKwHora": 0.175,
+	"esBajoConsumo": false,
+	"esEsencial": false,
+	"esInteligente": true
+}, {
+	"nombre": "Televisor",
+	"descripcion": "LCD de 40",
+	"hsMensualMinimo": 90.0,
+	"hsMensualMaximo": 360.0,
+	"consumoKwHora": 0.18,
+	"esBajoConsumo": true,
+	"esEsencial": false,
+	"esInteligente": false
+}]

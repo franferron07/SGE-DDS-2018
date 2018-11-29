@@ -154,7 +154,7 @@ public abstract class DispositivoUsuario {
 	}
 	public  String getIdentificacion() {
 		return this.detalle.getDescripcion();
-	}
+	}//charlable
 	public  double getHsMensualMinimo() {
 		return this.detalle.getHsMensualMinimo();
 	}
