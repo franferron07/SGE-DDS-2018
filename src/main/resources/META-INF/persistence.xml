@@ -44,8 +44,10 @@
         
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/equipo_3" /> 
+            <!-- property name="hibernate.connection.url" value="jdbc:mysql://equipo3.c8laxzmm3pst.us-east-2.rds.amazonaws.com:3306/equipo_3" />  -->
             <property name="hibernate.connection.username" value="root" /> 
             <property name="hibernate.connection.password" value="" /> 
+            <!-- <property name="hibernate.connection.password" value="Amazonwebservices19" />  -->
                         
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
