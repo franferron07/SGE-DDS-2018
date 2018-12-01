@@ -64,6 +64,7 @@ public class MapController {
 			}
 			
 			trafojson.add(new TrafoJson( transformador.getId(), new Coordenada(transformador.getUbicacion().getLongitud(),transformador.getUbicacion().getLatitud()), clientes, transformador.getZonaAsignada().getId(), transformador.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
+			clientes = new ArrayList<Integer>();
 		}
 		
 		GsonBuilder b = new GsonBuilder();
