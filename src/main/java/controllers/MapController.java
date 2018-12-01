@@ -36,6 +36,7 @@ public class MapController {
 				coordenadas.add(new Coordenada( coordenada.getLongitud(),coordenada.getLatitud() ));
 			}
 			zonajson.add(new ZonaJson(zona.getId(), coordenadas, zona.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
+			coordenadas = new ArrayList<Coordenada>();
 		}
 		
 		GsonBuilder b = new GsonBuilder();
