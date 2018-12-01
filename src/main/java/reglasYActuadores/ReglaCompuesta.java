@@ -24,10 +24,6 @@ public class ReglaCompuesta extends Regla {
 	@JoinColumn( name="reglapadre_id" , referencedColumnName="id" )
 	private List<Regla> reglas;
 	
-	/*@OneToMany(mappedBy="id" , cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
-	private List<Regla> reglasHijas;*/
-	
-	
 	public ReglaCompuesta(){
 		
 	}

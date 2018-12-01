@@ -17,7 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import reglasYActuadores.ActuadorBase;
-import reglasYActuadores.ActuadoresEnum;
+import reglasYActuadores.ActuadorString;
+
 
 
 @Entity
@@ -36,9 +37,13 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	@Transient
 	private ActuadorBase accionaAutomaticaOptimizador; //activara esta accion el optimizador de horas al dispositivo
 	
+	/*@ManyToOne
+	@JoinColumn( name="actuador_id" , referencedColumnName="id" )
+	private ActuadoresEnum accionaAutomaticaOptimizadorEnum; //guardara el enum , sirve para obtenerlo de la base y luego instanciarlo al inicio*/
+	
 	@ManyToOne
 	@JoinColumn( name="actuador_id" , referencedColumnName="id" )
-	private ActuadoresEnum accionaAutomaticaOptimizadorEnum; //guardara el enum , sirve para obtenerlo de la base y luego instanciarlo al inicio
+	private ActuadorString accionaAutomaticaOptimizadorString;
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dispositivo_id")

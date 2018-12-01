@@ -28,7 +28,9 @@
 		<class>reglasYActuadores.ReglaSimple</class>
 		<class>reglasYActuadores.CondicionRegla</class>
 		<class>reglasYActuadores.ActuadorBase</class>
-		<class>reglasYActuadores.ActuadoresEnum</class>
+		<!--  <class>reglasYActuadores.ActuadoresEnum</class>
+		<class>reglasYActuadores.ReglaActuadorEnum</class>-->
+		<class>reglasYActuadores.ActuadorString</class>
 		<class>geoposicionamiento.Transformador</class>
 		<class>geoposicionamiento.ZonaGeografica</class>
 	    

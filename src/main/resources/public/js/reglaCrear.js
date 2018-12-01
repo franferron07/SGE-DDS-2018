@@ -83,6 +83,17 @@
       });
 
 
+     $('#dispositivos').change(function(){
+        
+        var checkboxes = $('#dispositivos').val();
+        
+        var valor = checkboxes.toString();
+
+        $('#dispositivos_string').val( valor );
+        console.log( valor);
+      });
+
+
     /* $('#export-btn').click(function(e){
         
      
