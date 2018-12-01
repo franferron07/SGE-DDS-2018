@@ -19,7 +19,7 @@ function modificar(id, permiteEdicion = false){
 
 
 // this is the id of the form
-$("#form_disp").submit(function(e) {
+$("#form_regla").submit(function(e) {
 
 	alert("esta haciendo submit");
     var form = $(this);
@@ -47,7 +47,7 @@ $("#form_disp").submit(function(e) {
 
 function pedidoBorrar(id){
 
-		if (confirm("¿Está seguro que desea eliminar el dispositivo?")) {
+		if (confirm("¿Está seguro que desea eliminar la regla?")) {
 			borrarDispositivo(id);
 		}
 		return false;

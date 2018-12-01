@@ -1,25 +1,25 @@
 package controllers;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.google.gson.reflect.TypeToken;
 
-import Utils.HibernateProxyTypeAdapter;
+
 import dispositivos.DispositivoInteligente;
-import dispositivos.DispositivoUsuario;
+
 import models.ModelHelper;
-import models.UsuarioModel;
-import reglasYActuadores.ActuadoresEnum;
+
+import reglasYActuadores.ActuadorString;
 import reglasYActuadores.CondicionRegla;
 import reglasYActuadores.Regla;
 import reglasYActuadores.ReglaSimple;
+import repositorios.RepositorioActuadoresString;
 import repositorios.RepositorioRegla;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
@@ -50,8 +50,7 @@ public class ReglaController {
 		
 		Map<String, Object> model=new HashMap<>();
 		
-		List<Enum> enumValues = Arrays.asList(ActuadoresEnum.values());
-		model.put("actuadores", enumValues);
+		model.put("actuadores", RepositorioActuadoresString.getActuadores());
 		
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		model.put("dispositivos" , cliente.filtrarDispositivosInteligentes() );
@@ -69,45 +68,42 @@ public class ReglaController {
 		//recibo params
 		String nombreRegla =request.queryParams("nombre");
 		String condiciones_json =request.queryParams("export");
-		//String actuadores =  request.queryParams("actuadores");
-		int id_dispositivo = Integer.parseInt(request.queryParams("dispositivos"));
+		
+		String dispositivos_string = request.queryParams("dispositivos_string");
+		String[] dispos = dispositivos_string.split(",");
 		
 		String actuadores_string = request.queryParams("actuadores_string");
 		String[] acts = actuadores_string.split(",");
 		
-		
-		
-		
-		// Busco Dispositivo inteligente 
-		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
-        DispositivoInteligente inteligente = (DispositivoInteligente) RepositorioUsuarios.buscarDispositivo(cliente, id_dispositivo);
-        
 		int tipo = Integer.parseInt(request.queryParams("tipo"));  //0 simple , 1 compuesta
 		
+		//parseo condiciones
 		Gson gson = new Gson();
 		List<CondicionRegla> condiciones = gson.fromJson(condiciones_json, new TypeToken<List<CondicionRegla>>(){}.getType());
 		
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		
 		// REGLA SIMPLE
 		if( tipo == 0 ){
 			
 			ReglaSimple regla = new ReglaSimple(nombreRegla);
-			
 			regla.agregarCondiciones(condiciones);
-			regla.agregarDispositivo( inteligente );
-			
+
 			// agrego actuadores en reglas
 			for (String a: acts) {           
 				
-				ActuadoresEnum actuador = ActuadoresEnum.valueOf(a);
-				actuador.setValorEnum(a);
-				regla.agregarActuadorEnum(actuador);
-				
+				ActuadorString actuador = RepositorioActuadoresString.buscarActuadorEnum( Integer.parseInt(a) );
+				regla.agregarActuadores_string(actuador);
 		    }
 			
-			/*ActuadoresEnum actuador = ActuadoresEnum.valueOf(actuadores);
-			actuador.setValorEnum(actuadores);
-			regla.agregarActuadorEnum(actuador);*/
+			//agrego dispos en reglas
+			for (String d: dispos) {           
+				
+				int id_dispo = Integer.parseInt(d);
+				
+				DispositivoInteligente inteligente = (DispositivoInteligente) RepositorioUsuarios.buscarDispositivo(cliente, id_dispo);
+				regla.agregarDispositivo(inteligente);
+		    }
 			
 			modelHelper.agregar(regla);
 			
@@ -119,22 +115,28 @@ public class ReglaController {
 		}
 		
 		model.put("reglas", RepositorioRegla.getReglas());
-		//System.out.println( condiciones.size()+"******************" );
-		
 	
-		
-		
-		
-		
-		
-		
-		
 		return new ModelAndView(model , "reglas.hbs");
 	}
 	
 	public ModelAndView modificar(Request request, Response response) {
 		
-		return new ModelAndView(null, "modalRegla.hbs");
+		Map<String, Object> model=new HashMap<>();
+		
+		int id = request.session().attribute("id");
+		
+		int id_regla = Integer.parseInt(request.params("id"));
+		
+		Regla regla = RepositorioRegla.buscarRegla(id_regla);
+		
+		model.put("regla", regla);
+		
+		model.put("actuadores", RepositorioActuadoresString.getActuadores());
+		
+		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
+		model.put("dispositivos" , cliente.filtrarDispositivosInteligentes() );
+		
+		return new ModelAndView(model, "modalRegla.hbs");
 	}
 	
 	public ModelAndView update(Request request, Response response) {
@@ -147,7 +149,6 @@ public class ReglaController {
 	
 	public ModelAndView eliminar(Request request, Response response) {
 
-		//int id = request.session().attribute("id");
 		Map<String, Object> model=new HashMap<>();
 		int id_regla = Integer.parseInt(request.params("id"));
 

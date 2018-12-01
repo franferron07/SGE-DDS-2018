@@ -9,11 +9,12 @@
 			  <thead>
 			    <tr>
 			      <th scope="col">Id</th>
-			      <th scope="col">Activa</th>		
-			      <th scope="col">Tipo</th>
 			      <th scope="col">Nombre</th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      <th scope="col">Activa</th>		
+			      <th scope="col">Actuadores</th>
+			      <th scope="col">Dispositivos</th>
+			      <th scope="col">Modificar</th>
+			      <th scope="col">Eliminar</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -21,14 +22,22 @@
 
 				    <tr>
 				      <td>{{id}}</td>
-				      <!--{{#if detalle.esInteligente}}
-				      	<td>Estandar</td>
-				      {{else}}
-					  	<td>Inteligente</td>
-  					  {{/if}}-->
-  					  <td>{{activado}}</td>
-  					  <td></td>
 				      <td>{{nombreRegla}}</td>
+				      {{#if activado}}
+				      	<td>Si</td>
+				      {{else}}
+					  	<td>No</td>
+					  {{/if}}
+					  <td>
+					  	{{#each actuadores_string}}
+					  		{{nombre}} ,
+					  	{{/each}}
+					  </td>
+					  <td>
+				  		{{#each dispositivos}}
+					  		{{detalle.nombre}} {{detalle.descripcion}} ,
+					  	{{/each}}
+					  </td>
 				      <td><button type="button" class="btn btn-primary" onclick="modificar('{{id}}',true)">Modificar</button></td>
 				      <td><button type="button" class="btn btn-danger" onclick="pedidoBorrar('{{id}}')">Borrar</button></td>
 				    </tr>

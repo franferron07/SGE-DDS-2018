@@ -45,12 +45,14 @@
 
 						    <div class="form-group col-md-6">
 						      <label for="dispositivos">Dispositivos</label>
-				              <select id="dispositivos" name="dispositivos" multiple>
+				              <select id="dispositivos" name="dispositivos" multiple="multiple">
 				              	<option value="-1">(Seleccionar)</option>
 				              	{{#each dispositivos}}
                 				<option value="{{id}}" >{{detalle.nombre}}-{{detalle.descripcion}}</option>
                 				{{/each}} 
            					  </select>
+
+           					   <input name="dispositivos_string" id="dispositivos_string" value="" style="display:none;" />
 						    </div>
 
 						    <div class="form-group col-md-6">
@@ -58,7 +60,7 @@
 				              <select class="mdb-select md-form" multiple="multiple" id="actuadores" name="actuadores">
 				              	<option value="-1">(Seleccionar)</option>
 				              	{{#each actuadores}}
-                				<option value="{{this}}">{{this}}</option>
+                				<option value="{{id}}">{{nombre}}</option>
                 				{{/each}} 
            					  </select>
 
@@ -130,7 +132,7 @@
 
 						 <div class="text-center">
                         	<button class="btn btn-primary" id="crear">Crear</button>
-                        	<input type="button" class="btn btn-primary" id="export-btn" />
+                        	<!--<input type="button" class="btn btn-primary" id="export-btn" />-->
                         	<input type="text" style="display:none;" id="export" name="export" value=""/>
                     	</div>
 

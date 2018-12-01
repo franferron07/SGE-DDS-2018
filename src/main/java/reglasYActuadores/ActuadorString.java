@@ -1,52 +1,42 @@
 package reglasYActuadores;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="actuadorEnum")
-public enum ActuadoresEnum {
-	
-	APAGAR , PRENDER ,  CAMBIAR_INTENSIDAD_LUZ , CAMBIAR_TEMPERATURA ;
+@Table(name="actuadorString")
+public class ActuadorString {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(name="valorEnum")
-	private String valorEnum;
-
+	@Column(name="nombre")
+	private String nombre;
 	
-	ActuadoresEnum(){
+	public ActuadorString(){
 		
 	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	public String getValorEnum() {
-		return valorEnum;
+	public String getNombre() {
+		return nombre;
 	}
 
-
-	public void setValorEnum(String valorEnum) {
-		this.valorEnum = valorEnum;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 	
-	
+
 }

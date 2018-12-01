@@ -14,8 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,15 +42,23 @@ public abstract class Regla {
 	@Transient
 	protected List<ActuadorBase> actuadores;
 	
-	//enum de actuadores , los que voy a guardar en la base. 
-	/*@ElementCollection(targetClass = Skill.class)
-	@CollectionTable(name = "person_skill",joinColumns = @JoinColumn(name = "person_id"))
-	@Enumerated(EnumType.STRING)
-	@Column(name = "skill_id")*/
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	protected List<ActuadoresEnum> actuadores_enums;
 	
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = { 
+	        CascadeType.DETACH
+	    })
+	    @JoinTable(name = "regla_actuadorstring",
+	        joinColumns = @JoinColumn(name = "regla_id"),
+	        inverseJoinColumns = @JoinColumn(name = "actuador_id")
+	    )
+	protected List<ActuadorString> actuadores_string;
+	
+	
+	//@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)	
+	@ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable(name = "regla_dispositivointeligente",
+        joinColumns = @JoinColumn(name = "regla_id"),
+        inverseJoinColumns = @JoinColumn(name = "dispositivo_id")
+    )
 	protected List<DispositivoInteligente> dispositivos;
 	
 	@Column(name="activado")
@@ -62,7 +72,9 @@ public abstract class Regla {
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
-		this.actuadores_enums = new ArrayList<ActuadoresEnum>();
+		//this.actuadores_enums = new ArrayList<ActuadoresEnum>();
+		this.actuadores_string = new ArrayList<ActuadorString>();
+		
 		this.dispositivos = new ArrayList<DispositivoInteligente>();
 		this.activado=true;
 	}
@@ -115,10 +127,10 @@ public abstract class Regla {
 		}		
 	}
 	
-	public void agregarActuadorEnum(ActuadoresEnum unActuador){
+	/*public void agregarActuadorEnum(ActuadoresEnum unActuador){
 		
 		this.actuadores_enums.add(unActuador);
-	}
+	}*/
 	
 	public int getId() {
 		return id;
@@ -159,6 +171,30 @@ public abstract class Regla {
 	public void setActivado(boolean activado) {
 		this.activado = activado;
 	}
+
+	
+	
+	
+	public List<ActuadorString> getActuadores_string() {
+		return actuadores_string;
+	}
+
+	public void setActuadores_string(List<ActuadorString> actuadores_string) {
+		this.actuadores_string = actuadores_string;
+	}
+
+	public void agregarActuadores_string(ActuadorString actuador){
+		
+		this.actuadores_string.add(actuador);
+	}
+
+	/*public List<ActuadoresEnum> getActuadores_enums() {
+		return actuadores_enums;
+	}*/
+
+	/*public void setActuadores_enums(List<ActuadoresEnum> actuadores_enums) {
+		this.actuadores_enums = actuadores_enums;
+	}*/
 
 	
 	

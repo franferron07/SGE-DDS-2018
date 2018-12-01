@@ -1,5 +1,6 @@
 package server;
 
+import repositorios.RepositorioActuadoresString;
 import repositorios.RepositorioDispositivosLista;
 import repositorios.RepositorioRegla;
 import repositorios.RepositorioUsuarios;
@@ -20,8 +21,10 @@ public class Server extends Thread implements spark.servlet.SparkApplication{
 
 	@Override
 	public void init() {
+		
 		RepositorioUsuarios.cargarUsuarios();
 		RepositorioDispositivosLista.cargarDispositiosLista();
+		RepositorioActuadoresString.cargarActuadoresEnum();
 		RepositorioRegla.cargarReglas();
 		
 		Spark.port(9000);		
