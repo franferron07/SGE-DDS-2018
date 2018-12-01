@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import repositorios.RepositorioUsuarios;
 import repositorios.RepositorioClientes;
+import repositorios.RepositorioDispositivosLista;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -34,6 +35,7 @@ public class AdministradorController {
 	
 	public RepositorioUsuarios repositorio_usuarios;
 	public RepositorioClientes repositorio_clientes;
+	public RepositorioDispositivosLista repositorio_dispositivos;
 	
 	public AdministradorController(){
 		repositorio_usuarios = new RepositorioUsuarios();
@@ -210,6 +212,14 @@ public class AdministradorController {
 	}
 	
 */
+	public ModelAndView mostrarDispositivos(Request request, Response response) {
+		Map<String, Object> model=new HashMap<>();
+
+		model.put("dispositivosDetalle", new ModelHelper().buscarTodos(DispositivoDetalle.class));
+		return new ModelAndView(model, "dispositivosDetalle.hbs");
+		
+	}
+	
 	
 	public ModelAndView crearDispositivo(Request request, Response response) {
 		
@@ -217,27 +227,37 @@ public class AdministradorController {
 		
 	}
 	
-	public ModelAndView crear(Request request, Response response) {
-		Map<String, Object> model=new HashMap<>();
-		
-		model.put("dispositivo", "Nuevo dispositivo");
-		return new ModelAndView(model, "dispositivoDetalle.hbs");
-	}
 	
 	public ModelAndView guardar(Request request, Response response) {
+		
+		List<NameValuePair> pairs = URLEncodedUtils.parse(request.body(), Charset.defaultCharset());
+
+        Map<String, String> params = toMap(pairs);
+        
+        System.out.println(params.get("nombre"));
+		
+		System.out.println(request.body());
+		
 		Map<String, Object> model=new HashMap<>();
 		
-		DispositivoDetalle nuevoDispositivo = new DispositivoDetalle();
-		nuevoDispositivo.setNombre(request.queryParams("nombre"));
-		nuevoDispositivo.setDescripcion(request.queryParams("descripcion"));
-		nuevoDispositivo.setHsMensualMinimo(Integer.parseInt(request.queryParams("hsMensualMinimo")));
-		nuevoDispositivo.setHsMensualMaximo(Integer.parseInt(request.queryParams("hsMensualMaximo")));
-		nuevoDispositivo.setConsumoKwHora(Float.parseFloat(request.queryParams("ConsumoKwHora")));
-		nuevoDispositivo.setEsEsencial(Boolean.parseBoolean(request.queryParams("esEsencial")));
-		nuevoDispositivo.setEsInteligente(Boolean.parseBoolean(request.queryParams("esInteligente")));
+		String id = Integer.toString(request.session().attribute("id"));
 		
-		model.put("dispositivos", 4);
-		return new ModelAndView(model, "dispositivoDetalle.hbs");
+		DispositivoDetalle nuevoDispositivo = new DispositivoDetalle();
+		nuevoDispositivo.setNombre(params.get("nombre"));
+		nuevoDispositivo.setDescripcion(params.get("descripcion"));
+		nuevoDispositivo.setHsMensualMinimo(Integer.parseInt(params.get("hsMensualMinimo")));
+		nuevoDispositivo.setHsMensualMaximo(Integer.parseInt(params.get("hsMensualMaximo")));
+		nuevoDispositivo.setConsumoKwHora(Float.parseFloat(params.get("consumoKwHora")));
+		nuevoDispositivo.setEsEsencial(Boolean.parseBoolean(params.get("esEsencial")));
+		nuevoDispositivo.setEsInteligente(Boolean.parseBoolean(params.get("esInteligente")));
+		nuevoDispositivo.setEsBajoConsumo(Boolean.parseBoolean(params.get("consumo")));
+		
+		repositorio_dispositivos.agregarDipositivoDetalle(nuevoDispositivo);
+		
+		System.out.println(request.queryParams("nombre"));
+		
+		model.put("dispositivosDetalle", new ModelHelper().buscarTodos(DispositivoDetalle.class));
+		return new ModelAndView(model, "dispositivosDetalle.hbs");
 	}
 	
 	

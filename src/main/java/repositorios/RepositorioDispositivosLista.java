@@ -32,6 +32,10 @@ public class RepositorioDispositivosLista {
 		
 	}
 	
+	public static void agregarDipositivoDetalle(DispositivoDetalle unDispositivoDetalle) {
+		model.agregar(unDispositivoDetalle);
+	}
+	
 	
 	
 	public static void cargarDispositiosLista(){
