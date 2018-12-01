@@ -19,7 +19,7 @@
 	      <label for="adaptador">Actuadores</label>
         <select class="mdb-select md-form" multiple="multiple" id="actuadores" name="actuadores">
           <option value="-1">(Seleccionar)</option>
-          {{#each regla.actuadores}}
+          {{#each regla.actuadores_string}}
             <option value="{{id}}">{{nombre}}</option>
           {{/each}} 
         </select>
@@ -46,5 +46,3 @@
   	 </form>
 
  </div>
-
- <!--<script type="text/javascript" src="/js/modalRegla.js"></script>-->
