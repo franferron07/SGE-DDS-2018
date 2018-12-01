@@ -84,10 +84,9 @@ private static HandlebarsTemplateEngine engine;
 		
 		/* ADMINISTRADOR */
 	    Spark.get("/sge/administrador/dispositivo" , administradorController::crearDispositivo, Router.engine);
-	    Spark.get("/sge/administrador/dispositivo", administradorController::crear, Router.engine);
-		Spark.post("/sge/administrador/dispositivo", administradorController::guardar, Router.engine);
+		Spark.post("/sge/administrador/guardarDispositivoDetalle", administradorController::guardar, Router.engine);
+		Spark.get("/sge/administrador/mostrarDispositivos", administradorController::mostrarDispositivos, Router.engine);
 		
-		//Reportes
 		Spark.get("/sge/reportes", administradorController::reportes, Router.engine);
 		Spark.post("/api/reportes", administradorController::reportes_results, Router.engine);
 

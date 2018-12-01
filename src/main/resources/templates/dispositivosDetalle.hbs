@@ -1,0 +1,42 @@
+﻿{{#partial "contenido"}}
+
+ <!--Main Layout-->
+    <main>
+         <div class="container mt-5 pt-5">
+
+
+            <table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th scope="col">Id</th>	
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Descripción</th>
+			      <th scope="col">Horas mensuales mínimas</th>
+			      <th scope="col">Horas mensuales maximas</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{{#each dispositivosDetalle}}
+
+				    <tr>
+				      <td>{{id}}</td>
+				      <td>{{nombre}}</td>
+				      <td>{{descripcion}}</td>
+				      <td>{{hsMensualMinimo}}</td>
+				      <td>{{hsMensualMaximo}}</td>
+				    </tr>
+
+				{{/each}}
+
+			  </tbody>
+			</table>
+
+
+        </div>
+    </main>
+
+{{/partial}}
+
+{{>layoutAdministrador.hbs}}
+
+
