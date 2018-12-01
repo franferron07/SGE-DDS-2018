@@ -12,7 +12,7 @@ public class ActuadorString {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@Column(name="nombre")
 	private String nombre;

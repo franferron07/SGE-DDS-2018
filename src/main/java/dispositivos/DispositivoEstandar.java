@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 public class DispositivoEstandar extends DispositivoUsuario {
 	
 	@Column(name = "horasPorDia")
-	private float horasPorDia; //horas encendido por dia
+	private Float horasPorDia; //horas encendido por dia
 	
 
 	//constructor

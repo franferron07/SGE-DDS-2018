@@ -26,7 +26,7 @@ public abstract class DispositivoUsuario {
 	
 	@Id
 	@GeneratedValue
-	public int id;
+	public Integer id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="dispositivoDetalle_id" , referencedColumnName="id")
