@@ -54,7 +54,7 @@ public abstract class Modo {
     	this.consumos = new ArrayList<Consumo>();
 		this.dispositivo_inteligente = di;
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss");
 		fechaHoraInicio_s= fechaHoraInicio.format(formatter);
 	}
 	
@@ -99,9 +99,10 @@ public abstract class Modo {
 	
 	//parsea fecha
 	public LocalDateTime parsearFecha( String fecha_s ){
-		
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		return LocalDateTime.parse(fecha_s, formatter);
+		System.out.println("fecha a parsear");
+		System.out.println(fecha_s);
+	    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		return LocalDateTime.parse(fecha_s);
 	}
 	
 	
@@ -150,7 +151,7 @@ public abstract class Modo {
 		this.fechaHoraFin = fechaHoraFin;
 		
 		/* seteo hora parseada final */
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss");
 		fechaHoraFin_s= fechaHoraFin.format(formatter);
 		
 	}

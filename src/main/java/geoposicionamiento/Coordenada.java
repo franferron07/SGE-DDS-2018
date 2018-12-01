@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Coordenada {
 	@Id
 	@GeneratedValue
-	public int id;
+	public Integer id;
 	
 	@Column(name="longitud")
 	public double longitud;//x
@@ -29,7 +29,7 @@ public class Coordenada {
 	public Ubicable ubicable;
 	
 	@Column(name="orden")
-	public int orden;
+	public Integer orden;
 	
 	public Coordenada() {
 		
