@@ -30,13 +30,18 @@ public class MapController {
 		List <ZonaGeografica> zonas = model.buscarTodos(ZonaGeografica.class);
 		List <ZonaJson> zonajson = new ArrayList<ZonaJson>();
 		List<Coordenada> coordenadas = new ArrayList<Coordenada>();
-		
+		/*
 		for (ZonaGeografica zona : zonas) {
 			for (Coordenada coordenada : zona.getCoordenadas()) {
 				coordenadas.add(new Coordenada( coordenada.getLongitud(),coordenada.getLatitud() ));
 			}
 			zonajson.add(new ZonaJson(zona.getId(), coordenadas, zona.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
 			coordenadas = new ArrayList<Coordenada>();
+		}
+		*/
+		
+		for (ZonaGeografica zona : zonas) {
+			zonajson.add(new ZonaJson(zona.getId(), zona.getCoordenadas_json(), zona.consumoTotal(LocalDateTime.now().minusMonths(1),LocalDateTime.now()) ));
 		}
 		
 		GsonBuilder b = new GsonBuilder();

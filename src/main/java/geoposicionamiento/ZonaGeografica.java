@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,8 @@ public class ZonaGeografica{
 	@JoinColumn(name = "ubicable_id")
 	public Ubicable ubicable = new Ubicable();
 	
-	
+	@Column(name="coordenadas")
+	public String coordenadas_json;
 	//constructor
 	public ZonaGeografica( ){
 		transformadores = new ArrayList<Transformador>();
@@ -137,6 +139,14 @@ public class ZonaGeografica{
 
 	public void setUbicable(Ubicable ubicable) {
 		this.ubicable = ubicable;
+	}
+
+	public String getCoordenadas_json() {
+		return coordenadas_json;
+	}
+
+	public void setCoordenadas_json(String coordenadas_json) {
+		this.coordenadas_json = coordenadas_json;
 	}
 
 	

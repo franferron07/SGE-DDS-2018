@@ -6,13 +6,13 @@ import geoposicionamiento.Coordenada;
 
 public class ZonaJson {
 
-	public ZonaJson(int id, List<Coordenada> coordenadas, double consumo) {
+	public ZonaJson(int id, String coordenadas, double consumo) {
 		super();
 		this.id = id;
 		this.coordenadas = coordenadas;
 		this.consumo = consumo;
 	}
 	private int id;
-	private List<Coordenada> coordenadas;
+	private String coordenadas;
 	private double consumo;
 }

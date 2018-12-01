@@ -127,14 +127,16 @@ $( document ).ready(function() {
 
 
 		console.log("displayZonas");
-		var coordenadas = [];
 		//iter
 		$.each(data, function() {
 			console.log(this.id);
+			/*
 			$.each(this.coordenadas,function(){
 				coordenadas.push([this.longitud,this.latitud]);
 			});
-
+			*/
+			var coordenadas = JSON.parse(this.coordenadas);
+			coordenadas.forEach(function(item,index){item.reverse();});
 		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>").bringToBack();
 			function styleColor(consumo){
 				switch(true){
@@ -152,7 +154,7 @@ $( document ).ready(function() {
 						break;
 				}
 			}
-			coordenadas = [];
+
 		});
 
 	}
