@@ -1,10 +1,10 @@
-var RED_ZONE=600;
-var YELLOW_ZONE=400;
-var GREEN_ZONE=200;
+var RED_ZONE=30;
+var YELLOW_ZONE=20;
+var GREEN_ZONE=10;
 
-var RED_MARKER=600;
-var YELLOW_MARKER=400;
-var GREEN_MARKER=200;
+var RED_MARKER=30;
+var YELLOW_MARKER=20;
+var GREEN_MARKER=10;
 
 $( document ).ready(function() {
 
@@ -152,6 +152,7 @@ $( document ).ready(function() {
 						break;
 				}
 			}
+			coordenadas = [];
 		});
 
 	}
