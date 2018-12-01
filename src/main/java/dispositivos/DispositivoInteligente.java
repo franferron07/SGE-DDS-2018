@@ -40,9 +40,6 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	@JoinColumn( name="actuador_id" , referencedColumnName="id" )
 	private ActuadoresEnum accionaAutomaticaOptimizadorEnum; //guardara el enum , sirve para obtenerlo de la base y luego instanciarlo al inicio
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dispositivo_id")
-	private DispositivoUsuario di_padre; //relacion de hijo a padre
 	
 	/*
 	@ManyToMany 

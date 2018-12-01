@@ -17,7 +17,7 @@ public enum ActuadoresEnum {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@Column(name="valorEnum")
 	private String valorEnum;
