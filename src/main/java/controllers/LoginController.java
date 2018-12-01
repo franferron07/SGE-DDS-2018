@@ -27,6 +27,25 @@ public class LoginController {
 		return new ModelAndView(null, "login.hbs");
 	}
 	
+	public ModelAndView home(Request request, Response response) {
+		Map<String, Object> model=new HashMap<>();
+		
+		Integer id = request.session().attribute("id");
+		String salida = "";
+		
+		Usuario usuario = RepositorioUsuarios.buscarUsuario(id);
+
+		if( usuario.getClass() == Cliente.class ){
+			Cliente cli = (Cliente) usuario ;
+			salida="inicioCliente.hbs";
+		}
+		else{
+			salida="inicioAdministrador.hbs";
+		}
+		model.put("usuario", usuario);
+		return new ModelAndView(model, salida);
+		
+	}
 	
 	public ModelAndView loguear(Request request, Response response) {
 		
@@ -45,15 +64,12 @@ public class LoginController {
 		if(  password.equals( usuario.getPassword()  ) ){
 			//login correcto verifico si es cliente o admin
 			
-			int validador= 0;
 			String salida="";
 			if( usuario.getClass() == Cliente.class ){
 				Cliente cli = (Cliente) usuario ;
-				validador= 1;
 				salida="inicioCliente.hbs";
 			}
 			else{
-				validador= 0;
 				salida="inicioAdministrador.hbs";
 			}
 			
@@ -61,7 +77,6 @@ public class LoginController {
 			
 			request.session(true);              
 			request.session().attribute("id",usuario.getId());
-			request.session().attribute("tipo",validador); //tipo a cliente que recibe el layout. 1 es cliente . 0 Administrador
 			
 			return new ModelAndView(model, salida);
 			

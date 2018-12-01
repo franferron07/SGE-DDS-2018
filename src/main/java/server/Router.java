@@ -50,6 +50,7 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/login", loginController::ver, Router.engine);
 		Spark.post("/login",loginController::loguear,engine);
 		Spark.get("/logout",loginController::logout,engine);
+		Spark.get("/sge/home", loginController::home, engine);
 
 		/* MAPA */
 		Spark.get("/mapa", mapController::drawMap, Router.engine);
