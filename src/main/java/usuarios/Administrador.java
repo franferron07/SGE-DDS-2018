@@ -19,8 +19,6 @@ public class Administrador extends Usuario {
 
 	@Column(name="fechaAltaSistema")
 	private Date fechaAltaSistema;
-	@Column(name="identificadorSistema")
-	private int identificadorSistema;
 
 	public Administrador() {
 		
@@ -31,14 +29,6 @@ public class Administrador extends Usuario {
 		return getDiffDates(fechaAltaSistema,new Date(),1);
 	}
 
-
-	public int getIdentificadorSistema() {
-		return identificadorSistema;
-	}
-
-	public void setIdentificadorSistema(int identificadorSistema) {
-		this.identificadorSistema = identificadorSistema;
-	}
 	
 	private synchronized long getDiffDates(Date fechaInicio, Date fechaFin, int tipo) {
 		// Fecha inicio
