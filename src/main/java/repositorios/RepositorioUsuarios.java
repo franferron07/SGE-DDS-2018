@@ -2,7 +2,7 @@ package repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 import dispositivos.DispositivoUsuario;
 import models.UsuarioModel;
@@ -30,7 +30,13 @@ public class RepositorioUsuarios {
 	
 	public static  Usuario buscarUsuario(String username){
 		
-		return usuarios.stream().filter( u -> username.equals( u.getUsername())).findFirst().get();
+		Optional<Usuario> optUsers= usuarios.stream().filter( u -> username.equals( u.getUsername())).findFirst();
+		Boolean isPresent = optUsers.isPresent();
+		if (isPresent) {
+			return optUsers.get();
+		}else {
+			return null;
+		}
 		
 	}
 	

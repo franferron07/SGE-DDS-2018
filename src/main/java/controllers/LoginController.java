@@ -57,6 +57,7 @@ public class LoginController {
 		
 		if( usuario == null ){
 			mensaje="El nombre de usuario es incorrecto";
+			model.put("mensaje", mensaje);
 			return new ModelAndView(model, "login.hbs");
 		}
 		
