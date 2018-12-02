@@ -26,7 +26,11 @@
 				      {{#if detalle.esInteligente}}
 				      	<td>Inteligente</td>
 				      {{else}}
-					  	<td>Estandar</td>
+					      {{#if esAdaptado}}
+					      	<td>Adaptado</td>
+					      {{else}}
+						  	<td>Estandar</td>
+	  					  {{/if}}
   					  {{/if}}
 				      <td>{{detalle.nombre}}</td>
 				      <td>{{detalle.descripcion}}</td>

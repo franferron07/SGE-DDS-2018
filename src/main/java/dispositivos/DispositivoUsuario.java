@@ -45,7 +45,8 @@ public abstract class DispositivoUsuario {
     @JoinColumn
 	protected Cliente cliente;
 	
-	
+	@Transient
+	private boolean esAdaptado;
 	
 	public DispositivoUsuario(){
 		
@@ -160,6 +161,14 @@ public abstract class DispositivoUsuario {
 	}
 	public  double getHsMensualMaximo(){
 		return this.detalle.getHsMensualMaximo();
+	}
+
+	public boolean isEsAdaptado() {
+		return esAdaptado;
+	}
+
+	public void setEsAdaptado(boolean esAdaptado) {
+		this.esAdaptado = esAdaptado;
 	}
 
 

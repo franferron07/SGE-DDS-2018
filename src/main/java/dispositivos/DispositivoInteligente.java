@@ -46,6 +46,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 	private ActuadorString accionaAutomaticaOptimizadorString;
 	
 	
+	
 	/*
 	@ManyToMany 
 	private List<Regla> reglas;
@@ -67,6 +68,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.logModos.add(new ModoApagado( this ));
 		this.detalle = disp_detalle;
 	}
+    
     
     public DispositivoInteligente(){
     	

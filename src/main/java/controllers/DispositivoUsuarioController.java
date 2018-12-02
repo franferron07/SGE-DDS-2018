@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dispositivos.DispositivoDetalle;
@@ -30,7 +31,15 @@ public class DispositivoUsuarioController {
 		int id = request.session().attribute("id");
 		
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
-		model.put("dispositivos", cliente.getDispositivos());
+		List<DispositivoUsuario> dispositivos = cliente.getDispositivos();
+		
+		
+		for (DispositivoUsuario dispositivo : dispositivos) {
+			System.out.println(dispositivo.getId());
+			System.out.println(dispositivo instanceof DispositivoInteligente);
+			dispositivo.setEsAdaptado(dispositivo instanceof DispositivoInteligente);
+		}
+		model.put("dispositivos", dispositivos);
 		return new ModelAndView(model, "dispositivos.hbs");
 	}
 	
@@ -160,8 +169,8 @@ public class DispositivoUsuarioController {
 
 		}
 
-		
-		model.put("dispositivos", cliente.getDispositivos());
+		response.redirect("/sge/cliente/dispositivos");
+		//model.put("dispositivos", cliente.getDispositivos());
 		return new ModelAndView(model, "dispositivos.hbs");
 	}
 	

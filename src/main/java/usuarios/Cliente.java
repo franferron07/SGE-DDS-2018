@@ -13,6 +13,7 @@ import dispositivos.DispositivoUsuario;
 import geoposicionamiento.Coordenada;
 import geoposicionamiento.Transformador;
 import optimizacion_horas.Optimizador;
+import repositorios.RepositorioUsuarios;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -119,10 +120,10 @@ public class Cliente extends Usuario {
 		
 		//agrego disposiutivo estandar en inteligente y lo agrego a la lista.
 		dispositivoInteligente.convertirDispositivoEstandar( dispositivoEstandar );
-		agregarDispositivo(dispositivoInteligente);
+		RepositorioUsuarios.agregar_dispositivo_usuario( this.getId() , dispositivoInteligente );
 		quitarDispositivo(dispositivoEstandar);
 		
-		puntaje+=10;
+		puntaje-=5;
 
 	}
 	
@@ -152,6 +153,8 @@ public class Cliente extends Usuario {
 		
 		dispositivos.add(dispositivo);
 		dispositivo.setCliente(this);
+		
+		
 	}
 
 	
