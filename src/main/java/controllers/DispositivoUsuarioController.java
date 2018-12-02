@@ -191,6 +191,7 @@ public class DispositivoUsuarioController {
 		modelusuario.modificar(dispositivo);
 		cliente.quitarDispositivo(dispositivo);
 		
+		response.redirect("/sge/cliente/dispositivos");
 		model.put("dispositivos", cliente.getDispositivos());
 		return new ModelAndView(model, "dispositivos.hbs");
 	}

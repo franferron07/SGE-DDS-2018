@@ -67,9 +67,6 @@ public class ClienteController {
 		javax.persistence.Query q2 = ModelHelper.getEntityManager().createNativeQuery(queryReglas,Regla.class);
 		List<Regla> reglas = q2.getResultList();
 		model.put("reglas", reglas);
-		
-		
-		
 		return new ModelAndView(model, "dashboard_hogar.hbs");
 	}
 	

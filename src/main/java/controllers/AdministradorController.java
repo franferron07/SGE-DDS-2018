@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import repositorios.RepositorioUsuarios;
-import repositorios.RepositorioClientes;
 import repositorios.RepositorioDispositivosLista;
 import spark.ModelAndView;
 import spark.Request;
@@ -33,12 +31,12 @@ import models.TransformadorModel;
 
 public class AdministradorController {
 	
-	public RepositorioUsuarios repositorio_usuarios;
-	public RepositorioClientes repositorio_clientes;
+
+
 	public RepositorioDispositivosLista repositorio_dispositivos;
 	
 	public AdministradorController(){
-		repositorio_usuarios = new RepositorioUsuarios();
+
 	}
 	
 	public ModelAndView reportes (Request request,Response response) {
@@ -191,14 +189,7 @@ public class AdministradorController {
 	}
 	
 
-	public ModelAndView mostrar(Request request, Response response, boolean permiteEdicion) {
-		Map<String, Object> model=new HashMap<>();
-		int id = Integer.parseInt(request.params("id"));
-		Usuario usuario = repositorio_usuarios.buscarUsuario(id);
-		model.put("usuario", usuario);
-		model.put("permiteEdicion", permiteEdicion);
-		return new ModelAndView(model, "modalUsuario.hbs");
-}
+
 	
 /*
 
