@@ -128,7 +128,7 @@ public class AdministradorController {
 		        
 		        String queryConsumoPromedioDI = "SELECT IFNULL(AVG(c.consumo), 0) AS consumo_inteligentes"+
 		        										 " FROM dispositivo d"+
-		        										 " LEFT JOIN dispositivointeligente di ON di.id = d.id"+
+		        										 " LEFT JOIN DispositivoInteligente di ON di.id = d.id"+
 		        										 " LEFT JOIN modo m ON m.dispositivo_inteligente_id = d.id"+
 		        										 " LEFT JOIN consumo c ON c.modo_id = m.id"+
 		        										 " WHERE c.fechaInicio >= '"+ desde +
@@ -136,7 +136,7 @@ public class AdministradorController {
 		        										 
 		        String queryConsumoPromedioDE = "SELECT IFNULL(AVG(DATEDIFF('" + hasta + "', '" + desde + "') * de.horasPorDia), 0) AS consumo_estandar"+
 		        										 " FROM dispositivo d"+
-		        										 " LEFT JOIN dispositivoestandar de ON de.id = d.id";								 
+		        										 " LEFT JOIN DispositivoEstandar de ON de.id = d.id";								 
 		        
 		        
 		        
