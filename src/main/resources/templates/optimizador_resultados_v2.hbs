@@ -3,32 +3,28 @@
 
     <!--Main Layout-->
     <main>
-        <!--carga de archivo-->
-        <input type="file" id="file-input" />
-        <h3>Contenido del archivo:</h3>
-        <pre id="contenido-archivo"></pre>
-        <!--fin carga de archivo-->
+
 
         <div class="container mt-5 pt-5">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <!--<th scope="col">Usuario ID</th>
-                    <th scope="col">Usuario Nombre</th>-->
-                    <th scope="col"> Se Paso de Consumo</th>
                     <th scope="col">Dispositivos</th>
-                    <th scope="col">Horas Maximas que debe usar cada dispositivo para mantener eficiencia</th>
+                    <th scope="col"> Se Paso de Consumo</th>
+                    <th scope="col">Horas Maximas de uso para mantener eficiencia</th>
                    <!-- <th scope="col">Boton De Deteccion de Dispositivo</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 {{#each resultados}}
                     <tr>
-                        <!--<td>{{user_id}}</td>
-                        <td>{{user_name}}</td>-->
-                        <td>{{se_paso_de_cosumo}}</td>
                         <td>{{dispositivo_id}}</td>
-                        <td>          {{horasQuePuedeConsumir}} hs</td>
+                        {{#if se_paso_de_cosumo}}
+                           <td>Si</td>
+                        {{else}}
+                           <td>No</td>
+                        {{/if}}
+                        <td>{{horasQuePuedeConsumir}} hs</td>
                         <td>-</td>
                     </tr>
                 {{/each}}
