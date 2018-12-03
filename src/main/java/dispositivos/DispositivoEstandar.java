@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.joda.time.Days;
+import java.time.temporal.ChronoUnit;
+
 @Entity
 @DiscriminatorValue("estandar")
 public class DispositivoEstandar extends DispositivoUsuario {
@@ -43,6 +46,8 @@ public class DispositivoEstandar extends DispositivoUsuario {
 		int dias;
 		dias= periodoEnDias( desde , hasta );
 		
+
+
 		return consumoEnElDia() * dias ; 
 	}
 	
@@ -52,7 +57,14 @@ public class DispositivoEstandar extends DispositivoUsuario {
 	public int periodoEnDias( LocalDateTime desde , LocalDateTime hasta ){
 		
 		Period periodo= Period.between(desde.toLocalDate(), hasta.toLocalDate());
-		return periodo.getDays();
+		
+		System.out.println("Consumo desde la funcion PeriodoEnDias");
+		
+		Integer daysBetween = (int) java.time.temporal.ChronoUnit.DAYS.between(desde.toLocalDate(), hasta.toLocalDate());
+		
+		System.out.println(daysBetween);
+		
+		return daysBetween;
 		
 	}
 	

@@ -99,8 +99,6 @@ public abstract class Modo {
 	
 	//parsea fecha
 	public LocalDateTime parsearFecha( String fecha_s ){
-		System.out.println("fecha a parsear");
-		System.out.println(fecha_s);
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		return LocalDateTime.parse(fecha_s, formatter);
 	}

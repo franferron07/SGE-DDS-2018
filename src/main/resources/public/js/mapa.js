@@ -1,10 +1,10 @@
-var RED_ZONE=30;
-var YELLOW_ZONE=20;
-var GREEN_ZONE=10;
+var RED_ZONE=190;
+var YELLOW_ZONE=150;
+var GREEN_ZONE=80;
 
-var RED_MARKER=30;
-var YELLOW_MARKER=20;
-var GREEN_MARKER=10;
+var RED_MARKER=190;
+var YELLOW_MARKER=150;
+var GREEN_MARKER=80;
 
 $( document ).ready(function() {
 
