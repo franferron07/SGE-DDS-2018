@@ -12,6 +12,7 @@ import java.util.Map;
 import dispositivos.Consumo;
 import models.ModelHelper;
 import reglasYActuadores.Regla;
+import repositorios.RepositorioRegla;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
@@ -55,7 +56,7 @@ public class ClienteController {
 		//Query DB for dispositivos
 		Cliente cliente = (Cliente) RepositorioUsuarios.buscarUsuario(id);
 		model.put("dispositivos", cliente.getDispositivos());
-		
+		/*
 		//Query DB for reglas
 		String queryReglas = "SELECT r.* from usuario u "+
 							"join dispositivo d on d.cliente_id=u.id "+
@@ -65,8 +66,11 @@ public class ClienteController {
 							"where u.id="+Integer.toString(id);
 				
 		javax.persistence.Query q2 = ModelHelper.getEntityManager().createNativeQuery(queryReglas,Regla.class);
-		List<Regla> reglas = q2.getResultList();
-		model.put("reglas", reglas);
+		List<Regla> reglas = q2.getResultList();*/
+		
+		List<Regla> reglas2 = RepositorioRegla.filtrarReglsaCliente(id);
+		
+		model.put("reglas", reglas2);
 		return new ModelAndView(model, "dashboard_hogar.hbs");
 	}
 	
