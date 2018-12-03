@@ -39,7 +39,7 @@ public class ReglaController {
 		Map<String, Object> model=new HashMap<>();	
 		int id = request.session().attribute("id");
 		
-		model.put("reglas", RepositorioRegla.getReglas());
+		model.put("reglas", RepositorioRegla.filtrarReglsaCliente(id) );
 		return new ModelAndView(model, "reglas.hbs");
 	}
 	

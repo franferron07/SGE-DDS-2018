@@ -51,20 +51,30 @@
 
      $('#crear').click(function(e){
         
-        
-        //realizo validacion de campos numericos
-        var form= $('#CreateForm');
-         
-        
-        var items = [];
-        var objetoserializado;
+        //si no hay dispo no dejo avanzar
+        console.log($('#dispositivos_string').val());
+        if(  $('#dispositivos_string').val() != "" ){
 
-        items=serializarCondiciones();
-        
-        objetoserializado = JSON.stringify(items);
-        console.log(objetoserializado);
-        //se guarda en el atributo del formulario
-        $('#export').val(objetoserializado);      
+
+            var form= $('#CreateForm');
+             
+            
+            var items = [];
+            var objetoserializado;
+
+            items=serializarCondiciones();
+            
+            objetoserializado = JSON.stringify(items);
+            console.log(objetoserializado);
+            //se guarda en el atributo del formulario
+            $('#export').val(objetoserializado);
+
+        }
+        else
+        {
+            alert( "Debe crear la regla con al menos un dispositivo" );
+            return false;
+        }      
 
       });
 

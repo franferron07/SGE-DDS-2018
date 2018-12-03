@@ -2,10 +2,14 @@ package repositorios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import dispositivos.Modo;
 import models.ModelHelper;
 import models.UsuarioModel;
 import reglasYActuadores.Regla;
+import usuarios.Cliente;
 
 
 public class RepositorioRegla {
@@ -34,6 +38,20 @@ public class RepositorioRegla {
 		reglas.add(regla);
 	}
 	
+	public static List<Regla> filtrarReglsaCliente( int id_cli ){
+		
+		try{
+			
+			Stream<Regla> reglasFilt = reglas.stream().filter( r -> r.getDispositivos().get(0).getCliente().id == id_cli );
+			return reglasFilt.collect(Collectors.toList());	
+			
+		}catch(Exception  e){
+			//si algo falla listo todas
+			return getReglas();
+		}
+		
+	}
+	
 	//getter y setters
 	public static List<Regla> getReglas() {
 		return reglas;
@@ -47,6 +65,7 @@ public class RepositorioRegla {
 		
 		reglas.remove(regla);
 	}
+	
 	
 	
 	
