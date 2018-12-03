@@ -61,7 +61,7 @@ $( document ).ready(function() {
 		$.each(data, function() {
 			console.log(this.id);
 
-		  	L.circleMarker([this.coordenadas.longitud,this.coordenadas.latitud],{radius:styleRadius(this.consumo),color: styleCMarker(this.consumo)}).addTo(mapa).bindPopup("<p>Transformador "+"id:"+this.id+"</br>"+"Coordenadas: "+this.coordenadas.latitud+", "+this.coordenadas.longitud+"</br>"+"Clientes:"+this.clientes+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>").bringToFront();
+		  	L.circleMarker([this.coordenadas.longitud,this.coordenadas.latitud],{radius:styleRadius(this.consumo),color: styleCMarker(this.consumo)}).addTo(mapa).bindPopup("<p>Transformador "+"id:"+this.id+"</br>"+"Coordenadas: "+this.coordenadas.latitud+", "+this.coordenadas.longitud+"</br>"+"Clientes:"+this.clientes+"</br>"+"Consumo último mes:"+this.consumo.toFixed(2)+"KW"+"</br>"+"</p>").bringToFront();
 		
 			function styleRadius(consumo){
 				switch(true){
@@ -138,7 +138,7 @@ $( document ).ready(function() {
 			*/
 			var coordenadas = JSON.parse(this.coordenadas);
 			coordenadas.forEach(function(item,index){item.reverse();});
-		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo+"KW"+"</br>"+"</p>").bringToBack();
+		  	L.polygon(coordenadas,{color: styleColor(this.consumo)}).addTo(mapa).bindPopup("<p>Zona "+"id:"+this.id+"</br>"+"Consumo último mes:"+this.consumo.toFixed(2)+"KW"+"</br>"+"</p>").bringToBack();
 			function styleColor(consumo){
 				switch(true){
 					case (consumo>=RED_ZONE):
