@@ -19,11 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OptimizadorController {
-    private    Cliente cliente_seleccionado=new Cliente();
-    private ArrayList<DispositivoUsuario> dispositivos=new ArrayList<DispositivoUsuario>();
-    private ArrayList<ResultadoHora> resultados=new ArrayList<ResultadoHora>();
+    private    Cliente cliente_seleccionado;
+    private ArrayList<ResultadoHora> resultados;
     private ModelHelper modelHelper =new ModelHelper();
-    private Optimizador optimizador = new Optimizador();
+    private Optimizador optimizador ;
 
     private Cliente buscarClientePorID(int id_usuario){
         Cliente user = this.modelHelper.buscar(Cliente.class,id_usuario);
@@ -46,11 +45,17 @@ public class OptimizadorController {
         return new ModelAndView(model, "optimizador_resultados_v2.hbs");
     }*/
     public ModelAndView mostrarResultadosOptimizador(Request request, Response res ){
+    	
+    	optimizador = new Optimizador();
+    	resultados = new ArrayList<ResultadoHora>();
+        
+    	
         Map<String, Object> model=new HashMap<>();
         int idUserLoggeado = request.session().attribute("id");
         //dispositivos=(ArrayList<DispositivoUsuario>) userLoggeado.getDispositivos();
         this.cliente_seleccionado=(Cliente)RepositorioUsuarios.buscarUsuario(idUserLoggeado);
 
+        
         //optimizador.cargarDispositivosEsenciales();
 
         //// optimizador.cargarDispositivos(RepositorioDispositivosLista.jsonToArrayList(""));
