@@ -60,7 +60,7 @@ public abstract class DispositivoUsuario {
 	//Me da el consumo en un determinado periodo de tiempo. 
 	public abstract float consumoPeriodo( LocalDateTime desde , LocalDateTime hasta );
 	
-	public abstract boolean esInteligente(); // esEsencial() lo reemplaza para el simplex
+	//public abstract boolean esInteligente(); // esEsencial() lo reemplaza para el simplex
 
 	//Me da horas de encendido en un periodo de tiempo
 	public abstract double horasDeUso( LocalDateTime desde, LocalDateTime hasta);
@@ -162,6 +162,7 @@ public abstract class DispositivoUsuario {
 	public  double getHsMensualMaximo(){
 		return this.detalle.getHsMensualMaximo();
 	}
+	public  boolean esInteligente(){return this.detalle.isEsInteligente();}
 
 	public boolean isEsAdaptado() {
 		return esAdaptado;

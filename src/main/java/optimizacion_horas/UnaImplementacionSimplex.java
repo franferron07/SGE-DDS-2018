@@ -31,6 +31,12 @@ public class UnaImplementacionSimplex implements Implementador{
 			this.dispositivos.add(i, dispositivos__[i]);
 		}
 	}
+	public void cargarDispositivos(ArrayList<DispositivoUsuario> _dispositivoUsuarios_){
+		this.dispositivos.addAll(_dispositivoUsuarios_);
+	}
+	public void cargarDispositivos(Cliente cliente){
+		this.dispositivos.addAll(cliente.getDispositivos());
+	}
 
 	@Override
 	public void maximizar() {

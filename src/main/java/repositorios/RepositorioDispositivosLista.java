@@ -1,5 +1,6 @@
 package repositorios;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +132,28 @@ public class RepositorioDispositivosLista {
 			System.out.println("jsonToArrayList()->   "+unDispositivo);//se puede borrar
 		}
 		return unosDispositivos;
+	}
+	public static void cargaDeDispositivosDetalleAUser(ArrayList<DispositivoDetalle> lista_, Cliente cliente_){//agregando a un cliente
+		for (int i = 0; i < lista_.size(); i++) {
+			DispositivoUsuario unDispositivoDelCliente = new DispositivoUsuario() {
+				@Override
+				public float consumoPeriodo(LocalDateTime desde, LocalDateTime hasta) {
+					return 0;
+				}
+
+				@Override
+				public double horasDeUso(LocalDateTime desde, LocalDateTime hasta) {
+					return 0;
+				}
+
+				@Override
+				public String toString() {
+					return "nombre: "+this.getDetalle().getNombre()+" ,descripcion: "+this.getDetalle().getDescripcion()+" ,consumo: "+this.getConsumoKwHora()+" , kwMinimo: "+this.getHsMensualMinimo()+" y kWMaximo:  "+this.getHsMensualMaximo();
+				}
+			};
+			unDispositivoDelCliente.setDispositivoLista(lista_.get(i));
+			cliente_.agregarDispositivo(unDispositivoDelCliente);
+		}
 	}
 	
 }

@@ -98,7 +98,7 @@ private static HandlebarsTemplateEngine engine;
 		Spark.get("/api/consumo_ultimo_mes/:id", (req, res) -> cliController.consumoUltimoMes(req, res));
 		
 		
-		Spark.get("/sge/optimizador",optimizadorController::mostrarResultadosOptimizador,Router.engine);
+		Spark.get("/sge/simplex",optimizadorController::mostrarResultadosOptimizador,Router.engine);
 
 
 	}

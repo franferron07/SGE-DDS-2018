@@ -11,6 +11,8 @@ public interface Implementador {
 	public void maximizar() ;
 	public void analisarResultados( LocalDateTime desde , LocalDateTime hasta );
 	public void cargarDispositivos(DispositivoUsuario... _dispositivoUsuarios_);
+	public void cargarDispositivos(ArrayList<DispositivoUsuario>_dispositivoUsuarios_);
+	public void cargarDispositivos(Cliente cliente);
 	public void setConsumoMaximoDeEnergia(double consumoMaximoDeEnergia) ;
 	public int cantidadDeDispositivos();
 	public ArrayList<ResultadoHora> getHorasDeCadaDispositivo();

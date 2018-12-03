@@ -7,9 +7,6 @@ public class ResultadoHora {
 		this.dispositivo_id=dispositivo;
 		this.horasQuePuedeConsumir=horas;
 	}
-	public String getDispositivo() {
-		return dispositivo_id;
-	}
 	public void setDispositivo(String dispositivo) {
 		this.dispositivo_id = dispositivo;
 	}
@@ -19,6 +16,14 @@ public class ResultadoHora {
 	public void setHorasQuePuedeConsumir(double horasQuePuedeConsumir) {
 		this.horasQuePuedeConsumir = horasQuePuedeConsumir;
 	}
-	
-	
+
+	public String getDispositivo_id() {
+		return dispositivo_id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "ID: "+this.dispositivo_id+" , horas: "+this.horasQuePuedeConsumir;
+	}
 }
