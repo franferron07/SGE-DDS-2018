@@ -1,8 +1,8 @@
-var RED_ZONE=190;
+var RED_ZONE=230;
 var YELLOW_ZONE=150;
 var GREEN_ZONE=80;
 
-var RED_MARKER=190;
+var RED_MARKER=230;
 var YELLOW_MARKER=150;
 var GREEN_MARKER=80;
 
@@ -13,7 +13,7 @@ $( document ).ready(function() {
             });
 
     $(document).ajaxComplete(function () {
-        $(".loading").hide();
+        //$(".loading").hide();
     });
 
 	mapa = L.map('mapa', {
@@ -116,6 +116,7 @@ $( document ).ready(function() {
 			success: function(data) {
 				console.log("success");
 				console.log(data);
+				$(".loading").hide();
 				displayZonas(data);
 			},
 			type: 'GET'
