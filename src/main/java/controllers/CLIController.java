@@ -153,7 +153,7 @@ public class CLIController {
 		
 		double consumo_ultimo_mes;
 		consumo_ultimo_mes = cliente.consumoEnUnPeriodo(LocalDateTime.now().minusDays(30), LocalDateTime.now());
-		return "Su consumo fue del último mes fue de " + consumo_ultimo_mes + " KW";
+		return "Su consumo del último mes fue de " + consumo_ultimo_mes + " KW";
 	}
 	
 }
