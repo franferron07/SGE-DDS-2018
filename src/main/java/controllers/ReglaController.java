@@ -114,8 +114,8 @@ public class ReglaController {
 			
 		}
 		
-		model.put("reglas", RepositorioRegla.getReglas());
-	
+		//model.put("reglas", RepositorioRegla.getReglas());
+		response.redirect("/sge/cliente/reglas");
 		return new ModelAndView(model , "reglas.hbs");
 	}
 	
