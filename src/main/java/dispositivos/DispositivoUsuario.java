@@ -154,7 +154,7 @@ public abstract class DispositivoUsuario {
 		return this.detalle.getConsumoKwHora();
 	}
 	public  String getIdentificacion() {
-		return this.detalle.getDescripcion();
+		return this.detalle.getNombre()+" , "+ this.detalle.getDescripcion();
 	}//charlable
 	public  double getHsMensualMinimo() {
 		return this.detalle.getHsMensualMinimo();

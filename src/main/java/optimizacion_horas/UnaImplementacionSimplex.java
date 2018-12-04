@@ -52,8 +52,17 @@ public class UnaImplementacionSimplex implements Implementador{
 		PointValuePair solucion =this.algoritmo.resolver();
 		this.maximaEnergiaResultado=solucion.getValue();
 		for (int i = 0; i < this.cantidadDeDispositivos(); i++) {
-			double xi=solucion.getPoint()[i];
-			ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),xi);
+			double horasTope=solucion.getPoint()[i];
+
+			//ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),horasTope);
+
+			//entrega final, para que el ResultadoHora tenga dispositivo para saber el consumo actual
+
+			//ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),horasTope);
+			double horasDeUso = this.dispositivos.get(i).horasDeUso(LocalDateTime.now().withDayOfMonth(1), LocalDateTime.now());
+			ResultadoHora par = new ResultadoHora(this.dispositivos.get(i).getIdentificacion(),horasTope-horasDeUso);
+			par.setSePasoDeConsumo(horasTope<horasDeUso);
+
 			this.resultados.add(par) ;
 		}
 	}

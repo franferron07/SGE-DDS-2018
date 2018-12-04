@@ -64,7 +64,7 @@ public class SensorTest {
 		reglaSimple.agregarActuador(actuadorLuz);
 		reglaSimple.agregarActuador(actuadorTemperatura);
 		
-		sensor.obtenerMedicion(new Medicion(10));		
+		sensor.obtenerMedicion(new Medicion((double)10));
 	}
 	
 }

@@ -49,7 +49,7 @@ public class HorasMaximasConDispositivosTest {
 		Assert.assertEquals(resultados.get(0).getHorasQuePuedeConsumir(),370.0,0.001);
 		Assert.assertEquals(resultados.get(1).getHorasQuePuedeConsumir(),30.0,0.001);
 		Assert.assertEquals(resultados.get(2).getHorasQuePuedeConsumir(),360.0,0.001);
-		Assert.assertEquals(resultados.get(0).getDispositivo_id(),"De 8 pulgadas");
+		Assert.assertEquals(resultados.get(0).getDispositivo_id(),"LCD , De 8 pulgadas");
 	}
 
 

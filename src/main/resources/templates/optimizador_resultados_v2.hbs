@@ -11,7 +11,7 @@
                 <tr>
                     <th scope="col">Dispositivos</th>
                     <th scope="col"> Se Paso de Consumo</th>
-                    <th scope="col">Horas Maximas de uso para mantener eficiencia</th>
+                    <th scope="col">Horas Restantes para Eficiencia</th>
                    <!-- <th scope="col">Boton De Deteccion de Dispositivo</th>-->
                 </tr>
                 </thead>
@@ -19,7 +19,7 @@
                 {{#each resultados}}
                     <tr>
                         <td>{{dispositivo_id}}</td>
-                        {{#if se_paso_de_cosumo}}
+                        {{#if sePasoDeConsumo}}
                            <td>Si</td>
                         {{else}}
                            <td>No</td>
