@@ -40,7 +40,7 @@ public abstract class Regla {
 	private String nombreRegla;
 	
 	@Transient
-	protected List<ActuadorBase> actuadores;
+	private List<ActuadorBase> actuadores;
 	
 	
 	@ManyToMany(cascade = { 
@@ -72,28 +72,44 @@ public abstract class Regla {
 	public Regla(String nombre){
 		this.nombreRegla=nombre;
 		this.actuadores= new ArrayList<ActuadorBase>();
-		//this.actuadores_enums = new ArrayList<ActuadoresEnum>();
 		this.actuadores_string = new ArrayList<ActuadorString>();
 		
 		this.dispositivos = new ArrayList<DispositivoInteligente>();
 		this.activado=true;
+		
+	}
+	
+	
+	public void crearActuadoresBase(){
+		
+		this.actuadores= new ArrayList<ActuadorBase>();
+		
+		ActuadorFactory factory = new ActuadorFactory();
+		
+		for (ActuadorString act_s : actuadores_string) {
+			
+			ActuadorBase actuador = factory.crearActuador(act_s.getNombre());
+			this.actuadores.add(actuador);
+		}
 	}
 	
 	public void notificacionDeMedicion(Medicion medicion) {
+
 		evaluarMedicion(medicion);
 	}
 	
 	//ejecuto si se cumplen todas las condiciones de la regla , sea simple o compuesta.
 	public void evaluarMedicion(Medicion medicion) {
-		
+
 		if( cumpleCondiciones(medicion.getValor()) ){
+			
 			ejecutarAccionDispositivosActuadores();
 		}
 		
 	}
 		
 	
-	public abstract boolean cumpleCondiciones(double d);
+	public abstract boolean cumpleCondiciones(Double d);
 
 	
 	//accion que se ejecuta cuando se cumple la condicion. a partir de los dispoisitivos llama a los actuadores para ejecutarse
@@ -102,7 +118,7 @@ public abstract class Regla {
 		this.dispositivos.stream().forEach(d->ejecutarActuadores(d));	
 	}
 	
-	public abstract void ejecutarActuadores(DispositivoInteligente d);
+	public abstract void ejecutarActuadores(DispositivoInteligente d) ;
 	
 
 	public void activar(){
@@ -149,6 +165,9 @@ public abstract class Regla {
 	}
 
 	public List<ActuadorBase> getActuadores() {
+		
+		crearActuadoresBase();
+		
 		return actuadores;
 	}
 
@@ -186,15 +205,16 @@ public abstract class Regla {
 	public void agregarActuadores_string(ActuadorString actuador){
 		
 		this.actuadores_string.add(actuador);
+		
+		//agrego actuador base a lista
+		ActuadorFactory factory = new ActuadorFactory();
+		ActuadorBase act = factory.crearActuador(actuador.getNombre());
+		this.actuadores.add(act);
+		
 	}
-
-	/*public List<ActuadoresEnum> getActuadores_enums() {
-		return actuadores_enums;
-	}*/
-
-	/*public void setActuadores_enums(List<ActuadoresEnum> actuadores_enums) {
-		this.actuadores_enums = actuadores_enums;
-	}*/
+	
+	
+	
 
 	
 	

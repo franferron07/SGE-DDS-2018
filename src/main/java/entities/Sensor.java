@@ -11,37 +11,53 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
+import models.ModelHelper;
 import reglasYActuadores.Regla;
+import server.SubscriberMQTT;
 
 @Entity
 @Table(name="sensor")
-public class Sensor  {
+public class Sensor {
 	
 	@Id
 	@GeneratedValue
 	private int id;
 	
+	
 	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+	@Where(clause = "activado = 1")
 	private List<Regla> observadores;
-	@OneToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 	private List<Medicion> mediciones;
 	
 	
 	public Sensor(){
 		observadores= new ArrayList<Regla>();
 		mediciones= new ArrayList<Medicion>();
+
+		//suscribo a canal
+		Thread subscriber = new SubscriberMQTT(this);
+		subscriber.start();
+
 	}
 	
+
 	//se realiza de alguna manera de forma externa y se reciben datos de esa medicion
 	public void obtenerMedicion( Medicion medicion ){
-		/* procedimiento no definido. es externo*/	
+		
 		agregarMedicion(medicion);
 		avisarMedicion(medicion);
+		
+		ModelHelper model = new ModelHelper();
+		
+		model.modificar(this);
 	}
 
 	//metodo que avisa a sus observadores(reglas) que realizo la medicion
 	private void avisarMedicion(Medicion medicion) {
-		
+		 System.out.println( "*********"+ observadores.size() );
 		this.observadores.forEach( r -> r.notificacionDeMedicion(medicion));
 		
 	}
@@ -52,6 +68,7 @@ public class Sensor  {
 		 if (!mediciones.contains(unaMedicion)) {
 			 this.mediciones.add(unaMedicion); 
 		 }
+		
 	}
 	
 	
@@ -61,6 +78,9 @@ public class Sensor  {
 		 if (!observadores.contains(regla)) {
 			 this.observadores.add(regla); 
 		 }
+		 
+		 ModelHelper model = new ModelHelper();
+		 model.modificar(this);
 	}
 	
 	public int cantidadObservadores(){
@@ -85,6 +105,25 @@ public class Sensor  {
 	public void setMediciones(List<Medicion> mediciones) {
 		this.mediciones = mediciones;
 	}
+
+
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<Regla> getObservadores() {
+		return observadores;
+	}
+
+	public void setObservadores(List<Regla> observadores) {
+		this.observadores = observadores;
+	}
+	
+	
 
 
 	

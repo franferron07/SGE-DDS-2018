@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import reglasYActuadores.ActuadorBase;
 import reglasYActuadores.ActuadorString;
 
@@ -234,7 +236,7 @@ public class DispositivoInteligente extends DispositivoUsuario {
 		this.accionaAutomaticaOptimizador = accionaAutomaticaOptimizador;
 	}
 
-	public void ejecutarAccionAutomatica() {
+	public void ejecutarAccionAutomatica() throws MqttException {
 		
 		if( accionaAutomaticaOptimizador != null){
 			accionaAutomaticaOptimizador.ejecutarAccion(this);

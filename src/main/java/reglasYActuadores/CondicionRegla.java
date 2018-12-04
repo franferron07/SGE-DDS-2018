@@ -35,35 +35,35 @@ public class CondicionRegla {
 	}
 	
 	//chequeo si se cumple o no la medicion segun el comparador pasado. siempre el valorComparable es el segundo miembro
-	public boolean cumpleMedicion(double valor) {
+	public boolean cumpleMedicion(Double valor) {
 		
-		if( this.comparador == ">" ){
+		if( this.comparador.equals(">") ) {
 			
 			if( valor > this.valorComparable ) return true;
 			return false;
 		}
-		if( this.comparador == "<" ){
+		if( this.comparador.equals("<")  ){
 			
 			if( valor < this.valorComparable )return true;
 			return false;
 			
 		}
-		if( this.comparador == "==" ){
+		if( this.comparador.equals("==")  ){
 			
 			if( valor == this.valorComparable ) return true;
 			return false;
 		}
-		if( this.comparador == "!=" ){
+		if( this.comparador.equals("!=") ){
 			
 			if( valor != this.valorComparable )return true;
 			return false;
 		}
-		if( this.comparador == "<=" ){
+		if( this.comparador.equals("<=") ){
 			
 			if( valor <= this.valorComparable )return true;
 			return false;
 		}
-		if( this.comparador == ">=" ){
+		if( this.comparador.equals(">=")  ){
 			
 			if( valor >= this.valorComparable)return true;
 			return false;

@@ -11,7 +11,7 @@ public class ActuadorFactory {
 		case "APAGAR":
 			return new ApagarDICommand(); 
 		
-		case "ENCENDER":
+		case "PRENDER":
 			return new PrenderDiCommand();
 			
 		case "CAMBIAR_INTENSIDAD_LUZ":

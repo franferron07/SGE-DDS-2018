@@ -62,7 +62,9 @@ function borrarDispositivo(id){
     			url 	: ruta,
     			dataType: "html",
     	 		success : function(result){
-            		location.reload();
+            	location.reload();
         		}
         	});
+
+
 }

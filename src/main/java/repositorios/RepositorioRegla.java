@@ -40,16 +40,9 @@ public class RepositorioRegla {
 	
 	public static List<Regla> filtrarReglsaCliente( int id_cli ){
 		
-		try{
-			
-			Stream<Regla> reglasFilt = reglas.stream().filter( r -> r.getDispositivos().get(0).getCliente().id == id_cli );
-			return reglasFilt.collect(Collectors.toList());	
-			
-		}catch(Exception  e){
-			//si algo falla listo todas
-			return getReglas();
-		}
-		
+		cargarReglas();
+		//System.out.println( "********************"+reglasFilt.collect(Collectors.toList()).size() );
+		return  reglas.stream().filter( r -> r.getDispositivos().get(0).getCliente().getId() == id_cli ).collect(Collectors.toList());
 	}
 	
 	//getter y setters

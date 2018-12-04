@@ -3,6 +3,7 @@ package server;
 import repositorios.RepositorioActuadoresString;
 import repositorios.RepositorioDispositivosLista;
 import repositorios.RepositorioRegla;
+import repositorios.RepositorioSensor;
 import repositorios.RepositorioUsuarios;
 import spark.Spark;
 import spark.debug.DebugScreen;
@@ -25,6 +26,8 @@ public class Server extends Thread implements spark.servlet.SparkApplication{
 		RepositorioUsuarios.cargarUsuarios();
 		RepositorioDispositivosLista.cargarDispositiosLista();
 		RepositorioActuadoresString.cargarActuadoresEnum();
+		
+		RepositorioSensor.cargarSensores();
 		RepositorioRegla.cargarReglas();
 		
 		Spark.port(9000);		

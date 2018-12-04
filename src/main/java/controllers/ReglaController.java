@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 
 import dispositivos.DispositivoInteligente;
-
+import entities.Sensor;
 import models.ModelHelper;
 
 import reglasYActuadores.ActuadorString;
@@ -21,6 +21,7 @@ import reglasYActuadores.Regla;
 import reglasYActuadores.ReglaSimple;
 import repositorios.RepositorioActuadoresString;
 import repositorios.RepositorioRegla;
+import repositorios.RepositorioSensor;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
@@ -106,6 +107,9 @@ public class ReglaController {
 		    }
 			
 			modelHelper.agregar(regla);
+			Sensor sensor = RepositorioSensor.sensores.get(0);
+			sensor.agregarObservador(regla);
+			
 			
 			RepositorioRegla.agregarRegla(regla);
 		}

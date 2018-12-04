@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import dispositivos.DispositivoInteligente;
 
 @Entity
@@ -35,7 +37,7 @@ public class ReglaCompuesta extends Regla {
 
 	//filtra los modos que entren en el intervalo pedido
 	@Override
-	public boolean cumpleCondiciones(double valor) {
+	public boolean cumpleCondiciones(Double valor) {
 		
 		return this.reglas.stream().allMatch( c -> c.cumpleCondiciones(valor) );
 	}
@@ -48,7 +50,14 @@ public class ReglaCompuesta extends Regla {
 		this.reglas.stream().forEach(r->r.ejecutarAccionDispositivosActuadores());
 		
 		//ejecuto actuadores propios
-		this.actuadores.stream().forEach(a->a.ejecutarAccion(d));
+		getActuadores().stream().forEach(a->{
+			try {
+				a.ejecutarAccion(d);
+			} catch (MqttException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 	
 

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.apache.commons.math3.optim.PointValuePair;
 import org.apache.commons.math3.optim.linear.Relationship;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import dispositivos.DispositivoInteligente;
 import dispositivos.DispositivoUsuario;
@@ -113,7 +114,12 @@ public class UnaImplementacionSimplex implements Implementador{
 				if( dispositivo.esInteligente() ){
 
 					DispositivoInteligente di = (DispositivoInteligente) dispositivo;
-					di.ejecutarAccionAutomatica();
+					try {
+						di.ejecutarAccionAutomatica();
+					} catch (MqttException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 			i++;

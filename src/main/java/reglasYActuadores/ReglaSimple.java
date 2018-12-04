@@ -10,7 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import dispositivos.DispositivoInteligente;
+import entities.Sensor;
+import repositorios.RepositorioRegla;
+import repositorios.RepositorioSensor;
 
 @Entity
 @DiscriminatorValue("reglaSimple")
@@ -27,12 +32,13 @@ public class ReglaSimple extends Regla {
 	public ReglaSimple(String nombre) {
 		super(nombre);
 		this.condiciones = new ArrayList<CondicionRegla>();
+
 	}
 
 	
 	@Override
-	public boolean cumpleCondiciones(double valor) {
-		
+	public boolean cumpleCondiciones(Double valor) {
+
 		return this.condiciones.stream().allMatch( c -> c.cumpleMedicion(valor) );
 	}
 	
@@ -42,7 +48,16 @@ public class ReglaSimple extends Regla {
 	@Override
 	public void ejecutarActuadores( DispositivoInteligente d ) {		
 		
-		this.actuadores.stream().forEach(a->a.ejecutarAccion(d));		
+		getActuadores().stream().forEach(a->{
+			try {
+				a.ejecutarAccion(d);
+			} catch (MqttException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+				System.out.println(e.toString());
+			}
+		});		
 	}
 	
 	

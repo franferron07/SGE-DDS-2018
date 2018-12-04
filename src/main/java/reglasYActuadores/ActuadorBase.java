@@ -1,13 +1,10 @@
 package reglasYActuadores;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+
+
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import dispositivos.DispositivoInteligente;
 
@@ -19,7 +16,26 @@ import dispositivos.DispositivoInteligente;
 public abstract class ActuadorBase {
 
 	
-	public abstract void ejecutarAccion( DispositivoInteligente dispositivo );
+	public abstract void ejecutarAccion( DispositivoInteligente dispositivo ) throws MqttException ;
+	
+	
+	public void enviarMensaje( String msg ) throws MqttException {
+
+        MqttClient client;
+
+		client = new MqttClient("tcp://test.mosquitto.org:1883", MqttClient.generateClientId());
+		
+		client.connect();
+
+        MqttMessage message = new MqttMessage();
+        message.setPayload(msg.getBytes());
+        client.publish("dds-actuadores", message);
+
+        client.disconnect();
+
+        System.out.println("== END PUBLISHER ==");
+		
+	}
 
 	
 }

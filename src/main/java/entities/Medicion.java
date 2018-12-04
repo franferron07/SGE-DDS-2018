@@ -20,7 +20,7 @@ public class Medicion {
 	public int id;
 	
 	@Column(name="valor")
-	public double valor;
+	public Double valor;
 	
 	@Enumerated
 	@Column(name="magnitud")
@@ -33,8 +33,13 @@ public class Medicion {
 	public LocalDateTime fechaFin;
 	
 	
+	
+	public Medicion(  ){
+
+	}
+	
 	//constructor
-	public Medicion( double valor ){
+	public Medicion( Double valor ){
 		
 		this.valor = valor;
 		
@@ -42,10 +47,10 @@ public class Medicion {
 	
 	
 	//getters y setters
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 	public TipoMagnitud getMagnitud() {
